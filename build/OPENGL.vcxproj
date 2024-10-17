@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{400721B4-E30F-37E5-A744-41FDCDA04695}</ProjectGuid>
+    <ProjectGuid>{5F29886D-62CD-3F8F-81CA-F83DE7C8F0C2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -59,25 +59,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">G:\Code\HCMUS\Code\OpenGl\build\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">G:\WorkSpace\Minecraft\build\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">OPENGL.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">OPENGL</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">G:\Code\HCMUS\Code\OpenGl\build\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">G:\WorkSpace\Minecraft\build\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">OPENGL.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">OPENGL</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">G:\Code\HCMUS\Code\OpenGl\build\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">G:\WorkSpace\Minecraft\build\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">OPENGL.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">OPENGL</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">G:\Code\HCMUS\Code\OpenGl\build\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">G:\WorkSpace\Minecraft\build\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">OPENGL.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">OPENGL</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -103,10 +103,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -114,9 +114,9 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <PostBuildEvent>
-      <Message>		</Message>
+      <Message>	</Message>
       <Command>setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Assets G:/Code/HCMUS/Code/OpenGl/build/Debug/Assets
+D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Assets G:/WorkSpace/Minecraft/build/Debug/Assets
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -125,16 +125,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Shader G:/Code/HCMUS/Code/OpenGl/build/Debug
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd
-setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release G:/Code/HCMUS/Code/OpenGl/build/Debug
+D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Shader G:/WorkSpace/Minecraft/build/Debug/Shaders
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -144,13 +135,13 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/Code/HCMUS/Code/OpenGl/GLFW/lib-vc2022;G:/Code/HCMUS/Code/OpenGl/GLFW/lib-vc2022/$(Configuration);G:/Code/HCMUS/Code/OpenGl/Assimp/lib/Release;G:/Code/HCMUS/Code/OpenGl/Assimp/lib/Release/$(Configuration);G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release;G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:/WorkSpace/Minecraft/GLFW/lib-vc2022;G:/WorkSpace/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/Code/HCMUS/Code/OpenGl/build/Debug/OPENGL.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/Code/HCMUS/Code/OpenGl/build/Debug/OPENGL.pdb</ProgramDataBaseFile>
+      <ImportLibrary>G:/WorkSpace/Minecraft/build/Debug/OPENGL.lib</ImportLibrary>
+      <ProgramDataBaseFile>G:/WorkSpace/Minecraft/build/Debug/OPENGL.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -159,7 +150,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -176,10 +167,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -187,9 +178,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <PostBuildEvent>
-      <Message>		</Message>
+      <Message>	</Message>
       <Command>setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Assets G:/Code/HCMUS/Code/OpenGl/build/Release/Assets
+D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Assets G:/WorkSpace/Minecraft/build/Release/Assets
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -198,16 +189,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Shader G:/Code/HCMUS/Code/OpenGl/build/Release
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd
-setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release G:/Code/HCMUS/Code/OpenGl/build/Release
+D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Shader G:/WorkSpace/Minecraft/build/Release/Shaders
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -217,13 +199,13 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/Code/HCMUS/Code/OpenGl/GLFW/lib-vc2022;G:/Code/HCMUS/Code/OpenGl/GLFW/lib-vc2022/$(Configuration);G:/Code/HCMUS/Code/OpenGl/Assimp/lib/Release;G:/Code/HCMUS/Code/OpenGl/Assimp/lib/Release/$(Configuration);G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release;G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:/WorkSpace/Minecraft/GLFW/lib-vc2022;G:/WorkSpace/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/Code/HCMUS/Code/OpenGl/build/Release/OPENGL.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/Code/HCMUS/Code/OpenGl/build/Release/OPENGL.pdb</ProgramDataBaseFile>
+      <ImportLibrary>G:/WorkSpace/Minecraft/build/Release/OPENGL.lib</ImportLibrary>
+      <ProgramDataBaseFile>G:/WorkSpace/Minecraft/build/Release/OPENGL.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -232,7 +214,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -249,10 +231,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -260,9 +242,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <PostBuildEvent>
-      <Message>		</Message>
+      <Message>	</Message>
       <Command>setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Assets G:/Code/HCMUS/Code/OpenGl/build/MinSizeRel/Assets
+D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Assets G:/WorkSpace/Minecraft/build/MinSizeRel/Assets
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -271,16 +253,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Shader G:/Code/HCMUS/Code/OpenGl/build/MinSizeRel
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd
-setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release G:/Code/HCMUS/Code/OpenGl/build/MinSizeRel
+D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Shader G:/WorkSpace/Minecraft/build/MinSizeRel/Shaders
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -290,13 +263,13 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/Code/HCMUS/Code/OpenGl/GLFW/lib-vc2022;G:/Code/HCMUS/Code/OpenGl/GLFW/lib-vc2022/$(Configuration);G:/Code/HCMUS/Code/OpenGl/Assimp/lib/Release;G:/Code/HCMUS/Code/OpenGl/Assimp/lib/Release/$(Configuration);G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release;G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:/WorkSpace/Minecraft/GLFW/lib-vc2022;G:/WorkSpace/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/Code/HCMUS/Code/OpenGl/build/MinSizeRel/OPENGL.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/Code/HCMUS/Code/OpenGl/build/MinSizeRel/OPENGL.pdb</ProgramDataBaseFile>
+      <ImportLibrary>G:/WorkSpace/Minecraft/build/MinSizeRel/OPENGL.lib</ImportLibrary>
+      <ProgramDataBaseFile>G:/WorkSpace/Minecraft/build/MinSizeRel/OPENGL.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -305,7 +278,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -321,10 +294,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\Code\HCMUS\Code\OpenGl\GLFW\include;G:\Code\HCMUS\Code\OpenGl\GLAD\include;G:\Code\HCMUS\Code\OpenGl\GLM;G:\Code\HCMUS\Code\OpenGl\Assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -332,9 +305,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <PostBuildEvent>
-      <Message>		</Message>
+      <Message>	</Message>
       <Command>setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Assets G:/Code/HCMUS/Code/OpenGl/build/RelWithDebInfo/Assets
+D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Assets G:/WorkSpace/Minecraft/build/RelWithDebInfo/Assets
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -343,16 +316,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Shader G:/Code/HCMUS/Code/OpenGl/build/RelWithDebInfo
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd
-setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release G:/Code/HCMUS/Code/OpenGl/build/RelWithDebInfo
+D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Shader G:/WorkSpace/Minecraft/build/RelWithDebInfo/Shaders
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -362,13 +326,13 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc143-mt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/Code/HCMUS/Code/OpenGl/GLFW/lib-vc2022;G:/Code/HCMUS/Code/OpenGl/GLFW/lib-vc2022/$(Configuration);G:/Code/HCMUS/Code/OpenGl/Assimp/lib/Release;G:/Code/HCMUS/Code/OpenGl/Assimp/lib/Release/$(Configuration);G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release;G:/Code/HCMUS/Code/OpenGl/Assimp/bin/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:/WorkSpace/Minecraft/GLFW/lib-vc2022;G:/WorkSpace/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/Code/HCMUS/Code/OpenGl/build/RelWithDebInfo/OPENGL.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/Code/HCMUS/Code/OpenGl/build/RelWithDebInfo/OPENGL.pdb</ProgramDataBaseFile>
+      <ImportLibrary>G:/WorkSpace/Minecraft/build/RelWithDebInfo/OPENGL.lib</ImportLibrary>
+      <ProgramDataBaseFile>G:/WorkSpace/Minecraft/build/RelWithDebInfo/OPENGL.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -376,11 +340,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="G:\Code\HCMUS\Code\OpenGl\CMakeLists.txt">
+    <CustomBuild Include="G:\WorkSpace\Minecraft\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule G:/Code/HCMUS/Code/OpenGl/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule G:/WorkSpace/Minecraft/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-D:\CMAKE\bin\cmake.exe -SG:/Code/HCMUS/Code/OpenGl -BG:/Code/HCMUS/Code/OpenGl/build --check-stamp-file G:/Code/HCMUS/Code/OpenGl/build/CMakeFiles/generate.stamp
+D:\CMAKE\bin\cmake.exe -SG:/WorkSpace/Minecraft -BG:/WorkSpace/Minecraft/build --check-stamp-file G:/WorkSpace/Minecraft/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -388,12 +352,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">G:\WorkSpace\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule G:/Code/HCMUS/Code/OpenGl/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule G:/WorkSpace/Minecraft/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-D:\CMAKE\bin\cmake.exe -SG:/Code/HCMUS/Code/OpenGl -BG:/Code/HCMUS/Code/OpenGl/build --check-stamp-file G:/Code/HCMUS/Code/OpenGl/build/CMakeFiles/generate.stamp
+D:\CMAKE\bin\cmake.exe -SG:/WorkSpace/Minecraft -BG:/WorkSpace/Minecraft/build --check-stamp-file G:/WorkSpace/Minecraft/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -401,12 +365,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">G:\WorkSpace\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule G:/Code/HCMUS/Code/OpenGl/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule G:/WorkSpace/Minecraft/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-D:\CMAKE\bin\cmake.exe -SG:/Code/HCMUS/Code/OpenGl -BG:/Code/HCMUS/Code/OpenGl/build --check-stamp-file G:/Code/HCMUS/Code/OpenGl/build/CMakeFiles/generate.stamp
+D:\CMAKE\bin\cmake.exe -SG:/WorkSpace/Minecraft -BG:/WorkSpace/Minecraft/build --check-stamp-file G:/WorkSpace/Minecraft/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -414,12 +378,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">G:\WorkSpace\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule G:/Code/HCMUS/Code/OpenGl/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule G:/WorkSpace/Minecraft/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-D:\CMAKE\bin\cmake.exe -SG:/Code/HCMUS/Code/OpenGl -BG:/Code/HCMUS/Code/OpenGl/build --check-stamp-file G:/Code/HCMUS/Code/OpenGl/build/CMakeFiles/generate.stamp
+D:\CMAKE\bin\cmake.exe -SG:/WorkSpace/Minecraft -BG:/WorkSpace/Minecraft/build --check-stamp-file G:/WorkSpace/Minecraft/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -427,25 +391,23 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">G:\WorkSpace\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="G:\Code\HCMUS\Code\OpenGl\main.cpp" />
-    <ClCompile Include="G:\Code\HCMUS\Code\OpenGl\GLAD\src\glad.c" />
-    <ClCompile Include="G:\Code\HCMUS\Code\OpenGl\shader.cpp" />
-    <ClInclude Include="G:\Code\HCMUS\Code\OpenGl\shader.h" />
-    <ClCompile Include="G:\Code\HCMUS\Code\OpenGl\Texture.cpp" />
-    <ClInclude Include="G:\Code\HCMUS\Code\OpenGl\Texture.h" />
-    <ClInclude Include="G:\Code\HCMUS\Code\OpenGl\Camera.h" />
-    <ClCompile Include="G:\Code\HCMUS\Code\OpenGl\Mesh.cpp" />
-    <ClInclude Include="G:\Code\HCMUS\Code\OpenGl\Mesh.h" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\main.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\GLAD\src\glad.c" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\shader.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture.cpp" />
+    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Camera.h" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\game.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="G:\Code\HCMUS\Code\OpenGl\build\ZERO_CHECK.vcxproj">
-      <Project>{5E3E4B7C-267C-340A-BF3B-66D3BE969D14}</Project>
+    <ProjectReference Include="G:\WorkSpace\Minecraft\build\ZERO_CHECK.vcxproj">
+      <Project>{1A5FB8DB-289D-30E1-9BAC-8DC1CDC95C59}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="G:\Code\HCMUS\Code\OpenGl\build\CMakeFiles\d6323c30c3d37f7ca8c7158d9314e313\generate.stamp.rule">
+    <CustomBuild Include="G:\WorkSpace\Minecraft\build\CMakeFiles\9abbbe0f5df247058ae2ac5b1f88ee74\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{7F20BCBC-2942-37EE-AF04-F6BBCEA94300}</UniqueIdentifier>
+      <UniqueIdentifier>{1348B937-0B8D-30DD-8156-914F0D6F9E28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

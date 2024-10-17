@@ -1,5 +1,6 @@
-G:\Code\HCMUS\Code\OpenGl\main.cpp;G:\Code\HCMUS\Code\OpenGl\build\OPENGL.dir\Debug\main.obj
-G:\Code\HCMUS\Code\OpenGl\GLAD\src\glad.c;G:\Code\HCMUS\Code\OpenGl\build\OPENGL.dir\Debug\glad.obj
-G:\Code\HCMUS\Code\OpenGl\shader.cpp;G:\Code\HCMUS\Code\OpenGl\build\OPENGL.dir\Debug\shader.obj
-G:\Code\HCMUS\Code\OpenGl\Texture.cpp;G:\Code\HCMUS\Code\OpenGl\build\OPENGL.dir\Debug\Texture.obj
-G:\Code\HCMUS\Code\OpenGl\Mesh.cpp;G:\Code\HCMUS\Code\OpenGl\build\OPENGL.dir\Debug\Mesh.obj
+G:\WorkSpace\Minecraft\Script\main.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\main.obj
+G:\WorkSpace\Minecraft\GLAD\src\glad.c;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\glad.obj
+G:\WorkSpace\Minecraft\Script\shader.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\shader.obj
+G:\WorkSpace\Minecraft\Script\Texture.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Texture.obj
+G:\WorkSpace\Minecraft\Script\game.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\game.obj
+G:\WorkSpace\Minecraft\Script\Player.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Player.obj
