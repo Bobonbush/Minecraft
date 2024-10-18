@@ -12,8 +12,8 @@ WorldRenderer :: WorldRenderer() {
     textureManager = TextureManager::getInstance();
     settings = Setting::getInstance();
     shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
-    for(int i = 0 ; i < 20; i++) {
-        for(int j = 0 ; j < 20 ; j++) blocks.push_back(std::make_unique<Dirt>(glm::vec3(i * settings -> getBlockNDCSize().x, 0, j * settings -> getBlockNDCSize().z), settings -> getBlockNDCSize(), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
+    for(int i = 0 ; i < 400; i++) {
+        for(int j = 0 ; j < 400 ; j++) blocks.push_back(std::make_unique<Dirt>(glm::vec3(i * settings -> getBlockNDCSize().x, 0, j * settings -> getBlockNDCSize().z), settings -> getBlockNDCSize(), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
     }
 }
 
@@ -95,6 +95,8 @@ void Game::Init() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glDepthMask(GL_FALSE);
+    glDepthFunc(GL_LESS);
     
     glViewport(0, 0, settings -> getResolution().x , settings -> getResolution().y);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
