@@ -11,6 +11,10 @@ WorldRenderer :: WorldRenderer() {
     shaderManager = ShaderManager::getInstance();
     textureManager = TextureManager::getInstance();
     shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
+    blocks.push_back(new Dirt(glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
+    blocks.push_back(new Stone(glm::vec3(1, 0, 0), glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
+    blocks.push_back(new Water(glm::vec3(2, 0, 0), glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
+    
 }
 
 WorldRenderer :: ~WorldRenderer() {
@@ -35,6 +39,11 @@ void WorldRenderer :: Update(float deltaTime) {
 void WorldRenderer :: AddBlock(Block *block) {
     blocks.push_back(block);
 }
+
+void WorldRenderer :: RemoveBlock(Block *block) {
+    blocks.erase(std::remove(blocks.begin(), blocks.end(), block), blocks.end());
+}
+
 void WorldRenderer :: Clear() {
     blocks.clear();
 }
