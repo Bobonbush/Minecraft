@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "Camera.h"
 #include "Resource/TextureLoad.h"
+#include <memory>
 
 class Block {
     private:
@@ -12,7 +13,7 @@ class Block {
         glm::vec3 rotation;
     protected: 
         TextureManager *textureManager;
-        CubeRenderer *cubeRenderer;
+        std::unique_ptr<CubeRenderer> cubeRenderer;
     public :
 
         Block(glm :: vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);

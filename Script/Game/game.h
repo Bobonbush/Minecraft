@@ -8,10 +8,11 @@
 #include "Settings.h"
 #include "Resource/ShaderLoad.h"
 #include "Resource/TextureLoad.h"
+#include <memory>
 
 class WorldRenderer {
     private:
-        std::vector<Block*> blocks;
+        std::vector<std::unique_ptr<Block>> blocks;
 
         
 
@@ -42,9 +43,6 @@ class WorldRenderer {
         
         void Render(glm::mat4 view, glm::mat4 projection);
         void Update(float deltaTime);
-        void AddBlock(Block *block);
-        void RemoveBlock(Block *block);
-        void Clear();
 };
 
 

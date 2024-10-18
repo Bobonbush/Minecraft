@@ -12,42 +12,27 @@ WorldRenderer :: WorldRenderer() {
     textureManager = TextureManager::getInstance();
     settings = Setting::getInstance();
     shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
-    blocks.push_back(new Dirt(glm::vec3(0, 0, 0), settings -> getBlockNDCSize(), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
-    blocks.push_back(new Stone(glm::vec3(1, 0, 0), settings -> getBlockNDCSize(), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
-    blocks.push_back(new Water(glm::vec3(2, 0, 0), settings -> getBlockNDCSize(), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
-    
+    for(int i = 0 ; i < 20; i++) {
+        for(int j = 0 ; j < 20 ; j++) blocks.push_back(std::make_unique<Dirt>(glm::vec3(i * settings -> getBlockNDCSize().x, 0, j * settings -> getBlockNDCSize().z), settings -> getBlockNDCSize(), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
+    }
 }
 
 WorldRenderer :: ~WorldRenderer() {
-    for (Block *block : blocks) {
-        delete block;
-    }
     delete instance;
 }
 
 void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
-    for (Block *block : blocks) {
+    for (auto &block : blocks) {
         block -> Render(view, projection);
     }
 }
 
 void WorldRenderer :: Update(float deltaTime) {
-    for (Block *block : blocks) {
+    for (auto &block : blocks) {
         block -> Update(deltaTime);
     }
 }
 
-void WorldRenderer :: AddBlock(Block *block) {
-    blocks.push_back(block);
-}
-
-void WorldRenderer :: RemoveBlock(Block *block) {
-    blocks.erase(std::remove(blocks.begin(), blocks.end(), block), blocks.end());
-}
-
-void WorldRenderer :: Clear() {
-    blocks.clear();
-}
 
 
 

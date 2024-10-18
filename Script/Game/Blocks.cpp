@@ -7,13 +7,12 @@ Block::Block(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &sh
     this->position = position;
     this->scale = scale;
     this->rotation = rotation;
-    cubeRenderer = new CubeRenderer(shader);
+    cubeRenderer = std::make_unique< CubeRenderer >(shader);
     textureManager = TextureManager::getInstance();
 
 }
 
 Block::~Block() {
-    delete cubeRenderer;
 }
 
 void Block::Render(glm:: mat4 view, glm::mat4 projection) {
