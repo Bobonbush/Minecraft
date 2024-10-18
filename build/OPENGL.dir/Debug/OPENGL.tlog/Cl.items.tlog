@@ -8,3 +8,5 @@ G:\WorkSpace\Minecraft\Script\Settings.cpp;G:\WorkSpace\Minecraft\build\OPENGL.d
 G:\WorkSpace\Minecraft\Script\Game\Blocks.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Blocks.obj
 G:\WorkSpace\Minecraft\Script\Resource\ShaderLoad.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\ShaderLoad.obj
 G:\WorkSpace\Minecraft\Script\Resource\TextureLoad.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\TextureLoad.obj
+G:\WorkSpace\Minecraft\Script\Resource\PerlinNoise.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\PerlinNoise.obj
+G:\WorkSpace\Minecraft\Script\Game\world.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\world.obj

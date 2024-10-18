@@ -3,35 +3,6 @@
 
 
 
-// WorldRenderer Define
-
-WorldRenderer *WorldRenderer :: instance = nullptr;
-
-WorldRenderer :: WorldRenderer() {
-    shaderManager = ShaderManager::getInstance();
-    textureManager = TextureManager::getInstance();
-    settings = Setting::getInstance();
-    shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
-    for(int i = 0 ; i < 400; i++) {
-        for(int j = 0 ; j < 400 ; j++) blocks.push_back(std::make_unique<Dirt>(glm::vec3(i * settings -> getBlockNDCSize().x, 0, j * settings -> getBlockNDCSize().z), settings -> getBlockNDCSize(), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
-    }
-}
-
-WorldRenderer :: ~WorldRenderer() {
-    delete instance;
-}
-
-void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
-    for (auto &block : blocks) {
-        block -> Render(view, projection);
-    }
-}
-
-void WorldRenderer :: Update(float deltaTime) {
-    for (auto &block : blocks) {
-        block -> Update(deltaTime);
-    }
-}
 
 
 

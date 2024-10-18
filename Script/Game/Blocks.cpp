@@ -104,3 +104,43 @@ void Water::Update(float deltaTime) {
 void Water::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
 }
+
+// SAND BLOCK
+
+Sand::Sand(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
+    texture = textureManager -> LoadTexture("Assets/sand.png");
+    cubeRenderer -> LoadCube(texture);
+}
+
+Sand::~Sand() {
+}
+
+void Sand::Update(float deltaTime) {
+    Block::Update(deltaTime);
+}
+
+void Sand::Render(glm::mat4 view, glm::mat4 projection) {
+    Block::Render(view, projection);
+}
+
+// GRASS BLOCK
+
+Grass::Grass(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
+    textureTop = textureManager -> LoadTexture("Assets/Grass/Top.png");
+    textureSide = textureManager -> LoadTexture("Assets/Grass/Side.png");
+    textureBottom = textureManager -> LoadTexture("Assets/Grass/dirt.png");
+    cubeRenderer -> LoadCube(textureTop, textureSide, textureBottom);
+}
+
+Grass::~Grass() {
+}
+
+void Grass::Update(float deltaTime) {
+    Block::Update(deltaTime);
+}
+
+void Grass::Render(glm::mat4 view, glm::mat4 projection) {
+    Block::Render(view, projection);
+}
+
+

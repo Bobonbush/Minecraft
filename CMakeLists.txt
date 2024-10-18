@@ -41,6 +41,11 @@ add_executable(OPENGL Script/main.cpp
                       Script/Algorithm.h
                       Script/Resource/ShaderLoad.cpp
                       Script/Resource/TextureLoad.cpp
+                      Script/Resource/PerlinNoise.cpp
+                      Script/Resource/db_perlin.hpp
+                      Script/Game/world.cpp
+
+                      
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

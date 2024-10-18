@@ -5,6 +5,7 @@
 #include "Resource/TextureLoad.h"
 #include <memory>
 
+
 class Block {
     private:
         
@@ -62,6 +63,31 @@ class Water : public Block {
     public:
         Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
         ~Water();
+
+        void Render(glm::mat4 view, glm::mat4 projection);
+        void Update(float deltaTime);
+};
+
+
+class Sand : public Block {
+    private:
+        unsigned int texture;
+    public:
+        Sand(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
+        ~Sand();
+
+        void Render(glm::mat4 view, glm::mat4 projection);
+        void Update(float deltaTime);
+};
+
+class Grass : public Block {
+    private:
+        unsigned int textureTop;
+        unsigned int textureSide;
+        unsigned int textureBottom;
+    public:
+        Grass(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
+        ~Grass();
 
         void Render(glm::mat4 view, glm::mat4 projection);
         void Update(float deltaTime);

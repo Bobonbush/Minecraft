@@ -31,12 +31,21 @@
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Resource\TextureLoad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Resource\PerlinNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\world.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\WorkSpace\Minecraft\Script\Utils\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="G:\WorkSpace\Minecraft\Script\Algorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Resource\db_perlin.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

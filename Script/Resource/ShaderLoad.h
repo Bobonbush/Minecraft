@@ -1,3 +1,5 @@
+#ifndef SHADERMANAGER_H
+#define SHADERMANAGER_H
 #include "Shader.h"
 #include <map>
 #include "Algorithm.h"
@@ -21,3 +23,5 @@ class ShaderManager  {
 
         Shader& GetShader(std::string name);
 };
+
+#endif

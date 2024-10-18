@@ -47,6 +47,14 @@ class SPA {
         }
     }
 
+    template<class X> static X min(X a, X b) {
+        return a < b ? a : b;
+    }
+
+    template<class X> static X max(X a, X b) {
+        return a > b ? a : b;
+    }
+
 };
 
 #endif

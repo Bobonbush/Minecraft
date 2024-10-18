@@ -9,42 +9,7 @@
 #include "Resource/ShaderLoad.h"
 #include "Resource/TextureLoad.h"
 #include <memory>
-
-class WorldRenderer {
-    private:
-        std::vector<std::unique_ptr<Block>> blocks;
-
-        
-
-        static WorldRenderer * instance;
-
-        ShaderManager * shaderManager;
-
-        TextureManager * textureManager;
-
-        Setting * settings;
-
-        WorldRenderer();
-        
-    public:
-        ~WorldRenderer();
-        
-        static WorldRenderer* getInstance() {
-            if (instance == nullptr) {
-                instance = new WorldRenderer();
-            }
-            return instance;
-        }
-
-        void CreateWorld() {
-        }
-
-
-        
-        void Render(glm::mat4 view, glm::mat4 projection);
-        void Update(float deltaTime);
-};
-
+#include "World.h"
 
 class Game {
     private:
