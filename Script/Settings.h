@@ -11,6 +11,8 @@ class Setting { // Singleton
         glm::vec2 resolution;
         float volume;
         int controls;
+
+        const glm::vec3 BlockNDCSize = glm::vec3(0.3f, 0.3f , 0.3f);
         Setting() {
             // Load settings from file
             resolution = glm::vec2(1400, 800);
@@ -63,6 +65,10 @@ class Setting { // Singleton
 
         int getControls() {
             // Get controls
+        }
+
+        glm::vec3 getBlockNDCSize() {
+            return BlockNDCSize;
         }
 
 

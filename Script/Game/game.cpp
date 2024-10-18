@@ -10,10 +10,11 @@ WorldRenderer *WorldRenderer :: instance = nullptr;
 WorldRenderer :: WorldRenderer() {
     shaderManager = ShaderManager::getInstance();
     textureManager = TextureManager::getInstance();
+    settings = Setting::getInstance();
     shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
-    blocks.push_back(new Dirt(glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
-    blocks.push_back(new Stone(glm::vec3(1, 0, 0), glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
-    blocks.push_back(new Water(glm::vec3(2, 0, 0), glm::vec3(1, 1, 1), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
+    blocks.push_back(new Dirt(glm::vec3(0, 0, 0), settings -> getBlockNDCSize(), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
+    blocks.push_back(new Stone(glm::vec3(1, 0, 0), settings -> getBlockNDCSize(), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
+    blocks.push_back(new Water(glm::vec3(2, 0, 0), settings -> getBlockNDCSize(), glm::vec3(0, 0, 0), shaderManager -> GetShader("block")));
     
 }
 

@@ -11,14 +11,22 @@ Player :: ~Player() {
 }
 
 void Player :: processInput(GLFWwindow *window, float deltaTime) {
+    float speed = 1.f;
+    if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
+        speed = 2.f;
+    }
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        camera.ProcessKeyboard(FORWARD, deltaTime);
+        camera.ProcessKeyboard(FORWARD, deltaTime * speed);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        camera.ProcessKeyboard(BACKWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        camera.ProcessKeyboard(LEFT, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        camera.ProcessKeyboard(RIGHT, deltaTime);
+        camera.ProcessKeyboard(BACKWARD, deltaTime  * speed);
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS )
+        camera.ProcessKeyboard(LEFT, deltaTime * speed);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS )
+        camera.ProcessKeyboard(RIGHT, deltaTime * speed);
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+        camera.ProcessKeyboard(UP, deltaTime);
+    if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+        camera.ProcessKeyboard(DOWN, deltaTime);
 }
 
 void Player :: processMouse(GLFWwindow *window , float currentX , float currentY) {

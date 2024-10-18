@@ -21,6 +21,8 @@ class WorldRenderer {
 
         TextureManager * textureManager;
 
+        Setting * settings;
+
         WorldRenderer();
         
     public:
