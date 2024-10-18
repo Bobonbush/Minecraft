@@ -1,6 +1,8 @@
 G:\WorkSpace\Minecraft\Script\main.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\main.obj
 G:\WorkSpace\Minecraft\GLAD\src\glad.c;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\glad.obj
-G:\WorkSpace\Minecraft\Script\shader.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\shader.obj
-G:\WorkSpace\Minecraft\Script\Texture.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Texture.obj
-G:\WorkSpace\Minecraft\Script\game.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\game.obj
-G:\WorkSpace\Minecraft\Script\Player.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Player.obj
+G:\WorkSpace\Minecraft\Script\Utils\shader.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\shader.obj
+G:\WorkSpace\Minecraft\Script\Utils\Texture.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Texture.obj
+G:\WorkSpace\Minecraft\Script\Game\game.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\game.obj
+G:\WorkSpace\Minecraft\Script\Game\Player.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Player.obj
+G:\WorkSpace\Minecraft\Script\Settings.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Settings.obj
+G:\WorkSpace\Minecraft\Script\Game\Blocks.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Blocks.obj

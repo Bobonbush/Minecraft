@@ -12,14 +12,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(GLFW_PATH "GLFW")
 set(GLAD_PATH "GLAD")
 set(GLM_PATH "GLM")
-
+set(Utils "Script/Utils")
+set(Game "Script/Game")
+set(Script "Script")
 
 
 
 include_directories(${GLFW_PATH}/include)
 include_directories(${GLAD_PATH}/include)
 include_directories(${GLM_PATH})
-
+include_directories(${Utils})
+include_directories(${Game})
+include_directories(${Script})
 
 
 link_directories(${GLFW_PATH}/lib-vc2022)
@@ -27,11 +31,14 @@ link_directories(${GLFW_PATH}/lib-vc2022)
 
 add_executable(OPENGL Script/main.cpp
                       GLAD/src/glad.c
-                      Script/shader.cpp
-                      Script/Texture.cpp 
-                      Script/Camera.h
-                      Script/game.cpp 
-                      Script/Player.cpp
+                      Script/Utils/shader.cpp
+                      Script/Utils/Texture.cpp 
+                      Script/Utils/Camera.h
+                      Script/Game/game.cpp 
+                      Script/Game/Player.cpp
+                      Script/Settings.cpp
+                      Script/Game/Blocks.cpp
+                      Script/Algorithm.h
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

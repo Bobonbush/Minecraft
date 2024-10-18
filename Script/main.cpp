@@ -1,7 +1,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Texture.h"
 #include "Camera.h"
-#include "game.h"
+#include "Game/game.h"
 
 
 

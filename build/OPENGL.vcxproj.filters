@@ -7,21 +7,30 @@
     <ClCompile Include="G:\WorkSpace\Minecraft\GLAD\src\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\shader.cpp">
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Utils\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture.cpp">
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Utils\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\game.cpp">
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player.cpp">
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\Blocks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Camera.h">
+    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Utils\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Algorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
