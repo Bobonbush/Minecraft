@@ -2,6 +2,45 @@
 
 
 
+
+// WorldRenderer Define
+
+WorldRenderer *WorldRenderer :: instance = nullptr;
+
+WorldRenderer :: WorldRenderer() {
+    shaderManager = ShaderManager::getInstance();
+    textureManager = TextureManager::getInstance();
+    shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
+}
+
+WorldRenderer :: ~WorldRenderer() {
+    for (Block *block : blocks) {
+        delete block;
+    }
+    delete instance;
+}
+
+void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
+    for (Block *block : blocks) {
+        block -> Render(view, projection);
+    }
+}
+
+void WorldRenderer :: Update(float deltaTime) {
+    for (Block *block : blocks) {
+        block -> Update(deltaTime);
+    }
+}
+
+void WorldRenderer :: AddBlock(Block *block) {
+    blocks.push_back(block);
+}
+void WorldRenderer :: Clear() {
+    blocks.clear();
+}
+
+
+
 //Game Define
 
 Game :: Game() {
@@ -11,27 +50,27 @@ Game :: Game() {
 Game :: ~Game() {
     glfwDestroyWindow(window);
     delete block;
+    delete block2;
 }
 
 void Game::Update() {
     totalTime = glfwGetTime();
     float deltaTime = totalTime - lastTime;
+    world -> Update(deltaTime);
 
     double xpos, ypos;
     glfwGetCursorPos(window, &xpos, &ypos);
     lastTime = totalTime;
-    block -> Update(deltaTime);
 
 
     player -> Update(deltaTime, window, xpos, ypos);
-
 }
 
 void Game::Render() {
     glm::mat4 view = player -> getViewMatrix();
     glm::mat4 projection = player -> getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y);
     player -> Render();
-    block -> Render(view, projection);
+    world -> Render(view, projection);
 }
 
 void Game::Init() {
@@ -71,8 +110,8 @@ void Game::Init() {
 void Game::Run() {
     Init();
     player = Player::getInstance();
-    Shader shader("Shaders/block.vs", "Shaders/block.fs");
-    block = new Dirt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec3(0.f, 0.f, 0.f), shader);
+    world = WorldRenderer::getInstance();
+    
 
 
 

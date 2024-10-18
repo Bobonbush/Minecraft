@@ -28,12 +28,23 @@ class SPA {
         position.y = (position.y / setting -> getResolution().y) * 2 - 1;
     }
 
+
+    static void SetSeed(int seed) {
+        srand(seed);
+    }
+
     static int RandomInt(int min, int max) {
         return rand() % (max - min + 1) + min;
     }
 
     static float RandomFloat(float min, float max) {
         return min + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(max-min)));
+    }
+
+    static void convertToLowerCase(std::string &str) {
+        for (int i = 0; i < (int)str.size(); i++) {
+            str[i] = tolower(str[i]);
+        }
     }
 
 };

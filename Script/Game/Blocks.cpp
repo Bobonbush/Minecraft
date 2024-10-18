@@ -8,6 +8,8 @@ Block::Block(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &sh
     this->scale = scale;
     this->rotation = rotation;
     cubeRenderer = new CubeRenderer(shader);
+    textureManager = TextureManager::getInstance();
+
 }
 
 Block::~Block() {
@@ -51,7 +53,8 @@ void Block::Update(float deltaTime) {
 // DIRT BLOCK
 
 Dirt::Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
-    texture = TextureLoader::LoadTexture("Assets/dirt.png");
+    
+    texture =  textureManager -> LoadTexture("Assets/dirt.png");
     cubeRenderer -> LoadCube(texture);
 }
 
@@ -63,5 +66,42 @@ void Dirt::Update(float deltaTime) {
 }
 
 void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
+    Block::Render(view, projection);
+}
+
+
+// STONE BLOCK
+
+Stone::Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
+    texture = textureManager -> LoadTexture("Assets/stone.png");
+    cubeRenderer -> LoadCube(texture);
+}
+
+Stone::~Stone() {
+}
+
+void Stone::Update(float deltaTime) {
+    Block::Update(deltaTime);
+}
+
+void Stone::Render(glm::mat4 view, glm::mat4 projection) {
+    Block::Render(view, projection);
+}
+
+// WATER BLOCK
+
+Water:: Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
+    texture = textureManager -> LoadTexture("Assets/water.png");
+    cubeRenderer -> LoadCube(texture);
+}
+
+Water::~Water() {
+}
+
+void Water::Update(float deltaTime) {
+    Block::Update(deltaTime);
+}
+
+void Water::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
 }

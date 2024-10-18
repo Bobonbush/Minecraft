@@ -39,6 +39,8 @@ add_executable(OPENGL Script/main.cpp
                       Script/Settings.cpp
                       Script/Game/Blocks.cpp
                       Script/Algorithm.h
+                      Script/Resource/ShaderLoad.cpp
+                      Script/Resource/TextureLoad.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

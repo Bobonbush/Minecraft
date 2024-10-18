@@ -407,6 +407,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Settings.cpp" />
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\Blocks.cpp" />
     <ClInclude Include="G:\WorkSpace\Minecraft\Script\Algorithm.h" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Resource\ShaderLoad.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Resource\TextureLoad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="G:\WorkSpace\Minecraft\build\ZERO_CHECK.vcxproj">

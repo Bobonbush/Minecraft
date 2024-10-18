@@ -6,3 +6,5 @@ G:\WorkSpace\Minecraft\Script\Game\game.cpp;G:\WorkSpace\Minecraft\build\OPENGL.
 G:\WorkSpace\Minecraft\Script\Game\Player.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Player.obj
 G:\WorkSpace\Minecraft\Script\Settings.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Settings.obj
 G:\WorkSpace\Minecraft\Script\Game\Blocks.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\Blocks.obj
+G:\WorkSpace\Minecraft\Script\Resource\ShaderLoad.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\ShaderLoad.obj
+G:\WorkSpace\Minecraft\Script\Resource\TextureLoad.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\TextureLoad.obj

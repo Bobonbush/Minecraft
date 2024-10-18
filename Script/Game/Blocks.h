@@ -2,6 +2,7 @@
 #define BLOCK_H
 #include "Texture.h"
 #include "Camera.h"
+#include "Resource/TextureLoad.h"
 
 class Block {
     private:
@@ -10,6 +11,7 @@ class Block {
         glm::vec3 scale;
         glm::vec3 rotation;
     protected: 
+        TextureManager *textureManager;
         CubeRenderer *cubeRenderer;
     public :
 
@@ -39,6 +41,30 @@ class Dirt : public Block{
         void Update(float deltaTime);
 };
 
+
+class Stone : public Block{
+    private:
+        unsigned int texture;
+    public:
+        Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
+        ~Stone();
+
+        void Render(glm::mat4 view, glm::mat4 projection);
+        void Update(float deltaTime);
+};
+
+
+
+class Water : public Block {
+    private:
+        unsigned int texture;
+    public:
+        Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
+        ~Water();
+
+        void Render(glm::mat4 view, glm::mat4 projection);
+        void Update(float deltaTime);
+};
 #endif
 
 

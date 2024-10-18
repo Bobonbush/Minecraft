@@ -18,6 +18,7 @@ class Shader {
     // constructor reads and builds the shader
     Shader(const char* vertexPath, const char* fragmentPath);
     ~Shader();
+    Shader() = default;
     // use/activate the shader
     void use();
     // utility uniform functions
