@@ -46,6 +46,47 @@ void Block::Update(float deltaTime) {
     
 }
 
+bool Block::FrustumCulling(const Frustum frustum) {
+    glm::vec3 blockMin = position - scale / 2.f; // Minimum corner of the block
+    glm::vec3 blockMax = position + scale / 2.f; // Maximum corner of the block
+
+    // Check each plane of the frustum
+    if (frustum.leftFace.distance + glm::dot(frustum.leftFace.normal, blockMin) < 0 &&
+        frustum.leftFace.distance + glm::dot(frustum.leftFace.normal, blockMax) < 0) {
+        
+        return false; // Block is outside the left face
+    }
+
+    if (frustum.rightFace.distance + glm::dot(frustum.rightFace.normal, blockMax) < 0 &&
+        frustum.rightFace.distance + glm::dot(frustum.rightFace.normal, blockMin) < 0) {
+            //std::cout << "Fuck" << '\n';
+        return false; // Block is outside the right face
+        
+    }
+
+    if (frustum.topFace.distance + glm::dot(frustum.topFace.normal, blockMax) < 0 &&
+        frustum.topFace.distance + glm::dot(frustum.topFace.normal, blockMin) < 0) {
+        return false; // Block is outside the top face
+    }
+
+    if (frustum.bottomFace.distance + glm::dot(frustum.bottomFace.normal, blockMin) < 0 &&
+        frustum.bottomFace.distance + glm::dot(frustum.bottomFace.normal, blockMax) < 0) {
+        return false; // Block is outside the bottom face
+    }
+    
+
+
+    if (frustum.farFace.distance + glm::dot(frustum.farFace.normal, blockMin) < 0 &&
+        frustum.farFace.distance + glm::dot(frustum.farFace.normal, blockMax) < 0) {
+        return false; // Block is behind the far face
+    }
+
+
+    
+
+    // If the block is not outside any planes, it's in the frustum
+    return true;
+}
 
 // DIRT BLOCK
 

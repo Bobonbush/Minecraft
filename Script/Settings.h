@@ -13,6 +13,8 @@ class Setting { // Singleton
         int controls;
 
         const glm::vec3 BlockNDCSize = glm::vec3(0.1f, 0.1f , 0.1f);
+        float fNear = 0.1f;
+        float fFar = 50.f;
         Setting() {
             // Load settings from file
             resolution = glm::vec2(1400, 800);
@@ -69,6 +71,14 @@ class Setting { // Singleton
 
         glm::vec3 getBlockNDCSize() {
             return BlockNDCSize;
+        }
+
+        float getNear() {
+            return fNear;
+        }
+
+        float getFar() {
+            return fFar * BlockNDCSize.x;
         }
 
 

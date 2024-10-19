@@ -12,10 +12,11 @@
 #include "Algorithm.h"
 #define DB_PERLIN_IMPL
 #include "Resource/db_perlin.hpp"
+#include <thread>
 class WorldRenderer {
     private:
         std::vector<std::unique_ptr<Block>> blocks;
-
+        Player *player;
         enum BlockType {
             WATER,
             SAND,

@@ -25,9 +25,34 @@ const float ZOOM        =  45.0f;
 
 
 // An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL
+
+
+struct Plane {
+    glm::vec3 normal = glm::vec3(0.f ,1.f, 0.f);
+    float distance = 0.f;
+
+    void normalize() {
+        float length = glm::length(normal);
+        normal /= length;
+        distance /= length;
+    }
+};
+
+struct Frustum {
+    Plane nearFace;
+    Plane farFace;
+    Plane rightFace;
+    Plane leftFace;
+    Plane topFace;
+    Plane bottomFace;
+
+    Frustum() = default;
+};
+
+
 class Camera
 {
-
+    
 
 
 public:
@@ -45,6 +70,7 @@ public:
     float MouseSensitivity;
     float Zoom;
 
+
     // constructor with vectors
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
     {
@@ -54,6 +80,10 @@ public:
         Pitch = pitch;
         updateCameraVectors();
     }
+
+    
+
+    
     // constructor with scalar values
     Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
     {
@@ -64,14 +94,19 @@ public:
         updateCameraVectors();
     }
 
+
+
+
     // returns the view matrix calculated using Euler Angles and the LookAt Matrix
     glm::mat4 GetViewMatrix()
     {
         return glm::lookAt(Position, Position + Front, Up);
     }
 
-    glm::mat4 GetProjectionMatrix(float width, float height) {
-        return glm::perspective(glm::radians(Zoom), width / height, 0.1f, 100.0f);
+    glm::mat4 GetProjectionMatrix(float width, float height , float near, float far) {
+        
+        return glm::perspective(glm::radians(Zoom), width / height, near , far);
+        //return glm::perspective(glm::radians(Zoom), width / height, settings ->  getNear() , settings -> getFar());
     }
 
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)

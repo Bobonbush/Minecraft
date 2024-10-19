@@ -16,7 +16,22 @@ WorldRenderer :: ~WorldRenderer() {
 }
 
 void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
+    
+    Frustum frustum = player -> extractFrustumPlanes();
+    /*
+    std::cout << "Frustum" << std::endl;
+    std::cout << "Top Plane: " << frustum.topFace.normal.x << " " << frustum.topFace.normal.y << " " << frustum.topFace.normal.z << " " << frustum.topFace.distance << std::endl;
+    std::cout << "Bottom Plane: " << frustum.bottomFace.normal.x << " " << frustum.bottomFace.normal.y << " " << frustum.bottomFace.normal.z << " " << frustum.bottomFace.distance << std::endl;
+    std::cout << "Left Plane: " << frustum.leftFace.normal.x << " " << frustum.leftFace.normal.y << " " << frustum.leftFace.normal.z << " " << frustum.leftFace.distance << std::endl;
+    std::cout << "Right Plane: " << frustum.rightFace.normal.x << " " << frustum.rightFace.normal.y << " " << frustum.rightFace.normal.z << " " << frustum.rightFace.distance << std::endl;
+    std::cout << "Near Plane: " << frustum.nearFace.normal.x << " " << frustum.nearFace.normal.y << " " << frustum.nearFace.normal.z << " " << frustum.nearFace.distance << std::endl;
+    std::cout << "Far Plane: " << frustum.farFace.normal.x << " " << frustum.farFace.normal.y << " " << frustum.farFace.normal.z << " " << frustum.farFace.distance << std::endl;
+    */
+
     for (auto &block : blocks) {
+        if(!block -> FrustumCulling(frustum)) {
+            continue;
+        }
         block -> Render(view, projection);
     }
 }
@@ -29,12 +44,17 @@ void WorldRenderer :: Update(float deltaTime) {
 
 
 void WorldRenderer::CreateWorld() {
-            
-    int width = 100;
-    int height = 100;
+    
+    blocks.push_back(std::make_unique<Stone>(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), shaderManager -> GetShader("block")));
+   
+    int width = 500;
+    int height = 500;
 
     std::vector<std::vector<float>> elavationMap(width, std::vector<float>(height, 0));
-
+    player = Player::getInstance();
+    
+    Frustum frustum = player -> extractFrustumPlanes();
+    
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             float nx = i;

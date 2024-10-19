@@ -27,6 +27,8 @@ class Game {
         void Update();
         void Render();
 
+            //std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Roughly 60 FPS
+
     public :
         Game();
         ~Game();

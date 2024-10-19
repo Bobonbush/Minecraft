@@ -2,6 +2,7 @@
 #define PLAYER_H
 #include "Camera.h"
 #include "Texture.h"
+#include "Settings.h"
 
 
 class Player {                // Another Singleton
@@ -37,8 +38,12 @@ class Player {                // Another Singleton
         }
 
         glm::mat4 getProjectionMatrix(float width, float height) {
-            return camera.GetProjectionMatrix(width, height);
+            Setting *settings = Setting::getInstance();
+            return camera.GetProjectionMatrix(width, height,  settings -> getNear(), settings -> getFar());
         }
+
+
+        Frustum extractFrustumPlanes() ;
         
 };
 

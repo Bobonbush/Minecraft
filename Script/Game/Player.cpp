@@ -44,6 +44,60 @@ void Player :: processMouse(GLFWwindow *window , float currentX , float currentY
 }
 
 
+Frustum Player::extractFrustumPlanes() {
+    glm::mat4 view = getViewMatrix();
+    Setting *settings = Setting::getInstance();
+
+    glm::mat4 projection = getProjectionMatrix(settings -> getResolution().x, settings -> getResolution().y);
+    Frustum frustum;
+    glm::mat4 clip = projection * view;
+    
+    // right plane
+    frustum.rightFace.normal.x = clip[0][3] - clip[0][0];
+    frustum.rightFace.normal.y = clip[1][3] - clip[1][0];
+    frustum.rightFace.normal.z = clip[2][3] - clip[2][0];
+    frustum.rightFace.distance = clip[3][3] - clip[3][0];
+    frustum.rightFace.normalize();
+    
+    // left plane
+    frustum.leftFace.normal.x = clip[0][3] + clip[0][0];
+    frustum.leftFace.normal.y = clip[1][3] + clip[1][0];
+    frustum.leftFace.normal.z = clip[2][3] + clip[2][0];
+    frustum.leftFace.distance = clip[3][3] + clip[3][0];
+    frustum.leftFace.normalize();
+    
+    // bottom plane
+    frustum.bottomFace.normal.x = clip[0][3] + clip[0][1];
+    frustum.bottomFace.normal.y = clip[1][3] + clip[1][1];
+    frustum.bottomFace.normal.z = clip[2][3] + clip[2][1];
+    frustum.bottomFace.distance = clip[3][3] + clip[3][1];
+    frustum.bottomFace.normalize();
+    
+    // top plane
+    frustum.topFace.normal.x = clip[0][3] - clip[0][1];
+    frustum.topFace.normal.y = clip[1][3] - clip[1][1];
+    frustum.topFace.normal.z = clip[2][3] - clip[2][1];
+    frustum.topFace.distance = clip[3][3] - clip[3][1];
+    
+    frustum.topFace.normalize();
+    
+    // near plane
+    frustum.nearFace.normal.x = clip[0][3] + clip[0][2];
+    frustum.nearFace.normal.y = clip[1][3] + clip[1][2];
+    frustum.nearFace.normal.z = clip[2][3] + clip[2][2];
+    
+    frustum.nearFace.distance = clip[3][3] + clip[3][2];
+    frustum.nearFace.normalize();
+    
+    // far plane
+    frustum.farFace.normal.x = clip[0][3] - clip[0][2];
+    frustum.farFace.normal.y = clip[1][3] - clip[1][2];
+    frustum.farFace.normal.z = clip[2][3] - clip[2][2];
+    frustum.farFace.distance = clip[3][3] - clip[3][2];
+    frustum.farFace.normalize();
+
+    return frustum;
+}
 
 void Player :: Update(float deltaTime, GLFWwindow *window, float currentX, float currentY) {
     processInput(window, deltaTime);

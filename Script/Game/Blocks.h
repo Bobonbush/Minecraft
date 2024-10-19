@@ -29,6 +29,8 @@ class Block {
 
         virtual void Update(float deltaTime);
 
+        bool FrustumCulling(Frustum frustum);
+
 };
 
 

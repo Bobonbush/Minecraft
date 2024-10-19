@@ -30,13 +30,14 @@ void Game::Update() {
 
 
     player -> Update(deltaTime, window, xpos, ypos);
+
+    world -> Render(player -> getViewMatrix(), player -> getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y));
 }
 
 void Game::Render() {
     glm::mat4 view = player -> getViewMatrix();
     glm::mat4 projection = player -> getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y);
     player -> Render();
-    world -> Render(view, projection);
 }
 
 void Game::Init() {
@@ -80,18 +81,20 @@ void Game::Run() {
     player = Player::getInstance();
     world = WorldRenderer::getInstance();
     
-
-
+    
 
     while (!glfwWindowShouldClose(window)) {
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(0.2f, 0.3f , 0.7f , 1.f);
         Update();
         Render();
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        
     }
 
-     glfwTerminate();
+
+    glfwTerminate();
 
 }
