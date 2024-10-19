@@ -9,12 +9,12 @@
 class Block {
     private:
         
+        
+    protected: 
         glm::vec3 position;
         glm::vec3 scale;
         glm::vec3 rotation;
-    protected: 
         TextureManager *textureManager;
-        std::unique_ptr<CubeRenderer> cubeRenderer;
     public :
 
         Block(glm :: vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
@@ -35,6 +35,7 @@ class Block {
 class Dirt : public Block{
     private:
         unsigned int texture;
+        static std::unique_ptr<CubeRenderer> cubeRenderer;
     public:
         Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
         ~Dirt();
@@ -47,6 +48,7 @@ class Dirt : public Block{
 class Stone : public Block{
     private:
         unsigned int texture;
+        static std::unique_ptr<CubeRenderer> cubeRenderer;
     public:
         Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
         ~Stone();
@@ -60,6 +62,7 @@ class Stone : public Block{
 class Water : public Block {
     private:
         unsigned int texture;
+        static std::unique_ptr<CubeRenderer> cubeRenderer;
     public:
         Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
         ~Water();
@@ -72,6 +75,7 @@ class Water : public Block {
 class Sand : public Block {
     private:
         unsigned int texture;
+        static std::unique_ptr<CubeRenderer> cubeRenderer;
     public:
         Sand(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
         ~Sand();
@@ -85,6 +89,7 @@ class Grass : public Block {
         unsigned int textureTop;
         unsigned int textureSide;
         unsigned int textureBottom;
+        static std::unique_ptr<CubeRenderer> cubeRenderer;
     public:
         Grass(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
         ~Grass();

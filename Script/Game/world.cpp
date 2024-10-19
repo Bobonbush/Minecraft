@@ -37,22 +37,22 @@ void WorldRenderer::CreateWorld() {
 
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            float nx = (float)i / width - 0.5f;
-            float ny = (float)j / height - 0.5f;
+            float nx = i;
+            float ny = j;
 
-            float frequency = 6.25f;
-            elavationMap[i][j] = frequency * (db::perlin(2 * nx * frequency, 2 * ny * frequency) ) + frequency/2.f * (db::perlin(4 * nx * frequency, 4 * ny * frequency) ) + frequency/4.f * (db::perlin(8 * nx * frequency, 8 * ny * frequency) ) + frequency/8.f * (db::perlin(16 * nx * frequency, 16 * ny * frequency) );
-
-            elavationMap[i][j] = elavationMap[i][j]/(frequency + frequency/2.f + frequency/4.f + frequency/8.f);
+            elavationMap[i][j] = db::perlin(nx / 64.f, ny / 64.f ) * 1.00f + db::perlin(nx / 32.f, ny / 32.f ) * 0.5f + db::perlin(nx / 16.f, ny / 16.f ) * 0.25f;
+            
         }
     }
 
     for(int i = 0 ; i < width ; i++) {
         for(int j = 0 ; j < height ;j ++) {
             elavationMap[i][j] = (elavationMap[i][j] + 1.f) / 2.f ;
-            std::cout << elavationMap[i][j] << " ";
+            elavationMap[i][j] = pow(elavationMap[i][j], 3.f);
+            //SPA::clamp(elavationMap[i][j], 0.f, 1.f);
+            //std::cout << elavationMap[i][j] << " ";
         }
-        std::cout << std::endl;
+        //std::cout << std::endl;
     }
 
 
@@ -63,14 +63,14 @@ void WorldRenderer::CreateWorld() {
             float e = elavationMap[i][j];
             int blockHeight = 0;
             int blockType = 0;
-            if(e < 0.4f) {          // Water Level
+            if(e < 0.02f) {          // Water Level
                 blockHeight = 1;
                 blockType = WATER;
-            }else if(e < 0.5f) {    // Sand Level
-                blockHeight = SPA::RandomInt(1, 3);
+            }else if(e < 0.03f) {    // Sand Level
+                blockHeight = SPA::RandomInt(1, 2);
                 blockType = SAND;
-            } else if(e < 0.7f) {   // Dirt Level
-                blockHeight = SPA::RandomInt(5, 9);
+            } else if(e < 0.4f) {   // Dirt Level
+                blockHeight = SPA::RandomInt(2, 4);
 
                 blockType = DIRT;
             } else {                // Stone Level

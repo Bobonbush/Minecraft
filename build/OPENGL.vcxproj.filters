@@ -1,63 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\main.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\GLAD\src\glad.c">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\GLAD\src\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Utils\shader.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Utils\Texture.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\game.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Game\game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\Player.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Game\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Settings.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Settings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\Blocks.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Game\Blocks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Resource\ShaderLoad.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Resource\ShaderLoad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Resource\TextureLoad.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Resource\TextureLoad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Resource\PerlinNoise.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Resource\PerlinNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\world.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Game\world.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Utils\Camera.h">
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Algorithm.h">
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Algorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Resource\db_perlin.hpp">
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Resource\db_perlin.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="G:\WorkSpace\Minecraft\CMakeLists.txt" />
+    <CustomBuild Include="D:\WorkSpace\Minecraft\Minecraft\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{5E6BBC2A-8187-3B73-820F-82CB0BC2E501}</UniqueIdentifier>
+      <UniqueIdentifier>{D64172EA-31B7-3F58-A275-FFEEF939E3F8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{4CD78F6C-D6A7-3D51-97F0-D546C573C022}</UniqueIdentifier>
+      <UniqueIdentifier>{F035ECA5-E349-31F3-B822-F57B84F0376E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

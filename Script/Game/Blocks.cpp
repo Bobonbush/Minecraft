@@ -7,7 +7,6 @@ Block::Block(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &sh
     this->position = position;
     this->scale = scale;
     this->rotation = rotation;
-    cubeRenderer = std::make_unique< CubeRenderer >(shader);
     textureManager = TextureManager::getInstance();
 
 }
@@ -16,7 +15,6 @@ Block::~Block() {
 }
 
 void Block::Render(glm:: mat4 view, glm::mat4 projection) {
-    cubeRenderer->Render(position, scale, rotation, view , projection);
 }
 
 void Block::SetPosition(glm::vec3 position) {
@@ -51,10 +49,14 @@ void Block::Update(float deltaTime) {
 
 // DIRT BLOCK
 
+std::unique_ptr<CubeRenderer> Dirt::cubeRenderer = nullptr;
 Dirt::Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
     
     texture =  textureManager -> LoadTexture("Assets/dirt.png");
-    cubeRenderer -> LoadCube(texture);
+    if(cubeRenderer == nullptr) {
+        cubeRenderer = std::make_unique<CubeRenderer>(shader);
+        cubeRenderer -> LoadCube(texture);
+    }
 }
 
 Dirt::~Dirt() {
@@ -66,14 +68,18 @@ void Dirt::Update(float deltaTime) {
 
 void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
+    cubeRenderer -> Render(position, scale, rotation, view, projection);
 }
 
 
 // STONE BLOCK
-
+std::unique_ptr<CubeRenderer> Stone::cubeRenderer = nullptr;
 Stone::Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
     texture = textureManager -> LoadTexture("Assets/stone.png");
-    cubeRenderer -> LoadCube(texture);
+    if(cubeRenderer == nullptr) {
+        cubeRenderer = std::make_unique<CubeRenderer>(shader);
+        cubeRenderer -> LoadCube(texture);
+    }
 }
 
 Stone::~Stone() {
@@ -85,13 +91,19 @@ void Stone::Update(float deltaTime) {
 
 void Stone::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
+    cubeRenderer -> Render(position, scale, rotation, view, projection);
 }
 
 // WATER BLOCK
 
+std::unique_ptr<CubeRenderer> Water::cubeRenderer = nullptr;
+
 Water:: Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
     texture = textureManager -> LoadTexture("Assets/water.png");
-    cubeRenderer -> LoadCube(texture);
+    if(cubeRenderer == nullptr) {
+        cubeRenderer = std::make_unique<CubeRenderer>(shader);
+        cubeRenderer -> LoadCube(texture);
+    }
 }
 
 Water::~Water() {
@@ -103,13 +115,19 @@ void Water::Update(float deltaTime) {
 
 void Water::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
+    cubeRenderer -> Render(position, scale, rotation, view, projection);
 }
 
 // SAND BLOCK
 
+std::unique_ptr<CubeRenderer> Sand::cubeRenderer = nullptr;
+
 Sand::Sand(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
     texture = textureManager -> LoadTexture("Assets/sand.png");
-    cubeRenderer -> LoadCube(texture);
+    if(cubeRenderer == nullptr) {
+        cubeRenderer = std::make_unique<CubeRenderer>(shader);
+        cubeRenderer -> LoadCube(texture);
+    }
 }
 
 Sand::~Sand() {
@@ -121,15 +139,23 @@ void Sand::Update(float deltaTime) {
 
 void Sand::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
+    cubeRenderer -> Render(position, scale, rotation, view, projection);
 }
 
 // GRASS BLOCK
+
+std::unique_ptr<CubeRenderer> Grass::cubeRenderer = nullptr;
 
 Grass::Grass(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
     textureTop = textureManager -> LoadTexture("Assets/Grass/Top.png");
     textureSide = textureManager -> LoadTexture("Assets/Grass/Side.png");
     textureBottom = textureManager -> LoadTexture("Assets/Grass/dirt.png");
-    cubeRenderer -> LoadCube(textureTop, textureSide, textureBottom);
+
+    if(cubeRenderer == nullptr) {
+        cubeRenderer = std::make_unique<CubeRenderer>(shader);
+        cubeRenderer -> LoadCube(textureTop, textureSide, textureBottom);
+    }
+    
 }
 
 Grass::~Grass() {
@@ -141,6 +167,7 @@ void Grass::Update(float deltaTime) {
 
 void Grass::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
+    cubeRenderer -> Render(position, scale, rotation, view, projection);
 }
 
 
