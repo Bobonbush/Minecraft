@@ -42,6 +42,15 @@ glm::vec3 Block::GetRotation() {
     return rotation;
 }
 
+
+
+void Block::PrepareRender(Frustum frustum) {
+}
+
+void Block::Render(glm::vec4 view, glm::mat4 projection) {
+
+}
+
 void Block::Update(float deltaTime) {
     
 }
@@ -91,13 +100,15 @@ bool Block::FrustumCulling(const Frustum frustum) {
 // DIRT BLOCK
 
 std::unique_ptr<CubeRenderer> Dirt::cubeRenderer = nullptr;
+std::vector<glm::vec3> Dirt::validPositions;
 Dirt::Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
     
     texture =  textureManager -> LoadTexture("Assets/dirt.png");
     if(cubeRenderer == nullptr) {
         cubeRenderer = std::make_unique<CubeRenderer>(shader);
-        cubeRenderer -> LoadCube(texture);
+        
     }
+    cubeRenderer -> LoadCube(texture);
 }
 
 Dirt::~Dirt() {
@@ -107,20 +118,37 @@ void Dirt::Update(float deltaTime) {
     Block::Update(deltaTime);
 }
 
+void Dirt::PrepareRender(Frustum frustum) {
+    Block::PrepareRender(frustum);
+    if(FrustumCulling(frustum)) {
+        
+    }
+    validPositions.push_back(position);
+}
+
 void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
+
     Block::Render(view, projection);
-    cubeRenderer -> Render(position, scale, rotation, view, projection);
+    if((int) validPositions.size() == 0) {
+        return;
+    }
+    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    validPositions.clear();
 }
 
 
-// STONE BLOCK
+//STONE BLOCK
+
+
 std::unique_ptr<CubeRenderer> Stone::cubeRenderer = nullptr;
+std::vector<glm::vec3> Stone::validPositions;
 Stone::Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
-    texture = textureManager -> LoadTexture("Assets/stone.png");
+    texture = textureManager -> LoadTexture("Assets/Stone.png");
     if(cubeRenderer == nullptr) {
         cubeRenderer = std::make_unique<CubeRenderer>(shader);
-        cubeRenderer -> LoadCube(texture);
     }
+
+    cubeRenderer -> LoadCube(texture);
 }
 
 Stone::~Stone() {
@@ -130,21 +158,37 @@ void Stone::Update(float deltaTime) {
     Block::Update(deltaTime);
 }
 
+void Stone::PrepareRender(Frustum frustum) {
+    Block::PrepareRender(frustum);
+    if(FrustumCulling(frustum)) {
+       
+    }
+
+     validPositions.push_back(position);
+}
+
 void Stone::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
-    cubeRenderer -> Render(position, scale, rotation, view, projection);
+    if( (int) validPositions.size() == 0) {
+        return;
+    }
+
+    //std::cout << "YES" <<'\n';
+    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    validPositions.clear();
 }
 
 // WATER BLOCK
 
 std::unique_ptr<CubeRenderer> Water::cubeRenderer = nullptr;
+std::vector<glm::vec3> Water::validPositions;
 
 Water:: Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
     texture = textureManager -> LoadTexture("Assets/water.png");
     if(cubeRenderer == nullptr) {
         cubeRenderer = std::make_unique<CubeRenderer>(shader);
-        cubeRenderer -> LoadCube(texture);
     }
+    cubeRenderer -> LoadCube(texture);
 }
 
 Water::~Water() {
@@ -156,19 +200,32 @@ void Water::Update(float deltaTime) {
 
 void Water::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
-    cubeRenderer -> Render(position, scale, rotation, view, projection);
+    if( (int)validPositions.size() == 0) {
+        return;
+    }
+    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    validPositions.clear();
+}
+
+void Water::PrepareRender(Frustum frustum) {
+    Block::PrepareRender(frustum);
+    if(FrustumCulling(frustum)) {
+        
+    }
+    validPositions.push_back(position);
 }
 
 // SAND BLOCK
 
 std::unique_ptr<CubeRenderer> Sand::cubeRenderer = nullptr;
+std::vector<glm::vec3> Sand::validPositions;
 
 Sand::Sand(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
     texture = textureManager -> LoadTexture("Assets/sand.png");
     if(cubeRenderer == nullptr) {
         cubeRenderer = std::make_unique<CubeRenderer>(shader);
-        cubeRenderer -> LoadCube(texture);
     }
+    cubeRenderer -> LoadCube(texture);
 }
 
 Sand::~Sand() {
@@ -180,12 +237,25 @@ void Sand::Update(float deltaTime) {
 
 void Sand::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
-    cubeRenderer -> Render(position, scale, rotation, view, projection);
+    if((int) validPositions.size() == 0) {
+        return;
+    }
+    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    validPositions.clear();
+}
+
+void Sand::PrepareRender(Frustum frustum) {
+    Block::PrepareRender(frustum);
+    if(FrustumCulling(frustum)) {
+        
+    }
+    validPositions.push_back(position);
 }
 
 // GRASS BLOCK
 
 std::unique_ptr<CubeRenderer> Grass::cubeRenderer = nullptr;
+std::vector<glm::vec3> Grass::validPositions;
 
 Grass::Grass(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
     textureTop = textureManager -> LoadTexture("Assets/Grass/Top.png");
@@ -194,8 +264,9 @@ Grass::Grass(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &sh
 
     if(cubeRenderer == nullptr) {
         cubeRenderer = std::make_unique<CubeRenderer>(shader);
-        cubeRenderer -> LoadCube(textureTop, textureSide, textureBottom);
     }
+
+    cubeRenderer -> LoadCube(textureTop, textureSide, textureBottom);
     
 }
 
@@ -208,7 +279,17 @@ void Grass::Update(float deltaTime) {
 
 void Grass::Render(glm::mat4 view, glm::mat4 projection) {
     Block::Render(view, projection);
-    cubeRenderer -> Render(position, scale, rotation, view, projection);
+    if(validPositions.size() == 0) {
+        return;
+    }
+    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    validPositions.clear();
 }
 
-
+void Grass::PrepareRender(Frustum frustum) {
+    Block::PrepareRender(frustum);
+    if(FrustumCulling(frustum)) {
+        
+    }
+    validPositions.push_back(position);
+}

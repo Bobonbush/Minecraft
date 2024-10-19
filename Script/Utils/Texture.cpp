@@ -164,6 +164,7 @@ CubeSurface::CubeSurface(Shader &shader, int face, unsigned int texture) : shade
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
+    glGenBuffers(1, &instanceVBO);
     std::vector<float> vertex;
 
     if(face == 4 ) {
@@ -248,17 +249,28 @@ CubeSurface::CubeSurface(Shader &shader, int face, unsigned int texture) : shade
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
     glEnableVertexAttribArray(2);
+
+    glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+    glBufferData(GL_ARRAY_BUFFER, (int)instancePositions.size() * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
     
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
+    glEnableVertexAttribArray(3);
+    glVertexAttribDivisor(3, 1); 
     glBindVertexArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 CubeSurface::~CubeSurface() {
 }
 
-void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection) {
+void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3> & validPositions) {
+    if(validPositions.size() == 0) {
+        return;
+    }
     shader.use();
     glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, position);
     model = glm::scale(model, scale);
     model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
 
@@ -268,12 +280,38 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
     shader.setMat4("model", model);
     shader.setMat4("view", view);
     shader.setMat4("projection", projection);
+    bool diff = false;
 
 
+    for(int i = 0; i < (int) validPositions.size(); i++) {
+        if(i == (int) instancePositions.size()) {
+            
+            instancePositions.push_back(validPositions[i]);
+            diff = true;
+            continue;
+        }
+        if(validPositions[i] != instancePositions[i]) {
+            instancePositions[i] = validPositions[i];
+            diff = true;
+            
+        }
+        instancePositions[i] = validPositions[i];
+    }
+
+    
+    if(diff) {
+        glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+
+        std::cout << "YES" <<'\n';
+        glBufferData(GL_ARRAY_BUFFER, (int)instancePositions.size() * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElementsInstanced(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0, instancePositions.size());
+
     glBindVertexArray(0);
 }
 
@@ -323,6 +361,11 @@ CubeRenderer::CubeRenderer(Shader &shader) : shader(shader) {
 }
 
 void CubeRenderer:: LoadCube(unsigned int texture) {
+    numBlocks++;
+    if(numBlocks > 1) {
+        //std::cout << "Only one block can be loaded at a time" << std::endl;
+        return;
+    }
     CubeBuilder builder(shader);
     builder.BuildSurfaceTop(texture);
     builder.BuildSurfaceBottom(texture);
@@ -373,9 +416,9 @@ void CubeRenderer:: LoadCube(unsigned int top, unsigned int around, unsigned int
 }
 
 
-void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection) {
+void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPosition) {
     for (int i = 0; i < (int) cubeSurfaces.size(); i++) {
-        cubeSurfaces[i].Render(position, scale, rotation, view, projection);
+        cubeSurfaces[i].Render(position, scale, rotation, view, projection, validPosition);
     }
 }
 

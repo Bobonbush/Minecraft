@@ -14,7 +14,7 @@ class Setting { // Singleton
 
         const glm::vec3 BlockNDCSize = glm::vec3(0.1f, 0.1f , 0.1f);
         float fNear = 0.1f;
-        float fFar = 50.f;
+        float fFar = 300.f;
         Setting() {
             // Load settings from file
             resolution = glm::vec2(1400, 800);

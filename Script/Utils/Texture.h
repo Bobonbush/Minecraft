@@ -50,11 +50,13 @@ class CubeSurface {
         unsigned int VAO, VBO, EBO;
         Shader &shader;
         unsigned int texture;
+        unsigned int instanceVBO;
+        std::vector<glm::vec3> instancePositions;
     public :
 
         CubeSurface(Shader & shader ,int face, unsigned int texture);
         ~CubeSurface();
-        void Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection);
+        void Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPosition);
         
 };
 
@@ -81,6 +83,7 @@ class CubeRenderer {
     private:
         std::vector<CubeSurface> cubeSurfaces;
         Shader& shader;
+        int numBlocks = 0;
 
     public :
 
@@ -91,7 +94,7 @@ class CubeRenderer {
         void LoadCube(unsigned int top , unsigned int overall);
         void LoadCube(unsigned int top , unsigned int around, unsigned int bottom);
 
-        void Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection);
+        void Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPositions);
 };
 
 

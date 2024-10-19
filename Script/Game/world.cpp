@@ -8,6 +8,7 @@ WorldRenderer :: WorldRenderer() {
     textureManager = TextureManager::getInstance();
     settings = Setting::getInstance();
     shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
+    player = Player::getInstance();
     CreateWorld();
 }
 
@@ -29,11 +30,14 @@ void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
     */
 
     for (auto &block : blocks) {
-        if(!block -> FrustumCulling(frustum)) {
-            continue;
-        }
+        block -> PrepareRender(frustum);
+        
+    }
+
+    for (auto &block : blocks) {
         block -> Render(view, projection);
     }
+
 }
 
 void WorldRenderer :: Update(float deltaTime) {
@@ -45,13 +49,10 @@ void WorldRenderer :: Update(float deltaTime) {
 
 void WorldRenderer::CreateWorld() {
     
-    blocks.push_back(std::make_unique<Stone>(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 0.0f), shaderManager -> GetShader("block")));
-   
     int width = 500;
-    int height = 500;
-
+    int height = 400;
+         
     std::vector<std::vector<float>> elavationMap(width, std::vector<float>(height, 0));
-    player = Player::getInstance();
     
     Frustum frustum = player -> extractFrustumPlanes();
     
@@ -104,15 +105,20 @@ void WorldRenderer::CreateWorld() {
                 switch (blockType) {
                     case WATER :
                         blocks.push_back(std::make_unique<Water>(position, settings -> getBlockNDCSize(), glm::vec3(0.0f, 0.0f, 0.0f), shaderManager -> GetShader("block")));
+                        //blocks.push_back(std::make_unique<Dirt>(position, settings -> getBlockNDCSize(), glm::vec3(0.0f, 0.0f, 0.0f), shaderManager -> GetShader("block")));
                         break;
                     case SAND :
                         blocks.push_back(std::make_unique<Sand>(position, settings -> getBlockNDCSize(), glm::vec3(0.0f, 0.0f, 0.0f), shaderManager -> GetShader("block")));
+                        //blocks.push_back(std::make_unique<Dirt>(position, settings -> getBlockNDCSize(), glm::vec3(0.0f, 0.0f, 0.0f), shaderManager -> GetShader("block")));
                         break;
                     case DIRT :   
                         if(numTop == blockHeight - 1) {
                             blocks.push_back(std::make_unique<Grass>(position, settings -> getBlockNDCSize(), glm::vec3(0.0f, 0.0f, 0.0f), shaderManager -> GetShader("block")));
+                            //blocks.push_back(std::make_unique<Stone>(position, settings -> getBlockNDCSize(), glm::vec3(0.0f, 0.0f, 0.0f), shaderManager -> GetShader("block")));
+
                         } else {
                             blocks.push_back(std::make_unique<Dirt>(position, settings -> getBlockNDCSize(), glm::vec3(0.0f, 0.0f, 0.0f), shaderManager -> GetShader("block")));
+                            
                         }
                          break;
                     case STONE :
@@ -122,5 +128,6 @@ void WorldRenderer::CreateWorld() {
             }
         }
     }
+    
     
 }
