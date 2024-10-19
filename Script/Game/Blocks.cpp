@@ -121,9 +121,8 @@ void Dirt::Update(float deltaTime) {
 void Dirt::PrepareRender(Frustum frustum) {
     Block::PrepareRender(frustum);
     if(FrustumCulling(frustum)) {
-        
+         validPositions.push_back(position);
     }
-    validPositions.push_back(position);
 }
 
 void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
@@ -161,10 +160,10 @@ void Stone::Update(float deltaTime) {
 void Stone::PrepareRender(Frustum frustum) {
     Block::PrepareRender(frustum);
     if(FrustumCulling(frustum)) {
-       
+       validPositions.push_back(position);
     }
 
-     validPositions.push_back(position);
+     
 }
 
 void Stone::Render(glm::mat4 view, glm::mat4 projection) {
@@ -210,9 +209,9 @@ void Water::Render(glm::mat4 view, glm::mat4 projection) {
 void Water::PrepareRender(Frustum frustum) {
     Block::PrepareRender(frustum);
     if(FrustumCulling(frustum)) {
-        
+        validPositions.push_back(position);
     }
-    validPositions.push_back(position);
+    
 }
 
 // SAND BLOCK
@@ -247,9 +246,9 @@ void Sand::Render(glm::mat4 view, glm::mat4 projection) {
 void Sand::PrepareRender(Frustum frustum) {
     Block::PrepareRender(frustum);
     if(FrustumCulling(frustum)) {
-        
+        validPositions.push_back(position);
     }
-    validPositions.push_back(position);
+    
 }
 
 // GRASS BLOCK
@@ -289,7 +288,7 @@ void Grass::Render(glm::mat4 view, glm::mat4 projection) {
 void Grass::PrepareRender(Frustum frustum) {
     Block::PrepareRender(frustum);
     if(FrustumCulling(frustum)) {
-        
+        validPositions.push_back(position);
     }
-    validPositions.push_back(position);
+    
 }

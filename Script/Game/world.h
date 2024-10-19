@@ -50,6 +50,51 @@ class WorldRenderer {
                 }
             }
         }
+
+        void HardNoise(std::vector<std::vector<float>> &elavationMap) {
+            int n = (int)elavationMap.size();
+            for (int i = 0; i < n; i++) {
+                int m = (int)elavationMap[i].size();
+                for (int j = 0; j < m; j++) {
+                    if(i + 1 < n )
+                        elavationMap[i][j] = SPA::max(elavationMap[i][j] , elavationMap[i+1][j] );
+                    if(j + 1 < m)
+                        elavationMap[i][j] = SPA::max(elavationMap[i][j] , elavationMap[i][j+1] );
+                    if(i + 1 < n && j + 1 < m)
+                        elavationMap[i][j] = SPA::max(elavationMap[i][j] , elavationMap[i+1][j+1] );
+                }
+            }
+        }
+
+        void SoftHeight(std::vector<std::vector<int>> & HeightMap) {
+            int n = (int)HeightMap.size();
+            for (int i = 0; i < n; i++) {
+                int m = (int)HeightMap[i].size();
+                for (int j = 0; j < m; j++) {
+                    if(i + 1 < n )
+                        HeightMap[i][j] = SPA::min(HeightMap[i][j] , HeightMap[i+1][j] );
+                    if(j + 1 < m)
+                        HeightMap[i][j] = SPA::min(HeightMap[i][j] , HeightMap[i][j+1] );
+                    if(i + 1 < n && j + 1 < m)
+                        HeightMap[i][j] = SPA::min(HeightMap[i][j] , HeightMap[i+1][j+1] );
+                }
+            }
+        }
+
+        void HardHeight(std::vector<std::vector<int>> & HeightMap) {
+            int n = (int)HeightMap.size();
+            for (int i = 0; i < n; i++) {
+                int m = (int)HeightMap[i].size();
+                for (int j = 0; j < m; j++) {
+                    if(i + 1 < n )
+                        HeightMap[i][j] = SPA::max(HeightMap[i][j] , HeightMap[i+1][j] );
+                    if(j + 1 < m)
+                        HeightMap[i][j] = SPA::max(HeightMap[i][j] , HeightMap[i][j+1] );
+                    if(i + 1 < n && j + 1 < m)
+                        HeightMap[i][j] = SPA::max(HeightMap[i][j] , HeightMap[i+1][j+1] );
+                }
+            }
+        }
         
     public:
         ~WorldRenderer();

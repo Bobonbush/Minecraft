@@ -281,13 +281,14 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
     shader.setMat4("view", view);
     shader.setMat4("projection", projection);
     bool diff = false;
+    bool neww = false;
 
 
     for(int i = 0; i < (int) validPositions.size(); i++) {
         if(i == (int) instancePositions.size()) {
             
             instancePositions.push_back(validPositions[i]);
-            diff = true;
+            neww = true;
             continue;
         }
         if(validPositions[i] != instancePositions[i]) {
@@ -299,12 +300,18 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
     }
 
     
-    if(diff) {
+    if(neww) {
         glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-
-        std::cout << "YES" <<'\n';
         glBufferData(GL_ARRAY_BUFFER, (int)instancePositions.size() * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
         
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
+    if(diff) {
+        glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+        int number = (int)validPositions.size();
+        
+        glBufferData(GL_ARRAY_BUFFER, number * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
     glActiveTexture(GL_TEXTURE0);

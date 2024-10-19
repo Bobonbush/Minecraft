@@ -50,7 +50,8 @@ void WorldRenderer :: Update(float deltaTime) {
 void WorldRenderer::CreateWorld() {
     
     int width = 500;
-    int height = 400;
+    int height = 500;
+    
          
     std::vector<std::vector<float>> elavationMap(width, std::vector<float>(height, 0));
     
@@ -69,16 +70,18 @@ void WorldRenderer::CreateWorld() {
     for(int i = 0 ; i < width ; i++) {
         for(int j = 0 ; j < height ;j ++) {
             elavationMap[i][j] = (elavationMap[i][j] + 1.f) / 2.f ;
-            elavationMap[i][j] = pow(elavationMap[i][j], 3.f);
+            elavationMap[i][j] = pow(elavationMap[i][j], 4.f);
             //SPA::clamp(elavationMap[i][j], 0.f, 1.f);
             //std::cout << elavationMap[i][j] << " ";
         }
         //std::cout << std::endl;
     }
 
+    std::vector<std::vector<int>> HeightMap(width, std::vector<int>(height, 0));
+
 
     SoftNoise(elavationMap);
-
+    HardNoise(elavationMap);
     for(int i = 0 ; i < width ; i++) {
         for(int j = 0 ; j < height ;j ++) {
             float e = elavationMap[i][j];
@@ -95,7 +98,32 @@ void WorldRenderer::CreateWorld() {
 
                 blockType = DIRT;
             } else {                // Stone Level
-                blockHeight = SPA::RandomInt(10, 15); 
+                blockHeight = SPA::RandomInt(10, 45); 
+
+                blockType = STONE;
+            }
+
+            HeightMap[i][j] = blockHeight;
+        }
+    }
+
+    SoftHeight(HeightMap);
+    //HardHeight(HeightMap);
+
+
+    for(int i = 0 ; i < width ; i++) {
+        for(int j = 0 ; j < height ;j ++) {
+            float e = elavationMap[i][j];
+            int blockHeight = HeightMap[i][j];
+            int blockType = 0;
+            if(e < 0.03f) {          // Water Level
+                blockType = WATER;
+            }else if(e < 0.04f) {    // Sand Level
+                blockType = SAND;
+            } else if(e < 0.4f) {   // Dirt Level
+
+                blockType = DIRT;
+            } else {                // Stone Level
 
                 blockType = STONE;
             }

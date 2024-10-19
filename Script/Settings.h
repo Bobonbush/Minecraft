@@ -12,7 +12,7 @@ class Setting { // Singleton
         float volume;
         int controls;
 
-        const glm::vec3 BlockNDCSize = glm::vec3(0.1f, 0.1f , 0.1f);
+        const glm::vec3 BlockNDCSize = glm::vec3(0.5f, 0.5f , 0.5f);
         float fNear = 0.1f;
         float fFar = 300.f;
         Setting() {
