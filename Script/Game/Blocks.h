@@ -5,21 +5,32 @@
 #include "Resource/TextureLoad.h"
 #include <memory>
 
+class HitBox3D {
+    private:
+        static std::unique_ptr<CubeRenderer> cubeRenderer;
+    public : 
+        HitBox3D(Shader &shader);
+        ~HitBox3D();
+        void ShowHitBox(glm::mat4 view, glm::mat4 projection , glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::vector<glm::vec3> &validPositions);
+    
+};
+
 
 class Block {
     private:
         
         
     protected: 
+        std::unique_ptr<HitBox3D> Box;
+        TextureManager *textureManager;
+
         glm::vec3 position;
         glm::vec3 scale;
         glm::vec3 rotation;
-        TextureManager *textureManager;
     public :
 
         Block(glm :: vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
         ~Block();
-        virtual void Render(glm::mat4 view, glm::mat4 projection);
         void SetPosition(glm::vec3 position);
         void SetScale(glm::vec3 scale);
         void SetRotation(glm::vec3 rotation);
@@ -28,12 +39,16 @@ class Block {
         glm::vec3 GetRotation();
 
         virtual void PrepareRender(Frustum frustum);
-        virtual void Render(glm::vec4 view, glm::mat4 projection);
+        virtual void Render(glm::mat4 view, glm::mat4 projection);
         virtual void Update(float deltaTime);
+        
 
         bool FrustumCulling(Frustum frustum);
 
 };
+
+
+
 
 
 class Dirt : public Block{

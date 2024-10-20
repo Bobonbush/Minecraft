@@ -44,6 +44,8 @@ add_executable(OPENGL Script/main.cpp
                       Script/Resource/PerlinNoise.cpp
                       Script/Resource/db_perlin.hpp
                       Script/Game/world.cpp
+                      Script/Physic/rigidbody.cpp
+                      Script/Physic/PhysicVariable.cpp
 
                       
 )

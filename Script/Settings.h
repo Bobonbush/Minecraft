@@ -17,7 +17,7 @@ class Setting { // Singleton
         float fFar = 300.f;
         Setting() {
             // Load settings from file
-            resolution = glm::vec2(1400, 800);
+            resolution = glm::vec2(1600, 800);
         }
 
         void Update(float deltaTime) { 

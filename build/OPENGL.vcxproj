@@ -412,6 +412,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Resource\PerlinNoise.cpp" />
     <ClInclude Include="G:\WorkSpace\Minecraft\Script\Resource\db_perlin.hpp" />
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\world.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Physic\rigidbody.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Physic\PhysicVariable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="G:\WorkSpace\Minecraft\build\ZERO_CHECK.vcxproj">

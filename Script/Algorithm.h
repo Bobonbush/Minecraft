@@ -28,6 +28,12 @@ class SPA {
         position.y = (position.y / setting -> getResolution().y) * 2 - 1;
     }
 
+    static void ConvertToNDCUnit(glm::vec3 & force) {
+        Setting* setting = Setting::getInstance();
+        force.x = (force.x / setting->getResolution().x) * 2;
+        force.y = (force.y / setting -> getResolution().y) * 2;
+    }
+
 
     static void SetSeed(int seed) {
         srand(seed);

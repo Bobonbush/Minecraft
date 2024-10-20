@@ -3,7 +3,13 @@
 
 Player * Player::instance = nullptr;
 Player :: Player() {
-    camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+    camera = Camera(glm::vec3(0.0f, 15.0f, 3.0f));
+    Setting *settings = Setting::getInstance();
+
+    PhysicConstant *physicConstant = PhysicConstant::getInstance();
+
+    rigidbody = std::make_shared<Rigidbody>(camera.Position, glm::vec3(settings -> getBlockNDCSize().x, settings -> getBlockNDCSize().x * 2.f, settings -> getBlockNDCSize().z), glm::vec3(0.0f, 0.0f, 0.0f), physicConstant -> getPlayerMass() , 0.0f, 0.0f, false);
+    
 }
 
 Player :: ~Player() {
@@ -27,6 +33,12 @@ void Player :: processInput(GLFWwindow *window, float deltaTime) {
         camera.ProcessKeyboard(UP, deltaTime);
     if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
         camera.ProcessKeyboard(DOWN, deltaTime);
+    /*
+    if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !rigidbody -> GetUseGravity()) {
+        rigidbody -> ApplyForce(glm::vec3(0.0f, JUMPFORCE , 0.0f));
+    }
+    */
+    CopyCameraCharecteristics();
 }
 
 void Player :: processMouse(GLFWwindow *window , float currentX , float currentY) {
@@ -102,6 +114,9 @@ Frustum Player::extractFrustumPlanes() {
 void Player :: Update(float deltaTime, GLFWwindow *window, float currentX, float currentY) {
     processInput(window, deltaTime);
     processMouse(window, currentX , currentY);
+    rigidbody -> Update(deltaTime);
+
+    camera.Position = rigidbody -> GetPosition();
 }
 
 void Player :: Render() {

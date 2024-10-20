@@ -49,8 +49,8 @@ void WorldRenderer :: Update(float deltaTime) {
 
 void WorldRenderer::CreateWorld() {
     
-    int width = 500;
-    int height = 500;
+    int width = 100;
+    int height = 100;
     
          
     std::vector<std::vector<float>> elavationMap(width, std::vector<float>(height, 0));

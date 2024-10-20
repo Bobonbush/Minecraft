@@ -37,6 +37,12 @@
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\world.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Physic\rigidbody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Physic\PhysicVariable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\WorkSpace\Minecraft\Script\Utils\Camera.h">

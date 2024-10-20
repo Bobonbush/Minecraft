@@ -1,6 +1,28 @@
 #include "Blocks.h"
 
 
+
+// HitBox3D
+std::unique_ptr<CubeRenderer> HitBox3D::cubeRenderer = nullptr;
+HitBox3D::HitBox3D(Shader &shader) {
+    TextureManager *textureManager = TextureManager::getInstance();
+    if(cubeRenderer == nullptr) {
+        cubeRenderer = std::make_unique<CubeRenderer>(shader);
+        
+    }
+    cubeRenderer -> LoadCube(textureManager -> LoadTexture("Assets/hitbox.png"));
+}
+
+HitBox3D::~HitBox3D() {
+}
+
+void HitBox3D::ShowHitBox(glm::mat4 view, glm::mat4 projection, glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::vector<glm::vec3> &validPositions) {
+    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+}
+
+
+
+
 // BLOCK
 
 Block::Block(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) {
@@ -8,13 +30,10 @@ Block::Block(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &sh
     this->scale = scale;
     this->rotation = rotation;
     textureManager = TextureManager::getInstance();
-
+    Box = std::make_unique<HitBox3D>(shader);
 }
 
 Block::~Block() {
-}
-
-void Block::Render(glm:: mat4 view, glm::mat4 projection) {
 }
 
 void Block::SetPosition(glm::vec3 position) {
@@ -47,7 +66,7 @@ glm::vec3 Block::GetRotation() {
 void Block::PrepareRender(Frustum frustum) {
 }
 
-void Block::Render(glm::vec4 view, glm::mat4 projection) {
+void Block::Render(glm::mat4 view, glm::mat4 projection) {
 
 }
 
@@ -109,6 +128,7 @@ Dirt::Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shad
         
     }
     cubeRenderer -> LoadCube(texture);
+    
 }
 
 Dirt::~Dirt() {
@@ -127,11 +147,13 @@ void Dirt::PrepareRender(Frustum frustum) {
 
 void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
 
-    Block::Render(view, projection);
+    
     if((int) validPositions.size() == 0) {
         return;
     }
+    Block::Render(view, projection);
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    Box -> ShowHitBox(view, projection, position, scale, rotation, validPositions);
     validPositions.clear();
 }
 
@@ -167,13 +189,15 @@ void Stone::PrepareRender(Frustum frustum) {
 }
 
 void Stone::Render(glm::mat4 view, glm::mat4 projection) {
-    Block::Render(view, projection);
+   
     if( (int) validPositions.size() == 0) {
         return;
     }
+    Block::Render(view, projection);
 
     //std::cout << "YES" <<'\n';
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    Box -> ShowHitBox(view, projection, position, scale, rotation, validPositions);
     validPositions.clear();
 }
 
@@ -198,10 +222,11 @@ void Water::Update(float deltaTime) {
 }
 
 void Water::Render(glm::mat4 view, glm::mat4 projection) {
-    Block::Render(view, projection);
+    
     if( (int)validPositions.size() == 0) {
         return;
     }
+    Block::Render(view, projection);
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
     validPositions.clear();
 }
@@ -224,6 +249,7 @@ Sand::Sand(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shad
     if(cubeRenderer == nullptr) {
         cubeRenderer = std::make_unique<CubeRenderer>(shader);
     }
+    
     cubeRenderer -> LoadCube(texture);
 }
 
@@ -235,11 +261,13 @@ void Sand::Update(float deltaTime) {
 }
 
 void Sand::Render(glm::mat4 view, glm::mat4 projection) {
-    Block::Render(view, projection);
+    
     if((int) validPositions.size() == 0) {
         return;
     }
+    Block::Render(view, projection);
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    Box -> ShowHitBox(view, projection, position, scale, rotation, validPositions);
     validPositions.clear();
 }
 
@@ -277,11 +305,13 @@ void Grass::Update(float deltaTime) {
 }
 
 void Grass::Render(glm::mat4 view, glm::mat4 projection) {
-    Block::Render(view, projection);
+    
     if(validPositions.size() == 0) {
         return;
     }
+    Block::Render(view, projection);
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    Box -> ShowHitBox(view, projection, position, scale, rotation, validPositions);
     validPositions.clear();
 }
 
