@@ -8,12 +8,57 @@
 #include "Algorithm.h"
 
 #include "PhysicVariable.h"
+#include "Resource/TextureLoad.h"
 
+
+
+class HitBox3D {
+    
+    private:
+        static std::unique_ptr<CubeRenderer> cubeRenderer;
+        Shader shader;
+    public:
+        HitBox3D(Shader &shader);
+        ~HitBox3D();
+
+        void ShowHitBox(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3> &validPositions);
+};
 
 
 
 class Rigidbody { 
     private :
+
+        enum Face {
+            FRONT = 0,
+            BACK = 1,
+            LEFT = 2,
+            RIGHT = 3,
+            TOP = 4,
+            BOTTOM = 5
+        };
+
+        const glm::vec3 compass[6] = {
+            glm::vec3(0.0f, 0.0f, 1.0f),
+            glm::vec3(0.0f, 0.0f, -1.0f),
+            glm::vec3(-1.0f, 0.0f, 0.0f),
+            glm::vec3(1.0f, 0.0f, 0.0f),
+            glm::vec3(0.0f, 1.0f, 0.0f),
+            glm::vec3(0.0f, -1.0f, 0.0f)
+        };
+
+        glm::vec3 getDirectionCollide(glm::vec3 target) {
+            float max = 0.0f;
+            glm::vec3 result = glm::vec3(0.0f, 0.0f, 0.0f);
+            for (int i = 0; i < 6; i++) {
+                float dot = glm::dot(target, compass[i]);
+                if (dot > max) {
+                    max = dot;
+                    result = compass[i];
+                }
+            }   
+            return result;     
+        }
         glm::vec3 position;
         glm::vec3 scale;
         glm::vec3 rotation;
@@ -26,26 +71,30 @@ class Rigidbody {
         glm::vec3 velocity;
         glm::vec3 angularVelocity;
         glm::vec3 force;
+        HitBox3D hitBox;
 
         PhysicConstant *physicConstant;
-
-        static std::vector<std::shared_ptr<Rigidbody>> rigidbodies;         //  List of all rigidbodies
         bool AABBIntersect(const Rigidbody& other);
-        static void AABBDetection();
+    
         
     public :
 
-        Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, float mass, float drag, float angularDrag, bool useGravity);
+        Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, float mass, float drag, float angularDrag, bool useGravity, Shader &shader);
         ~Rigidbody() = default;
 
         void ApplyForce(glm::vec3 force);
 
-        void Update(float deltaTime);
+        void Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies);
+        
+        void CollisionDetection(std::vector<std::shared_ptr<Rigidbody>> & rigidbodies);
 
+        void ResolveCollision(Rigidbody & other);
 
-        static void CollisionDetection() {
-            AABBDetection();
+        glm::vec3 AABBClosestPoint(const Rigidbody& other, const glm::vec3 & min , const glm::vec3 & max) {
+            return glm::clamp(other.position, min, max);
         }
+
+        
 
 
         // Setters
@@ -110,16 +159,10 @@ class Rigidbody {
 
         // Static functions
 
-        static void AddRigidbody(std::shared_ptr<Rigidbody> rigidbody) {
-            rigidbodies.push_back(std::move(rigidbody));
-        }
 
-        static void RemoveRigidbody(std::shared_ptr<Rigidbody>& rigidbody) {
-            auto it = std::remove_if(rigidbodies.begin(), rigidbodies.end(), [&rigidbody](const std::shared_ptr<Rigidbody>& r) {
-                        return r.get() == rigidbody.get();
-            });
-            rigidbodies.erase(it, rigidbodies.end());
-}
+        void ShowHitBox(glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3> &validPositions) {
+            hitBox.ShowHitBox(position, scale, rotation, view, projection, validPositions);
+        }
 
 };
 

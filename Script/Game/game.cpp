@@ -29,9 +29,8 @@ void Game::Update() {
     lastTime = totalTime;
 
 
-    player -> Update(deltaTime, window, xpos, ypos);
-
     world -> Render(player -> getViewMatrix(), player -> getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y));
+    player -> Update(deltaTime, window, xpos, ypos, world -> getValidBodies());
 }
 
 void Game::Render() {

@@ -4,16 +4,7 @@
 #include "Camera.h"
 #include "Resource/TextureLoad.h"
 #include <memory>
-
-class HitBox3D {
-    private:
-        static std::unique_ptr<CubeRenderer> cubeRenderer;
-    public : 
-        HitBox3D(Shader &shader);
-        ~HitBox3D();
-        void ShowHitBox(glm::mat4 view, glm::mat4 projection , glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::vector<glm::vec3> &validPositions);
-    
-};
+#include "Physic/rigidbody.h"
 
 
 class Block {
@@ -21,14 +12,15 @@ class Block {
         
         
     protected: 
-        std::unique_ptr<HitBox3D> Box;
         TextureManager *textureManager;
+        
 
         glm::vec3 position;
         glm::vec3 scale;
         glm::vec3 rotation;
+        bool ShowHitBox = true;
     public :
-
+        std::shared_ptr<Rigidbody> rigidbody;
         Block(glm :: vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
         ~Block();
         void SetPosition(glm::vec3 position);

@@ -7,8 +7,9 @@ Player :: Player() {
     Setting *settings = Setting::getInstance();
 
     PhysicConstant *physicConstant = PhysicConstant::getInstance();
-
-    rigidbody = std::make_shared<Rigidbody>(camera.Position, glm::vec3(settings -> getBlockNDCSize().x, settings -> getBlockNDCSize().x * 2.f, settings -> getBlockNDCSize().z), glm::vec3(0.0f, 0.0f, 0.0f), physicConstant -> getPlayerMass() , 0.0f, 0.0f, false);
+    ShaderManager *shaderManager = ShaderManager::getInstance();
+    shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
+    rigidbody = std::make_shared<Rigidbody>(camera.Position, glm::vec3(settings -> getBlockNDCSize().x /4.f, settings -> getBlockNDCSize().y * 2.f, settings -> getBlockNDCSize().z /4.f), glm::vec3(0.0f, 0.0f, 0.0f), physicConstant -> getPlayerMass() , 0.0f, 0.0f, true, ShaderManager::getInstance() -> GetShader("block"));
     
 }
 
@@ -111,14 +112,17 @@ Frustum Player::extractFrustumPlanes() {
     return frustum;
 }
 
-void Player :: Update(float deltaTime, GLFWwindow *window, float currentX, float currentY) {
+void Player :: Update(float deltaTime, GLFWwindow *window, float currentX, float currentY, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies) {
     processInput(window, deltaTime);
     processMouse(window, currentX , currentY);
-    rigidbody -> Update(deltaTime);
+    rigidbody -> Update(deltaTime, rigidbodies);
 
     camera.Position = rigidbody -> GetPosition();
 }
 
 void Player :: Render() {
-    // Render player
+    std::vector<glm::vec3> validPositions;
+    validPositions.push_back(rigidbody -> GetPosition());
+
+    rigidbody -> ShowHitBox(getViewMatrix(), getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y), validPositions);
 }

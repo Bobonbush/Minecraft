@@ -30,8 +30,21 @@ class SPA {
 
     static void ConvertToNDCUnit(glm::vec3 & force) {
         Setting* setting = Setting::getInstance();
-        force.x = (force.x / setting->getResolution().x) * 2;
-        force.y = (force.y / setting -> getResolution().y) * 2;
+        const float Unit = 10049;
+        force = force / Unit;
+    }
+
+    static void ConvertNDCtoScreen(glm::vec3 &position) {
+        Setting* setting = Setting::getInstance();
+        position.x = (position.x + 1) * setting->getResolution().x / 2;
+        position.y = (position.y + 1) * setting->getResolution().y / 2;
+        
+    }
+
+    static void ConvertToNormalUnit(glm::vec3 & force) {
+        Setting* setting = Setting::getInstance();
+        const float Unit = 10049;
+        force = force * Unit;
     }
 
 

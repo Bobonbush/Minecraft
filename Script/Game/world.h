@@ -16,6 +16,7 @@
 class WorldRenderer {
     private:
         std::vector<std::unique_ptr<Block>> blocks;
+        std::vector<std::shared_ptr<Rigidbody>> validBodies;
         Player *player;
         enum BlockType {
             WATER,
@@ -114,6 +115,10 @@ class WorldRenderer {
         
         void Render(glm::mat4 view, glm::mat4 projection);
         void Update(float deltaTime);
-};
+
+        std::vector<std::shared_ptr<Rigidbody>> & getValidBodies() {
+            return validBodies;
+        }
+ };
 
 #endif

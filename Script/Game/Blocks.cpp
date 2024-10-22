@@ -2,35 +2,17 @@
 
 
 
-// HitBox3D
-std::unique_ptr<CubeRenderer> HitBox3D::cubeRenderer = nullptr;
-HitBox3D::HitBox3D(Shader &shader) {
-    TextureManager *textureManager = TextureManager::getInstance();
-    if(cubeRenderer == nullptr) {
-        cubeRenderer = std::make_unique<CubeRenderer>(shader);
-        
-    }
-    cubeRenderer -> LoadCube(textureManager -> LoadTexture("Assets/hitbox.png"));
-}
-
-HitBox3D::~HitBox3D() {
-}
-
-void HitBox3D::ShowHitBox(glm::mat4 view, glm::mat4 projection, glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::vector<glm::vec3> &validPositions) {
-    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
-}
-
-
 
 
 // BLOCK
+
 
 Block::Block(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) {
     this->position = position;
     this->scale = scale;
     this->rotation = rotation;
     textureManager = TextureManager::getInstance();
-    Box = std::make_unique<HitBox3D>(shader);
+    rigidbody = std::make_shared<Rigidbody>(position, scale, rotation, 1, 0, 0, false, shader);
 }
 
 Block::~Block() {
@@ -152,8 +134,11 @@ void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
         return;
     }
     Block::Render(view, projection);
+    if(ShowHitBox == true) {
+        rigidbody -> ShowHitBox(view, projection, validPositions);
+    }
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
-    Box -> ShowHitBox(view, projection, position, scale, rotation, validPositions);
+    
     validPositions.clear();
 }
 
@@ -195,9 +180,12 @@ void Stone::Render(glm::mat4 view, glm::mat4 projection) {
     }
     Block::Render(view, projection);
 
+     if(ShowHitBox == true) {
+        rigidbody -> ShowHitBox(view, projection, validPositions);
+    }
+
     //std::cout << "YES" <<'\n';
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
-    Box -> ShowHitBox(view, projection, position, scale, rotation, validPositions);
     validPositions.clear();
 }
 
@@ -227,6 +215,10 @@ void Water::Render(glm::mat4 view, glm::mat4 projection) {
         return;
     }
     Block::Render(view, projection);
+
+     if(ShowHitBox == true) {
+        rigidbody -> ShowHitBox(view, projection, validPositions);
+    }
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
     validPositions.clear();
 }
@@ -266,8 +258,11 @@ void Sand::Render(glm::mat4 view, glm::mat4 projection) {
         return;
     }
     Block::Render(view, projection);
+
+     if(ShowHitBox == true) {
+        rigidbody -> ShowHitBox(view, projection, validPositions);
+    }
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
-    Box -> ShowHitBox(view, projection, position, scale, rotation, validPositions);
     validPositions.clear();
 }
 
@@ -310,8 +305,11 @@ void Grass::Render(glm::mat4 view, glm::mat4 projection) {
         return;
     }
     Block::Render(view, projection);
+
+     if(ShowHitBox == true) {
+        rigidbody -> ShowHitBox(view, projection, validPositions);
+    }
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
-    Box -> ShowHitBox(view, projection, position, scale, rotation, validPositions);
     validPositions.clear();
 }
 

@@ -18,7 +18,7 @@ WorldRenderer :: ~WorldRenderer() {
 
 void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
     
-    Frustum frustum = player -> extractFrustumPlanes();
+    
     /*
     std::cout << "Frustum" << std::endl;
     std::cout << "Top Plane: " << frustum.topFace.normal.x << " " << frustum.topFace.normal.y << " " << frustum.topFace.normal.z << " " << frustum.topFace.distance << std::endl;
@@ -29,10 +29,6 @@ void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
     std::cout << "Far Plane: " << frustum.farFace.normal.x << " " << frustum.farFace.normal.y << " " << frustum.farFace.normal.z << " " << frustum.farFace.distance << std::endl;
     */
 
-    for (auto &block : blocks) {
-        block -> PrepareRender(frustum);
-        
-    }
 
     for (auto &block : blocks) {
         block -> Render(view, projection);
@@ -41,6 +37,14 @@ void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
 }
 
 void WorldRenderer :: Update(float deltaTime) {
+
+    validBodies.clear();
+    Frustum frustum = player -> extractFrustumPlanes();
+    for (auto &block : blocks) {
+        block -> PrepareRender(frustum);
+        validBodies.push_back(block -> rigidbody);
+        
+    }
     for (auto &block : blocks) {
         block -> Update(deltaTime);
     }

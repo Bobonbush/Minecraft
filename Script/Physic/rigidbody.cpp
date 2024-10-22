@@ -1,10 +1,32 @@
 #include "rigidbody.h"
 
-std::vector<std::shared_ptr<Rigidbody>> Rigidbody::rigidbodies;
+
+
+// HitBox3D
+
+std::unique_ptr<CubeRenderer> HitBox3D::cubeRenderer = nullptr;
+
+HitBox3D::HitBox3D(Shader &shader) : shader(shader) {
+    if(!cubeRenderer ) cubeRenderer =  std::make_unique<CubeRenderer>(shader);
+    TextureManager *textureManager = TextureManager::getInstance();
+    cubeRenderer -> LoadCube(textureManager -> LoadTexture("Assets/HitBox.png"));
+    
+}
+
+HitBox3D::~HitBox3D() {
+}
+
+void HitBox3D::ShowHitBox(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3> &validPositions) {
+    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+}
 
 
 
-Rigidbody::Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, float mass, float drag, float angularDrag, bool useGravity) {
+
+
+
+// Rigidbody
+Rigidbody::Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, float mass, float drag, float angularDrag, bool useGravity, Shader &shader) : hitBox(shader) {
    
     this->position = position;
     this->scale = scale;
@@ -27,47 +49,65 @@ void Rigidbody::ApplyForce(glm::vec3 force) {
     this->force += force;
 }
 
-void Rigidbody::AABBDetection() {
-    std::sort(rigidbodies.begin(), rigidbodies.end(), [](const std::shared_ptr<Rigidbody>& a, const std::shared_ptr<Rigidbody>& b) {
-        return a->position.x < b->position.x;
-    });
-
-
-    std::set<std::shared_ptr<Rigidbody>> xSorted;
-    std::set<std::shared_ptr<Rigidbody>> eraseSet;
-    for (int i = 0; i < rigidbodies.size(); i++) {
-        for (auto it = xSorted.begin(); it != xSorted.end(); it++) {
-            if(rigidbodies[i] -> position.x  + rigidbodies[i] -> scale.x < rigidbodies[i] -> position.x) {
-                eraseSet.insert(rigidbodies[i]);
-            }
+void Rigidbody::CollisionDetection(std::vector<std::shared_ptr<Rigidbody>> & rigidbodies) {
+    for (auto &rigidbody : rigidbodies) {
+        if (AABBIntersect(*rigidbody)) {
+            ResolveCollision(*rigidbody);
         }
-
-        xSorted.insert(rigidbodies[i]);
     }
 }
 
+void Rigidbody::ResolveCollision(Rigidbody & other) {
+    glm::vec3 difference = position - other.position;
+    glm::vec3 direction = getDirectionCollide(difference);
+    glm::vec3 VelocityDiff = velocity - other.velocity;
 
-bool Rigidbody::AABBIntersect(const Rigidbody& other) {
-    return position.x < other.position.x + other.scale.x &&
-        position.x + scale.x > other.position.x &&
-        position.y < other.position.y + other.scale.y &&
-        position.y + scale.y > other.position.y &&
-        position.z < other.position.z + other.scale.z &&
-        position.z + scale.z > other.position.z;
+    glm::vec3 normalForce = glm::dot(VelocityDiff, direction) * direction * mass;
+    force -= normalForce;
+    
+    glm::vec3 penetration = glm::abs(difference) - (scale + other.scale) /2.f;
+    //glm::vec3 correction = glm::clamp(penetration, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(100.0f, 100.0f, 100.0f));
+    glm::vec3 correction = penetration *  (-direction);
+    position += correction;
+    //force += normalForce;
+
+
+
 }
 
-void Rigidbody::Update(float deltaTime) {
+bool Rigidbody::AABBIntersect(const Rigidbody& other) {
+    bool overLapX = (position.x + scale.x >= other.position.x) && (other.position.x + other.scale.x >= position.x);
+    bool overLapY = (position.y + scale.y >= other.position.y) && (other.position.y + other.scale.y >= position.y);
+    bool overLapZ = (position.z + scale.z >= other.position.z) && (other.position.z + other.scale.z >= position.z);
+
+    return overLapX && overLapY && overLapZ;
+}
+
+void Rigidbody::Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies) {
     if(useGravity) {
         ApplyForce(glm::vec3(0.0f, - physicConstant -> getGravity() * mass , 0.0f));
     }
 
-    glm::vec3 VelocityMag = force/mass * deltaTime;
-    SPA::ConvertToNDCUnit(VelocityMag);
+    glm::vec3 VelocityMag = force/mass;
+
+    velocity += VelocityMag;
+    
+    force = glm::vec3(0.0f, 0.0f, 0.0f);
+
+    CollisionDetection(rigidbodies);
+
+    VelocityMag = force/mass;
+    
 
     velocity += VelocityMag;
 
-
-    position += velocity * deltaTime;
+    
+    
+    glm::vec3 RealVelocity = velocity * deltaTime;
+    SPA::ConvertToNDCUnit(RealVelocity);
+    
+    position += RealVelocity; 
+    //std::cout << RealVelocity.x << " " << RealVelocity.y << " " << RealVelocity.z << std::endl;
 
 
     force = glm::vec3(0.0f, 0.0f, 0.0f);

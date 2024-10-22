@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Settings.h"
 #include "Physic/rigidbody.h"
+#include "Resource/ShaderLoad.h"
 
 
 class Player {                // Another Singleton
@@ -40,7 +41,7 @@ class Player {                // Another Singleton
         ~Player();
 
 
-        void Update(float deltaTime, GLFWwindow *window, float currentX, float currentY);
+        void Update(float deltaTime, GLFWwindow *window, float currentX, float currentY, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies);
         void Render();
         glm::mat4 getViewMatrix() {
             return camera.GetViewMatrix();
