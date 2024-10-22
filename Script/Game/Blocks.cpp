@@ -13,6 +13,7 @@ Block::Block(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &sh
     this->rotation = rotation;
     textureManager = TextureManager::getInstance();
     rigidbody = std::make_shared<Rigidbody>(position, scale, rotation, 1, 0, 0, false, shader);
+    PhysicConstant * physicConstant = PhysicConstant::getInstance();
 }
 
 Block::~Block() {
@@ -49,7 +50,7 @@ void Block::PrepareRender(Frustum frustum) {
 }
 
 void Block::Render(glm::mat4 view, glm::mat4 projection) {
-
+    
 }
 
 void Block::Update(float deltaTime) {
@@ -59,6 +60,8 @@ void Block::Update(float deltaTime) {
 bool Block::FrustumCulling(const Frustum frustum) {
     glm::vec3 blockMin = position - scale / 2.f; // Minimum corner of the block
     glm::vec3 blockMax = position + scale / 2.f; // Maximum corner of the block
+
+    return true;
 
     // Check each plane of the frustum
     if (frustum.leftFace.distance + glm::dot(frustum.leftFace.normal, blockMin) < 0 &&

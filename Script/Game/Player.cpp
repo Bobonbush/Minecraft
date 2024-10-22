@@ -3,14 +3,13 @@
 
 Player * Player::instance = nullptr;
 Player :: Player() {
-    camera = Camera(glm::vec3(0.0f, 15.0f, 3.0f));
+    camera = Camera(glm::vec3(0.0f, 15.f, 3.0f));
     Setting *settings = Setting::getInstance();
 
     PhysicConstant *physicConstant = PhysicConstant::getInstance();
     ShaderManager *shaderManager = ShaderManager::getInstance();
     shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
-    rigidbody = std::make_shared<Rigidbody>(camera.Position, glm::vec3(settings -> getBlockNDCSize().x /4.f, settings -> getBlockNDCSize().y * 2.f, settings -> getBlockNDCSize().z /4.f), glm::vec3(0.0f, 0.0f, 0.0f), physicConstant -> getPlayerMass() , 0.0f, 0.0f, true, ShaderManager::getInstance() -> GetShader("block"));
-    
+    rigidbody = std::make_shared<Rigidbody>(camera.Position, glm::vec3(settings -> getBlockNDCSize().x /1.5f , settings -> getBlockNDCSize().y *2.f , settings -> getBlockNDCSize().z/1.5f ), glm::vec3(0.0f, 0.0f, 0.0f), physicConstant -> getPlayerMass() , 0.0f, 0.0f, true, ShaderManager::getInstance() -> GetShader("block"));
 }
 
 Player :: ~Player() {
@@ -18,29 +17,24 @@ Player :: ~Player() {
 }
 
 void Player :: processInput(GLFWwindow *window, float deltaTime) {
-    float speed = 1.f;
-    if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
-        speed = 2.f;
+    float speed = SPEED;
+    if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+        rigidbody -> AddInternalForce(glm::vec3(camera.Front.x * speed, 0.0f, camera.Front.z * speed) * deltaTime);
     }
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        camera.ProcessKeyboard(FORWARD, deltaTime * speed);
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        camera.ProcessKeyboard(BACKWARD, deltaTime  * speed);
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS )
-        camera.ProcessKeyboard(LEFT, deltaTime * speed);
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS )
-        camera.ProcessKeyboard(RIGHT, deltaTime * speed);
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-        //camera.ProcessKeyboard(UP, deltaTime);
-    if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-        camera.ProcessKeyboard(DOWN, deltaTime);
-    
+    if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+        rigidbody -> AddInternalForce(glm::vec3(-camera.Front.x * speed, 0.0f, -camera.Front.z * speed) * deltaTime);
+    }
+
+    if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+        rigidbody -> AddInternalForce(glm::vec3(-camera.Right.x * speed, 0.0f, -camera.Right.z * speed) * deltaTime);
+    }
+
+    if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+        rigidbody -> AddInternalForce(glm::vec3(camera.Right.x * speed, 0.0f, camera.Right.z * speed) * deltaTime);
+    }
     if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && rigidbody -> GetUseGravity() && rigidbody -> isGround()) {
         rigidbody -> AddInternalForce(glm::vec3(0.0f, JUMPFORCE , 0.0f));
-        std::cout << "Jump" << std::endl;   
     }
-    
-    CopyCameraCharecteristics();
 }
 
 void Player :: processMouse(GLFWwindow *window , float currentX , float currentY) {
@@ -119,6 +113,7 @@ void Player :: Update(float deltaTime, GLFWwindow *window, float currentX, float
     rigidbody -> Update(deltaTime, rigidbodies);
 
     camera.Position = rigidbody -> GetPosition();
+    camera.Position.y += rigidbody -> GetScale().y / 4.f;
 }
 
 void Player :: Render() {

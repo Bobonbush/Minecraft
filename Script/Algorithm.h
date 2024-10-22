@@ -30,7 +30,7 @@ class SPA {
 
     static void ConvertToNDCUnit(glm::vec3 & force) {
         Setting* setting = Setting::getInstance();
-        const float Unit = 10049;
+        const float Unit = 9049;
         force = force / Unit;
     }
 
@@ -43,7 +43,7 @@ class SPA {
 
     static void ConvertToNormalUnit(glm::vec3 & force) {
         Setting* setting = Setting::getInstance();
-        const float Unit = 10049;
+        const float Unit = 9049;
         force = force * Unit;
     }
 

@@ -11,13 +11,23 @@ class PhysicConstant
         
         
         const float CONSTANTOFFSET = 30.f;
-        const float GRAVITY = 9.8f;
-        const float PLAYER_MASS = 50.0f;
+        const float GRAVITY = 9.8f * 1.5f;
+        const float PLAYER_MASS = 0.1f;
+        
+
+
+        /*
+        Fricton of each Blocks
+        */
+
+        
 
 
         static PhysicConstant* instance;
         PhysicConstant()  = default;
     public:
+
+        const float DEFAULTFriction = 0.1f;
 
         static PhysicConstant* getInstance() {
             if (instance == nullptr) {

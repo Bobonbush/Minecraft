@@ -49,7 +49,7 @@ class Rigidbody {
             glm::vec3(0.0f, -1.0f, 0.0f)
         };
 
-        glm::vec3 getDirectionCollide(glm::vec3 target) ;
+        glm::vec3 getDirectionCollide(glm::vec3 target, glm::vec3 &otherScale) ;
         glm::vec3 position;
         glm::vec3 scale;
         glm::vec3 rotation;
@@ -127,7 +127,6 @@ class Rigidbody {
         void SetUseGravity(bool useGravity) {
             this->useGravity = useGravity;
         }
-
         // Getters
 
         glm::vec3 GetPosition() {
