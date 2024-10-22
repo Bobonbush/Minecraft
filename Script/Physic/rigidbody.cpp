@@ -43,16 +43,54 @@ Rigidbody::Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, fl
 }
 
 
+glm::vec3 Rigidbody::getDirectionCollide(glm::vec3 target) {
+            float max = 0.0f;
+            glm::vec3 result = glm::vec3(0.0f, 0.0f, 0.0f);
+            int Direction = 0;
+            for (int i = 0; i < 6; i++) {
+                float dot = glm::dot(target, compass[i]);
+                if (dot > max) {
+                    max = dot;
+                    result = compass[i];
+                    Direction = i;
+                }
+            }  
+            if(FaceCollision[Direction]) return glm::vec3(0.0f, 0.0f, 0.0f);
+            FaceCollision[Direction] = true; 
+            return result;     
+        }
+
 // Only Accept Normal Coordinate Force
 void Rigidbody::ApplyForce(glm::vec3 force) {
     force = force * physicConstant -> getConstantOffset();
     this->force += force;
 }
 
+void Rigidbody::AddInternalForce(glm::vec3 force) {
+    InternalForce += force * physicConstant -> getConstantOffset();
+}
+
+void Rigidbody::ApplyInternalForce() {
+    force += InternalForce;
+    InternalForce = glm::vec3(0.0f, 0.0f, 0.0f);
+}
+
+
+
+void Rigidbody::UpdateVelocity (float deltaTime) {
+    glm::vec3 VelocityMag = force/mass;
+
+    velocity += VelocityMag;
+    
+    force = glm::vec3(0.0f, 0.0f, 0.0f);
+}
+
 void Rigidbody::CollisionDetection(std::vector<std::shared_ptr<Rigidbody>> & rigidbodies) {
+    FaceCollision = {false, false, false, false, false, false};
     for (auto &rigidbody : rigidbodies) {
         if (AABBIntersect(*rigidbody)) {
             ResolveCollision(*rigidbody);
+            break;
         }
     }
 }
@@ -62,8 +100,8 @@ void Rigidbody::ResolveCollision(Rigidbody & other) {
     glm::vec3 direction = getDirectionCollide(difference);
     glm::vec3 VelocityDiff = velocity - other.velocity;
 
-    glm::vec3 normalForce = glm::dot(VelocityDiff, direction) * direction * mass;
-    force -= normalForce;
+    glm::vec3 StopForce = glm::dot(VelocityDiff, direction) * direction * mass;
+    force -= StopForce;
     
     glm::vec3 penetration = glm::abs(difference) - (scale + other.scale) /2.f;
     //glm::vec3 correction = glm::clamp(penetration, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(100.0f, 100.0f, 100.0f));
@@ -76,39 +114,37 @@ void Rigidbody::ResolveCollision(Rigidbody & other) {
 }
 
 bool Rigidbody::AABBIntersect(const Rigidbody& other) {
-    bool overLapX = (position.x + scale.x >= other.position.x) && (other.position.x + other.scale.x >= position.x);
-    bool overLapY = (position.y + scale.y >= other.position.y) && (other.position.y + other.scale.y >= position.y);
-    bool overLapZ = (position.z + scale.z >= other.position.z) && (other.position.z + other.scale.z >= position.z);
+    glm::vec3 min = position - scale / 2.f;
+    glm::vec3 max = position + scale / 2.f;
 
-    return overLapX && overLapY && overLapZ;
+    glm::vec3 otherMin = other.position - other.scale / 2.f;
+    glm::vec3 otherMax = other.position + other.scale / 2.f;
+
+    return (min.x <= otherMax.x && max.x >= otherMin.x) &&
+           (min.y <= otherMax.y && max.y >= otherMin.y) &&
+           (min.z <= otherMax.z && max.z >= otherMin.z);
 }
 
 void Rigidbody::Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies) {
     if(useGravity) {
-        ApplyForce(glm::vec3(0.0f, - physicConstant -> getGravity() * mass , 0.0f));
+        ApplyForce(glm::vec3(0.0f, - physicConstant -> getGravity() * mass * deltaTime , 0.0f));
     }
 
-    glm::vec3 VelocityMag = force/mass;
-
-    velocity += VelocityMag;
-    
-    force = glm::vec3(0.0f, 0.0f, 0.0f);
-
+    UpdateVelocity(deltaTime);
     CollisionDetection(rigidbodies);
+    UpdateVelocity(deltaTime);
 
-    VelocityMag = force/mass;
-    
+    ApplyInternalForce();
 
-    velocity += VelocityMag;
-
+    UpdateVelocity(deltaTime);
     
-    
-    glm::vec3 RealVelocity = velocity * deltaTime;
+    glm::vec3 RealVelocity = velocity ;
     SPA::ConvertToNDCUnit(RealVelocity);
     
-    position += RealVelocity; 
+    position += RealVelocity ; 
     //std::cout << RealVelocity.x << " " << RealVelocity.y << " " << RealVelocity.z << std::endl;
 
+    
 
     force = glm::vec3(0.0f, 0.0f, 0.0f);
 }

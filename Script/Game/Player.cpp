@@ -31,14 +31,15 @@ void Player :: processInput(GLFWwindow *window, float deltaTime) {
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS )
         camera.ProcessKeyboard(RIGHT, deltaTime * speed);
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-        camera.ProcessKeyboard(UP, deltaTime);
+        //camera.ProcessKeyboard(UP, deltaTime);
     if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
         camera.ProcessKeyboard(DOWN, deltaTime);
-    /*
-    if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !rigidbody -> GetUseGravity()) {
-        rigidbody -> ApplyForce(glm::vec3(0.0f, JUMPFORCE , 0.0f));
+    
+    if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && rigidbody -> GetUseGravity() && rigidbody -> isGround()) {
+        rigidbody -> AddInternalForce(glm::vec3(0.0f, JUMPFORCE , 0.0f));
+        std::cout << "Jump" << std::endl;   
     }
-    */
+    
     CopyCameraCharecteristics();
 }
 

@@ -38,6 +38,8 @@ class Rigidbody {
             BOTTOM = 5
         };
 
+        std::vector<bool>FaceCollision = {false, false, false, false, false, false};
+
         const glm::vec3 compass[6] = {
             glm::vec3(0.0f, 0.0f, 1.0f),
             glm::vec3(0.0f, 0.0f, -1.0f),
@@ -47,18 +49,7 @@ class Rigidbody {
             glm::vec3(0.0f, -1.0f, 0.0f)
         };
 
-        glm::vec3 getDirectionCollide(glm::vec3 target) {
-            float max = 0.0f;
-            glm::vec3 result = glm::vec3(0.0f, 0.0f, 0.0f);
-            for (int i = 0; i < 6; i++) {
-                float dot = glm::dot(target, compass[i]);
-                if (dot > max) {
-                    max = dot;
-                    result = compass[i];
-                }
-            }   
-            return result;     
-        }
+        glm::vec3 getDirectionCollide(glm::vec3 target) ;
         glm::vec3 position;
         glm::vec3 scale;
         glm::vec3 rotation;
@@ -71,10 +62,17 @@ class Rigidbody {
         glm::vec3 velocity;
         glm::vec3 angularVelocity;
         glm::vec3 force;
+        glm::vec3 InternalForce = glm::vec3(0.0f, 0.0f, 0.0f);
         HitBox3D hitBox;
 
         PhysicConstant *physicConstant;
         bool AABBIntersect(const Rigidbody& other);
+
+        void UpdateVelocity(float deltaTime);
+
+        void ApplyForce(glm::vec3 force);
+
+        void ApplyInternalForce();
     
         
     public :
@@ -82,7 +80,8 @@ class Rigidbody {
         Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, float mass, float drag, float angularDrag, bool useGravity, Shader &shader);
         ~Rigidbody() = default;
 
-        void ApplyForce(glm::vec3 force);
+        
+        void AddInternalForce(glm::vec3 force);
 
         void Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies);
         
@@ -93,6 +92,8 @@ class Rigidbody {
         glm::vec3 AABBClosestPoint(const Rigidbody& other, const glm::vec3 & min , const glm::vec3 & max) {
             return glm::clamp(other.position, min, max);
         }
+
+        
 
         
 
@@ -162,6 +163,10 @@ class Rigidbody {
 
         void ShowHitBox(glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3> &validPositions) {
             hitBox.ShowHitBox(position, scale, rotation, view, projection, validPositions);
+        }
+
+        bool isGround() {
+            return velocity.y == 0;
         }
 
 };
