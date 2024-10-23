@@ -44,4 +44,8 @@ class Chunk {
         std::vector<std::shared_ptr<Rigidbody>> Update(float deltaTime);
         void LoadChunk();
         void GenerateChunk();
+
+        glm::vec3 GetOrigin() {
+            return origin;
+        }
 };

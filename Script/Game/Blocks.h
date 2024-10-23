@@ -18,7 +18,7 @@ class Block {
         glm::vec3 position;
         glm::vec3 scale;
         glm::vec3 rotation;
-        bool ShowHitBox = false;
+        bool ShowHitBox = true;
     public :
         std::shared_ptr<Rigidbody> rigidbody;
         Block(glm :: vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);

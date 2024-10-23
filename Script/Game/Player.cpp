@@ -47,7 +47,7 @@ void Player :: processInput(GLFWwindow *window, float deltaTime) {
     }
 
     if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && !rigidbody -> GetUseGravity()) {
-        rigidbody -> AddInternalForce(rigidbody -> GetPosition() + glm::vec3(0.0f, -speed * deltaTime, 0.0f));
+        rigidbody -> SetPosition(rigidbody -> GetPosition() + glm::vec3(0.0f, -speed * deltaTime, 0.0f));
     }
 
     if(glfwGetKey(window, GLFW_KEY_SPACE ) == GLFW_PRESS && !rigidbody -> GetUseGravity()) {

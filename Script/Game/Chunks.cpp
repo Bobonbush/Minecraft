@@ -181,7 +181,8 @@ void Chunk::GenerateChunk() {
             }
 
             for(int numTop = 0 ; numTop < blockHeight ; numTop++) {
-                glm::vec3 position = glm::vec3(i * settings -> getBlockNDCSize().x - (width/2) * settings -> getBlockNDCSize().x, numTop * settings -> getBlockNDCSize().y , j * settings -> getBlockNDCSize().z - (height/2) * settings -> getBlockNDCSize().z) + origin;
+                
+                glm::vec3 position = glm::vec3(origin.x + i * settings -> getBlockNDCSize().x - (width /2) * settings -> getBlockNDCSize().x, origin.y + numTop * settings -> getBlockNDCSize().y, origin.z + j * settings -> getBlockNDCSize().z - (height /2) * settings -> getBlockNDCSize().z);
                 switch (blockType) {
                     case WATER :
                         blocks.push_back(std::make_unique<Water>(position, settings -> getBlockNDCSize(), glm::vec3(0.0f, 0.0f, 0.0f), shaderManager -> GetShader("block")));

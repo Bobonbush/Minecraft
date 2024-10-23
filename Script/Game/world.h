@@ -14,13 +14,16 @@
 
 
 #include <thread>
+#include <queue>
 class WorldRenderer {
     private:
         std::vector<std::unique_ptr<Chunk>> chunks;
+        std::vector<std::unique_ptr<Chunk>> WaitingChunks;
         Player *player;
         std::vector<std::shared_ptr<Rigidbody>> validBodies;
 
         int ChunkDiameter = 1;
+        std::queue<std::unique_ptr<Chunk>> ChunkLoadQueue;
         
 
         
@@ -55,7 +58,7 @@ class WorldRenderer {
         void Update(float deltaTime);
 
         void LoadChunks();
-
+        void UnloadChunks();
         std::vector<std::shared_ptr<Rigidbody>> & getValidBodies() {
             return validBodies;
         }
