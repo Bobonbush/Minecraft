@@ -82,6 +82,10 @@ class Setting { // Singleton
             return fFar * BlockNDCSize.x;
         }
 
+        glm::vec3 getChunkSize() {
+            return ChunkResolution;
+        }
+
 
 };
 

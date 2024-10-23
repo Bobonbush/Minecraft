@@ -10,20 +10,18 @@
 #include "Resource/TextureLoad.h"
 #include <memory>
 #include "Algorithm.h"
-#define DB_PERLIN_IMPL
-#include "Resource/db_perlin.hpp"
+#include "Chunks.h"
+
+
 #include <thread>
 class WorldRenderer {
     private:
-        std::vector<std::unique_ptr<Block>> blocks;
-        std::vector<std::shared_ptr<Rigidbody>> validBodies;
+        std::vector<std::unique_ptr<Chunk>> chunks;
         Player *player;
-        enum BlockType {
-            WATER,
-            SAND,
-            DIRT,
-            STONE
-        };
+        std::vector<std::shared_ptr<Rigidbody>> validBodies;
+
+        int ChunkDiameter = 1;
+        
 
         
 
@@ -37,65 +35,7 @@ class WorldRenderer {
 
         WorldRenderer();
 
-        void SoftNoise(std::vector<std::vector<float>> &elavationMap) {
-            int n = (int)elavationMap.size();
-            for (int i = 0; i < n; i++) {
-                int m = (int)elavationMap[i].size();
-                for (int j = 0; j < m; j++) {
-                    if(i + 1 < n )
-                        elavationMap[i][j] = SPA::min(elavationMap[i][j] , elavationMap[i+1][j] );
-                    if(j + 1 < m)
-                        elavationMap[i][j] = SPA::min(elavationMap[i][j] , elavationMap[i][j+1] );
-                    if(i + 1 < n && j + 1 < m)
-                        elavationMap[i][j] = SPA::min(elavationMap[i][j] , elavationMap[i+1][j+1] );
-                }
-            }
-        }
-
-        void HardNoise(std::vector<std::vector<float>> &elavationMap) {
-            int n = (int)elavationMap.size();
-            for (int i = 0; i < n; i++) {
-                int m = (int)elavationMap[i].size();
-                for (int j = 0; j < m; j++) {
-                    if(i + 1 < n )
-                        elavationMap[i][j] = SPA::max(elavationMap[i][j] , elavationMap[i+1][j] );
-                    if(j + 1 < m)
-                        elavationMap[i][j] = SPA::max(elavationMap[i][j] , elavationMap[i][j+1] );
-                    if(i + 1 < n && j + 1 < m)
-                        elavationMap[i][j] = SPA::max(elavationMap[i][j] , elavationMap[i+1][j+1] );
-                }
-            }
-        }
-
-        void SoftHeight(std::vector<std::vector<int>> & HeightMap) {
-            int n = (int)HeightMap.size();
-            for (int i = 0; i < n; i++) {
-                int m = (int)HeightMap[i].size();
-                for (int j = 0; j < m; j++) {
-                    if(i + 1 < n )
-                        HeightMap[i][j] = SPA::min(HeightMap[i][j] , HeightMap[i+1][j] );
-                    if(j + 1 < m)
-                        HeightMap[i][j] = SPA::min(HeightMap[i][j] , HeightMap[i][j+1] );
-                    if(i + 1 < n && j + 1 < m)
-                        HeightMap[i][j] = SPA::min(HeightMap[i][j] , HeightMap[i+1][j+1] );
-                }
-            }
-        }
-
-        void HardHeight(std::vector<std::vector<int>> & HeightMap) {
-            int n = (int)HeightMap.size();
-            for (int i = 0; i < n; i++) {
-                int m = (int)HeightMap[i].size();
-                for (int j = 0; j < m; j++) {
-                    if(i + 1 < n )
-                        HeightMap[i][j] = SPA::max(HeightMap[i][j] , HeightMap[i+1][j] );
-                    if(j + 1 < m)
-                        HeightMap[i][j] = SPA::max(HeightMap[i][j] , HeightMap[i][j+1] );
-                    if(i + 1 < n && j + 1 < m)
-                        HeightMap[i][j] = SPA::max(HeightMap[i][j] , HeightMap[i+1][j+1] );
-                }
-            }
-        }
+        
         
     public:
         ~WorldRenderer();
@@ -109,12 +49,12 @@ class WorldRenderer {
 
         /* implement noise generation */
 
-        void CreateWorld();
-
 
         
         void Render(glm::mat4 view, glm::mat4 projection);
         void Update(float deltaTime);
+
+        void LoadChunks();
 
         std::vector<std::shared_ptr<Rigidbody>> & getValidBodies() {
             return validBodies;

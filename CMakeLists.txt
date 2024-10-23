@@ -46,7 +46,7 @@ add_executable(OPENGL Script/main.cpp
                       Script/Game/world.cpp
                       Script/Physic/rigidbody.cpp
                       Script/Physic/PhysicVariable.cpp
-
+                      Script/Game/Chunks.cpp
                       
 )
         
