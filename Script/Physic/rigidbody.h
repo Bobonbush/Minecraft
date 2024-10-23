@@ -58,6 +58,7 @@ class Rigidbody {
         float drag;
         float angularDrag;
         bool useGravity;
+        float inverseMass;
 
         glm::vec3 velocity;
         glm::vec3 angularVelocity;

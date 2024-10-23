@@ -3,13 +3,13 @@
 
 Player * Player::instance = nullptr;
 Player :: Player() {
-    camera = Camera(glm::vec3(0.0f, 15.f, 3.0f));
+    camera = Camera(glm::vec3(0.0f, 1.f, 3.0f));
     Setting *settings = Setting::getInstance();
 
     PhysicConstant *physicConstant = PhysicConstant::getInstance();
     ShaderManager *shaderManager = ShaderManager::getInstance();
     shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
-    rigidbody = std::make_shared<Rigidbody>(camera.Position, glm::vec3(settings -> getBlockNDCSize().x /1.5f , settings -> getBlockNDCSize().y *2.f , settings -> getBlockNDCSize().z/1.5f ), glm::vec3(0.0f, 0.0f, 0.0f), physicConstant -> getPlayerMass() , 0.0f, 0.0f, true, ShaderManager::getInstance() -> GetShader("block"));
+    rigidbody = std::make_shared<Rigidbody>(camera.Position, glm::vec3(settings -> getBlockNDCSize().x /1.5f , settings -> getBlockNDCSize().y *2.f , settings -> getBlockNDCSize().z/1.5f ), glm::vec3(0.0f, 0.0f, 0.0f), physicConstant -> getPlayerMass() , 0.0f, 0.0f, false, ShaderManager::getInstance() -> GetShader("block"));
 }
 
 Player :: ~Player() {
@@ -18,6 +18,16 @@ Player :: ~Player() {
 
 void Player :: processInput(GLFWwindow *window, float deltaTime) {
     float speed = SPEED;
+
+    if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
+        speed *= 1.5f;
+    }
+    
+    if(glfwGetKey(window, GLFW_KEY_C) == GLFW_RELEASE  && ButtonPressed == true) {
+        //speed *= 2.5f;
+        rigidbody -> SetUseGravity(!rigidbody -> GetUseGravity());
+    }
+    ButtonPressed = glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS;
     if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         rigidbody -> AddInternalForce(glm::vec3(camera.Front.x * speed, 0.0f, camera.Front.z * speed) * deltaTime);
     }
@@ -34,6 +44,14 @@ void Player :: processInput(GLFWwindow *window, float deltaTime) {
     }
     if(glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && rigidbody -> GetUseGravity() && rigidbody -> isGround()) {
         rigidbody -> AddInternalForce(glm::vec3(0.0f, JUMPFORCE , 0.0f));
+    }
+
+    if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && !rigidbody -> GetUseGravity()) {
+        rigidbody -> AddInternalForce(rigidbody -> GetPosition() + glm::vec3(0.0f, -speed * deltaTime, 0.0f));
+    }
+
+    if(glfwGetKey(window, GLFW_KEY_SPACE ) == GLFW_PRESS && !rigidbody -> GetUseGravity()) {
+        rigidbody -> SetPosition(rigidbody -> GetPosition() + glm::vec3(0.0f, speed * deltaTime, 0.0f));
     }
 }
 
@@ -120,5 +138,5 @@ void Player :: Render() {
     std::vector<glm::vec3> validPositions;
     validPositions.push_back(rigidbody -> GetPosition());
 
-    rigidbody -> ShowHitBox(getViewMatrix(), getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y), validPositions);
+    //rigidbody -> ShowHitBox(getViewMatrix(), getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y), validPositions);
 }

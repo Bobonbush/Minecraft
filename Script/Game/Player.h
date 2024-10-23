@@ -12,8 +12,8 @@ class Player {                // Another Singleton
     private:
 
         
-        const float SPEED = 1.5f;
-        const float JUMPFORCE = 0.75f;
+        const float SPEED = 5.5f;
+        const float JUMPFORCE = 1.05f;
         Camera camera;
         Player();
         static Player* instance;
@@ -24,6 +24,8 @@ class Player {                // Another Singleton
         std::shared_ptr<Rigidbody> rigidbody;
         void processInput(GLFWwindow *window, float deltaTime) ;
         void processMouse(GLFWwindow *window, float currentX, float currentY);
+
+        bool ButtonPressed = false;
 
         void CopyCameraCharecteristics() {
             rigidbody -> SetPosition(camera.Position);

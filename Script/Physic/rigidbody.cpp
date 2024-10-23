@@ -40,6 +40,7 @@ Rigidbody::Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, fl
     velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     force = glm::vec3(0.0f, 0.0f, 0.0f);
     physicConstant = PhysicConstant::getInstance();
+    inverseMass = 1 / mass;
 }
 
 
@@ -85,7 +86,7 @@ void Rigidbody::ApplyInternalForce() {
 
 
 void Rigidbody::UpdateVelocity (float deltaTime) {
-    glm::vec3 VelocityMag = force/mass;
+    glm::vec3 VelocityMag = force * inverseMass ;
 
     velocity += VelocityMag;
     
@@ -94,6 +95,8 @@ void Rigidbody::UpdateVelocity (float deltaTime) {
 
 void Rigidbody::CollisionDetection(std::vector<std::shared_ptr<Rigidbody>> & rigidbodies) {
     FaceCollision = {false, false, false, false, false, false};
+
+
     for (auto &rigidbody : rigidbodies) {
         if (AABBIntersect(*rigidbody)) {
             ResolveCollision(*rigidbody);
@@ -150,6 +153,8 @@ bool Rigidbody::AABBIntersect(const Rigidbody& other) {
 void Rigidbody::Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies) {
     if(useGravity) {
         ApplyForce(glm::vec3(0.0f, - physicConstant -> getGravity() * mass * deltaTime , 0.0f));
+    }else {
+        velocity.y = 0;
     }
 
     UpdateVelocity(deltaTime);
@@ -161,18 +166,23 @@ void Rigidbody::Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> 
     UpdateVelocity(deltaTime);
 
     
-    glm::vec3 RealVelocity = velocity ;
+    glm::vec3 RealVelocity = velocity  ;
 
     
     SPA::ConvertToNDCUnit(RealVelocity);
     
-    position += RealVelocity ; 
-    //std::cout << RealVelocity.x << " " << RealVelocity.y << " " << RealVelocity.z << std::endl;
-    
-    
-
-    force = glm::vec3(0.0f, 0.0f, 0.0f);
+    position += RealVelocity ;
 
     
-    
+    // Default Drag Force
+    float friction = 5.8f;
+    friction = 1 - friction * deltaTime;
+    SPA::clamp(friction, 0.0f, 1.0f);
+    //std::cout << friction << std::endl;
+    velocity.x *= friction;
+    velocity.z *= friction;
+    if(glm::length(velocity) < 0.01f) {
+        velocity = glm::vec3(0.0f, 0.0f, 0.0f);
+    }
+
 }
