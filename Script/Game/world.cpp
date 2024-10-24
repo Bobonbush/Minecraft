@@ -44,8 +44,11 @@ void WorldRenderer:: LoadChunks() {
     position.y = 0.f;
     for(auto &chunk : chunks) {
         glm::vec3 chunkPosition = chunk -> GetOrigin();
+
+        glm::vec3 min = chunkPosition - glm::vec3(settings -> getChunkSize().x * settings -> getBlockNDCSize().x, 0.f, settings -> getChunkSize().y * settings -> getBlockNDCSize().z) /2.f;
+        glm::vec3 max = chunkPosition + glm::vec3(settings -> getChunkSize().x * settings -> getBlockNDCSize().x, 0.f, settings -> getChunkSize().y * settings -> getBlockNDCSize().z) /2.f;
         
-        if(glm::distance(position, chunkPosition) *2.f < settings -> getChunkSize().x * settings -> getBlockNDCSize().x) {
+        if(position.x >= min.x && position.x <= max.x && position.z >= min.z && position.z <= max.z) {
             Find = true;
             origin = chunkPosition;
             break;
@@ -118,6 +121,7 @@ void WorldRenderer:: LoadChunks() {
 }
 
 void WorldRenderer::UnloadChunks() {
+
     glm::vec3 position = player -> GetPosition();
     position.y = 0.f;
     glm::vec3 origin = player -> GetPosition();
@@ -125,9 +129,10 @@ void WorldRenderer::UnloadChunks() {
     
     for(auto &chunk : chunks) {
         glm::vec3 chunkPosition = chunk -> GetOrigin();
+        glm::vec3 min = chunkPosition - glm::vec3(settings -> getChunkSize().x * settings -> getBlockNDCSize().x, 0.f, settings -> getChunkSize().y * settings -> getBlockNDCSize().z) /2.f;
+        glm::vec3 max = chunkPosition + glm::vec3(settings -> getChunkSize().x * settings -> getBlockNDCSize().x, 0.f, settings -> getChunkSize().y * settings -> getBlockNDCSize().z) /2.f;
         
-        if(glm::distance(position, chunkPosition) / settings -> getBlockNDCSize().x < settings -> getChunkSize().x * settings -> getBlockNDCSize().x) {
-            //Find = true;
+        if(position.x >= min.x && position.x <= max.x && position.z >= min.z && position.z <= max.z) {
             origin = chunkPosition;
             break;
         }
@@ -135,7 +140,7 @@ void WorldRenderer::UnloadChunks() {
     position = origin;
     for(int i = 0 ; i < (int)chunks.size()-1 ; i++) {
         glm::vec3 chunkPosition = chunks[i] -> GetOrigin();
-        if(glm::distance(position, chunkPosition) / 2.f > (ChunkDiameter + 1) * settings -> getChunkSize().x * settings -> getBlockNDCSize().x) {
+        if(glm::distance(position, chunkPosition) > (ChunkDiameter ) * settings -> getChunkSize().x) {
             swap(chunks[i], chunks.back());
             chunks.pop_back();
             i--;
