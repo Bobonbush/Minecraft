@@ -22,6 +22,8 @@ class Chunk {
             SNOW
         };
         glm::vec3 origin;
+
+
         std::vector<std::unique_ptr<Block>> blocks;
 
         void SoftNoise(std::vector<std::vector<float>> &elavationMap);

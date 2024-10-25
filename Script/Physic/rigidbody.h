@@ -65,11 +65,14 @@ class Rigidbody {
         glm::vec3 force;
         glm::vec3 InternalForce = glm::vec3(0.0f, 0.0f, 0.0f);
         HitBox3D hitBox;
+        glm::vec3 lastPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 lastVelocity;
+
 
         PhysicConstant *physicConstant;
         bool AABBIntersect(const Rigidbody& other);
 
-        void UpdateVelocity(float deltaTime);
+        void UpdateVelocity();
 
         void ApplyForce(glm::vec3 force);
 
@@ -85,6 +88,8 @@ class Rigidbody {
         void AddInternalForce(glm::vec3 force);
 
         void Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies);
+
+        void FixedUpdate(float Alpha, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies);
         
         void CollisionDetection(std::vector<std::shared_ptr<Rigidbody>> & rigidbodies);
 

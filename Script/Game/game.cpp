@@ -21,7 +21,9 @@ Game :: ~Game() {
 
 void Game::Update() {
     totalTime = glfwGetTime();
+    
     float deltaTime = totalTime - lastTime;
+    elapsedTime += deltaTime;
     world -> Update(deltaTime);
 
     double xpos, ypos;
@@ -30,7 +32,19 @@ void Game::Update() {
 
 
     world -> Render(player -> getViewMatrix(), player -> getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y));
-    player -> Update(deltaTime, window, xpos, ypos, world -> getValidBodies());
+    player -> Update(deltaTime, world -> getValidBodies());
+
+    accumulatedTime += deltaTime;
+    while(accumulatedTime >= maxFrameTime) {
+        FixedUpdate(xpos, ypos);
+        accumulatedTime -= maxFrameTime;
+    }
+    Alpha = accumulatedTime / maxFrameTime;
+
+}
+
+void Game::FixedUpdate(float xpos, float ypos) {
+    player -> FixedUpdate( window,xpos, ypos, world -> getValidBodies(), Alpha);
 }
 
 void Game::Render() {

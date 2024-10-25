@@ -12,8 +12,8 @@ class Player {                // Another Singleton
     private:
 
         
-        const float SPEED = 5.5f;
-        const float JUMPFORCE = 1.05f;
+        const float SPEED = 1.f;
+        const float JUMPFORCE = 20.05f;
         Camera camera;
         Player();
         static Player* instance;
@@ -22,7 +22,7 @@ class Player {                // Another Singleton
         float lastMouseY = 0;
         bool firstMouse = true;
         std::shared_ptr<Rigidbody> rigidbody;
-        void processInput(GLFWwindow *window, float deltaTime) ;
+        void processInput(GLFWwindow *window) ;
         void processMouse(GLFWwindow *window, float currentX, float currentY);
 
         bool ButtonPressed = false;
@@ -43,7 +43,8 @@ class Player {                // Another Singleton
         ~Player();
 
 
-        void Update(float deltaTime, GLFWwindow *window, float currentX, float currentY, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies);
+        void Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies);
+        void FixedUpdate(GLFWwindow *window, float currentX, float currentY, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies, float Alpha);
         void Render();
         glm::mat4 getViewMatrix() {
             return camera.GetViewMatrix();

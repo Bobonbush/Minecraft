@@ -21,15 +21,18 @@ class Game {
         Block * block2;
         WorldRenderer * world;
 
-        glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
-    glm::vec3 velocity = glm::vec3(1.0f, 0.0f, 0.0f);
-    glm::vec3 acceleration = glm::vec3(1.5f, 0.0f, 0.0f);
+        float elapsedTime = 0;
+
+        float accumulatedTime = 0.0f;
+        float maxFrameTime = 1/60.0f; // 60 frame per second
+        float Alpha = 1.0f;
 
 
         void Init();
 
         void Update();
         void Render();
+        void FixedUpdate(float xpos, float ypos );
 
             //std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Roughly 60 FPS
 

@@ -111,8 +111,8 @@ void Chunk::GenerateChunk() {
     
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            float nx = i;
-            float ny = j;
+            float nx = i - width / 2 + origin.x;
+            float ny = j - height / 2 + origin.z;
 
             elavationMap[i][j] = db::perlin(nx / 64.f, ny / 64.f ) * 1.00f + db::perlin(nx / 32.f, ny / 32.f ) * 0.5f + db::perlin(nx / 16.f, ny / 16.f ) * 0.25f;
             

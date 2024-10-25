@@ -85,7 +85,7 @@ void Rigidbody::ApplyInternalForce() {
 
 
 
-void Rigidbody::UpdateVelocity (float deltaTime) {
+void Rigidbody::UpdateVelocity () {
     glm::vec3 VelocityMag = force * inverseMass ;
 
     velocity += VelocityMag;
@@ -151,32 +151,37 @@ bool Rigidbody::AABBIntersect(const Rigidbody& other) {
 }
 
 void Rigidbody::Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies) {
+    
+}
+
+void Rigidbody::FixedUpdate(float Alpha, std::vector<std::shared_ptr<Rigidbody> > & rigidbodies) {
     if(useGravity) {
-        ApplyForce(glm::vec3(0.0f, - physicConstant -> getGravity() * mass * deltaTime , 0.0f));
+        ApplyForce(glm::vec3(0.0f, - physicConstant -> getGravity() * mass , 0.0f));
     }else {
         velocity.y = 0;
     }
 
-    UpdateVelocity(deltaTime);
+    UpdateVelocity();
     CollisionDetection(rigidbodies);
-    UpdateVelocity(deltaTime);
+    UpdateVelocity();
 
     ApplyInternalForce();
 
-    UpdateVelocity(deltaTime);
+    UpdateVelocity();
 
     
     glm::vec3 RealVelocity = velocity  ;
+    //velocity = SPA::lerp(lastVelocity, velocity, Alpha);
 
     
     SPA::ConvertToNDCUnit(RealVelocity);
     
     position += RealVelocity ;
 
+    position = SPA::lerp(lastPosition, position, Alpha);
     
     // Default Drag Force
-    float friction = 5.8f;
-    friction = 1 - friction * deltaTime;
+    float friction = 0.95f;
     SPA::clamp(friction, 0.0f, 1.0f);
     //std::cout << friction << std::endl;
     velocity.x *= friction;
@@ -185,4 +190,6 @@ void Rigidbody::Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> 
         velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     }
 
+    lastPosition = position;
+    lastVelocity = velocity;
 }

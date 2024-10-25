@@ -74,6 +74,14 @@ class SPA {
         return a > b ? a : b;
     }
 
+    template<class X> static X abs(X a) {
+        return a < 0 ? -a : a;
+    }
+
+    template<class X> static X lerp(X a, X b, float t) {
+        return a + t * (b - a);
+    }
+
 };
 
 #endif
