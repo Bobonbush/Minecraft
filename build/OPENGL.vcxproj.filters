@@ -46,6 +46,9 @@
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\Chunks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Game\skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\WorkSpace\Minecraft\Script\Utils\Camera.h">

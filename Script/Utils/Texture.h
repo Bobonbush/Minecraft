@@ -14,6 +14,7 @@
 
 #include <map>
 #include "shader.h"
+#include <memory>
 
 
 class TextureLoader {
@@ -36,6 +37,8 @@ class TextureLoader {
 
     static void buildCircle(float radius, int vCount, std::vector<glm::vec3> &vertices, std::vector<unsigned int> &indices);
     static GLFWcursor* createCustomCursor(const char* imagePath);
+
+    static unsigned int LoadCubeMap(std::vector<std::string> faces);
 };
 
 
@@ -48,13 +51,13 @@ class TextureLoader {
 class CubeSurface { 
     private:
         unsigned int VAO, VBO, EBO;
-        Shader &shader;
+        std::shared_ptr<Shader> shader;
         unsigned int texture;
         unsigned int instanceVBO;
         std::vector<glm::vec3> instancePositions;
     public :
 
-        CubeSurface(Shader & shader ,int face, unsigned int texture);
+        CubeSurface(std::shared_ptr<Shader> shader ,int face, unsigned int texture);
         ~CubeSurface();
         void Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPosition);
         
@@ -64,10 +67,10 @@ class CubeSurface {
 class CubeBuilder {
     private :
         std::vector<CubeSurface> cubeSurfaces;
-        Shader &shader;
+        std::shared_ptr<Shader> shader;
     public:
 
-        CubeBuilder(Shader &shader);
+        CubeBuilder(std::shared_ptr<Shader> shader);
         ~CubeBuilder();
         void BuildSurfaceTop(unsigned int texture);
         void BuildSurfaceBottom(unsigned int texture);
@@ -82,12 +85,12 @@ class CubeBuilder {
 class CubeRenderer {
     private:
         std::vector<CubeSurface> cubeSurfaces;
-        Shader& shader;
+        std::shared_ptr<Shader> shader;
         int numBlocks = 0;
 
     public :
 
-        CubeRenderer(Shader &shader);
+        CubeRenderer(std::shared_ptr<Shader> shader);
 
         void LoadCube(unsigned int texture);
         void LoadCube(unsigned int top, unsigned int bottom, unsigned int left, unsigned int right, unsigned int front, unsigned int back);

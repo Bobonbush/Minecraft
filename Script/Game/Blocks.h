@@ -18,10 +18,11 @@ class Block {
         glm::vec3 position;
         glm::vec3 scale;
         glm::vec3 rotation;
-        bool ShowHitBox = false;
+        bool ShowHitBox = true;
+        std::shared_ptr<Shader> shader;
     public :
         std::shared_ptr<Rigidbody> rigidbody;
-        Block(glm :: vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
+        Block(glm :: vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader);
         ~Block();
         void SetPosition(glm::vec3 position);
         void SetScale(glm::vec3 scale);
@@ -49,7 +50,7 @@ class Dirt : public Block{
         static std::unique_ptr<CubeRenderer> cubeRenderer;
         static std::vector<glm::vec3> validPositions;
     public:
-        Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
+        Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader);
         ~Dirt();
 
         void Render(glm::mat4 view, glm::mat4 projection);
@@ -64,7 +65,7 @@ class Stone : public Block {
         static std::unique_ptr<CubeRenderer> cubeRenderer;
         static std::vector<glm::vec3> validPositions;
     public:
-        Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
+        Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader);
         ~Stone();
 
         void Render(glm::mat4 view, glm::mat4 projection);
@@ -80,7 +81,7 @@ class Water : public Block {
         static std::unique_ptr<CubeRenderer> cubeRenderer;
         static std::vector<glm::vec3> validPositions;
     public:
-        Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
+        Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader);
         ~Water();
 
         void Render(glm::mat4 view, glm::mat4 projection);
@@ -96,7 +97,7 @@ class Sand : public Block {
 
         static std::vector<glm::vec3> validPositions;
     public:
-        Sand(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
+        Sand(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader);
         ~Sand();
 
         void Render(glm::mat4 view, glm::mat4 projection);
@@ -113,7 +114,7 @@ class Grass : public Block {
 
         static std::vector<glm::vec3> validPositions;
     public:
-        Grass(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader);
+        Grass(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader);
         ~Grass();
 
         void Render(glm::mat4 view, glm::mat4 projection);

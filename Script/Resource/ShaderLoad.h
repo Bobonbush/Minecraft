@@ -4,10 +4,12 @@
 #include <map>
 #include "Algorithm.h"
 
+#include <memory>
+
 class ShaderManager  {
     private:
         static ShaderManager * instance;
-        std::map<std::string, Shader*> shaders;
+        std::map<std::string, std::shared_ptr<Shader>> shaders;
         ShaderManager();
     public:
         ~ShaderManager();
@@ -21,7 +23,7 @@ class ShaderManager  {
             return instance;
         }
 
-        Shader& GetShader(std::string name);
+        std::shared_ptr<Shader> GetShader(std::string name);
 };
 
 #endif

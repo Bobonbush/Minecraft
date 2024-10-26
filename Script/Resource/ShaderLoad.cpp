@@ -7,9 +7,6 @@ ShaderManager::ShaderManager() {
 }
 
 ShaderManager::~ShaderManager() {
-    for (auto shader : shaders) {
-        delete shader.second;
-    }
     delete instance;
 }
 
@@ -20,16 +17,18 @@ void ShaderManager::LoadShader(std::string name, std::string vertexPath, std::st
         return;
     }
     SPA::convertToLowerCase(name);
-    shaders[name] = new Shader(vertexPath.c_str(), fragmentPath.c_str());
+
+    shaders[name] = std::make_shared<Shader>(vertexPath.c_str(), fragmentPath.c_str());
 }
 
-Shader & ShaderManager::GetShader(std::string name) {
+std::shared_ptr<Shader> ShaderManager::GetShader(std::string name) {
+    SPA::convertToLowerCase(name);
     if(shaders.find(name) == shaders.end()) {
         std::cout << "Shader not found" << '\n';
        // return *shaders["default"];
     }
-    SPA::convertToLowerCase(name);
-    return *shaders[name];
+    
+    return shaders[name];
 }
    
 

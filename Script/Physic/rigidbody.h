@@ -16,9 +16,9 @@ class HitBox3D {
     
     private:
         static std::unique_ptr<CubeRenderer> cubeRenderer;
-        Shader shader;
+        std::shared_ptr<Shader> shader;
     public:
-        HitBox3D(Shader &shader);
+        HitBox3D(std::shared_ptr<Shader> shader);
         ~HitBox3D();
 
         void ShowHitBox(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3> &validPositions);
@@ -81,7 +81,7 @@ class Rigidbody {
         
     public :
 
-        Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, float mass, float drag, float angularDrag, bool useGravity, Shader &shader);
+        Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, float mass, float drag, float angularDrag, bool useGravity, std::shared_ptr<Shader> shader);
         ~Rigidbody() = default;
 
         

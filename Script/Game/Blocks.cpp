@@ -7,7 +7,7 @@
 // BLOCK
 
 
-Block::Block(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) {
+Block::Block(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader) : shader(shader) {
     this->position = position;
     this->scale = scale;
     this->rotation = rotation;
@@ -58,10 +58,8 @@ void Block::Update(float deltaTime) {
 }
 
 bool Block::FrustumCulling(const Frustum frustum) {
-    glm::vec3 blockMin = position - scale / 2.f; // Minimum corner of the block
-    glm::vec3 blockMax = position + scale / 2.f; // Maximum corner of the block
-    
-    return true;
+    glm::vec3 blockMin = position - scale/2.f ; // Minimum corner of the block
+    glm::vec3 blockMax = position + scale/2.f ; // Maximum corner of the block
     
 
     // Check each plane of the frustum
@@ -106,7 +104,7 @@ bool Block::FrustumCulling(const Frustum frustum) {
 
 std::unique_ptr<CubeRenderer> Dirt::cubeRenderer = nullptr;
 std::vector<glm::vec3> Dirt::validPositions;
-Dirt::Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
+Dirt::Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader) : Block(position, scale, rotation, shader) {
     
     texture =  textureManager -> LoadTexture("Assets/dirt.png");
     if(cubeRenderer == nullptr) {
@@ -152,7 +150,7 @@ void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
 
 std::unique_ptr<CubeRenderer> Stone::cubeRenderer = nullptr;
 std::vector<glm::vec3> Stone::validPositions;
-Stone::Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
+Stone::Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader) : Block(position, scale, rotation, shader) {
     texture = textureManager -> LoadTexture("Assets/Stone.png");
     if(cubeRenderer == nullptr) {
         cubeRenderer = std::make_unique<CubeRenderer>(shader);
@@ -198,7 +196,7 @@ void Stone::Render(glm::mat4 view, glm::mat4 projection) {
 std::unique_ptr<CubeRenderer> Water::cubeRenderer = nullptr;
 std::vector<glm::vec3> Water::validPositions;
 
-Water:: Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
+Water:: Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation,std::shared_ptr<Shader> shader) : Block(position, scale, rotation, shader) {
     texture = textureManager -> LoadTexture("Assets/water.png");
     if(cubeRenderer == nullptr) {
         cubeRenderer = std::make_unique<CubeRenderer>(shader);
@@ -240,7 +238,7 @@ void Water::PrepareRender(Frustum frustum) {
 std::unique_ptr<CubeRenderer> Sand::cubeRenderer = nullptr;
 std::vector<glm::vec3> Sand::validPositions;
 
-Sand::Sand(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
+Sand::Sand(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader) : Block(position, scale, rotation, shader) {
     texture = textureManager -> LoadTexture("Assets/sand.png");
     if(cubeRenderer == nullptr) {
         cubeRenderer = std::make_unique<CubeRenderer>(shader);
@@ -283,7 +281,7 @@ void Sand::PrepareRender(Frustum frustum) {
 std::unique_ptr<CubeRenderer> Grass::cubeRenderer = nullptr;
 std::vector<glm::vec3> Grass::validPositions;
 
-Grass::Grass(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, Shader &shader) : Block(position, scale, rotation, shader) {
+Grass::Grass(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader) : Block(position, scale, rotation, shader) {
     textureTop = textureManager -> LoadTexture("Assets/Grass/Top.png");
     textureSide = textureManager -> LoadTexture("Assets/Grass/Side.png");
     textureBottom = textureManager -> LoadTexture("Assets/Grass/dirt.png");

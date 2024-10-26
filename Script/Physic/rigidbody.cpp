@@ -6,7 +6,7 @@
 
 std::unique_ptr<CubeRenderer> HitBox3D::cubeRenderer = nullptr;
 
-HitBox3D::HitBox3D(Shader &shader) : shader(shader) {
+HitBox3D::HitBox3D(std::shared_ptr<Shader> shader) : shader(shader) {
     if(!cubeRenderer ) cubeRenderer =  std::make_unique<CubeRenderer>(shader);
     TextureManager *textureManager = TextureManager::getInstance();
     cubeRenderer -> LoadCube(textureManager -> LoadTexture("Assets/HitBox.png"));
@@ -26,7 +26,7 @@ void HitBox3D::ShowHitBox(glm::vec3 position, glm::vec3 scale, glm::vec3 rotatio
 
 
 // Rigidbody
-Rigidbody::Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, float mass, float drag, float angularDrag, bool useGravity, Shader &shader) : hitBox(shader) {
+Rigidbody::Rigidbody(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, float mass, float drag, float angularDrag, bool useGravity, std::shared_ptr<Shader> shader) : hitBox(shader) {
    
     this->position = position;
     this->scale = scale;

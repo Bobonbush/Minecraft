@@ -55,6 +55,7 @@ std::pair<int ,int> TextureLoader::GetTextureSize(char* path){
 unsigned int TextureLoader::LoadTextureJPG(char* path)
     {
         int width, height, nrChannels;
+        stbi_set_flip_vertically_on_load(true);
         unsigned char *data = stbi_load(path, &width, &height, &nrChannels, 0);
         
         unsigned int texture;
@@ -109,6 +110,38 @@ unsigned int TextureLoader::LoadTexture(char* path){
         }
 }
 
+unsigned int TextureLoader::LoadCubeMap(std::vector<std::string> faces){
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+    stbi_set_flip_vertically_on_load(false);
+
+    int width, height, nrChannels;
+    for (unsigned int i = 0; i < faces.size(); i++)
+    {
+        unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+        if (data)
+        {
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+                         0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
+            );
+        }
+        else
+        {
+            std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
+        }
+        stbi_image_free(data);
+    }
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    return textureID;
+}
+
 void TextureLoader::buildCircle(float radius, int vCount , std::vector<glm::vec3>& vertices, std::vector<unsigned int> &indices)
 {
     float angle = 360.0f / vCount;
@@ -160,7 +193,7 @@ GLFWcursor* TextureLoader::createCustomCursor(const char* imagePath) {
 }
 
 
-CubeSurface::CubeSurface(Shader &shader, int face, unsigned int texture) : shader(shader) , texture(texture) {
+CubeSurface::CubeSurface(std::shared_ptr<Shader> shader, int face, unsigned int texture) : shader(shader) , texture(texture) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -178,10 +211,13 @@ CubeSurface::CubeSurface(Shader &shader, int face, unsigned int texture) : shade
     }else if(face == 0) {
         vertex = {
             // positions          color             coords
-            0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-            0.5f,  0.5f, -0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+            -0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f,  // top left
             -0.5f,  0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-            -0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f  // top left
+             0.5f,  0.5f, -0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+            0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f // top right
+           
+            
+            
         };
     }else if(face == 1) {
         vertex = {
@@ -200,10 +236,16 @@ CubeSurface::CubeSurface(Shader &shader, int face, unsigned int texture) : shade
     }else if(face == 3) {
         
         vertex = {
-            0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-            0.5f,  -0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-            0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-            0.5f, 0.5f, -0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f  // top left
+             0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+             0.5f, 0.5f, -0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f,  // top left
+             0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+            0.5f,  -0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f // bottom right
+            
+            
+           
+            
+            
+
         };
     }else if(face == 5) {
         vertex = {
@@ -222,8 +264,8 @@ CubeSurface::CubeSurface(Shader &shader, int face, unsigned int texture) : shade
     };
 
     unsigned int indices[] = {
-        0, 1, 3, // first triangle
-        1, 2, 3  // second triangle
+        3, 1, 0, // first triangle
+        3, 2, 1  // second triangle
     };
 
     glBindVertexArray(VAO);
@@ -269,7 +311,7 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
     if(validPositions.size() == 0) {
         return;
     }
-    shader.use();
+    shader -> use();
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::scale(model, scale);
     model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -277,9 +319,9 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
     model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
 
     model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-    shader.setMat4("model", model);
-    shader.setMat4("view", view);
-    shader.setMat4("projection", projection);
+    shader -> setMat4("model", model);
+    shader -> setMat4("view", view);
+    shader -> setMat4("projection", projection);
     bool diff = false;
     bool neww = false;
 
@@ -323,7 +365,7 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
 }
 
 
-CubeBuilder::CubeBuilder(Shader &shader) : shader(shader) {
+CubeBuilder::CubeBuilder(std::shared_ptr<Shader> shader) : shader(shader) {
 
 }
 
@@ -363,7 +405,7 @@ std::vector<CubeSurface> CubeBuilder::GetCube() {
 }
 
 
-CubeRenderer::CubeRenderer(Shader &shader) : shader(shader) {
+CubeRenderer::CubeRenderer(std::shared_ptr<Shader> shader) : shader(shader) {
 
 }
 

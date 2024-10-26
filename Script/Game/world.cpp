@@ -9,6 +9,8 @@ WorldRenderer :: WorldRenderer() {
     settings = Setting::getInstance();
     shaderManager -> LoadShader("block", "Shaders/block.vs", "Shaders/block.fs");
     player = Player::getInstance();
+
+    skybox = std::make_unique<Skybox>();
 }
 
 WorldRenderer :: ~WorldRenderer() {
@@ -19,6 +21,8 @@ void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
     for(auto & chunk : chunks) {
         chunk -> Render(view, projection);
     }
+    skybox -> Render(view, projection);    
+    
 }
 
 void WorldRenderer :: Update(float deltaTime) {
@@ -39,7 +43,6 @@ void WorldRenderer :: Update(float deltaTime) {
 void WorldRenderer:: LoadChunks() {
     glm::vec3 position = player -> GetPosition();
     bool Find = false;
-    std::cout << "Player Position : " << position.x << " " << position.y << " " << position.z << '\n';
     glm::vec3 origin = player -> GetPosition();
     position.y = 0.f;
     for(auto &chunk : chunks) {
@@ -54,8 +57,6 @@ void WorldRenderer:: LoadChunks() {
             break;
         }
     }
-
-    std::cout << "Origin : " << origin.x << " " << origin.y << " " << origin.z << '\n';
 
     if(!Find) {
         glm::vec3 playerPosition = player -> GetPosition();
@@ -144,7 +145,6 @@ void WorldRenderer::UnloadChunks() {
             swap(chunks[i], chunks.back());
             chunks.pop_back();
             i--;
-            std::cout << "Chunk Unloaded\n";
         }
     }
     
