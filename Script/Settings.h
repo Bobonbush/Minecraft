@@ -16,17 +16,12 @@ class Setting { // Singleton
         const glm::vec3 ChunkResolution = glm::vec3(16, 16, 100);
         float fNear = 0.1f;
         float fFar = 300.f;
+
+        float MaxHour = 24.f ;
+        float hour = 0;
         Setting() {
             // Load settings from file
             resolution = glm::vec2(1600, 800);
-        }
-
-        void Update(float deltaTime) { 
-
-        } 
-
-        void Render() {
-
         }
 
     public:
@@ -85,6 +80,30 @@ class Setting { // Singleton
         glm::vec3 getChunkSize() {
             return ChunkResolution;
         }
+
+        float getHour() {
+            return hour / MaxHour;
+        }
+
+        float getMaxHour() {
+            return MaxHour;
+        }
+
+        void Update(float deltaTime) {
+            hour += deltaTime;
+            if(hour >= MaxHour) {
+                //hour = 0;
+            }
+        }
+
+        void setHour(float hour) {
+            this -> hour = hour;
+        }
+
+        void setMaxHour(float MaxHour) {
+            this -> MaxHour = MaxHour;
+        }
+
 
 
 };

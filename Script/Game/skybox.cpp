@@ -1,7 +1,63 @@
 #include "skybox.h"
 
 
+
+// Planet Implementation
+
+Planet::Planet (std::shared_ptr <Shader> shader ,char* path, glm::vec3 TimeZone) : TimeZone(TimeZone) {
+    ShaderManager * shaderManager = ShaderManager::getInstance();
+    TextureManager * textureManager = TextureManager::getInstance();
+    
+    
+    texture = textureManager -> LoadTexture(path);
+    cubeRenderer = std::make_unique<CubeSurface>(shader, 1, texture);
+}
+
+Planet::~Planet() {
+
+}
+
+void Planet::Render(glm::mat4 view, glm::mat4 projection) {
+    
+    Player * player = Player::getInstance();
+    Setting * settings = Setting::getInstance();
+    glm::vec3 CameraPosition = player -> GetPosition();
+    
+
+    
+    position = CameraPosition + glm::vec3(
+          distance  * cos (settings -> getHour() + TimeZone.x * glm::pi<float>()),
+          distance  * sin(settings -> getHour()+ TimeZone.y * glm::pi<float>()) , 
+        0.0f);
+    
+    
+    std::vector<glm::vec3> validPositions;
+    validPositions.push_back(position);
+    glm::mat4 viewWithoutTranslation = glm::mat4(glm::mat3(view));
+
+    glm::vec3 direction = glm::normalize(CameraPosition - position);
+    glm::vec3 bottomNormal = glm::vec3(0.0f, -1.0f, 0.0f);
+    glm::vec3 axis = glm::cross(bottomNormal, direction);
+
+    float dotProduct = glm::dot(bottomNormal, direction);
+    dotProduct = glm::clamp(dotProduct, -1.0f, 1.0f);
+    float angle = glm::acos(dotProduct);
+
+
+    glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), angle, axis);
+
+
+    
+    cubeRenderer -> Render(position, glm::vec3(5.0f, 5.0f, 5.0f), rotation, view, projection, validPositions);
+    
+}
+
+
+// Skybox
+
 Skybox::Skybox() {
+
+    
     float skyboxVertices[] = {
     // positions          
     -1.0f,  1.0f, -1.0f,
@@ -59,6 +115,7 @@ Skybox::Skybox() {
     unsigned int cubemapTexture = TextureLoader::LoadCubeMap(faces);
     ShaderManager * shaderManager = ShaderManager::getInstance();
     shaderManager -> LoadShader("skybox", "Shaders/skybox.vs", "Shaders/skybox.fs");
+    shaderManager -> LoadShader("lightSource", "Shaders/lightSource.vs", "Shaders/lightSource.fs");
     shader = shaderManager -> GetShader("skybox");
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -73,6 +130,10 @@ Skybox::Skybox() {
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
+    sun = std::make_unique<Planet>(shaderManager -> GetShader("lightSource"),(char* ) "Assets/sun.png", glm::vec3(0.0f, 0.0f, 0.0f));
+    moon = std::make_unique<Planet>(shaderManager -> GetShader("lightSource"),(char* ) "Assets/moon.png", glm::vec3(1.0f, 1.0f, 0.0f));
 }
 
 Skybox::~Skybox() {
@@ -81,7 +142,9 @@ Skybox::~Skybox() {
 }
 
 void Skybox::Render(glm::mat4 view, glm::mat4 projection) {
-    
+    moon -> Render(view, projection);
+    sun -> Render(view, projection);
+    //moon -> Render(view, projection);
     glm::mat4 viewWithoutTranslation = glm::mat4(glm::mat3(view));
     
     glDepthFunc(GL_LEQUAL);

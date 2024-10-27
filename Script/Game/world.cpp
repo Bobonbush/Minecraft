@@ -38,6 +38,9 @@ void WorldRenderer :: Update(float deltaTime) {
             validBodies.push_back(body);
         }
     }
+
+    Setting * settings = Setting::getInstance();   
+    settings -> Update(deltaTime);
 }
 
 void WorldRenderer:: LoadChunks() {
@@ -106,7 +109,7 @@ void WorldRenderer:: LoadChunks() {
         }
     }
 
-    if(!ChunkLoadQueue.empty()) {
+    while(!ChunkLoadQueue.empty()) {
         chunks.push_back(std::move(ChunkLoadQueue.front()));
         chunks.back() -> LoadChunk();
         ChunkLoadQueue.pop();
@@ -141,7 +144,7 @@ void WorldRenderer::UnloadChunks() {
     position = origin;
     for(int i = 0 ; i < (int)chunks.size()-1 ; i++) {
         glm::vec3 chunkPosition = chunks[i] -> GetOrigin();
-        if(glm::distance(position, chunkPosition) > (ChunkDiameter ) * settings -> getChunkSize().x) {
+        if(glm::distance(position, chunkPosition) > (ChunkDiameter ) * settings -> getChunkSize().x ) {
             swap(chunks[i], chunks.back());
             chunks.pop_back();
             i--;

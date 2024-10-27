@@ -134,6 +134,8 @@ void Player :: Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> &
 
     camera.Position = rigidbody -> GetPosition();
     camera.Position.y += rigidbody -> GetScale().y / 4.f;
+    ShaderManager *shaderManager = ShaderManager::getInstance();
+    shaderManager -> GetShader("block") -> setVec3("cameraPosition", camera.Position); 
 }
 
 void Player::FixedUpdate(GLFWwindow *window, float currentX, float currentY, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies, float Alpha) {
@@ -141,8 +143,9 @@ void Player::FixedUpdate(GLFWwindow *window, float currentX, float currentY, std
     rigidbody -> FixedUpdate(Alpha, rigidbodies);
     processInput(window);
     processMouse(window, currentX , currentY);
+
     
-    
+      
 }
 
 void Player :: Render() {

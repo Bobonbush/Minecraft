@@ -365,6 +365,61 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
 }
 
 
+void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3> & validPositions) {
+    if(validPositions.size() == 0) {
+        return;
+    }
+    shader -> use();
+    glm::mat4 model = glm::mat4(1.0f);
+    
+    model = glm::scale(model, scale);
+    model = model * rotation;
+    
+    shader -> setMat4("model", model);
+    shader -> setMat4("view", view);
+    shader -> setMat4("projection", projection);
+    bool diff = false;
+    bool neww = false;
+
+
+    for(int i = 0; i < (int) validPositions.size(); i++) {
+        if(i == (int) instancePositions.size()) {
+            
+            instancePositions.push_back(validPositions[i]);
+            neww = true;
+            continue;
+        }
+        if(validPositions[i] != instancePositions[i]) {
+            instancePositions[i] = validPositions[i];
+            diff = true;
+            
+        }
+        instancePositions[i] = validPositions[i];
+    }
+
+    
+    if(neww) {
+        glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+        glBufferData(GL_ARRAY_BUFFER, (int)instancePositions.size() * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+
+    if(diff) {
+        glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+        int number = (int)validPositions.size();
+        
+        glBufferData(GL_ARRAY_BUFFER, number * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindVertexArray(VAO);
+    glDrawElementsInstanced(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0, instancePositions.size());
+
+    glBindVertexArray(0);
+}
+
 CubeBuilder::CubeBuilder(std::shared_ptr<Shader> shader) : shader(shader) {
 
 }
@@ -470,4 +525,11 @@ void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotatio
         cubeSurfaces[i].Render(position, scale, rotation, view, projection, validPosition);
     }
 }
+
+void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPosition) {
+    for (int i = 0; i < (int) cubeSurfaces.size(); i++) {
+        cubeSurfaces[i].Render(position, scale, rotation, view, projection, validPosition);
+    }
+}
+
 
