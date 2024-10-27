@@ -202,65 +202,59 @@ CubeSurface::CubeSurface(std::shared_ptr<Shader> shader, int face, unsigned int 
 
     if(face == 4 ) {
         vertex = {
-            // positions          color             coords
-        0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-         0.5f, -0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-        -0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f  // top left 
+            // positions          color             coords        Normals
+        0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,      0.0f, 0.0f, 1.0f,  // top right
+         0.5f, -0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,     0.0f, 0.0f ,1.0f,// bottom right
+        -0.5f, -0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,     0.0f, 0.0f ,1.0f,// bottom left
+        -0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f,     0.0f, 0.0f ,1.0f  // top left 
         };
     }else if(face == 0) {
         vertex = {
-            // positions          color             coords
-            -0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f,  // top left
-            -0.5f,  0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-             0.5f,  0.5f, -0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-            0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f // top right
+            // positions          color             coords         Normals
+            -0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f,  0.0f, 1.0f, 0.0f,    // top left
+            -0.5f,  0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom left
+             0.5f,  0.5f, -0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom right
+            0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   0.0f , 1.0f , 0.0f // top right
            
             
             
         };
     }else if(face == 1) {
         vertex = {
-            0.5f, -0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-            0.5f, -0.5f, -0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-            -0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-            -0.5f, -0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f  // top left
+            0.5f, -0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   0.0f, -1.0f, 0.0f, // top right
+            0.5f, -0.5f, -0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,  0.0f, -1.0f, 0.0f, // bottom right
+            -0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, 0.0f, -1.0f, 0.0f,// bottom left
+            -0.5f, -0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f,  0.0f, -1.0f, 0.0f  // top left
         };
     }else if(face == 2) {
         vertex = {
-            -0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-            -0.5f,  -0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-            -0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-            -0.5f, 0.5f, -0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f  // top left
+            -0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,  -1.0f, 0.0f, 0.0f, // top right
+            -0.5f,  -0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom right
+            -0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // bottom left
+            -0.5f, 0.5f, -0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f,  -1.0, 0.0f, 0.0f  // top left
         };
     }else if(face == 3) {
         
         vertex = {
-             0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-             0.5f, 0.5f, -0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f,  // top left
-             0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-            0.5f,  -0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f // bottom right
-            
-            
-           
-            
-            
-
+             0.5f,  0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,  1.0, 0.0f, 0.0f, // top right
+             0.5f, 0.5f, -0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f,  1.0, 0.0f, 0.0f,  // top left
+             0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,  1.0, 0.0f, 0.0f, // bottom left
+            0.5f,  -0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,  1.0, 0.0f, 0.0f // bottom right
         };
     }else if(face == 5) {
         vertex = {
-            -0.5f,  0.5f, -0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-            -0.5f, -0.5f, -0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-            0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-            0.5f,  0.5f, -0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f  // top left
+            -0.5f,  0.5f, -0.5f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,  0.0f, 0.0f, -1.0f, // top right
+            -0.5f, -0.5f, -0.5f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,  0.0f, 0.0f, -1.0f,// bottom right
+             0.5f, -0.5f, -0.5f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,  0.0f, 0.0f, -1.0f,// bottom left
+             0.5f,  0.5f, -0.5f,   1.0f, 0.0f, 0.0f,   0.0f, 1.0f,  0.0f, 0.0f, -1.0f  // top left
         };
     }
 
     float vertices[] = {
-        vertex[0], vertex[1], vertex[2], vertex[3], vertex[4], vertex[5], vertex[6], vertex[7],
-        vertex[8], vertex[9], vertex[10], vertex[11], vertex[12], vertex[13], vertex[14], vertex[15],
-        vertex[16], vertex[17], vertex[18], vertex[19], vertex[20], vertex[21], vertex[22], vertex[23],
-        vertex[24], vertex[25], vertex[26], vertex[27], vertex[28], vertex[29], vertex[30], vertex[31]
+        vertex[0], vertex[1], vertex[2] , vertex[3], vertex[4], vertex[5] , vertex[6] , vertex[7] , vertex[8], vertex[9], vertex[10],
+        vertex[11], vertex[12], vertex[13] , vertex[14], vertex[15], vertex[16] , vertex[17] , vertex[18] , vertex[19], vertex[20], vertex[21],
+        vertex[22], vertex[23], vertex[24] , vertex[25], vertex[26], vertex[27] , vertex[28] , vertex[29] , vertex[30], vertex[31], vertex[32],
+        vertex[33], vertex[34], vertex[35] , vertex[36], vertex[37], vertex[38] , vertex[39] , vertex[40] , vertex[41], vertex[42], vertex[43]
     };
 
     unsigned int indices[] = {
@@ -278,19 +272,22 @@ CubeSurface::CubeSurface(std::shared_ptr<Shader> shader, int face, unsigned int 
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)0);
 
     glEnableVertexAttribArray(0);
 
     // Color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(3 * sizeof(float)));
 
     glEnableVertexAttribArray(1);
 
     // Texture attribute
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(6 * sizeof(float)));
 
     glEnableVertexAttribArray(2);
+
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*) (8 * sizeof(float)));
+    glEnableVertexAttribArray(4);
 
     glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
     glBufferData(GL_ARRAY_BUFFER, (int)instancePositions.size() * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
@@ -298,6 +295,8 @@ CubeSurface::CubeSurface(std::shared_ptr<Shader> shader, int face, unsigned int 
     glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
     glEnableVertexAttribArray(3);
     glVertexAttribDivisor(3, 1); 
+
+    
     glBindVertexArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);

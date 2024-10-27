@@ -18,10 +18,13 @@ WorldRenderer :: ~WorldRenderer() {
 }
 
 void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
+    
+    
     for(auto & chunk : chunks) {
         chunk -> Render(view, projection);
     }
-    skybox -> Render(view, projection);    
+    skybox -> Render(view, projection); 
+    
     
 }
 

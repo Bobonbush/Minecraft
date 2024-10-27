@@ -90,14 +90,15 @@ class Setting { // Singleton
         }
 
         void Update(float deltaTime) {
-            hour += deltaTime;
-            if(hour >= MaxHour) {
-                //hour = 0;
+            if(hour / MaxHour >= glm::pi<float>() * 2) {
+                hour = 0;
             }
+            hour += deltaTime;
         }
 
         void setHour(float hour) {
             this -> hour = hour;
+            
         }
 
         void setMaxHour(float MaxHour) {

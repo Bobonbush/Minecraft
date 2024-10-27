@@ -49,7 +49,19 @@ void Planet::Render(glm::mat4 view, glm::mat4 projection) {
 
     
     cubeRenderer -> Render(position, glm::vec3(5.0f, 5.0f, 5.0f), rotation, view, projection, validPositions);
+    ShaderManager * shaderManager = ShaderManager::getInstance();  
     
+    if(TimeZone == glm::vec3(0.0f, 0.0f, 0.0f) && settings -> getHour() <= glm::pi<float>() ) {
+        shaderManager -> GetShader("block") -> use();
+        shaderManager -> GetShader("block") -> setVec3("lightPos", position);
+        shaderManager -> GetShader("block") -> setVec3("lightColor", glm::vec3(0.7f, 0.7f, 1.f));
+    
+        //settings -> setHour(settings -> getHour() + 0.0001f);
+    }else {
+        shaderManager -> GetShader("block") -> use();
+        shaderManager -> GetShader("block") -> setVec3("lightPos", position);
+        shaderManager -> GetShader("block") -> setVec3("lightColor", glm::vec3(0.3f, 0.3f, 1.f));
+    }
 }
 
 
