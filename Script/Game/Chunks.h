@@ -4,11 +4,13 @@
 #define DB_PERLIN_IMPL
 #include "Resource/db_perlin.hpp"
 #include "Player.h"
+#include "Algorithm.h"
 
 class Chunk {
     private:
 
         enum BlockType {
+            AIR,
             WATER,
             SAND,
             DIRT,
@@ -25,6 +27,9 @@ class Chunk {
 
 
         std::vector<std::unique_ptr<Block>> blocks;
+        
+        std::vector<std::vector<std::vector<BlockType>>> BlockMap;
+        std::vector<std::vector<std::vector<glm::vec3>>> BlockPosMap;
 
         void SoftNoise(std::vector<std::vector<float>> &elavationMap);
 
@@ -37,6 +42,12 @@ class Chunk {
         Setting * settings;
         ShaderManager * shaderManager;
         Player *player;
+        
+        BlockType GetBlockState(float x, float y, float z);
+
+        void Culling();
+
+        void AddBlock(BlockType blockType, glm::vec3 position);
 
 
     public :

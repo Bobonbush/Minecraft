@@ -12,13 +12,18 @@ class Setting { // Singleton
         float volume;
         int controls;
 
-        const glm::vec3 BlockNDCSize = glm::vec3(0.5f, 0.5f , 0.5f);
-        const glm::vec3 ChunkResolution = glm::vec3(16, 16, 100);
+        const glm::vec3 BlockNDCSize = glm::vec3(1.f, 1.f , 1.f);
+        const glm::vec3 ChunkResolution = glm::vec3(15, 80, 15);
         float fNear = 0.1f;
         float fFar = 300.f;
 
         float MaxHour = 24.f ;
         float hour = 0;
+        float offsetDay = 0.25f;
+        float surfaceLevel = ChunkResolution.y/3.f;
+
+
+        int dayType = 0; // 0 = day, 1 = night, 2 = evening, 3 = afternoon, 4 = noon, 5 = morning
         Setting() {
             // Load settings from file
             resolution = glm::vec2(1600, 800);
@@ -90,8 +95,20 @@ class Setting { // Singleton
         }
 
         void Update(float deltaTime) {
-            if(hour / MaxHour >= glm::pi<float>() * 2) {
-                hour = 0;
+            if(hour / MaxHour >= (glm::pi<float>() + offsetDay) * 2) {
+                hour -= glm::pi<float>() *2 * MaxHour;
+            }
+            float realTime = getHour();
+            if(realTime >= (glm::pi<float>() + offsetDay) / 0.5f) {
+                dayType = 1;
+            }else if(realTime >= (glm::pi<float>() + offsetDay) / 1.0f) {
+                dayType = 2;
+            } else if(realTime >= (glm::pi<float>() + offsetDay) / 1.15f) {
+                dayType = 3;
+            } else if(realTime >= (glm::pi<float>() + offsetDay) / 2.5f) {
+                dayType = 4;
+            } else {
+                dayType = 5;
             }
             hour += deltaTime;
         }
@@ -101,8 +118,20 @@ class Setting { // Singleton
             
         }
 
+        int getDayType() {
+            return dayType;
+        }
+
         void setMaxHour(float MaxHour) {
             this -> MaxHour = MaxHour;
+        }
+
+        float getOffsetDay() {
+            return offsetDay;
+        }
+
+        float getSurfaceLevel() {
+            return surfaceLevel;
         }
 
 

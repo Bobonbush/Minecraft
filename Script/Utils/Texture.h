@@ -55,13 +55,14 @@ class CubeSurface {
         unsigned int texture;
         unsigned int instanceVBO;
         std::vector<glm::vec3> instancePositions;
+        bool Blocked = false;
     public :
 
         CubeSurface(std::shared_ptr<Shader> shader ,int face, unsigned int texture);
         ~CubeSurface();
         void Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPosition);
         void Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPositions);
-        
+        void SetBlocked(bool value);
 };
 
 
@@ -100,7 +101,8 @@ class CubeRenderer {
 
         void Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPositions);
         void Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPositions);
-        
+        void SetBlockedSurface(int face, bool value);
+        void SetFreeSurface();
 };
 
 

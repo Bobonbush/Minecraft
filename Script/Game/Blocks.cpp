@@ -7,6 +7,7 @@
 // BLOCK
 
 
+
 Block::Block(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader) : shader(shader) {
     this->position = position;
     this->scale = scale;
@@ -60,7 +61,7 @@ void Block::Update(float deltaTime) {
 bool Block::FrustumCulling(const Frustum frustum) {
     glm::vec3 blockMin = position - scale/2.f ; // Minimum corner of the block
     glm::vec3 blockMax = position + scale/2.f ; // Maximum corner of the block
-    
+    return true;
 
     // Check each plane of the frustum
     if (frustum.leftFace.distance + glm::dot(frustum.leftFace.normal, blockMin) < 0 &&
@@ -147,7 +148,6 @@ void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
 
 //STONE BLOCK
 
-
 std::unique_ptr<CubeRenderer> Stone::cubeRenderer = nullptr;
 std::vector<glm::vec3> Stone::validPositions;
 Stone::Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader) : Block(position, scale, rotation, shader) {
@@ -155,7 +155,6 @@ Stone::Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::share
     if(cubeRenderer == nullptr) {
         cubeRenderer = std::make_unique<CubeRenderer>(shader);
     }
-
     cubeRenderer -> LoadCube(texture);
 }
 
@@ -180,6 +179,7 @@ void Stone::Render(glm::mat4 view, glm::mat4 projection) {
     if( (int) validPositions.size() == 0) {
         return;
     }
+    std::cout << "BlockSize : " << validPositions.size() << '\n';
     Block::Render(view, projection);
 
      if(ShowHitBox == true) {

@@ -50,17 +50,19 @@ void Planet::Render(glm::mat4 view, glm::mat4 projection) {
     
     cubeRenderer -> Render(position, glm::vec3(5.0f, 5.0f, 5.0f), rotation, view, projection, validPositions);
     ShaderManager * shaderManager = ShaderManager::getInstance();  
+
+    float offsetDay = settings -> getOffsetDay();
     
-    if(TimeZone == glm::vec3(0.0f, 0.0f, 0.0f) && settings -> getHour() <= glm::pi<float>() ) {
+    if(TimeZone == glm::vec3(0.0f, 0.0f, 0.0f)) {
         shaderManager -> GetShader("block") -> use();
         shaderManager -> GetShader("block") -> setVec3("lightPos", position);
-        shaderManager -> GetShader("block") -> setVec3("lightColor", glm::vec3(0.7f, 0.7f, 1.f));
+        shaderManager -> GetShader("block") -> setVec3("lightColor", glm::vec3(0.8f, 0.8f, 1.f));
     
         //settings -> setHour(settings -> getHour() + 0.0001f);
-    }else {
+    }else if(TimeZone != glm::vec3(0.0f, 0.0f, 0.0f)) {
         shaderManager -> GetShader("block") -> use();
         shaderManager -> GetShader("block") -> setVec3("lightPos", position);
-        shaderManager -> GetShader("block") -> setVec3("lightColor", glm::vec3(0.3f, 0.3f, 1.f));
+        shaderManager -> GetShader("block") -> setVec3("lightColor", glm::vec3(0.4f, 0.4f, 0.6f));
     }
 }
 
@@ -163,6 +165,7 @@ void Skybox::Render(glm::mat4 view, glm::mat4 projection) {
     glDepthMask(GL_FALSE);
     
     shader -> use();
+    Setting * settings = Setting::getInstance();
 
     shader -> setMat4("view", viewWithoutTranslation);
     shader -> setMat4("projection", projection);

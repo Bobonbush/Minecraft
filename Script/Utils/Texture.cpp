@@ -365,7 +365,7 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
 
 
 void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3> & validPositions) {
-    if(validPositions.size() == 0) {
+    if(validPositions.size() == 0 || Blocked) {
         return;
     }
     shader -> use();
@@ -417,6 +417,10 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation
     glDrawElementsInstanced(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0, instancePositions.size());
 
     glBindVertexArray(0);
+}
+
+void CubeSurface::SetBlocked(bool value) {
+    Blocked = value;
 }
 
 CubeBuilder::CubeBuilder(std::shared_ptr<Shader> shader) : shader(shader) {
@@ -477,6 +481,15 @@ void CubeRenderer:: LoadCube(unsigned int texture) {
     builder.BuildSurfaceFront(texture);
     builder.BuildSurfaceBack(texture);
 
+    /*
+    face 0 = top
+    face 1 = Bot
+    face 2 = left
+    face 3 = right
+    face 4 = front
+    face 5 = back
+    */
+
     cubeSurfaces = builder.GetCube();
 }
 
@@ -489,11 +502,15 @@ void CubeRenderer:: LoadCube(unsigned int top, unsigned int bottom, unsigned int
     builder.BuildSurfaceFront(front);
     builder.BuildSurfaceBack(back);
 
+    
+
     cubeSurfaces = builder.GetCube();
 }
 
 
 void CubeRenderer:: LoadCube(unsigned int top, unsigned int overall) {
+
+    
     CubeBuilder builder(shader);
     builder.BuildSurfaceTop(top);
     builder.BuildSurfaceBottom(overall);
@@ -528,6 +545,17 @@ void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotatio
 void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPosition) {
     for (int i = 0; i < (int) cubeSurfaces.size(); i++) {
         cubeSurfaces[i].Render(position, scale, rotation, view, projection, validPosition);
+    }
+}
+
+
+void CubeRenderer::SetBlockedSurface(int face, bool value) {
+    cubeSurfaces[face].SetBlocked(value);
+}
+
+void CubeRenderer::SetFreeSurface() {
+    for(int i = 0; i < (int) cubeSurfaces.size(); i++) {
+        cubeSurfaces[i].SetBlocked(false);
     }
 }
 

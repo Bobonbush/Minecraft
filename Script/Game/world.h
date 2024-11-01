@@ -23,7 +23,7 @@ class WorldRenderer {
         Player *player;
         std::vector<std::shared_ptr<Rigidbody>> validBodies;
 
-        int ChunkDiameter = 4;
+        int ChunkDiameter = 2;
         std::queue<std::unique_ptr<Chunk>> ChunkLoadQueue;
         std::unique_ptr<Skybox> skybox;
 

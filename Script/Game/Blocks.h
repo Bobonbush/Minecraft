@@ -60,6 +60,7 @@ class Dirt : public Block{
 
 
 class Stone : public Block {
+
     private:
         unsigned int texture;
         static std::unique_ptr<CubeRenderer> cubeRenderer;
