@@ -47,7 +47,7 @@ glm::vec3 Block::GetRotation() {
 
 
 
-void Block::PrepareRender(Frustum frustum) {
+void Block::PrepareRender(Frustum frustum, int mask) {
 }
 
 void Block::Render(glm::mat4 view, glm::mat4 projection) {
@@ -105,6 +105,7 @@ bool Block::FrustumCulling(const Frustum frustum) {
 
 std::unique_ptr<CubeRenderer> Dirt::cubeRenderer = nullptr;
 std::vector<glm::vec3> Dirt::validPositions;
+std::vector<int> Dirt::banFace;
 Dirt::Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader) : Block(position, scale, rotation, shader) {
     
     texture =  textureManager -> LoadTexture("Assets/dirt.png");
@@ -123,10 +124,11 @@ void Dirt::Update(float deltaTime) {
     Block::Update(deltaTime);
 }
 
-void Dirt::PrepareRender(Frustum frustum) {
-    Block::PrepareRender(frustum);
+void Dirt::PrepareRender(Frustum frustum, int mask) {
+    Block::PrepareRender(frustum, mask);
     if(FrustumCulling(frustum)) {
-         validPositions.push_back(position);
+        validPositions.push_back(position);
+        banFace.push_back(mask);
     }
 }
 
@@ -143,6 +145,7 @@ void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
     cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
     
     validPositions.clear();
+    banFace.clear();
 }
 
 
@@ -150,6 +153,7 @@ void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
 
 std::unique_ptr<CubeRenderer> Stone::cubeRenderer = nullptr;
 std::vector<glm::vec3> Stone::validPositions;
+std::vector<int> Stone::banFace;
 Stone::Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader) : Block(position, scale, rotation, shader) {
     texture = textureManager -> LoadTexture("Assets/Stone.png");
     if(cubeRenderer == nullptr) {
@@ -165,13 +169,12 @@ void Stone::Update(float deltaTime) {
     Block::Update(deltaTime);
 }
 
-void Stone::PrepareRender(Frustum frustum) {
-    Block::PrepareRender(frustum);
+void Stone::PrepareRender(Frustum frustum, int mask) {
+    Block::PrepareRender(frustum, mask);
     if(FrustumCulling(frustum)) {
-       validPositions.push_back(position);
+        validPositions.push_back(position);
+        banFace.push_back(mask);
     }
-
-     
 }
 
 void Stone::Render(glm::mat4 view, glm::mat4 projection) {
@@ -187,15 +190,16 @@ void Stone::Render(glm::mat4 view, glm::mat4 projection) {
     }
 
     //std::cout << "YES" <<'\n';
-    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions, banFace);
     validPositions.clear();
+    banFace.clear();
 }
 
 // WATER BLOCK
 
 std::unique_ptr<CubeRenderer> Water::cubeRenderer = nullptr;
 std::vector<glm::vec3> Water::validPositions;
-
+std::vector<int> Water::banFace;
 Water:: Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation,std::shared_ptr<Shader> shader) : Block(position, scale, rotation, shader) {
     texture = textureManager -> LoadTexture("Assets/water.png");
     if(cubeRenderer == nullptr) {
@@ -221,19 +225,22 @@ void Water::Render(glm::mat4 view, glm::mat4 projection) {
      if(ShowHitBox == true) {
         rigidbody -> ShowHitBox(view, projection, validPositions);
     }
-    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions);
+    cubeRenderer -> Render(position, scale, rotation, view, projection, validPositions, banFace);
     validPositions.clear();
+    banFace.clear();
 }
 
-void Water::PrepareRender(Frustum frustum) {
-    Block::PrepareRender(frustum);
+void Water::PrepareRender(Frustum frustum, int mask) {
+    Block::PrepareRender(frustum, mask);
     if(FrustumCulling(frustum)) {
         validPositions.push_back(position);
+        banFace.push_back(mask);
     }
     
 }
 
 // SAND BLOCK
+/*
 
 std::unique_ptr<CubeRenderer> Sand::cubeRenderer = nullptr;
 std::vector<glm::vec3> Sand::validPositions;
@@ -322,3 +329,4 @@ void Grass::PrepareRender(Frustum frustum) {
     }
     
 }
+*/

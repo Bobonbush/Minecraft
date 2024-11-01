@@ -30,7 +30,7 @@ class Chunk {
         
         std::vector<std::vector<std::vector<BlockType>>> BlockMap;
         std::vector<std::vector<std::vector<glm::vec3>>> BlockPosMap;
-
+        std::vector<int> banFace;
         void SoftNoise(std::vector<std::vector<float>> &elavationMap);
 
         void HardNoise(std::vector<std::vector<float>> &elavationMap);

@@ -542,9 +542,41 @@ void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotatio
     }
 }
 
+void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPosition , std::vector<int> & banFace) {
+    int totalRenderer = 0;
+    for (int i = 0; i < (int) cubeSurfaces.size(); i++) {
+        std::vector<glm::vec3> realValidPosition;
+        for(int j = 0 ; j <= (int)banFace.size()-1 ; j++) {
+            int mask = (banFace[j] & (1 << i));
+            if(mask) {
+                continue;
+            }
+            totalRenderer++;
+            realValidPosition.push_back(validPosition[j]);
+        }
+        cubeSurfaces[i].Render(position, scale, rotation, view, projection, realValidPosition);
+    }
+
+    std::cout << "Total Renderer : " << totalRenderer << '\n';
+}
+
 void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPosition) {
     for (int i = 0; i < (int) cubeSurfaces.size(); i++) {
         cubeSurfaces[i].Render(position, scale, rotation, view, projection, validPosition);
+    }
+}
+
+void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPosition , std::vector<int> & banFace) {
+    for (int i = 0; i < (int) cubeSurfaces.size(); i++) {
+        std::vector<glm::vec3> realValidPosition;
+        for(int j = 0 ; j <= (int)banFace.size()-1 ; j++) {
+            int mask = (banFace[j] & (1 << i));
+            if(mask) {
+                continue;
+            }
+            realValidPosition.push_back(validPosition[j]);
+        }
+        cubeSurfaces[i].Render(position, scale, rotation, view, projection, realValidPosition);
     }
 }
 

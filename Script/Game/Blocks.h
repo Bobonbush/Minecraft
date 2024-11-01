@@ -31,7 +31,7 @@ class Block {
         glm::vec3 GetScale();
         glm::vec3 GetRotation();
 
-        virtual void PrepareRender(Frustum frustum);
+        virtual void PrepareRender(Frustum frustum, int mask);
         virtual void Render(glm::mat4 view, glm::mat4 projection);
         virtual void Update(float deltaTime);
         
@@ -49,12 +49,13 @@ class Dirt : public Block{
         unsigned int texture;
         static std::unique_ptr<CubeRenderer> cubeRenderer;
         static std::vector<glm::vec3> validPositions;
+        static std::vector<int> banFace;
     public:
         Dirt(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader);
         ~Dirt();
 
         void Render(glm::mat4 view, glm::mat4 projection);
-        void PrepareRender(Frustum frustum);
+        void PrepareRender(Frustum frustum , int mask);
         void Update(float deltaTime);
 };
 
@@ -65,13 +66,14 @@ class Stone : public Block {
         unsigned int texture;
         static std::unique_ptr<CubeRenderer> cubeRenderer;
         static std::vector<glm::vec3> validPositions;
+        static std::vector<int> banFace;
     public:
         Stone(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader);
         ~Stone();
 
         void Render(glm::mat4 view, glm::mat4 projection);
         void Update(float deltaTime);
-        void PrepareRender(Frustum frustum);
+        void PrepareRender(Frustum frustum, int mask);
 };
 
 
@@ -81,16 +83,17 @@ class Water : public Block {
         unsigned int texture;
         static std::unique_ptr<CubeRenderer> cubeRenderer;
         static std::vector<glm::vec3> validPositions;
+        static std::vector<int> banFace;
     public:
         Water(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader);
         ~Water();
 
         void Render(glm::mat4 view, glm::mat4 projection);
         void Update(float deltaTime);
-        void PrepareRender(Frustum frustum);
+        void PrepareRender(Frustum frustum, int mask);
 };
 
-
+/*
 class Sand : public Block {
     private:
         unsigned int texture;
@@ -122,7 +125,7 @@ class Grass : public Block {
         void Update(float deltaTime);
         void PrepareRender(Frustum frustum);
 };
-
+*/
 #endif
 
 

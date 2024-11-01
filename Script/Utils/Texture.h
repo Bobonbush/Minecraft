@@ -100,7 +100,10 @@ class CubeRenderer {
         void LoadCube(unsigned int top , unsigned int around, unsigned int bottom);
 
         void Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPositions);
+        void Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPositions, std::vector<int> &blockedSurfaces);
         void Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPositions);
+        void Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPositions, std::vector<int> &blockedSurfaces);
+        
         void SetBlockedSurface(int face, bool value);
         void SetFreeSurface();
 };

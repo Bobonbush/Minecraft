@@ -156,9 +156,10 @@ void Chunk::Culling() {
                 if(Left && Right && Top && Bottom && Front && Back) {
                     continue;
                 }
+                int mask = (Top << 0) | (Bottom << 1) | (Left << 2) | (Right << 3) | (Back << 4) | (Front << 5);
                 
-
                 AddBlock(BlockMap[x][y][z], position);
+                banFace.push_back(mask);
             }
         }
     }
@@ -183,12 +184,13 @@ void Chunk::Render(glm::mat4 view, glm::mat4 projection) {
 
 std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime) {
 
-    std::vector<std::shared_ptr<Rigidbody>> validBodies;
+    std::vector<std::shared_ptr<Rigidbody>> validBodies;         // FOr physics detection
     Frustum frustum = player -> extractFrustumPlanes();
+    int i = 0 ;
     for (auto &block : blocks) {
-        block -> PrepareRender(frustum);
+        block -> PrepareRender(frustum, banFace[i]);                         // Set valid positions 
+        i++;
         validBodies.push_back(block -> rigidbody);
-        
     }
 
     for(auto &block : blocks) {
