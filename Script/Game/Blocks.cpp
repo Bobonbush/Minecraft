@@ -61,6 +61,7 @@ void Block::Update(float deltaTime) {
 bool Block::FrustumCulling(const Frustum frustum) {
     glm::vec3 blockMin = position - scale/2.f ; // Minimum corner of the block
     glm::vec3 blockMax = position + scale/2.f ; // Maximum corner of the block
+
     return true;
 
     // Check each plane of the frustum

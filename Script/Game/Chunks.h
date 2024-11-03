@@ -6,7 +6,8 @@
 #include "Player.h"
 #include "Algorithm.h"
 
-class Chunk {
+
+class SubChunk {
     private:
 
         enum BlockType {
@@ -25,7 +26,7 @@ class Chunk {
         };
         glm::vec3 origin;
 
-
+        
         std::vector<std::unique_ptr<Block>> blocks;
         
         std::vector<std::vector<std::vector<BlockType>>> BlockMap;
@@ -51,8 +52,8 @@ class Chunk {
 
 
     public :
-        Chunk(glm::vec3 origin);
-        ~Chunk();
+        SubChunk(glm::vec3 origin);
+        ~SubChunk();
         void Render(glm::mat4 view, glm::mat4 projection);
         std::vector<std::shared_ptr<Rigidbody>> Update(float deltaTime);
         void LoadChunk();
@@ -61,4 +62,27 @@ class Chunk {
         glm::vec3 GetOrigin() {
             return origin;
         }
+};
+
+
+class Chunk {
+    private:
+        std::vector<std::shared_ptr<SubChunk>> subChunks;
+        std::vector<std::shared_ptr<SubChunk>> RenderSubChunks;
+        glm::vec3 origin;
+    public :
+        Chunk(glm::vec3 origin);
+        ~Chunk();
+
+
+        void Render(glm::mat4 view, glm::mat4 projection);
+
+        std::vector<std::shared_ptr<Rigidbody>> Update(float deltaTime, glm::vec3 playerPosition, float diameter);
+
+        void LoadChunk();
+
+        glm::vec3 GetOrigin() {
+            return origin;
+        }
+
 };

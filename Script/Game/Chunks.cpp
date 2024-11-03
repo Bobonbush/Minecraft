@@ -2,13 +2,12 @@
 
 
 
-Chunk::BlockType Chunk::GetBlockState(float x, float y, float z) {
+SubChunk::BlockType SubChunk::GetBlockState(float x, float y, float z) {
     //float noise = db::perlin(x / 128.0, y /128.0, z/128.0) * 1.00 + db::perlin(x / 32.0, y /32.0, z/32.0) * 0.5 + db::perlin(x / 16.0 , y /16.0, z/16.0) * 0.25 + db::perlin(x/8.0, y/ 8.0, z/8.0) * 0.125; // 4 octaves
-    float noise = db::perlin(x / 16.0, y / 16.0, z / 16.0) * 6.5f // Base level, medium scale
+    float noise = db::perlin(x / 16.0, y / 16.0, z / 16.0) * 8.5f // Base level, medium scale
             + db::perlin(x / 64.0, y / 64.0, z / 64.0) * 4.0f  // Low frequency, high amplitude for mountains
             + db::perlin(x / 4.0, y / 4.0, z / 4.0) * 3.5f  // High frequency, low amplitude for detail
-            + db::perlin(x / 128 , y / 128 , z /128) * 3.f;    
-
+    ;
     noise = pow(noise , 0.05f);
     Setting * settings = Setting::getInstance();
     float surface = settings -> getSurfaceLevel();
@@ -27,7 +26,7 @@ Chunk::BlockType Chunk::GetBlockState(float x, float y, float z) {
     return BlockType::AIR;
 }
 
-void Chunk::SoftNoise(std::vector<std::vector<float>> &elavationMap) {
+void SubChunk::SoftNoise(std::vector<std::vector<float>> &elavationMap) {
      int n = (int)elavationMap.size();
      for (int i = 0; i < n; i++) {
          int m = (int)elavationMap[i].size();
@@ -42,7 +41,7 @@ void Chunk::SoftNoise(std::vector<std::vector<float>> &elavationMap) {
      }
  }
 
- void Chunk::HardNoise(std::vector<std::vector<float>> &elavationMap) {
+ void SubChunk::HardNoise(std::vector<std::vector<float>> &elavationMap) {
      int n = (int)elavationMap.size();
      for (int i = 0; i < n; i++) {
          int m = (int)elavationMap[i].size();
@@ -57,7 +56,7 @@ void Chunk::SoftNoise(std::vector<std::vector<float>> &elavationMap) {
      }
  }
 
- void Chunk::SoftHeight(std::vector<std::vector<int>> & HeightMap) {
+ void SubChunk::SoftHeight(std::vector<std::vector<int>> & HeightMap) {
      int n = (int)HeightMap.size();
      for (int i = 0; i < n; i++) {
          int m = (int)HeightMap[i].size();
@@ -72,7 +71,7 @@ void Chunk::SoftNoise(std::vector<std::vector<float>> &elavationMap) {
      }
  }
 
- void Chunk::HardHeight(std::vector<std::vector<int>> & HeightMap) {
+ void SubChunk::HardHeight(std::vector<std::vector<int>> & HeightMap) {
      int n = (int)HeightMap.size();
      for (int i = 0; i < n; i++) {
          int m = (int)HeightMap[i].size();
@@ -97,7 +96,7 @@ Solution :
 3. If the block is visible, add it to the validBodies vector
 */
 
-void Chunk::AddBlock(BlockType blockType, glm::vec3 position) {
+void SubChunk::AddBlock(BlockType blockType, glm::vec3 position) {
     ShaderManager * shaderManager = ShaderManager::getInstance();
     Setting * settings = Setting::getInstance();
     std::shared_ptr<Shader> shader = shaderManager -> GetShader("block");
@@ -113,13 +112,13 @@ void Chunk::AddBlock(BlockType blockType, glm::vec3 position) {
         blocks.push_back(std::make_unique<Water>(position, settings -> getBlockNDCSize(), glm::vec3(0.0f), shader));
     }
 }
-void Chunk::Culling() {
+void SubChunk::Culling() {
     Setting * settings = Setting::getInstance();
     
     blocks.clear();
     for(int x = 0 ; x < settings -> getChunkSize().x ; x++ ) {
         for(int z = 0 ; z < settings -> getChunkSize().z ; z++) {
-            for(int y = 0 ; y < settings -> getChunkSize().y ; y++) {
+            for(int y = 0 ; y < settings -> getSubChunkResolution().y ; y++) {
                 if(BlockMap[x][y][z] == BlockType::AIR) {
                     continue;
                 }
@@ -141,7 +140,7 @@ void Chunk::Culling() {
                     Bottom = true;
                 }
 
-                if(y + 1 <  settings -> getChunkSize().y && BlockMap[x][y+1][z] != AIR) {
+                if(y + 1 <  settings -> getSubChunkResolution().y && BlockMap[x][y+1][z] != AIR) {
                     Top = true;
                 }
 
@@ -166,23 +165,23 @@ void Chunk::Culling() {
  }
 
 
-Chunk::Chunk(glm::vec3 origin) {
+SubChunk::SubChunk(glm::vec3 origin) {
     this->origin = origin;
     settings = Setting::getInstance();
     shaderManager = ShaderManager::getInstance();
     player = Player::getInstance();
 } 
 
-Chunk::~Chunk() {
+SubChunk::~SubChunk() {
 }
 
-void Chunk::Render(glm::mat4 view, glm::mat4 projection) {
+void SubChunk::Render(glm::mat4 view, glm::mat4 projection) {
     for (auto &block : blocks) {
         block -> Render(view, projection);
     }
 }
 
-std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime) {
+std::vector<std::shared_ptr<Rigidbody>> SubChunk::Update(float deltaTime) {
 
     std::vector<std::shared_ptr<Rigidbody>> validBodies;         // FOr physics detection
     Frustum frustum = player -> extractFrustumPlanes();
@@ -200,15 +199,15 @@ std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime) {
 }
 
 
-void Chunk::LoadChunk() {
+void SubChunk::LoadChunk() {
     GenerateChunk();
 }
 
-void Chunk::GenerateChunk() {
+void SubChunk::GenerateChunk() {
     Setting * settings = Setting::getInstance(); 
     ShaderManager * shaderManager = ShaderManager::getInstance();
     int chunkSizeX = settings -> getChunkSize().x;
-    int chunkHeight = settings -> getChunkSize().y;
+    int chunkHeight = settings -> getSubChunkResolution().y;
     int chunkSizeZ = settings -> getChunkSize().z;
     BlockMap.resize(chunkSizeX);
     BlockPosMap.resize(chunkSizeX);
@@ -224,7 +223,7 @@ void Chunk::GenerateChunk() {
 
     for(int x = 0 ; x < settings -> getChunkSize().x ; x++ ) {
         for(int z = 0 ; z < settings -> getChunkSize().z ; z++) {
-            for(int y = 0 ; y < settings -> getChunkSize().y ; y++) {
+            for(int y = 0 ; y < settings -> getSubChunkResolution().y ; y++) {
                 glm::vec3 position = origin;
                 position.x += x * settings -> getBlockNDCSize().x;
                 position.z += z * settings -> getBlockNDCSize().z;
@@ -238,7 +237,51 @@ void Chunk::GenerateChunk() {
             }
         }
     }
-
     Culling();
+}
 
+
+
+Chunk::Chunk(glm::vec3 origin) : origin(origin) {
+
+}
+
+Chunk::~Chunk() {
+}
+
+void Chunk::LoadChunk() {
+    Setting * settings = Setting::getInstance();
+    ShaderManager * shaderManager = ShaderManager::getInstance();
+    int chunkSizeX = settings -> getChunkSize().x;
+    int chunkHeight = settings -> getChunkSize().y / settings -> getSubChunkResolution().y;
+    int chunkSizeZ = settings -> getChunkSize().z;
+
+    for(int i = 0 ; i < chunkHeight ; i++) {
+        subChunks.push_back(std::make_shared<SubChunk>(origin + glm::vec3(0.f, i * settings -> getSubChunkResolution().y, 0.f)));
+        subChunks.back() -> LoadChunk();
+    }
+}
+
+void Chunk::Render(glm::mat4 view, glm::mat4 projection) {
+    for(auto &subChunk : RenderSubChunks) {
+        subChunk -> Render(view, projection);
+    }
+}
+
+std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime, glm::vec3 playerPosition, float diameter) {
+    std::vector<std::shared_ptr<Rigidbody>> validBodies;
+    RenderSubChunks.clear();
+
+    for(auto &subChunk : subChunks) {
+
+        if(glm::distance(subChunk -> GetOrigin(), playerPosition) <= diameter  ) {
+            RenderSubChunks.push_back(subChunk);
+        }
+        std::vector<std::shared_ptr<Rigidbody>> subValidBodies = subChunk -> Update(deltaTime);
+        for(auto &body : subValidBodies) {
+            validBodies.push_back(body);
+        }
+    }
+
+    return validBodies;
 }

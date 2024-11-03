@@ -36,7 +36,7 @@ void WorldRenderer :: Update(float deltaTime) {
     LoadChunks();
 
     for(auto & chunk : chunks) {
-        std::vector<std::shared_ptr<Rigidbody>> subvalidBodies = chunk -> Update(deltaTime);
+        std::vector<std::shared_ptr<Rigidbody>> subvalidBodies = chunk -> Update(deltaTime, player -> GetPosition(), settings -> getChunkSize().x * settings -> getBlockNDCSize().x * ChunkDiameter);
         for(auto & body : subvalidBodies) {
             validBodies.push_back(body);
         }
@@ -131,7 +131,6 @@ void WorldRenderer:: LoadChunks() {
 }
 
 void WorldRenderer::UnloadChunks() {
-    std::cout << (int)chunks.size() <<'\n';
     glm::vec3 position = player -> GetPosition();
     position.y = 0.f;
     glm::vec3 origin = player -> GetPosition();
@@ -172,7 +171,5 @@ void WorldRenderer::UnloadChunks() {
             chunks.pop_back();
         }
     }    
-
-    std::cout << (int)chunks.size() <<'\n';
     
 }
