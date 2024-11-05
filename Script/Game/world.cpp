@@ -28,21 +28,30 @@ void WorldRenderer :: Render(glm::mat4 view, glm::mat4 projection) {
     
 }
 
-void WorldRenderer :: Update(float deltaTime) {
+void WorldRenderer :: Update(float deltaTime, glm::mat4 view, glm::mat4 projection) {
     
     validBodies.clear();
-    Frustum frustum = player -> extractFrustumPlanes();
     UnloadChunks();
     LoadChunks();
+    
 
+    glm::mat4 ProjView = view * projection;
+    /*
+    std::cout << "The projection view matrix is : " << '\n';    
+    for(int i = 0 ; i < 4 ;i++) {
+        for(int j = 0 ; j< 4 ;j++) {
+            std::cout << ProjView[i][j] << ' ';
+        }
+        std::cout << '\n';
+    }
+    */
+    
     for(auto & chunk : chunks) {
-        std::vector<std::shared_ptr<Rigidbody>> subvalidBodies = chunk -> Update(deltaTime, player -> GetPosition(), settings -> getChunkSize().x * settings -> getBlockNDCSize().x * ChunkDiameter);
+        std::vector<std::shared_ptr<Rigidbody>> subvalidBodies = chunk -> Update(deltaTime, player -> GetPosition(), settings -> getChunkSize().x * settings -> getBlockNDCSize().x * ChunkDiameter, ProjView);
         for(auto & body : subvalidBodies) {
             validBodies.push_back(body);
         }
     }
-
-    Setting * settings = Setting::getInstance();   
     settings -> Update(deltaTime);
 }
 
@@ -51,6 +60,8 @@ void WorldRenderer:: LoadChunks() {
     bool Find = false;
     glm::vec3 origin = player -> GetPosition();
     position.y = 0.f;
+
+
 
     
     for(auto &chunk : chunks) {

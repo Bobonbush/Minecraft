@@ -184,10 +184,9 @@ void SubChunk::Render(glm::mat4 view, glm::mat4 projection) {
 std::vector<std::shared_ptr<Rigidbody>> SubChunk::Update(float deltaTime) {
 
     std::vector<std::shared_ptr<Rigidbody>> validBodies;         // FOr physics detection
-    Frustum frustum = player -> extractFrustumPlanes();
     int i = 0 ;
     for (auto &block : blocks) {
-        block -> PrepareRender(frustum, banFace[i]);                         // Set valid positions 
+        block -> PrepareRender(banFace[i]);                         // Set valid positions 
         i++;
         validBodies.push_back(block -> rigidbody);
     }
@@ -256,6 +255,9 @@ void Chunk::LoadChunk() {
     int chunkHeight = settings -> getChunkSize().y / settings -> getSubChunkResolution().y;
     int chunkSizeZ = settings -> getChunkSize().z;
 
+
+    
+
     for(int i = 0 ; i < chunkHeight ; i++) {
         subChunks.push_back(std::make_shared<SubChunk>(origin + glm::vec3(0.f, i * settings -> getSubChunkResolution().y, 0.f)));
         subChunks.back() -> LoadChunk();
@@ -268,15 +270,44 @@ void Chunk::Render(glm::mat4 view, glm::mat4 projection) {
     }
 }
 
-std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime, glm::vec3 playerPosition, float diameter) {
+std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime, glm::vec3 playerPosition, float diameter, glm::mat4 ProjView) {
     std::vector<std::shared_ptr<Rigidbody>> validBodies;
     RenderSubChunks.clear();
 
-    for(auto &subChunk : subChunks) {
+    Frustum frustum;
+    frustum.update();
+    /*
 
-        if(glm::distance(subChunk -> GetOrigin(), playerPosition) <= diameter  ) {
-            RenderSubChunks.push_back(subChunk);
+    std::cout << "Frustum :" <<'\n';
+
+    std::cout << "Top Left : " << frustum.planes[0].x << " " << frustum.planes[0].y << " " << frustum.planes[0].z << " " << frustum.planes[0].w << '\n';
+    std::cout << "Top Right : " << frustum.planes[1].x << " " << frustum.planes[1].y << " " << frustum.planes[1].z << " " << frustum.planes[1].w << '\n';
+    std::cout << "Bottom Left : " << frustum.planes[2].x << " " << frustum.planes[2].y << " " << frustum.planes[2].z << " " << frustum.planes[2].w << '\n';
+    std::cout << "Bottom Right : " << frustum.planes[3].x << " " << frustum.planes[3].y << " " << frustum.planes[3].z << " " << frustum.planes[3].w << '\n';
+    std::cout << "Near : " << frustum.planes[4].x << " " << frustum.planes[4].y << " " << frustum.planes[4].z << " " << frustum.planes[4].w << '\n';
+    std::cout << "Far : " << frustum.planes[5].x << " " << frustum.planes[5].y << " " << frustum.planes[5].z << " " << frustum.planes[5].w << '\n';
+*/
+    Setting * settings = Setting::getInstance();
+    glm::vec2 quadTreePosition(0.f, 0.f);
+    glm::vec2 quadTreeSize(settings -> getResolution().x, settings -> getResolution().y);
+
+    QuadTreeNode quadTree(quadTreePosition, quadTreeSize, 0);
+    
+
+    for(auto &subChunk : subChunks) {
+        
+        if(!(glm::distance(subChunk -> GetOrigin(), playerPosition) <= diameter)  ) {
+            continue;
         }
+        
+
+        if(frustum.isChunkInFrustum(subChunk -> GetOrigin(), settings -> getChunkSize().x * settings -> getBlockNDCSize().x )) {
+            RenderSubChunks.push_back(subChunk);
+        }else continue;
+
+        
+
+        
         std::vector<std::shared_ptr<Rigidbody>> subValidBodies = subChunk -> Update(deltaTime);
         for(auto &body : subValidBodies) {
             validBodies.push_back(body);

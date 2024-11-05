@@ -56,9 +56,6 @@ class Player {                // Another Singleton
         }
 
 
-        Frustum extractFrustumPlanes() ;
-
-
         // Getters
 
 

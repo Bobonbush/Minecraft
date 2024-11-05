@@ -13,7 +13,7 @@ class Setting { // Singleton
         int controls;
 
         const glm::vec3 BlockNDCSize = glm::vec3(1.f, 1.f , 1.f);
-        const glm::vec3 ChunkResolution = glm::vec3(16, 64, 16);
+        const glm::vec3 ChunkResolution = glm::vec3(16, 80, 16);
         const glm::vec3 SubChunkResolution = glm::vec3(16, 16, 16);
         float fNear = 0.1f;
         float fFar = 300.f;
@@ -80,7 +80,7 @@ class Setting { // Singleton
         }
 
         float getFar() {
-            return fFar * BlockNDCSize.x;
+            return fFar;
         }
 
         glm::vec3 getChunkSize() {

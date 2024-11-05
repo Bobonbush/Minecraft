@@ -38,17 +38,6 @@ struct Plane {
     }
 };
 
-struct Frustum {
-    Plane nearFace;
-    Plane farFace;
-    Plane rightFace;
-    Plane leftFace;
-    Plane topFace;
-    Plane bottomFace;
-
-    Frustum() = default;
-};
-
 
 class Camera
 {
@@ -104,7 +93,6 @@ public:
     }
 
     glm::mat4 GetProjectionMatrix(float width, float height , float near, float far) {
-        
         return glm::perspective(glm::radians(Zoom), width / height, near , far);
         //return glm::perspective(glm::radians(Zoom), width / height, settings ->  getNear() , settings -> getFar());
     }

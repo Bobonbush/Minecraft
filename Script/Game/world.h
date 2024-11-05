@@ -23,7 +23,7 @@ class WorldRenderer {
         Player *player;
         std::vector<std::shared_ptr<Rigidbody>> validBodies;
 
-        int ChunkDiameter = 2;
+        int ChunkDiameter = 5;
         std::queue<std::unique_ptr<Chunk>> ChunkLoadQueue;
         std::unique_ptr<Skybox> skybox;
 
@@ -59,7 +59,7 @@ class WorldRenderer {
 
         
         void Render(glm::mat4 view, glm::mat4 projection);
-        void Update(float deltaTime);
+        void Update(float deltaTime, glm::mat4 view, glm::mat4 projection);
 
         void LoadChunks();
         void UnloadChunks();

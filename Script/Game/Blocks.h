@@ -31,12 +31,9 @@ class Block {
         glm::vec3 GetScale();
         glm::vec3 GetRotation();
 
-        virtual void PrepareRender(Frustum frustum, int mask);
+        virtual void PrepareRender(int mask);
         virtual void Render(glm::mat4 view, glm::mat4 projection);
         virtual void Update(float deltaTime);
-        
-
-        bool FrustumCulling(Frustum frustum);
 
 };
 
@@ -55,7 +52,7 @@ class Dirt : public Block{
         ~Dirt();
 
         void Render(glm::mat4 view, glm::mat4 projection);
-        void PrepareRender(Frustum frustum , int mask);
+        void PrepareRender( int mask);
         void Update(float deltaTime);
 };
 
@@ -73,7 +70,7 @@ class Stone : public Block {
 
         void Render(glm::mat4 view, glm::mat4 projection);
         void Update(float deltaTime);
-        void PrepareRender(Frustum frustum, int mask);
+        void PrepareRender(int mask);
 };
 
 
@@ -90,7 +87,7 @@ class Water : public Block {
 
         void Render(glm::mat4 view, glm::mat4 projection);
         void Update(float deltaTime);
-        void PrepareRender(Frustum frustum, int mask);
+        void PrepareRender( int mask);
 };
 
 /*

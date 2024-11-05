@@ -47,7 +47,7 @@ glm::vec3 Block::GetRotation() {
 
 
 
-void Block::PrepareRender(Frustum frustum, int mask) {
+void Block::PrepareRender(int mask) {
 }
 
 void Block::Render(glm::mat4 view, glm::mat4 projection) {
@@ -57,51 +57,6 @@ void Block::Render(glm::mat4 view, glm::mat4 projection) {
 void Block::Update(float deltaTime) {
     
 }
-
-bool Block::FrustumCulling(const Frustum frustum) {
-    glm::vec3 blockMin = position - scale/2.f ; // Minimum corner of the block
-    glm::vec3 blockMax = position + scale/2.f ; // Maximum corner of the block
-
-    return true;
-
-    // Check each plane of the frustum
-    if (frustum.leftFace.distance + glm::dot(frustum.leftFace.normal, blockMin) < 0 &&
-        frustum.leftFace.distance + glm::dot(frustum.leftFace.normal, blockMax) < 0) {
-        
-        return false; // Block is outside the left face
-    }
-
-    if (frustum.rightFace.distance + glm::dot(frustum.rightFace.normal, blockMax) < 0 &&
-        frustum.rightFace.distance + glm::dot(frustum.rightFace.normal, blockMin) < 0) {
-            //std::cout << "Fuck" << '\n';
-        return false; // Block is outside the right face
-        
-    }
-
-    if (frustum.topFace.distance + glm::dot(frustum.topFace.normal, blockMax) < 0 &&
-        frustum.topFace.distance + glm::dot(frustum.topFace.normal, blockMin) < 0) {
-        return false; // Block is outside the top face
-    }
-
-    if (frustum.bottomFace.distance + glm::dot(frustum.bottomFace.normal, blockMin) < 0 &&
-        frustum.bottomFace.distance + glm::dot(frustum.bottomFace.normal, blockMax) < 0) {
-        return false; // Block is outside the bottom face
-    }
-    
-
-
-    if (frustum.farFace.distance + glm::dot(frustum.farFace.normal, blockMin) < 0 &&
-        frustum.farFace.distance + glm::dot(frustum.farFace.normal, blockMax) < 0) {
-        return false; // Block is behind the far face
-    }
-
-
-    
-
-    // If the block is not outside any planes, it's in the frustum
-    return true;
-}
-
 // DIRT BLOCK
 
 std::unique_ptr<CubeRenderer> Dirt::cubeRenderer = nullptr;
@@ -125,12 +80,10 @@ void Dirt::Update(float deltaTime) {
     Block::Update(deltaTime);
 }
 
-void Dirt::PrepareRender(Frustum frustum, int mask) {
-    Block::PrepareRender(frustum, mask);
-    if(FrustumCulling(frustum)) {
-        validPositions.push_back(position);
-        banFace.push_back(mask);
-    }
+void Dirt::PrepareRender(int mask) {
+    validPositions.push_back(position);
+    banFace.push_back(mask);
+    
 }
 
 void Dirt::Render(glm::mat4 view, glm::mat4 projection) {
@@ -170,12 +123,12 @@ void Stone::Update(float deltaTime) {
     Block::Update(deltaTime);
 }
 
-void Stone::PrepareRender(Frustum frustum, int mask) {
-    Block::PrepareRender(frustum, mask);
-    if(FrustumCulling(frustum)) {
-        validPositions.push_back(position);
-        banFace.push_back(mask);
-    }
+void Stone::PrepareRender( int mask) {
+    Block::PrepareRender(mask);
+
+    validPositions.push_back(position);
+    banFace.push_back(mask);
+    
 }
 
 void Stone::Render(glm::mat4 view, glm::mat4 projection) {
@@ -231,12 +184,12 @@ void Water::Render(glm::mat4 view, glm::mat4 projection) {
     banFace.clear();
 }
 
-void Water::PrepareRender(Frustum frustum, int mask) {
-    Block::PrepareRender(frustum, mask);
-    if(FrustumCulling(frustum)) {
-        validPositions.push_back(position);
-        banFace.push_back(mask);
-    }
+void Water::PrepareRender( int mask) {
+    Block::PrepareRender( mask);
+
+    validPositions.push_back(position);
+    banFace.push_back(mask);
+    
     
 }
 

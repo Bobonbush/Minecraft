@@ -24,14 +24,35 @@ void Game::Update() {
     
     float deltaTime = totalTime - lastTime;
     elapsedTime += deltaTime;
-    world -> Update(deltaTime);
+    glm::mat4 view = player -> getViewMatrix();
+    glm::mat4 projection = player -> getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y);
+    
+    /*
+    std::cout << "The view matrix is : " << '\n';
+    for(int i = 0 ; i < 4 ; i++) {
+        for(int j = 0 ; j < 4 ; j++) {
+            std::cout << view[i][j] << ' ';
+        }
+        std::cout << '\n';
+    }
+
+    std::cout << "The projection matrix is : " << '\n';
+    for(int i = 0 ; i < 4 ; i++) {
+        for(int j = 0 ; j < 4 ; j++) {
+            std::cout << projection[i][j] << ' ';
+        }
+        std::cout << '\n';
+    }
+    */
+    
+    world -> Update(deltaTime, view, projection);
 
     double xpos, ypos;
     glfwGetCursorPos(window, &xpos, &ypos);
     lastTime = totalTime;
 
 
-    world -> Render(player -> getViewMatrix(), player -> getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y));
+    world -> Render(view, projection);
     player -> Update(deltaTime, world -> getValidBodies());
 
     accumulatedTime += deltaTime;
