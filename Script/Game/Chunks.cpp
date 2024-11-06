@@ -4,16 +4,18 @@
 
 SubChunk::BlockType SubChunk::GetBlockState(float x, float y, float z) {
     //float noise = db::perlin(x / 128.0, y /128.0, z/128.0) * 1.00 + db::perlin(x / 32.0, y /32.0, z/32.0) * 0.5 + db::perlin(x / 16.0 , y /16.0, z/16.0) * 0.25 + db::perlin(x/8.0, y/ 8.0, z/8.0) * 0.125; // 4 octaves
-    float noise = db::perlin(x / 16.0, y / 16.0, z / 16.0) * 8.5f // Base level, medium scale
+    float noise = db::perlin(x * 4.0, y * 4.0, z * 4.0) * 8.5f // Base level, medium scale
             + db::perlin(x / 64.0, y / 64.0, z / 64.0) * 4.0f  // Low frequency, high amplitude for mountains
-            + db::perlin(x / 4.0, y / 4.0, z / 4.0) * 3.5f  // High frequency, low amplitude for detail
+            + db::perlin(x / 32.0, y / 32.0, z / 32.0) * 9.5f  // High frequency, low amplitude for detail
+            + db::perlin(x/ 128 , y / 128, z / 128) * 2.5f
+            ; // Low frequency, low amplitude for detail
     ;
-    noise = pow(noise , 0.05f);
+    noise = pow(noise , 2.25f);
     Setting * settings = Setting::getInstance();
     float surface = settings -> getSurfaceLevel();
     
 
-    if(y <= SPA::max(surface + noise * 50, -1.f)) {
+    if(y <= SPA::max(surface + noise * 20, -1.f)) {
         return BlockType::STONE;
     }
 
