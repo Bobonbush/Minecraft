@@ -5,24 +5,25 @@
 SubChunk::BlockType SubChunk::GetBlockState(float x, float y, float z) {
     //float noise = db::perlin(x / 128.0, y /128.0, z/128.0) * 1.00 + db::perlin(x / 32.0, y /32.0, z/32.0) * 0.5 + db::perlin(x / 16.0 , y /16.0, z/16.0) * 0.25 + db::perlin(x/8.0, y/ 8.0, z/8.0) * 0.125; // 4 octaves
     float noise = db::perlin(x * 4.0, y * 4.0, z * 4.0) * 8.5f // Base level, medium scale
-            + db::perlin(x / 64.0, y / 64.0, z / 64.0) * 4.0f  // Low frequency, high amplitude for mountains
-            + db::perlin(x / 32.0, y / 32.0, z / 32.0) * 9.5f  // High frequency, low amplitude for detail
-            + db::perlin(x/ 128 , y / 128, z / 128) * 2.5f
+            + db::perlin(x / 64.0, y / 64.0, z / 64.0) * 2.0f  // Low frequency, high amplitude for mountains
+            + db::perlin(x / 32.0, y / 32.0, z / 32.0) * 2.5f  // High frequency, low amplitude for detail
+            + db::perlin(x/ 128 , y / 128, z / 128) * 1.5f
+
             ; // Low frequency, low amplitude for detail
     ;
-    noise = pow(noise , 2.25f);
+    noise = pow(noise , 1.25f);
     Setting * settings = Setting::getInstance();
     float surface = settings -> getSurfaceLevel();
     
+    if(y <= surface) {
+        //return BlockType::WATER;
+    }
 
     if(y <= SPA::max(surface + noise * 20, -1.f)) {
         return BlockType::STONE;
     }
 
-    if(y <= surface) {
-        return BlockType::WATER;
-    }
-
+    
 
 
     return BlockType::AIR;
@@ -116,14 +117,26 @@ void SubChunk::AddBlock(BlockType blockType, glm::vec3 position) {
 }
 void SubChunk::Culling() {
     Setting * settings = Setting::getInstance();
-    
-    blocks.clear();
-    for(int x = 0 ; x < settings -> getChunkSize().x ; x++ ) {
-        for(int z = 0 ; z < settings -> getChunkSize().z ; z++) {
-            for(int y = 0 ; y < settings -> getSubChunkResolution().y ; y++) {
+    CompleteRender = true;
+
+    for(int x = 0 ; x < settings -> getChunkSize().x && CompleteRender ; x++ ) {
+        for(int z = 0 ; z < settings -> getChunkSize().z && CompleteRender ; z++) {
+            for(int y = 0 ; y < settings -> getSubChunkResolution().y && CompleteRender ; y++) {
                 if(BlockMap[x][y][z] == BlockType::AIR) {
                     continue;
                 }
+
+                if(LoadedBlocks[x][y][z]) {
+                    continue;
+                }
+
+                if(!settings -> BlockLoad()) {
+                    CompleteRender = false;
+                    continue;
+                }
+
+
+                LoadedBlocks[x][y][z] = true;
                 glm::vec3 position = BlockPosMap[x][y][z];
                 bool Left = false;
                 bool Right = false;
@@ -183,15 +196,25 @@ void SubChunk::Render(glm::mat4 view, glm::mat4 projection) {
     }
 }
 
-std::vector<std::shared_ptr<Rigidbody>> SubChunk::Update(float deltaTime) {
+void SubChunk::LoadBlock() {
+    if(CompleteRender) {
+        return;
+    }
+    Culling();
+}
 
+std::vector<std::shared_ptr<Rigidbody>> SubChunk::Update(float deltaTime) {
+    
     std::vector<std::shared_ptr<Rigidbody>> validBodies;         // FOr physics detection
     int i = 0 ;
+    LoadBlock();
     for (auto &block : blocks) {
         block -> PrepareRender(banFace[i]);                         // Set valid positions 
         i++;
         validBodies.push_back(block -> rigidbody);
     }
+
+    
 
     for(auto &block : blocks) {
         block -> Update(deltaTime);
@@ -212,12 +235,16 @@ void SubChunk::GenerateChunk() {
     int chunkSizeZ = settings -> getChunkSize().z;
     BlockMap.resize(chunkSizeX);
     BlockPosMap.resize(chunkSizeX);
+    LoadedBlocks.resize(chunkSizeX);
+
     for(int i = 0 ; i < chunkSizeX ; i++) {
         BlockMap[i].resize(chunkHeight);
         BlockPosMap[i].resize(chunkHeight);
+        LoadedBlocks[i].resize(chunkHeight);
         for(int j = 0 ; j < chunkHeight ; j++) {
             BlockMap[i][j].resize(chunkSizeZ);
             BlockPosMap[i][j].resize(chunkSizeZ);
+            LoadedBlocks[i][j].resize(chunkSizeZ);
         }
     }
 
@@ -238,7 +265,6 @@ void SubChunk::GenerateChunk() {
             }
         }
     }
-    Culling();
 }
 
 
@@ -299,7 +325,7 @@ std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime, glm::vec3
     for(auto &subChunk : subChunks) {
         
         if(!(glm::distance(subChunk -> GetOrigin(), playerPosition) <= diameter)  ) {
-            continue;
+            //continue;
         }
         
 

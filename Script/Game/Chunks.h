@@ -231,6 +231,9 @@ class SubChunk {
         std::vector<std::vector<std::vector<BlockType>>> BlockMap;
         std::vector<std::vector<std::vector<glm::vec3>>> BlockPosMap;
         std::vector<int> banFace;
+        std::vector<std::vector<std::vector<bool>>> LoadedBlocks;
+
+        bool CompleteRender = false;
         void SoftNoise(std::vector<std::vector<float>> &elavationMap);
 
         void HardNoise(std::vector<std::vector<float>> &elavationMap);
@@ -249,15 +252,17 @@ class SubChunk {
 
         void AddBlock(BlockType blockType, glm::vec3 position);
 
+        void GenerateChunk();
+
+        void LoadBlock();
 
     public :
         SubChunk(glm::vec3 origin);
         ~SubChunk();
         void Render(glm::mat4 view, glm::mat4 projection);
         std::vector<std::shared_ptr<Rigidbody>> Update(float deltaTime);
+        
         void LoadChunk();
-        void GenerateChunk();
-
         glm::vec3 GetOrigin() {
             return origin;
         }

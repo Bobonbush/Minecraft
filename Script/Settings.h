@@ -14,14 +14,16 @@ class Setting { // Singleton
 
         const glm::vec3 BlockNDCSize = glm::vec3(1.f, 1.f , 1.f);
         const glm::vec3 ChunkResolution = glm::vec3(16, 112, 16);
-        const glm::vec3 SubChunkResolution = glm::vec3(16, 5, 16);
+        const glm::vec3 SubChunkResolution = glm::vec3(16, 16, 16);
         float fNear = 0.1f;
         float fFar = 300.f;
 
         float MaxHour = 24.f ;
         float hour = 0;
         float offsetDay = 0.25f;
-        float surfaceLevel = ChunkResolution.y/5.f;
+        float surfaceLevel = ChunkResolution.y/6.f;
+        int maxBlockLoad = 28672;
+        int currentBlockLoad = 0;
 
 
         int dayType = 0; // 0 = day, 1 = night, 2 = evening, 3 = afternoon, 4 = noon, 5 = morning
@@ -96,6 +98,11 @@ class Setting { // Singleton
         }
 
         void Update(float deltaTime) {
+
+            currentBlockLoad = 0;
+            maxBlockLoad = ChunkResolution.x * SubChunkResolution.y * ChunkResolution.z;
+            maxBlockLoad /= 1;
+            
             if(hour / MaxHour >= (glm::pi<float>() + offsetDay) * 2) {
                 hour -= glm::pi<float>() *2 * MaxHour;
             }
@@ -137,6 +144,14 @@ class Setting { // Singleton
 
         glm::vec3 getSubChunkResolution() {
             return SubChunkResolution;
+        }
+
+        bool BlockLoad() {
+            if(currentBlockLoad < maxBlockLoad) {
+                currentBlockLoad++;
+                return true;
+            }
+            return false;
         }
 
 
