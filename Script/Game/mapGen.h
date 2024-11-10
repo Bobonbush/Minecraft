@@ -45,17 +45,18 @@ class FBM {
     float offset = 0.2f;
     float scale = 0.5f;
     float H = 0.5f;
-    float frequency = 1.0f;
+    
     
     public:
 
-    FBM(int octaves, float lacunarity, float gain, float offset, float scale, float H, float frequency, float amplitude) : octaves(octaves), lacunarity(lacunarity), gain(gain), offset(offset), scale(scale), H(H), frequency(frequency) {}
+    FBM(int octaves, float lacunarity, float gain, float offset, float scale, float H, float frequency, float amplitude) : octaves(octaves), lacunarity(lacunarity), gain(gain), offset(offset), scale(scale), H(H){}
     FBM() = default;
     float getValue (float x, float y , float z) {
         float amplitude = 1.0f;
         float total = 0.0f;
         float maxValue = 0.0f;
         float persistence = 0.5f;
+        float frequency = 1.0f;
 
         for(int i = 0 ; i < octaves ; i++) {
             total += db::perlin(x * frequency, y * frequency, z * frequency) * amplitude;
@@ -104,7 +105,7 @@ class GroundSelector {
     float getValue(float x, float y, float z) {
         float value = scaleoffset.getValue(x, y, z);
         float gradientValue = gradient.getGradient(x, y, z);
-        return gradientValue * value;
+        return low + (high - low) * gradientValue * value;
     }
 
     bool isGround(float x, float y, float z) {
