@@ -1,10 +1,4 @@
-#include "Resource/TextureLoad.h"
-#include "Resource/ShaderLoad.h"
-#include "Blocks.h"
-#define DB_PERLIN_IMPL
-#include "Resource/db_perlin.hpp"
-#include "Player.h"
-#include "Algorithm.h"
+#include "mapGen.h"
 
 
 struct Frustum {
@@ -13,7 +7,7 @@ struct Frustum {
     void normalize(glm::vec4 & plane) {
         float distance = glm::length(glm::vec3(plane));
         plane /= distance;
-
+        
         return ;
     }
 
@@ -234,18 +228,9 @@ class SubChunk {
         std::vector<std::vector<std::vector<bool>>> LoadedBlocks;
 
         bool CompleteRender = false;
-        void SoftNoise(std::vector<std::vector<float>> &elavationMap);
-
-        void HardNoise(std::vector<std::vector<float>> &elavationMap);
-
-        void SoftHeight(std::vector<std::vector<int>> & HeightMap);
-
-        void HardHeight(std::vector<std::vector<int>> & HeightMap);
-
         Setting * settings;
         ShaderManager * shaderManager;
         Player *player;
-        
         BlockType GetBlockState(float x, float y, float z);
 
         void Culling();

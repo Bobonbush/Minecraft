@@ -3,92 +3,12 @@
 
 
 SubChunk::BlockType SubChunk::GetBlockState(float x, float y, float z) {
-    //float noise = db::perlin(x / 128.0, y /128.0, z/128.0) * 1.00 + db::perlin(x / 32.0, y /32.0, z/32.0) * 0.5 + db::perlin(x / 16.0 , y /16.0, z/16.0) * 0.25 + db::perlin(x/8.0, y/ 8.0, z/8.0) * 0.125; // 4 octaves
-    float noise = db::perlin(x * 4.0, y * 4.0, z * 4.0) * 8.5f // Base level, medium scale
-            + db::perlin(x / 64.0, y / 64.0, z / 64.0) * 2.0f  // Low frequency, high amplitude for mountains
-            + db::perlin(x / 32.0, y / 32.0, z / 32.0) * 2.5f  // High frequency, low amplitude for detail
-            + db::perlin(x/ 128 , y / 128, z / 128) * 1.5f
-
-            ; // Low frequency, low amplitude for detail
-    ;
-    noise = pow(noise , 1.25f);
-    Setting * settings = Setting::getInstance();
-    float surface = settings -> getSurfaceLevel();
-    
-    if(y <= surface) {
-        //return BlockType::WATER;
-    }
-
-    if(y <= SPA::max(surface + noise * 20, -1.f)) {
+    GroundSelector groundSelector;
+    if(!groundSelector.isGround(x, y, z)) {
         return BlockType::STONE;
     }
-
-    
-
-
     return BlockType::AIR;
 }
-
-void SubChunk::SoftNoise(std::vector<std::vector<float>> &elavationMap) {
-     int n = (int)elavationMap.size();
-     for (int i = 0; i < n; i++) {
-         int m = (int)elavationMap[i].size();
-         for (int j = 0; j < m; j++) {
-             if(i + 1 < n )
-                 elavationMap[i][j] = SPA::min(elavationMap[i][j] , elavationMap[i+1][j] );
-             if(j + 1 < m)
-                 elavationMap[i][j] = SPA::min(elavationMap[i][j] , elavationMap[i][j+1] );
-             if(i + 1 < n && j + 1 < m)
-                 elavationMap[i][j] = SPA::min(elavationMap[i][j] , elavationMap[i+1][j+1] );
-         }
-     }
- }
-
- void SubChunk::HardNoise(std::vector<std::vector<float>> &elavationMap) {
-     int n = (int)elavationMap.size();
-     for (int i = 0; i < n; i++) {
-         int m = (int)elavationMap[i].size();
-         for (int j = 0; j < m; j++) {
-             if(i + 1 < n )
-                 elavationMap[i][j] = SPA::max(elavationMap[i][j] , elavationMap[i+1][j] );
-             if(j + 1 < m)
-                 elavationMap[i][j] = SPA::max(elavationMap[i][j] , elavationMap[i][j+1] );
-             if(i + 1 < n && j + 1 < m)
-                 elavationMap[i][j] = SPA::max(elavationMap[i][j] , elavationMap[i+1][j+1] );
-         }
-     }
- }
-
- void SubChunk::SoftHeight(std::vector<std::vector<int>> & HeightMap) {
-     int n = (int)HeightMap.size();
-     for (int i = 0; i < n; i++) {
-         int m = (int)HeightMap[i].size();
-         for (int j = 0; j < m; j++) {
-             if(i + 1 < n )
-                 HeightMap[i][j] = SPA::min(HeightMap[i][j] , HeightMap[i+1][j] );
-             if(j + 1 < m)
-                 HeightMap[i][j] = SPA::min(HeightMap[i][j] , HeightMap[i][j+1] );
-             if(i + 1 < n && j + 1 < m)
-                 HeightMap[i][j] = SPA::min(HeightMap[i][j] , HeightMap[i+1][j+1] );
-         }
-     }
- }
-
- void SubChunk::HardHeight(std::vector<std::vector<int>> & HeightMap) {
-     int n = (int)HeightMap.size();
-     for (int i = 0; i < n; i++) {
-         int m = (int)HeightMap[i].size();
-         for (int j = 0; j < m; j++) {
-             if(i + 1 < n )
-                 HeightMap[i][j] = SPA::max(HeightMap[i][j] , HeightMap[i+1][j] );
-             if(j + 1 < m)
-                 HeightMap[i][j] = SPA::max(HeightMap[i][j] , HeightMap[i][j+1] );
-             if(i + 1 < n && j + 1 < m)
-                 HeightMap[i][j] = SPA::max(HeightMap[i][j] , HeightMap[i+1][j+1] );
-         }
-     }
- }
-
 /*
 Task : Remove the blocks that are not visible to the player
 

@@ -82,6 +82,15 @@ class SPA {
         return a + t * (b - a);
     }
 
+    template<class X> static X mix (X a, X b, float t) {
+        return lerp(a, b, t);
+    }
+
+    template<class X> static X smoothstep(X a, X b, float t) {
+        t = t * t * (3 - 2 * t);
+        return lerp(a, b, t);
+    }
+
 };
 
 #endif
