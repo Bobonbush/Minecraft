@@ -4,8 +4,13 @@
 
 SubChunk::BlockType SubChunk::GetBlockState(float x, float y, float z) {
     GroundSelector groundSelector;
-    if(!groundSelector.isGround(x, y, z)) {
+    Setting * settings = Setting::getInstance();
+    if(groundSelector.isGround(x, y, z)) {
         return BlockType::STONE;
+    }
+
+    if(y < settings -> getSurfaceLevel()) {
+        return BlockType::WATER;
     }
     return BlockType::AIR;
 }

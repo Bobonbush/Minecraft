@@ -57,7 +57,7 @@ void WorldRenderer :: Update(float deltaTime, glm::mat4 view, glm::mat4 projecti
 
 void WorldRenderer:: LoadChunks() {
     if((int)chunks.size() != 0) {
-        return;
+        //return;
     }
     glm::vec3 position = player -> GetPosition();
     bool Find = false;
@@ -147,7 +147,7 @@ void WorldRenderer:: LoadChunks() {
 }
 
 void WorldRenderer::UnloadChunks() {
-    return ;
+    //return ;
     glm::vec3 position = player -> GetPosition();
     position.y = 0.f;
     glm::vec3 origin = player -> GetPosition();

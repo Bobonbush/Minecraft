@@ -3,7 +3,7 @@
 
 Player * Player::instance = nullptr;
 Player :: Player() {
-    camera = Camera(glm::vec3(0.0f, 113.f, 0.0f));
+    camera = Camera(glm::vec3(100.0f, 193.f, -100.0f));
     Setting *settings = Setting::getInstance();
 
     PhysicConstant *physicConstant = PhysicConstant::getInstance();
