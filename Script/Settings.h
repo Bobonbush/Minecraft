@@ -21,7 +21,7 @@ class Setting { // Singleton
         float MaxHour = 24.f ;
         float hour = 0;
         float offsetDay = 0.25f;
-        float surfaceLevel = ChunkResolution.y/6.f;
+        float surfaceLevel = ChunkResolution.y/8.f;
         int maxBlockLoad = 28672;
         int currentBlockLoad = 0;
 

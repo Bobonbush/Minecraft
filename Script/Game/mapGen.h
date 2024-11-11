@@ -64,7 +64,7 @@ class FBM {
         for(int i = 0 ; i < octaves ; i++) {
             float offset = 1058.f;
             float offset_y = (float) settings -> getChunkSize().y * 1.f ; 
-            total += db::perlin(x /offset  * freq , y/offset_y * freq,  z/offset * freq) * ampli;
+            total += db::perlin(x /offset  * freq ,  z/offset * freq) * ampli;
             //std::cout << freq << ' ' << lacunarity << ' ' << gain << ' ' << ampli << '\n';
             //std::cout << x /offset * freq << ' ' << y/offset_y * freq << ' ' << z/offset * freq << '\n';
             //std::cout << "Noise : " << db::perlin(x /offset * freq , y/offset_y * freq, z/offset * freq)  << '\n';
@@ -95,7 +95,7 @@ class Scaleoffset {
             shapeFractal = FBM(8, 2.0f, 0.5f, 0.00005f, 2.f);
         }
         Scaleoffset() {
-            shapeFractal = FBM(15, 4.005f, 0.0005f, 3.5, 1.5f);
+            shapeFractal = FBM(25, 2.00f, 0.025f, 10.5, 1.f);
         }
 
         float getValue(float x, float y, float z) {
@@ -112,7 +112,7 @@ class Scaleoffset {
 class GroundSelector {
     float low = 0.f;
     float high = 1.f;
-    float threshold = 0.4f;
+    float threshold = 0.5f;
     Scaleoffset scaleoffset;
     Gradient gradient;
     public:
@@ -126,7 +126,7 @@ class GroundSelector {
         float gradientValue =  gradient.getGradient(x, y, z);
         //std::cout << value  << ' ' << gradientValue << '\n';
         //float blended =  low + (high - low) * (gradientValue * (1 - gradientValue) * value);
-        return value;//glm::mix(value, gradientValue , 0.f);
+        return glm::mix(value, gradientValue , 0.6f);
     }
 
     bool isGround(float x, float y, float z) {
