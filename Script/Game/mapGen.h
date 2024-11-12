@@ -95,7 +95,7 @@ class Scaleoffset {
             shapeFractal = FBM(8, 2.0f, 0.5f, 0.00005f, 2.f);
         }
         Scaleoffset() {
-            shapeFractal = FBM(25, 2.00f, 0.025f, 10.5, 1.f);
+            shapeFractal = FBM(15, 2.00f, 0.025f, 10.5, 1.f);
         }
 
         float getValue(float x, float y, float z) {
@@ -126,7 +126,8 @@ class GroundSelector {
         float gradientValue =  gradient.getGradient(x, y, z);
         //std::cout << value  << ' ' << gradientValue << '\n';
         //float blended =  low + (high - low) * (gradientValue * (1 - gradientValue) * value);
-        return glm::mix(value, gradientValue , 0.6f);
+        float offset = 0.8f;
+        return glm::mix(value * offset, gradientValue , 0.4f);
     }
 
     bool isGround(float x, float y, float z) {

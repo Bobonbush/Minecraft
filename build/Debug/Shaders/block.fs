@@ -49,20 +49,17 @@ vec4 CalculateColor() {
     return vec4(result, 1.0);
 }
 
-float LinearizeDepth(float depth) {
-    float z = depth * 2.0 - 1.0;
-    return (2.0 * near * far) / (far + near -z * (far - near));
-}
 
 void main()
 {
 
     // Depth
-    float depth = LinearizeDepth(gl_FragCoord.z) / far;
+    
+    float depth = length(FragPos - viewPos) / (far - near) * 0.5;
     vec4 ResultColor = CalculateColor();
 
-    FragColor = texture(texture1, TexCoord) * ResultColor ; 
+    FragColor = texture(texture1, TexCoord) * ResultColor *  vec4(vec3(depth), 1.0) ; 
     //FragColor = texture(texture1, TexCoord) * ResultColor *  vec4(vec3(depth), 1.0) ;
-    if(FragColor.a < 0.1)
+    if(FragColor.a < 0.5)
         discard;
 }

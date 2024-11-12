@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "Camera.h"
 #include <fstream>
+#include <map>
 
 
 class Setting { // Singleton
@@ -12,8 +13,8 @@ class Setting { // Singleton
         float volume;
         int controls;
 
-        const glm::vec3 BlockNDCSize = glm::vec3(1.f, 1.f , 1.f);
-        const glm::vec3 ChunkResolution = glm::vec3(16, 192, 16);
+        const glm::vec3 BlockNDCSize = glm::vec3(2.f, 2.f , 2.f);
+        const glm::vec3 ChunkResolution = glm::vec3(16, 112, 16);
         const glm::vec3 SubChunkResolution = glm::vec3(16, 16, 16);
         float fNear = 0.1f;
         float fFar = 300.f;
@@ -24,6 +25,16 @@ class Setting { // Singleton
         float surfaceLevel = ChunkResolution.y/8.f;
         int maxBlockLoad = 28672;
         int currentBlockLoad = 0;
+
+        struct Vec3Comparation {
+            bool operator()(const glm::vec3& lhs, const glm::vec3& rhs) const {
+                return std::tie(lhs.x, lhs.y, lhs.z) < std::tie(rhs.x, rhs.y, rhs.z);
+            }
+        };
+
+        std::map<glm::vec3,bool, Vec3Comparation > blockMap;
+
+
 
 
         int dayType = 0; // 0 = day, 1 = night, 2 = evening, 3 = afternoon, 4 = noon, 5 = morning
@@ -45,7 +56,7 @@ class Setting { // Singleton
         }
 
 
-        void saveSettings() {
+        void saveSettings() const {
             // Save settings to file
         }
 
@@ -61,39 +72,39 @@ class Setting { // Singleton
             // Set controls
         }
 
-        glm::vec2 getResolution() {
+        const glm::vec2 getResolution() const {
             return resolution;
         }
 
-        int getVolume() {
+        const int getVolume() const {
             // Get volume
         }
 
-        int getControls() {
+        const int getControls() const {
             // Get controls
         }
 
-        glm::vec3 getBlockNDCSize() {
+        const glm::vec3 getBlockNDCSize() const {
             return BlockNDCSize;
         }
 
-        float getNear() {
+        const float getNear() const {
             return fNear;
         }
 
-        float getFar() {
+        const float getFar() const {
             return fFar;
         }
 
-        glm::vec3 getChunkSize() {
+        const glm::vec3 getChunkSize() const {
             return ChunkResolution;
         }
 
-        float getHour() {
+        const float getHour() const {
             return hour / MaxHour;
         }
 
-        float getMaxHour() {
+        const float getMaxHour() const {
             return MaxHour;
         }
 
@@ -154,7 +165,17 @@ class Setting { // Singleton
             return false;
         }
 
+        void setBlockMap(glm::vec3 position, bool value) {
+            blockMap[position] = value;
+        }
 
+        void deleteBlockMap(glm::vec3 position) {
+            blockMap.erase(position);
+        }
+
+        const bool getBlockMap(glm::vec3 position) {
+            return blockMap[position];
+        }
 
 };
 

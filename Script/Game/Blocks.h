@@ -20,6 +20,7 @@ class Block {
         glm::vec3 rotation;
         bool ShowHitBox = false;
         std::shared_ptr<Shader> shader;
+        void CullingValidPosition(std::vector<glm::vec3> & validPositions, std::vector<int> & banFace);
     public :
         std::shared_ptr<Rigidbody> rigidbody;
         Block(glm :: vec3 position, glm::vec3 scale, glm::vec3 rotation, std::shared_ptr<Shader> shader);

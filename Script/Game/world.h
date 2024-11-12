@@ -43,8 +43,6 @@ class WorldRenderer {
         WorldRenderer();
 
 
-        
-        
     public:
         ~WorldRenderer();
         
@@ -61,7 +59,7 @@ class WorldRenderer {
         
         void Render(glm::mat4 view, glm::mat4 projection);
         void Update(float deltaTime, glm::mat4 view, glm::mat4 projection);
-
+        
         void LoadChunks();
         void UnloadChunks();
         std::vector<std::shared_ptr<Rigidbody>> & getValidBodies() {
