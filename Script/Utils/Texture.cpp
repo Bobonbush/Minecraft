@@ -556,8 +556,6 @@ void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotatio
         }
         cubeSurfaces[i].Render(position, scale, rotation, view, projection, realValidPosition);
     }
-
-    std::cout << "Total Renderer : " << totalRenderer << '\n';
 }
 
 void CubeRenderer::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation, glm::mat4 view, glm::mat4 projection, std::vector<glm::vec3>& validPosition) {

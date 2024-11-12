@@ -19,7 +19,7 @@ class Gradient {
 
         void setGradient() {
             Setting * settings = Setting::getInstance();
-            int y = settings -> getChunkSize().y * 0.85f;
+            int y = settings -> getChunkSize().y * 0.85f * settings -> getBlockNDCSize().y;
             startPoints = glm::vec3(0.f, 0.f, 0.f);
             endPoints = glm::vec3(0.f, y, 0.f);
         }
@@ -62,7 +62,7 @@ class FBM {
         Setting * settings = Setting::getInstance();
 
         for(int i = 0 ; i < octaves ; i++) {
-            float offset = 1058.f;
+            float offset = 1058.f * settings -> getChunkSize().x;
             float offset_y = (float) settings -> getChunkSize().y * 1.f ; 
             total += db::perlin(x /offset  * freq ,  z/offset * freq) * ampli;
             //std::cout << freq << ' ' << lacunarity << ' ' << gain << ' ' << ampli << '\n';

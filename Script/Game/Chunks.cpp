@@ -82,6 +82,7 @@ void Frustum::update() {
 const bool Frustum::isChunkInFrustum(const glm::vec3 & origin, float chunkSize){
             glm::vec3 min = origin - glm::vec3(chunkSize /2.f);
             glm::vec3 max = origin + glm::vec3(chunkSize /2.f) ;
+            return true;
             for(int i = 0; i < 6 ; i++) {
                 int out = 0;
                 out += ((glm::dot(planes[i], glm::vec4(min.x, min.y, min.z, 1.f))  < 0.f) ? 1 : 0);
@@ -307,7 +308,11 @@ void SubChunk::GenerateChunk() {
     }
 }
 
+void SubChunk::ReloadChunk() {
+    //Culling();
+}
 
+// Chunk implementation
 
 Chunk::Chunk(glm::vec3 origin) : origin(origin) {
 
@@ -389,4 +394,10 @@ std::vector<std::shared_ptr<Block>> Chunk::GetBlocks() {
         }
     }
     return blocks;
+}
+
+void Chunk::ReloadChunk() {
+    for(auto &subChunk : subChunks) {
+        subChunk -> ReloadChunk();
+    }
 }

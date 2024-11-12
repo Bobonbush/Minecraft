@@ -27,6 +27,8 @@ class WorldRenderer {
         std::queue<std::unique_ptr<Chunk>> ChunkLoadQueue;
         std::unique_ptr<Skybox> skybox;
 
+        bool reloadChunk = false;
+
         
         
 

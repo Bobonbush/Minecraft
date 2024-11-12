@@ -45,38 +45,6 @@ glm::vec3 Block::GetRotation() {
     return rotation;
 }
 
-void Block::CullingValidPosition(std::vector<glm::vec3> & validPositions, std::vector<int> & banFace) {
-    if((int)validPositions.size() == 0) {
-        return;
-    }
-    Setting * settings = Setting::getInstance();
-    for(int i = 0 ; i < (int)validPositions.size() ; i++) {
-        glm::vec3 position = validPositions[i];
-        int mask = banFace[i];
-
-        glm::vec3 direction[6] = {
-            glm::vec3(0.0f, 1.0f, 0.0f),
-            glm::vec3(0.0f, -1.0f, 0.0f),
-            glm::vec3(-1.0f, 0.0f, 0.0f),
-            glm::vec3(1.0f, 0.0f, 0.0f),
-            glm::vec3(0.0f, 0.0f, 1.0f),
-            glm::vec3(0.0f, 0.0f, -1.0f)
-        };
-
-        for(int j = 0 ; j < 6 ; j++) {
-            if(mask & (1 << j)) {
-                continue;
-            }
-            glm::vec3 new_position = position + direction[j];
-            if(settings -> getBlockMap(new_position) == true) {
-                mask |= (1 << j);
-            }
-        }
-        banFace[i] = mask;
-    }
-}
-
-
 
 void Block::PrepareRender(int mask) {
 }
@@ -168,8 +136,8 @@ void Stone::Render(glm::mat4 view, glm::mat4 projection) {
         return;
     }
 
-    CullingValidPosition(validPositions, banFace);
-    std::cout << "BlockSize : " << validPositions.size() << '\n';
+    //CullingValidPosition(validPositions, banFace);
+    //std::cout << "BlockSize : " << validPositions.size() << '\n';
     Block::Render(view, projection);
 
      if(ShowHitBox == true) {

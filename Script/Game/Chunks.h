@@ -52,6 +52,7 @@ class SubChunk {
 
         void LoadBlock();
 
+        
     public :
         SubChunk(glm::vec3 origin);
         ~SubChunk();
@@ -59,6 +60,10 @@ class SubChunk {
         std::vector<std::shared_ptr<Rigidbody>> Update(float deltaTime);
         
         void LoadChunk();
+        
+        void ReloadChunk();  // Reload the chunk when the player moves
+
+        
         const glm::vec3 GetOrigin() const {
             return origin;
         }
@@ -90,5 +95,7 @@ class Chunk {
         glm::vec3 GetOrigin() {
             return origin;
         }
+
+        void ReloadChunk(); // Reload the chunk when the player moves
 
 };

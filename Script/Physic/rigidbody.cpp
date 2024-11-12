@@ -162,7 +162,7 @@ void Rigidbody::FixedUpdate(float Alpha, std::vector<std::shared_ptr<Rigidbody> 
     }
 
     UpdateVelocity();
-    CollisionDetection(rigidbodies);
+    //CollisionDetection(rigidbodies);
     UpdateVelocity();
 
     ApplyInternalForce();
