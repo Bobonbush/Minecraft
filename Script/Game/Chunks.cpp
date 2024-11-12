@@ -81,7 +81,7 @@ void Frustum::update() {
 
 const bool Frustum::isChunkInFrustum(const glm::vec3 & origin, float chunkSize){
             glm::vec3 min = origin - glm::vec3(chunkSize /2.f);
-            glm::vec3 max = origin + glm::vec3(chunkSize /1.2f) ;
+            glm::vec3 max = origin + glm::vec3(chunkSize /2.f) ;
             for(int i = 0; i < 6 ; i++) {
                 int out = 0;
                 out += ((glm::dot(planes[i], glm::vec4(min.x, min.y, min.z, 1.f))  < 0.f) ? 1 : 0);

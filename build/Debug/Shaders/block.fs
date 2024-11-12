@@ -55,11 +55,11 @@ void main()
 
     // Depth
     
-    float depth = length(FragPos - viewPos) / (far - near) * 0.5;
+    float depth = length(FragPos - viewPos) / (far - near);
     vec4 ResultColor = CalculateColor();
 
-    FragColor = texture(texture1, TexCoord) * ResultColor *  vec4(vec3(depth), 1.0) ; 
+    FragColor = texture(texture1, TexCoord) * ResultColor ; 
     //FragColor = texture(texture1, TexCoord) * ResultColor *  vec4(vec3(depth), 1.0) ;
-    if(FragColor.a < 0.5)
+    if(FragColor.a < 0.5 || depth > 0.5)
         discard;
 }
