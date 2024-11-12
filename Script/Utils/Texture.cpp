@@ -301,6 +301,9 @@ CubeSurface::CubeSurface(std::shared_ptr<Shader> shader, int face, unsigned int 
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    for(int i = 0 ; i < (int) 1e5 ; i++ ) {
+        instancePositions.push_back(glm::vec3(0.0f));
+    }
 }
 
 CubeSurface::~CubeSurface() {
@@ -310,6 +313,8 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
     if(validPositions.size() == 0) {
         return;
     }
+
+    
     shader -> use();
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::scale(model, scale);
@@ -330,11 +335,13 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
             
             instancePositions.push_back(validPositions[i]);
             neww = true;
+            std::cout << "WTF" <<'\n';
             continue;
         }
         if(validPositions[i] != instancePositions[i]) {
             instancePositions[i] = validPositions[i];
             diff = true;
+            
             
         }
         instancePositions[i] = validPositions[i];

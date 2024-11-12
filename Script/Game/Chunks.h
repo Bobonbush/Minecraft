@@ -38,7 +38,11 @@ class SubChunk {
         std::vector<int> banFace;
         std::vector<std::vector<std::vector<bool>>> LoadedBlocks;
 
+        glm::vec3 iterator = glm::vec3(0.f);
+
         bool CompleteRender = false;
+        bool ChunkLoaded = false;
+        bool firstLoad = true;
         Setting * settings;
         ShaderManager * shaderManager;
         Player *player;
@@ -63,7 +67,7 @@ class SubChunk {
         
         void ReloadChunk();  // Reload the chunk when the player moves
 
-        
+
         const glm::vec3 GetOrigin() const {
             return origin;
         }

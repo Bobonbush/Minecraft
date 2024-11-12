@@ -13,8 +13,8 @@ class Setting { // Singleton
         float volume;
         int controls;
 
-        const glm::vec3 BlockNDCSize = glm::vec3(2.f, 2.f , 2.f);
-        const glm::vec3 ChunkResolution = glm::vec3(16, 16, 16);
+        const glm::vec3 BlockNDCSize = glm::vec3(1.f, 1.f , 1.f);
+        const glm::vec3 ChunkResolution = glm::vec3(16, 64, 16);
         const glm::vec3 SubChunkResolution = glm::vec3(16, 16, 16);
         float fNear = 0.1f;
         float fFar = 300.f;
@@ -25,6 +25,8 @@ class Setting { // Singleton
         float surfaceLevel = ChunkResolution.y/8.f;
         int maxBlockLoad = 28672;
         int currentBlockLoad = 0;
+        int currentBlockRenderer = 0;
+        int maxBlockRender = 1000;
 
         struct Vec3Comparation {
             bool operator()(const glm::vec3& lhs, const glm::vec3& rhs) const {
@@ -112,7 +114,9 @@ class Setting { // Singleton
 
             currentBlockLoad = 0;
             maxBlockLoad = ChunkResolution.x * SubChunkResolution.y * ChunkResolution.z;
-            maxBlockLoad /= 1;
+            maxBlockLoad /= 8;
+            maxBlockRender = ChunkResolution.x * SubChunkResolution.y * ChunkResolution.z;
+            maxBlockRender /= 12;
             
             if(hour / MaxHour >= (glm::pi<float>() + offsetDay) * 2) {
                 hour -= glm::pi<float>() *2 * MaxHour;
@@ -159,6 +163,14 @@ class Setting { // Singleton
 
         bool BlockLoad() {
             if(currentBlockLoad < maxBlockLoad) {
+                currentBlockLoad++;
+                return true;
+            }
+            return false;
+        }
+
+        bool BlockRender() {
+            if(currentBlockRenderer < maxBlockRender) {
                 currentBlockLoad++;
                 return true;
             }

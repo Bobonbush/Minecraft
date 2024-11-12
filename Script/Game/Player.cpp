@@ -20,7 +20,7 @@ void Player :: processInput(GLFWwindow *window) {
     float speed = SPEED;
 
     if(glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
-        speed *= 3.5f;
+        speed *= 2.f;
     }
     
     if(glfwGetKey(window, GLFW_KEY_C) == GLFW_RELEASE  && ButtonPressed == true) {

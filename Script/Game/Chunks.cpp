@@ -81,8 +81,8 @@ void Frustum::update() {
 
 const bool Frustum::isChunkInFrustum(const glm::vec3 & origin, float chunkSize){
             glm::vec3 min = origin - glm::vec3(chunkSize /2.f);
-            glm::vec3 max = origin + glm::vec3(chunkSize /2.f) ;
-            return true;
+            glm::vec3 max = origin + glm::vec3(chunkSize /1.f) ;
+            
             for(int i = 0; i < 6 ; i++) {
                 int out = 0;
                 out += ((glm::dot(planes[i], glm::vec4(min.x, min.y, min.z, 1.f))  < 0.f) ? 1 : 0);
@@ -159,21 +159,26 @@ void SubChunk::Culling() {
     for(int x = 0 ; x < settings -> getChunkSize().x && CompleteRender ; x++ ) {
         for(int z = 0 ; z < settings -> getChunkSize().z && CompleteRender ; z++) {
             for(int y = 0 ; y < settings -> getSubChunkResolution().y && CompleteRender ; y++) {
-                if(BlockMap[x][y][z] == BlockType::AIR) {
-                    continue;
-                }
+                
 
                 if(LoadedBlocks[x][y][z]) {
                     continue;
                 }
 
-                if(!settings -> BlockLoad()) {
+                if(!settings -> BlockRender()) {
                     CompleteRender = false;
+                    iterator = glm::vec3(x, z, y);
                     continue;
                 }
 
+                
+
 
                 LoadedBlocks[x][y][z] = true;
+
+                if(BlockMap[x][y][z] == BlockType::AIR) {
+                    continue;
+                }
                 glm::vec3 position = BlockPosMap[x][y][z];
                 bool Left = false;
                 bool Right = false;
@@ -204,9 +209,12 @@ void SubChunk::Culling() {
                 if(settings ->  getBlockMap(glm::vec3 (position.x, position.y, position.z - settings -> getBlockNDCSize().z)) == true) {
                     Front = true;
                 }
+
+                
                 if(Left && Right && Top && Bottom && Front && Back) {
                     continue;
                 }
+                
                 int mask = (Top << 0) | (Bottom << 1) | (Left << 2) | (Right << 3) | (Back << 4) | (Front << 5);
                 
                 AddBlock(BlockMap[x][y][z], position);
@@ -214,8 +222,7 @@ void SubChunk::Culling() {
             }
         }
     }
- }
-
+}
 
 SubChunk::SubChunk(glm::vec3 origin) {
     this->origin = origin;
@@ -234,7 +241,7 @@ void SubChunk::Render(glm::mat4 view, glm::mat4 projection) {
 }
 
 void SubChunk::LoadBlock() {
-    if(CompleteRender) {
+    if(CompleteRender || !ChunkLoaded) {
         return;
     }
     Culling();
@@ -261,7 +268,62 @@ std::vector<std::shared_ptr<Rigidbody>> SubChunk::Update(float deltaTime) {
 
 
 void SubChunk::LoadChunk() {
-    GenerateChunk();
+    if(ChunkLoaded) {
+        return;
+    }
+    if(firstLoad) {
+        GenerateChunk();
+        firstLoad = false;
+    }
+
+    ChunkLoaded = true;
+
+    for(int x = 0; x < settings -> getChunkSize().x && ChunkLoaded ; x++ ) {
+        for(int z = 0; z < settings -> getChunkSize().z && ChunkLoaded ; z++) {
+            for(int y = 0 ; y < settings -> getSubChunkResolution().y && ChunkLoaded ; y++) {
+
+                
+                if(LoadedBlocks[x][y][z]) {
+                    continue;
+                }
+                if(!settings -> BlockLoad()) {
+                    ChunkLoaded = false;
+                    iterator = glm::vec3(x, z, y);
+                    break;
+                }
+
+                LoadedBlocks[x][y][z] = true;
+                
+                
+                
+
+                glm::vec3 position = origin;
+                position.x += x * settings -> getBlockNDCSize().x;
+                position.z += z * settings -> getBlockNDCSize().z;
+                position.y += y * settings -> getBlockNDCSize().y;
+                position.x -= settings -> getBlockNDCSize().x * (settings -> getChunkSize().x - 1) /2.f;
+                position.z -= settings -> getBlockNDCSize().z * (settings -> getChunkSize().z - 1) /2.f;
+                BlockType blockType = GetBlockState(position.x, position.y, position.z);
+                BlockMap[x][y][z] = blockType;
+
+                if(blockType != BlockType::AIR) {
+                    settings -> setBlockMap(position, true);
+                }
+                BlockPosMap[x][y][z] = position;
+            }
+        }
+    }
+
+    if(ChunkLoaded) {
+        iterator = glm::vec3(0.f);
+        for(int x = 0 ; x < settings -> getChunkSize().x ; x++) {
+            for(int z = 0 ; z < settings -> getChunkSize().z ; z++) {
+                for(int y = 0 ; y < settings -> getSubChunkResolution().y ; y++) {
+                    LoadedBlocks[x][y][z] = false;
+                }
+            }
+        }
+    }
 }
 
 void SubChunk::GenerateChunk() {
@@ -286,26 +348,7 @@ void SubChunk::GenerateChunk() {
     }
 
 
-    for(int x = 0 ; x < settings -> getChunkSize().x ; x++ ) {
-        for(int z = 0 ; z < settings -> getChunkSize().z ; z++) {
-            for(int y = 0 ; y < settings -> getSubChunkResolution().y ; y++) {
-                glm::vec3 position = origin;
-                position.x += x * settings -> getBlockNDCSize().x;
-                position.z += z * settings -> getBlockNDCSize().z;
-                position.y += y * settings -> getBlockNDCSize().y;
-                position.x -= settings -> getBlockNDCSize().x * (settings -> getChunkSize().x - 1) /2.f;
-                position.z -= settings -> getBlockNDCSize().z * (settings -> getChunkSize().z - 1) /2.f;
-                BlockType blockType = GetBlockState(position.x, position.y, position.z);
-                BlockMap[x][y][z] = blockType;
-
-                if(blockType != BlockType::AIR) {
-                    settings -> setBlockMap(position, true);
-                }
-
-                BlockPosMap[x][y][z] = position;
-            }
-        }
-    }
+    
 }
 
 void SubChunk::ReloadChunk() {
@@ -332,8 +375,15 @@ void Chunk::LoadChunk() {
     
 
     for(int i = 0 ; i < chunkHeight ; i++) {
+
+        
+        if( (int) subChunks.size() > i) {
+            subChunks[i] -> LoadChunk();
+            continue;
+        }
         subChunks.push_back(std::make_shared<SubChunk>(origin + glm::vec3(0.f, i * settings -> getSubChunkResolution().y, 0.f)));
         subChunks.back() -> LoadChunk();
+        break;
     }
 }
 
@@ -349,6 +399,10 @@ std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime, glm::vec3
 
     Frustum frustum;
     frustum.update();
+
+    std::sort(subChunks.begin(), subChunks.end(), [&playerPosition](std::shared_ptr<SubChunk> a, std::shared_ptr<SubChunk> b) {
+        return glm::length(a -> GetOrigin() - playerPosition) < glm::length(b -> GetOrigin() - playerPosition);
+    });
     /*
 
     std::cout << "Frustum :" <<'\n';
@@ -364,14 +418,9 @@ std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime, glm::vec3
     
 
     for(auto &subChunk : subChunks) {
-        
-        if(!(glm::distance(subChunk -> GetOrigin(), playerPosition) <= diameter)  ) {
-           // continue;
-        }
-        
-
         if(frustum.isChunkInFrustum(subChunk -> GetOrigin(), settings -> getChunkSize().x * settings -> getBlockNDCSize().x )) {
             RenderSubChunks.push_back(subChunk);
+            
         }else continue;
 
         

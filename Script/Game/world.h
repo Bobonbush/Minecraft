@@ -24,7 +24,7 @@ class WorldRenderer {
         std::vector<std::shared_ptr<Rigidbody>> validBodies;
 
         int ChunkDiameter = 5;
-        std::queue<std::unique_ptr<Chunk>> ChunkLoadQueue;
+        std::vector<std::unique_ptr<Chunk>> ChunkLoadQueue;
         std::unique_ptr<Skybox> skybox;
 
         bool reloadChunk = false;

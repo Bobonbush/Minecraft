@@ -24,7 +24,7 @@ events:
       The output was:
       0
       MSBuild version 17.8.3+195e7f5a3 for .NET Framework
-      Build started 11/12/2024 11:24:58 PM.
+      Build started 11/13/2024 5:56:45 AM.
       
       Project "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\3.30.0-rc4\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -53,7 +53,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:01.22
+      Time Elapsed 00:00:01.12
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -79,7 +79,7 @@ events:
       The output was:
       0
       MSBuild version 17.8.3+195e7f5a3 for .NET Framework
-      Build started 11/12/2024 11:25:00 PM.
+      Build started 11/13/2024 5:56:47 AM.
       
       Project "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\3.30.0-rc4\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -108,7 +108,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:01.03
+      Time Elapsed 00:00:01.13
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -127,8 +127,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-mxnpvr"
-      binary: "D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-mxnpvr"
+      source: "D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-c1bwus"
+      binary: "D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-c1bwus"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -137,40 +137,40 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-mxnpvr'
+        Change Dir: 'D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-c1bwus'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_5c7ff.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d77a9.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.8.3+195e7f5a3 for .NET Framework
-        Build started 11/12/2024 11:25:01 PM.
+        Build started 11/13/2024 5:56:48 AM.
         
-        Project "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxnpvr\\cmTC_5c7ff.vcxproj" on node 1 (default targets).
+        Project "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-c1bwus\\cmTC_d77a9.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_5c7ff.dir\\Debug\\".
+          Creating directory "cmTC_d77a9.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxnpvr\\Debug\\".
-          Creating directory "cmTC_5c7ff.dir\\Debug\\cmTC_5c7ff.tlog\\".
+          Creating directory "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-c1bwus\\Debug\\".
+          Creating directory "cmTC_d77a9.dir\\Debug\\cmTC_d77a9.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_5c7ff.dir\\Debug\\cmTC_5c7ff.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_5c7ff.dir\\Debug\\cmTC_5c7ff.tlog\\unsuccessfulbuild".
+          Creating "cmTC_d77a9.dir\\Debug\\cmTC_d77a9.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_d77a9.dir\\Debug\\cmTC_d77a9.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5c7ff.dir\\Debug\\\\" /Fd"cmTC_5c7ff.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.30\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d77a9.dir\\Debug\\\\" /Fd"cmTC_d77a9.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.30\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33134 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5c7ff.dir\\Debug\\\\" /Fd"cmTC_5c7ff.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.30\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d77a9.dir\\Debug\\\\" /Fd"cmTC_d77a9.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.30\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxnpvr\\Debug\\cmTC_5c7ff.exe" /INCREMENTAL /ILK:"cmTC_5c7ff.dir\\Debug\\cmTC_5c7ff.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-mxnpvr/Debug/cmTC_5c7ff.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-mxnpvr/Debug/cmTC_5c7ff.lib" /MACHINE:X64  /machine:x64 cmTC_5c7ff.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_5c7ff.vcxproj -> D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxnpvr\\Debug\\cmTC_5c7ff.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-c1bwus\\Debug\\cmTC_d77a9.exe" /INCREMENTAL /ILK:"cmTC_d77a9.dir\\Debug\\cmTC_d77a9.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-c1bwus/Debug/cmTC_d77a9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-c1bwus/Debug/cmTC_d77a9.lib" /MACHINE:X64  /machine:x64 cmTC_d77a9.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_d77a9.vcxproj -> D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-c1bwus\\Debug\\cmTC_d77a9.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_5c7ff.dir\\Debug\\cmTC_5c7ff.tlog\\unsuccessfulbuild".
-          Touching "cmTC_5c7ff.dir\\Debug\\cmTC_5c7ff.tlog\\cmTC_5c7ff.lastbuildstate".
-        Done Building Project "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-mxnpvr\\cmTC_5c7ff.vcxproj" (default targets).
+          Deleting file "cmTC_d77a9.dir\\Debug\\cmTC_d77a9.tlog\\unsuccessfulbuild".
+          Touching "cmTC_d77a9.dir\\Debug\\cmTC_d77a9.tlog\\cmTC_d77a9.lastbuildstate".
+        Done Building Project "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-c1bwus\\cmTC_d77a9.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:01.06
+        Time Elapsed 00:00:01.00
         
       exitCode: 0
   -
@@ -210,8 +210,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-fteexj"
-      binary: "D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-fteexj"
+      source: "D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-igptdc"
+      binary: "D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-igptdc"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -221,40 +221,40 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-fteexj'
+        Change Dir: 'D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-igptdc'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_7ed99.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_182b8.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.8.3+195e7f5a3 for .NET Framework
-        Build started 11/12/2024 11:25:03 PM.
+        Build started 11/13/2024 5:56:50 AM.
         
-        Project "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fteexj\\cmTC_7ed99.vcxproj" on node 1 (default targets).
+        Project "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-igptdc\\cmTC_182b8.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_7ed99.dir\\Debug\\".
+          Creating directory "cmTC_182b8.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fteexj\\Debug\\".
-          Creating directory "cmTC_7ed99.dir\\Debug\\cmTC_7ed99.tlog\\".
+          Creating directory "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-igptdc\\Debug\\".
+          Creating directory "cmTC_182b8.dir\\Debug\\cmTC_182b8.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_7ed99.dir\\Debug\\cmTC_7ed99.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_7ed99.dir\\Debug\\cmTC_7ed99.tlog\\unsuccessfulbuild".
+          Creating "cmTC_182b8.dir\\Debug\\cmTC_182b8.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_182b8.dir\\Debug\\cmTC_182b8.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_7ed99.dir\\Debug\\\\" /Fd"cmTC_7ed99.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.30\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_182b8.dir\\Debug\\\\" /Fd"cmTC_182b8.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.30\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33134 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_7ed99.dir\\Debug\\\\" /Fd"cmTC_7ed99.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.30\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_182b8.dir\\Debug\\\\" /Fd"cmTC_182b8.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.30\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fteexj\\Debug\\cmTC_7ed99.exe" /INCREMENTAL /ILK:"cmTC_7ed99.dir\\Debug\\cmTC_7ed99.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-fteexj/Debug/cmTC_7ed99.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-fteexj/Debug/cmTC_7ed99.lib" /MACHINE:X64  /machine:x64 cmTC_7ed99.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_7ed99.vcxproj -> D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fteexj\\Debug\\cmTC_7ed99.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-igptdc\\Debug\\cmTC_182b8.exe" /INCREMENTAL /ILK:"cmTC_182b8.dir\\Debug\\cmTC_182b8.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-igptdc/Debug/cmTC_182b8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/CMakeScratch/TryCompile-igptdc/Debug/cmTC_182b8.lib" /MACHINE:X64  /machine:x64 cmTC_182b8.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_182b8.vcxproj -> D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-igptdc\\Debug\\cmTC_182b8.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_7ed99.dir\\Debug\\cmTC_7ed99.tlog\\unsuccessfulbuild".
-          Touching "cmTC_7ed99.dir\\Debug\\cmTC_7ed99.tlog\\cmTC_7ed99.lastbuildstate".
-        Done Building Project "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fteexj\\cmTC_7ed99.vcxproj" (default targets).
+          Deleting file "cmTC_182b8.dir\\Debug\\cmTC_182b8.tlog\\unsuccessfulbuild".
+          Touching "cmTC_182b8.dir\\Debug\\cmTC_182b8.tlog\\cmTC_182b8.lastbuildstate".
+        Done Building Project "D:\\WorkSpace\\Minecraft\\Minecraft\\build\\CMakeFiles\\CMakeScratch\\TryCompile-igptdc\\cmTC_182b8.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:01.06
+        Time Elapsed 00:00:00.99
         
       exitCode: 0
   -

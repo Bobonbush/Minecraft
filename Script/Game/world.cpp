@@ -45,8 +45,18 @@ void WorldRenderer :: Update(float deltaTime, glm::mat4 view, glm::mat4 projecti
         std::cout << '\n';
     }
     */
+
+   std::sort(chunks.begin(), chunks.end(), [this](std::unique_ptr<Chunk> &a, std::unique_ptr<Chunk> &b) {
+        return glm::distance(a -> GetOrigin(), player -> GetPosition()) < glm::distance(b -> GetOrigin(), player -> GetPosition());
+    });
+
+    for(auto & chunk : chunks) {
+        chunk -> LoadChunk();
+    }
+
     
     for(auto & chunk : chunks) {
+        
         if(reloadChunk) {
             chunk -> ReloadChunk();
         }
@@ -126,15 +136,22 @@ void WorldRenderer:: LoadChunks() {
                 //std::cout << new_origin.x << ' ' << new_origin.y << ' ' << new_origin.z <<'\n';
                 //chunks.push_back(std::make_unique<Chunk>(new_origin));
                 //chunks.back() -> LoadChunk();
-                ChunkLoadQueue.push(std::make_unique<Chunk>(new_origin));
+                ChunkLoadQueue.push_back(std::make_unique<Chunk>(new_origin));
             }
         }
     }
+    
+    
+    std::sort(ChunkLoadQueue.begin(), ChunkLoadQueue.end(), [this](std::unique_ptr<Chunk> &a, std::unique_ptr<Chunk> &b) {
+        return glm::distance(a -> GetOrigin(), player -> GetPosition()) > glm::distance(b -> GetOrigin(), player -> GetPosition());
+    });
+    
+    
 
     while(!ChunkLoadQueue.empty()) {
         bool found = false;
 
-        glm::vec3 new_origin = ChunkLoadQueue.front() -> GetOrigin();
+        glm::vec3 new_origin = ChunkLoadQueue.back() -> GetOrigin();
 
         for(int i = 0 ; i < (int)WaitingChunks.size() ; i++) {
             if(WaitingChunks[i] -> GetOrigin() == new_origin) {
@@ -146,19 +163,18 @@ void WorldRenderer:: LoadChunks() {
         }
 
         if(!found) {
-            ChunkLoadQueue.pop();
+            ChunkLoadQueue.pop_back();
             continue;
         }
-        chunks.push_back(std::move(ChunkLoadQueue.front()));
+        chunks.push_back(std::move(ChunkLoadQueue.back()));
         chunks.back() -> LoadChunk();
-        ChunkLoadQueue.pop();
+        ChunkLoadQueue.pop_back();
         break;
     }
 
 }
 
 void WorldRenderer::UnloadChunks() {
-
         
     glm::vec3 position = player -> GetPosition();
     position.y = 0.f;
