@@ -61,8 +61,8 @@ class SubChunk {
         SubChunk(glm::vec3 origin);
         ~SubChunk();
         void Render(glm::mat4 view, glm::mat4 projection);
-        std::vector<std::shared_ptr<Rigidbody>> Update(float deltaTime);
-        
+        void Update(float deltaTime);
+        std::vector<std::shared_ptr<Rigidbody>> LoadRigidBody();
         void LoadChunk();
         
         void ReloadChunk();  // Reload the chunk when the player moves
@@ -92,8 +92,8 @@ class Chunk {
 
         std::vector<std::shared_ptr<Block>> GetBlocks();
 
-        std::vector<std::shared_ptr<Rigidbody>> Update(float deltaTime, glm::vec3 playerPosition, float diameter, glm::mat4 ProjView);
-
+        void Update(float deltaTime, glm::vec3 playerPosition, float diameter, glm::mat4 ProjView);
+        std::vector<std::shared_ptr<Rigidbody>> LoadRigidBody();
         void LoadChunk();
 
         glm::vec3 GetOrigin() {

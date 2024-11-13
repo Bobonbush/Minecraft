@@ -165,7 +165,7 @@ void SubChunk::Culling() {
                     continue;
                 }
 
-                if(!settings -> BlockRender()) {
+                if(!settings -> BlockLoad()) {
                     CompleteRender = false;
                     iterator = glm::vec3(x, z, y);
                     continue;
@@ -247,7 +247,7 @@ void SubChunk::LoadBlock() {
     Culling();
 }
 
-std::vector<std::shared_ptr<Rigidbody>> SubChunk::Update(float deltaTime) {
+void SubChunk::Update(float deltaTime) {
     
     std::vector<std::shared_ptr<Rigidbody>> validBodies;         // FOr physics detection
     int i = 0 ;
@@ -255,13 +255,19 @@ std::vector<std::shared_ptr<Rigidbody>> SubChunk::Update(float deltaTime) {
     for (auto &block : blocks) {
         block -> PrepareRender(banFace[i]);                         // Set valid positions 
         i++;
-        validBodies.push_back(block -> rigidbody);
     }
 
     
 
     for(auto &block : blocks) {
         block -> Update(deltaTime);
+    }
+}
+
+std::vector<std::shared_ptr<Rigidbody>> SubChunk::LoadRigidBody() {
+    std::vector<std::shared_ptr<Rigidbody>> validBodies;
+    for(auto &block : blocks) {
+        validBodies.push_back(block -> rigidbody);
     }
     return validBodies;
 }
@@ -346,10 +352,10 @@ void SubChunk::GenerateChunk() {
             LoadedBlocks[i][j].resize(chunkSizeZ);
         }
     }
-
-
-    
 }
+
+
+
 
 void SubChunk::ReloadChunk() {
     //Culling();
@@ -393,8 +399,9 @@ void Chunk::Render(glm::mat4 view, glm::mat4 projection) {
     }
 }
 
-std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime, glm::vec3 playerPosition, float diameter, glm::mat4 ProjView) {
-    std::vector<std::shared_ptr<Rigidbody>> validBodies;
+
+
+void Chunk::Update(float deltaTime, glm::vec3 playerPosition, float diameter, glm::mat4 ProjView) {
     RenderSubChunks.clear();
 
     Frustum frustum;
@@ -418,22 +425,29 @@ std::vector<std::shared_ptr<Rigidbody>> Chunk::Update(float deltaTime, glm::vec3
     
 
     for(auto &subChunk : subChunks) {
+        float offset = 0.5f;
+        if(glm::length(subChunk -> GetOrigin() - playerPosition) > diameter * settings -> getBlockNDCSize().x * settings -> getChunkSize().x * offset) {
+           // continue;
+        }
         if(frustum.isChunkInFrustum(subChunk -> GetOrigin(), settings -> getChunkSize().x * settings -> getBlockNDCSize().x )) {
             RenderSubChunks.push_back(subChunk);
             
         }else continue;
 
-        
+        subChunk -> Update(deltaTime);
+    }
 
-        
-        std::vector<std::shared_ptr<Rigidbody>> subValidBodies = subChunk -> Update(deltaTime);
-        for(auto &body : subValidBodies) {
+}
+
+std::vector<std::shared_ptr<Rigidbody>> Chunk::LoadRigidBody() {
+    std::vector<std::shared_ptr<Rigidbody>> validBodies;
+    for(auto &subChunk : subChunks) {
+        for(auto &body : subChunk -> LoadRigidBody()) {
             validBodies.push_back(body);
         }
     }
-
     return validBodies;
-}
+} 
 
 std::vector<std::shared_ptr<Block>> Chunk::GetBlocks() {
     std::vector<std::shared_ptr<Block>> blocks;

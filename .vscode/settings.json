@@ -84,6 +84,7 @@
         "thread": "cpp",
         "queue": "cpp",
         "ranges": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "filesystem": "cpp"
     }
 }

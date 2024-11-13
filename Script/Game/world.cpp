@@ -60,20 +60,13 @@ void WorldRenderer :: Update(float deltaTime, glm::mat4 view, glm::mat4 projecti
         if(reloadChunk) {
             chunk -> ReloadChunk();
         }
-        std::vector<std::shared_ptr<Rigidbody>> subvalidBodies = chunk -> Update(deltaTime, player -> GetPosition(), settings -> getChunkSize().x * settings -> getBlockNDCSize().x * ChunkDiameter, ProjView);
-        for(auto & body : subvalidBodies) {
-            validBodies.push_back(body);
-        }
+        chunk -> Update(deltaTime, player -> GetPosition(), settings -> getChunkSize().x * settings -> getBlockNDCSize().x * ChunkDiameter, ProjView);
     }
     settings -> Update(deltaTime);
 }
 
 void WorldRenderer:: LoadChunks() {
-    if(!chunks.empty()) {
-        //chunks.push_back(std::make_unique<Chunk>(glm::vec3(0.f)));
-        //chunks.back() -> LoadChunk();
-        return;
-    }
+    
     glm::vec3 position = player -> GetPosition();
     bool Find = false;
     glm::vec3 origin = player -> GetPosition();
@@ -106,10 +99,23 @@ void WorldRenderer:: LoadChunks() {
         
         //chunks.back() -> LoadChunk();
     }
-
+    std::vector<std::shared_ptr<Rigidbody>> validBodies;
+    for(auto &chunk : chunks) {
+        float distance = glm::distance(chunk -> GetOrigin(), origin);
+        if(distance <= 1 * settings -> getChunkSize().x * settings -> getBlockNDCSize().x) {
+            std::vector<std::shared_ptr<Rigidbody>>Bodies = chunk -> LoadRigidBody();
+            for(auto &body : validBodies) {
+                validBodies.push_back(body);
+            }
+        }
+    }
     
 
-
+    if(!chunks.empty()) {
+        //chunks.push_back(std::make_unique<Chunk>(glm::vec3(0.f)));
+        //chunks.back() -> LoadChunk();
+        //return;
+    }
     
     
     for(int x = -ChunkDiameter; x <= ChunkDiameter; x++) {

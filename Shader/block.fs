@@ -14,6 +14,7 @@ float far = 300.0;
 
 uniform vec3 lightColor = vec3(1.0);
 uniform vec3 lightPos = vec3(0.0, 0.0, 0.0);
+vec3 FogColor = vec3(0.1, 0.1, 0.1);
 
 
 uniform vec3 viewPos = vec3(0.0, 0.0, 0.0);
@@ -49,6 +50,21 @@ vec4 CalculateColor() {
     return vec4(result, 1.0);
 }
 
+float getFogFactor(float d) {
+    const float fogDensity = 0.1;
+    const float fogStart = 0.0;
+    const float fogEnd = 100.0;
+    float f = exp2(-d * fogDensity);
+    if(d <= fogStart)
+        return 0.0;
+    if(d >= fogEnd)
+        return 1.0;
+
+    return 1 - (fogEnd - d) * (fogEnd - fogStart);
+
+
+}
+
 
 void main()
 {
@@ -57,9 +73,13 @@ void main()
     
     float depth = length(FragPos - viewPos) / (far - near);
     vec4 ResultColor = CalculateColor();
+    float d = length(FragPos - viewPos);
+    float fogFactor = getFogFactor(d);
 
-    FragColor = texture(texture1, TexCoord)  ; 
-    //FragColor = texture(texture1, TexCoord) * ResultColor ;
+    
+    FragColor = texture(texture1, TexCoord) * ResultColor;
+    //FragColor = mix(texture(texture1, TexCoord) * ResultColor , vec4(FogColor, 1.f), fogFactor);
+    //FragColor = mix(texture(texture1, TexCoord) * ResultColor , vec4(FogColor, fogFactor),  fogFactor);
     if(FragColor.a < 0.5)
         discard;
 }
