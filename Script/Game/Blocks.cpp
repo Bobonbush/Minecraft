@@ -137,7 +137,7 @@ void Stone::Render(glm::mat4 view, glm::mat4 projection) {
     }
 
     //CullingValidPosition(validPositions, banFace);
-    //std::cout << "BlockSize : " << validPositions.size() << '\n';
+    std::cout << "BlockSize : " << validPositions.size() << '\n';
     Block::Render(view, projection);
 
      if(ShowHitBox == true) {

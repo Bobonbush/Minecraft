@@ -113,8 +113,8 @@ class Setting { // Singleton
         void Update(float deltaTime) {
 
             currentBlockLoad = 0;
-            maxBlockLoad = ChunkResolution.x * SubChunkResolution.y * ChunkResolution.z;
-            maxBlockLoad /= 8;
+            maxBlockLoad = ChunkResolution.x * SubChunkResolution.y  * ChunkResolution.z;
+            maxBlockLoad *= 2;
             maxBlockRender = ChunkResolution.x * SubChunkResolution.y * ChunkResolution.z;
             maxBlockRender /= 12;
             

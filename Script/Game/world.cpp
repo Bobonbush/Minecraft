@@ -69,6 +69,11 @@ void WorldRenderer :: Update(float deltaTime, glm::mat4 view, glm::mat4 projecti
 }
 
 void WorldRenderer:: LoadChunks() {
+    if(!chunks.empty()) {
+        //chunks.push_back(std::make_unique<Chunk>(glm::vec3(0.f)));
+        //chunks.back() -> LoadChunk();
+        return;
+    }
     glm::vec3 position = player -> GetPosition();
     bool Find = false;
     glm::vec3 origin = player -> GetPosition();
@@ -169,13 +174,13 @@ void WorldRenderer:: LoadChunks() {
         chunks.push_back(std::move(ChunkLoadQueue.back()));
         chunks.back() -> LoadChunk();
         ChunkLoadQueue.pop_back();
-        break;
+        //break;
     }
 
 }
 
 void WorldRenderer::UnloadChunks() {
-        
+    return ;
     glm::vec3 position = player -> GetPosition();
     position.y = 0.f;
     glm::vec3 origin = player -> GetPosition();
