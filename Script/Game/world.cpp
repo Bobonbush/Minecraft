@@ -94,28 +94,20 @@ void WorldRenderer:: LoadChunks() {
         origin.y = 0.f;
         chunks.push_back(std::make_unique<Chunk>(origin));
         chunks.back() -> LoadChunk();
-        //chunks.push_back(std::make_unique<Chunk>(origin + glm::vec3(settings -> getChunkSize().x * settings -> getBlockNDCSize().x, 0.f, 0.f)));
-        
-        
-        //chunks.back() -> LoadChunk();
     }
-    std::vector<std::shared_ptr<Rigidbody>> validBodies;
+
     for(auto &chunk : chunks) {
         float distance = glm::distance(chunk -> GetOrigin(), origin);
+
         if(distance <= 1 * settings -> getChunkSize().x * settings -> getBlockNDCSize().x) {
             std::vector<std::shared_ptr<Rigidbody>>Bodies = chunk -> LoadRigidBody();
-            for(auto &body : validBodies) {
+            for(auto& body : Bodies) {
+                
                 validBodies.push_back(body);
             }
         }
     }
     
-
-    if(!chunks.empty()) {
-        //chunks.push_back(std::make_unique<Chunk>(glm::vec3(0.f)));
-        //chunks.back() -> LoadChunk();
-        //return;
-    }
     
     
     for(int x = -ChunkDiameter; x <= ChunkDiameter; x++) {
@@ -180,13 +172,12 @@ void WorldRenderer:: LoadChunks() {
         chunks.push_back(std::move(ChunkLoadQueue.back()));
         chunks.back() -> LoadChunk();
         ChunkLoadQueue.pop_back();
-        //break;
+        break;
     }
 
 }
 
 void WorldRenderer::UnloadChunks() {
-    return ;
     glm::vec3 position = player -> GetPosition();
     position.y = 0.f;
     glm::vec3 origin = player -> GetPosition();

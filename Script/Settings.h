@@ -13,8 +13,8 @@ class Setting { // Singleton
         float volume;
         int controls;
 
-        const glm::vec3 BlockNDCSize = glm::vec3(2.f, 2.f , 2.f);
-        const glm::vec3 ChunkResolution = glm::vec3(16, 192, 16);
+        const glm::vec3 BlockNDCSize = glm::vec3(4.f, 4.f , 4.f);
+        const glm::vec3 ChunkResolution = glm::vec3(16, 64, 16);
         const glm::vec3 SubChunkResolution = glm::vec3(16, 16, 16);
         float fNear = 0.1f;
         float fFar = 300.f;

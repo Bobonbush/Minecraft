@@ -84,7 +84,6 @@ void Player :: Update(float deltaTime, std::vector<std::shared_ptr<Rigidbody>> &
 }
 
 void Player::FixedUpdate(GLFWwindow *window, float currentX, float currentY, std::vector<std::shared_ptr<Rigidbody>> & rigidbodies, float Alpha) {
-    
     rigidbody -> FixedUpdate(Alpha, rigidbodies);
     processInput(window);
     processMouse(window, currentX , currentY);

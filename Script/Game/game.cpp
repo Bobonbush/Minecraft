@@ -52,7 +52,7 @@ void Game::Update() {
     lastTime = totalTime;
 
 
-    world -> Render(view, projection);
+    
     player -> Update(deltaTime, world -> getValidBodies());
 
     accumulatedTime += deltaTime;
@@ -66,12 +66,14 @@ void Game::Update() {
 
 void Game::FixedUpdate(float xpos, float ypos) {
     player -> FixedUpdate( window,xpos, ypos, world -> getValidBodies(), Alpha);
+    
 }
 
 void Game::Render() {
     glm::mat4 view = player -> getViewMatrix();
     glm::mat4 projection = player -> getProjectionMatrix(Setting::getInstance() -> getResolution().x, Setting::getInstance() -> getResolution().y);
     player -> Render();
+    world -> Render(view, projection);
 }
 
 void Game::Init() {
@@ -118,13 +120,20 @@ void Game::Run() {
     Init();
     player = Player::getInstance();
     world = WorldRenderer::getInstance();
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+    glColorMask(1, 1, 1, 1);
+    glDepthMask(GL_FALSE);
     
     
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(0.2f, 0.3f , 0.7f , 1.f);
+        glClearColor(0.2f, 0.3f , 0.7f , 1.f);        
+        
         Update();
         Render();
+
         glfwSwapBuffers(window);
         glfwPollEvents();
 

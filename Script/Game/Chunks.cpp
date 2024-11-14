@@ -387,7 +387,7 @@ void Chunk::LoadChunk() {
             subChunks[i] -> LoadChunk();
             continue;
         }
-        subChunks.push_back(std::make_shared<SubChunk>(origin + glm::vec3(0.f, i * settings -> getSubChunkResolution().y, 0.f)));
+        subChunks.push_back(std::make_shared<SubChunk>(origin + glm::vec3(0.f, i * settings -> getSubChunkResolution().y * settings -> getBlockNDCSize().y, 0.f)));
         subChunks.back() -> LoadChunk();
         break;
     }
@@ -446,6 +446,7 @@ std::vector<std::shared_ptr<Rigidbody>> Chunk::LoadRigidBody() {
             validBodies.push_back(body);
         }
     }
+
     return validBodies;
 } 
 

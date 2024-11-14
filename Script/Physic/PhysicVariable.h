@@ -11,7 +11,7 @@ class PhysicConstant
         
         
         const float CONSTANTOFFSET = 5.f;
-        const float GRAVITY = 9.8f * 1.f;
+        const float GRAVITY = 9.8f * 3.f;
         const float PLAYER_MASS = 0.1f;
         
 

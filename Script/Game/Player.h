@@ -12,7 +12,7 @@ class Player {                // Another Singleton
     private:
 
         
-        const float SPEED = 1.5f;
+        const float SPEED = 3.5f;
         const float JUMPFORCE = 40.05f;
         Camera camera;
         Player();

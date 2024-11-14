@@ -414,6 +414,7 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation
     if(diff) {
         glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
         int number = (int)validPositions.size();
+        number = (int) instancePositions.size();
         
         glBufferData(GL_ARRAY_BUFFER, number * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
