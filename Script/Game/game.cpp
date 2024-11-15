@@ -121,15 +121,17 @@ void Game::Run() {
     player = Player::getInstance();
     world = WorldRenderer::getInstance();
 
+    
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     glColorMask(1, 1, 1, 1);
     glDepthMask(GL_FALSE);
     
-    
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(0.2f, 0.3f , 0.7f , 1.f);        
+
+
         
         Update();
         Render();
