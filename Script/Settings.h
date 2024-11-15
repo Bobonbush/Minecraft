@@ -14,10 +14,10 @@ class Setting { // Singleton
         int controls;
 
         const glm::vec3 BlockNDCSize = glm::vec3(4.f, 4.f , 4.f);
-        const glm::vec3 ChunkResolution = glm::vec3(16, 16, 16);
+        const glm::vec3 ChunkResolution = glm::vec3(16, 32, 16);
         const glm::vec3 SubChunkResolution = glm::vec3(16, 16, 16);
         float fNear = 0.1f;
-        float fFar = 300.f;
+        float fFar = 600.f;
 
         float MaxHour = 24.f ;
         float hour = 0;
@@ -114,9 +114,11 @@ class Setting { // Singleton
 
             currentBlockLoad = 0;
             maxBlockLoad = ChunkResolution.x * SubChunkResolution.y  * ChunkResolution.z;
-            maxBlockLoad *= 1.;
+            maxBlockLoad *= 1.75;
+
+            currentBlockRenderer = 0;
             maxBlockRender = ChunkResolution.x * SubChunkResolution.y * ChunkResolution.z;
-            maxBlockRender /= 12;
+            maxBlockRender *= 0.1;
             
             if(hour / MaxHour >= (glm::pi<float>() + offsetDay) * 2) {
                 hour -= glm::pi<float>() *2 * MaxHour;
@@ -171,7 +173,7 @@ class Setting { // Singleton
 
         bool BlockRender() {
             if(currentBlockRenderer < maxBlockRender) {
-                currentBlockLoad++;
+                currentBlockRenderer++;
                 return true;
             }
             return false;

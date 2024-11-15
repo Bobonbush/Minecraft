@@ -1,118 +1,7 @@
 #include "Chunks.h"
 
 
-void Frustum::normalize(glm::vec4 & plane) {
-    float distance = glm::length(glm::vec3(plane));
-    plane /= distance;
-    return ;
-}
 
-void Frustum::update() {
-    Player * player = Player::getInstance();
-        Setting * settings = Setting::getInstance();
-        glm::mat4 view = player -> getViewMatrix();
-        glm::mat4 projection = player -> getProjectionMatrix(settings -> getResolution().x , settings -> getResolution().y);
-        glm::mat4 viewProjMatrix =  projection * view ;
-        
-        planes[0].x = viewProjMatrix[0][3] + viewProjMatrix[0][0];
-        planes[0].y = viewProjMatrix[1][3] + viewProjMatrix[1][0];
-        planes[0].z = viewProjMatrix[2][3] + viewProjMatrix[2][0];
-        planes[0].w = viewProjMatrix[3][3] + viewProjMatrix[3][0];
-
-        normalize(planes[0]);
-        //std::cout << "Right : " << planes[0].x << ", " << planes[0].y << ", " << planes[0].z << ", " << planes[0].w  << '\n';
-
-       
-
-
-
-        planes[1].x = viewProjMatrix[0][3] - viewProjMatrix[0][0];
-        planes[1].y = viewProjMatrix[1][3] - viewProjMatrix[1][0];
-        planes[1].z = viewProjMatrix[2][3] - viewProjMatrix[2][0];
-        planes[1].w = viewProjMatrix[3][3] - viewProjMatrix[3][0];
-        normalize(planes[1]);
-
-        
-        
-
-        //std::cout << "Left : " << planes[1].x << ", " << planes[1].y << ", " << planes[1].z<< ", " << planes[1].w  << '\n';
-        
-        planes[2].x = viewProjMatrix[0][3] - viewProjMatrix[0][1];
-        planes[2].y = viewProjMatrix[1][3] - viewProjMatrix[1][1];
-        planes[2].z = viewProjMatrix[2][3] - viewProjMatrix[2][1];
-        planes[2].w = viewProjMatrix[3][3] - viewProjMatrix[3][1];
-        normalize(planes[2]);
-
-        
-
-       // std::cout << "Bottom : " << planes[2].x << ", " << planes[2].y << ", " << planes[2].z<< ", " << planes[2].w <<  '\n';
-        
-        planes[3].x = viewProjMatrix[0][3] + viewProjMatrix[0][1];
-        planes[3].y = viewProjMatrix[1][3] + viewProjMatrix[1][1];
-        planes[3].z = viewProjMatrix[2][3] + viewProjMatrix[2][1];
-        planes[3].w = viewProjMatrix[3][3] + viewProjMatrix[3][1];
-        normalize(planes[3]);
-
-    
-        
-        
-
-        //std::cout << "Top : " << planes[3].x << ", " << planes[3].y << ", " << planes[3].z<< ", " << planes[3].w <<  '\n';
-        
-        planes[4].x = viewProjMatrix[0][3] + viewProjMatrix[0][2];
-        planes[4].y = viewProjMatrix[1][3] + viewProjMatrix[1][2];
-        planes[4].z = viewProjMatrix[2][3] + viewProjMatrix[2][2];
-        planes[4].w = viewProjMatrix[3][3] + viewProjMatrix[3][2];
-        normalize(planes[4]);
-        
-        
-
-        //std::cout << "Near : " << planes[4].x << ", " << planes[4].y << ", " << planes[4].z << "," << planes[4].w << '\n';
-        
-        planes[5].x = viewProjMatrix[0][3] - viewProjMatrix[0][2];
-        planes[5].y = viewProjMatrix[1][3] - viewProjMatrix[1][2];
-        planes[5].z = viewProjMatrix[2][3] - viewProjMatrix[2][2];
-        planes[5].w = viewProjMatrix[3][3] - viewProjMatrix[3][2];
-        normalize(planes[5]);
-
-        //std::cout << "Far : " << planes[5].x << ", " << planes[5].y << ", " << planes[5].z << ", " << planes[5].w << '\n';
-        
-}
-
-const bool Frustum::isChunkInFrustum(const glm::vec3 & origin, float chunkSize){
-            glm::vec3 min = origin - glm::vec3(chunkSize /2.f) ;
-            glm::vec3 max = origin + glm::vec3(chunkSize /2.f) ;
-            max.y += chunkSize / 2.f;
-            min.y += chunkSize / 2.f;
-            
-            for(int i = 0; i < 6 ; i++) {
-                int out = 0;
-                out += ((glm::dot(planes[i], glm::vec4(min.x, min.y, min.z, 1.f))  < 0.f) ? 1 : 0);
-                out += ((glm::dot(planes[i], glm::vec4(max.x, min.y, min.z, 1.f)) < 0.f) ? 1 : 0);
-                out += ((glm::dot(planes[i], glm::vec4(min.x, max.y, min.z, 1.f)) < 0.f) ? 1 : 0);
-                out += ((glm::dot(planes[i], glm::vec4(max.x, max.y, min.z, 1.f)) < 0.f) ? 1 : 0);
-                out += ((glm::dot(planes[i], glm::vec4(min.x, min.y, max.z, 1.f)) < 0.f) ? 1 : 0);
-                out += ((glm::dot(planes[i], glm::vec4(max.x, min.y, max.z, 1.f)) < 0.f) ? 1 : 0);
-                out += ((glm::dot(planes[i], glm::vec4(min.x, max.y, max.z, 1.f)) < 0.f) ? 1 : 0);
-                out += ((glm::dot(planes[i], glm::vec4(max.x, max.y, max.z, 1.f)) < 0.f) ? 1 : 0);
-                if(out == 8) {
-                    return false;
-                }
-            }
-            /*
-            int out = 0;
-            
-            out = 0; for(int i = 0 ; i < 8 ; i++) out += ((planes[i].x > max.x)? 1 : 0); if(out == 8) return false;
-            out = 0; for(int i = 0 ; i < 8 ; i++) out += ((planes[i].x < min.x)? 1 : 0); if(out == 8) return false;
-            out = 0; for(int i = 0 ; i < 8 ; i++) out += ((planes[i].y > max.y)? 1 : 0); if(out == 8) return false;
-            out = 0; for(int i = 0 ; i < 8 ; i++) out += ((planes[i].y < min.y)? 1 : 0); if(out == 8) return false;
-            out = 0; for(int i = 0 ; i < 8 ; i++) out += ((planes[i].z > max.z)? 1 : 0); if(out == 8) return false;
-
-            out = 0; for(int i = 0 ; i < 8 ; i++) out += ((planes[i].z < min.z)? 1 : 0); if(out == 8) return false;
-            */
-            
-            return true;
-        }
 
 SubChunk::BlockType SubChunk::GetBlockState(float x, float y, float z) {
     GroundSelector groundSelector;
@@ -169,7 +58,7 @@ void SubChunk::Culling() {
                     continue;
                 }
 
-                if(!settings -> BlockLoad()) {
+                if(!settings -> BlockRender()) {
                     CompleteRender = false;
                     iterator = glm::vec3(x, z, y);
                     continue;

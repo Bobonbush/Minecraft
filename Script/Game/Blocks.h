@@ -5,6 +5,18 @@
 #include "Resource/TextureLoad.h"
 #include <memory>
 #include "Physic/rigidbody.h"
+#include "Player.h"
+
+class Frustum {
+    public: 
+
+    glm::vec4 planes[6];
+
+    void normalize(glm::vec4 & plane);
+    void update();
+    const bool isChunkInFrustum(const glm::vec3 & origin, float chunkSize);
+};
+
 
 
 class Block {
@@ -13,7 +25,8 @@ class Block {
         
     protected: 
         TextureManager *textureManager;
-        
+
+        Frustum frustum;    
 
         glm::vec3 position;
         glm::vec3 scale;

@@ -54,14 +54,15 @@ void Game::Update() {
 
     
     player -> Update(deltaTime, world -> getValidBodies());
-
+    //FixedUpdate(xpos, ypos);
+    
     accumulatedTime += deltaTime;
     while(accumulatedTime >= maxFrameTime) {
         FixedUpdate(xpos, ypos);
         accumulatedTime -= maxFrameTime;
     }
     Alpha = accumulatedTime / maxFrameTime;
-
+    
 }
 
 void Game::FixedUpdate(float xpos, float ypos) {

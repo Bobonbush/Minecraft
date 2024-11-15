@@ -262,14 +262,18 @@ CubeSurface::CubeSurface(std::shared_ptr<Shader> shader, int face, unsigned int 
         3, 2, 1  // second triangle
     };
 
+    for(int i = 0 ; i < (int) 1e5 ; i++ ) {
+        instancePositions.push_back(glm::vec3(0.0f));
+    }
+
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
 
     // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)0);
@@ -299,11 +303,16 @@ CubeSurface::CubeSurface(std::shared_ptr<Shader> shader, int face, unsigned int 
     
     glBindVertexArray(0);
 
+    glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+    glBufferData(GL_ARRAY_BUFFER, (int)instancePositions.size() * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
+        
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    for(int i = 0 ; i < (int) 1e5 ; i++ ) {
-        instancePositions.push_back(glm::vec3(0.0f));
-    }
+
+    
+    
 }
 
 CubeSurface::~CubeSurface() {
@@ -358,8 +367,8 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::vec3 rotation
     if(diff) {
         glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
         int number = (int)validPositions.size();
-        
-        glBufferData(GL_ARRAY_BUFFER, number * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, number * sizeof(glm::vec3), instancePositions.data());
+        //glBufferData(GL_ARRAY_BUFFER, number * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
     glActiveTexture(GL_TEXTURE0);

@@ -1,15 +1,7 @@
 #include "mapGen.h"
 
 
-class Frustum {
-    public: 
 
-    glm::vec4 planes[6];
-
-    void normalize(glm::vec4 & plane);
-    void update();
-    const bool isChunkInFrustum(const glm::vec3 & origin, float chunkSize);
-};
 
 
 class SubChunk {
