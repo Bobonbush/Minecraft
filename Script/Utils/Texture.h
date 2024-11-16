@@ -17,6 +17,7 @@
 #include "shader.h"
 #include <memory>
 #include <Settings.h>
+#include <chrono>>
 
 
 class TextureLoader {

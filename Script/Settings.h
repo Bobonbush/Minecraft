@@ -118,7 +118,8 @@ class Setting { // Singleton
 
             currentBlockRenderer = 0;
             maxBlockRender = ChunkResolution.x * SubChunkResolution.y * ChunkResolution.z;
-            maxBlockRender *= 0.1;
+            maxBlockRender *= 0.5;
+            //maxBlockRender = 1;
             
             if(hour / MaxHour >= (glm::pi<float>() + offsetDay) * 2) {
                 hour -= glm::pi<float>() *2 * MaxHour;

@@ -303,6 +303,8 @@ CubeSurface::CubeSurface(std::shared_ptr<Shader> shader, int face, unsigned int 
     
     glBindVertexArray(0);
 
+    
+    
     glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
     glBufferData(GL_ARRAY_BUFFER, (int)instancePositions.size() * sizeof(glm::vec3), instancePositions.data(), GL_DYNAMIC_DRAW);
         
@@ -310,7 +312,7 @@ CubeSurface::CubeSurface(std::shared_ptr<Shader> shader, int face, unsigned int 
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
+    glBindVertexArray(0);
     
     
 }
@@ -396,6 +398,8 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation
     bool diff = false;
     bool neww = false;
 
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
 
     for(int i = 0; i < (int) validPositions.size(); i++) {
         if(i == (int) instancePositions.size()) {
@@ -434,6 +438,11 @@ void CubeSurface::Render(glm::vec3 position, glm::vec3 scale, glm::mat4 rotation
     glDrawElementsInstanced(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0, instancePositions.size());
 
     glBindVertexArray(0);
+
+
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "[µs]" << std::endl;
+    
 }
 
 void CubeSurface::SetBlocked(bool value) {

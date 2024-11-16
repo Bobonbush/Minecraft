@@ -54,8 +54,9 @@ void Game::Update() {
 
     
     player -> Update(deltaTime, world -> getValidBodies());
-    //FixedUpdate(xpos, ypos);
+    FixedUpdate(xpos, ypos);
     
+    return ;
     accumulatedTime += deltaTime;
     while(accumulatedTime >= maxFrameTime) {
         FixedUpdate(xpos, ypos);
@@ -107,9 +108,9 @@ void Game::Init() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDepthMask(GL_FALSE);
     glDepthFunc(GL_LESS);
-    //glEnable(GL_CULL_FACE);
-    //glCullFace(GL_BACK); // Culls back faces by default
-    //glFrontFace(GL_CCW); // Front faces are counter-clockwise
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK); // Culls back faces by default
+    glFrontFace(GL_CCW); // Front faces are counter-clockwise
     
     glViewport(0, 0, settings -> getResolution().x , settings -> getResolution().y);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);

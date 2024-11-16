@@ -10,11 +10,11 @@ in vec3 FragPos;
 in vec3 Normal;
 
 float near = 0.1;
-float far = 300.0;
+float far = 600.0;
 
 uniform vec3 lightColor = vec3(1.0);
 uniform vec3 lightPos = vec3(0.0, 0.0, 0.0);
-vec3 FogColor = vec3(0.1, 0.1, 0.1);
+vec3 FogColor = vec3(0.5, 0.5, 0.5);
 
 
 uniform vec3 viewPos = vec3(0.0, 0.0, 0.0);
@@ -78,7 +78,7 @@ void main()
 
     
     FragColor = texture(texture1, TexCoord) * ResultColor;
-    //FragColor = mix(texture(texture1, TexCoord) * ResultColor , vec4(FogColor, 1.f), fogFactor);
+    //FragColor = mix(texture(texture1, TexCoord) * ResultColor , vec4(FogColor, fogFactor), fogFactor);
     //FragColor = mix(texture(texture1, TexCoord) * ResultColor , vec4(FogColor, fogFactor),  fogFactor);
     if(FragColor.a < 0.5)
         discard;

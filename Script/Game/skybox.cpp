@@ -26,9 +26,9 @@ void Planet::Render(glm::mat4 view, glm::mat4 projection) {
 
     
     position = CameraPosition + glm::vec3(
-          distance  * cos (settings -> getHour() + TimeZone.x * glm::pi<float>()),
-          distance  * sin(settings -> getHour()+ TimeZone.y * glm::pi<float>()) , 
-        0.0f);
+          distance * settings -> getBlockNDCSize().x * cos(settings -> getHour() + TimeZone.x * glm::pi<float>()),
+          distance * settings -> getBlockNDCSize().x * sin(settings -> getHour() + TimeZone.y * glm::pi<float>()) , 
+          0.0f);
     
     
     std::vector<glm::vec3> validPositions;
@@ -48,7 +48,7 @@ void Planet::Render(glm::mat4 view, glm::mat4 projection) {
 
 
     
-    cubeRenderer -> Render(position, glm::vec3(5.0f, 5.0f, 5.0f), rotation, view, projection, validPositions);
+    cubeRenderer -> Render(position, glm::vec3(10.0f, 10.0f, 10.0f), rotation, view, projection, validPositions);
     ShaderManager * shaderManager = ShaderManager::getInstance();  
 
     float offsetDay = settings -> getOffsetDay();
