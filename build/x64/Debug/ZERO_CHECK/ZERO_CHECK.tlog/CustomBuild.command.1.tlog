@@ -1,6 +1,6 @@
-^D:\WORKSPACE\MINECRAFT\MINECRAFT\BUILD\CMAKEFILES\9374D2DDDF51E9B088DEA395FFE3ADB6\GENERATE.STAMP.RULE
+^G:\WORKSPACE\MINECRAFT\BUILD\CMAKEFILES\9ABBBE0F5DF247058AE2AC5B1F88EE74\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/WorkSpace/Minecraft/Minecraft -BD:/WorkSpace/Minecraft/Minecraft/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/WorkSpace/Minecraft/Minecraft/build/OPENGL.sln
+D:\CMAKE\bin\cmake.exe -SG:/WorkSpace/Minecraft -BG:/WorkSpace/Minecraft/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file G:/WorkSpace/Minecraft/build/OPENGL.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

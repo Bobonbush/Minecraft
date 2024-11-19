@@ -13,7 +13,6 @@ set(GLFW_PATH "GLFW")
 set(GLAD_PATH "GLAD")
 set(GLM_PATH "GLM")
 set(Utils "Script/Utils")
-set(Game "Script/Game")
 set(Script "Script")
 
 
@@ -22,7 +21,6 @@ include_directories(${GLFW_PATH}/include)
 include_directories(${GLAD_PATH}/include)
 include_directories(${GLM_PATH})
 include_directories(${Utils})
-include_directories(${Game})
 include_directories(${Script})
 
 
@@ -31,25 +29,16 @@ link_directories(${GLFW_PATH}/lib-vc2022)
 
 add_executable(OPENGL Script/main.cpp
                       GLAD/src/glad.c
-                      Script/Utils/shader.cpp
-                      Script/Utils/Texture.cpp 
-                      Script/Utils/Camera.h
-                      Script/Game/game.cpp 
-                      Script/Game/Player.cpp
-                      Script/Settings.cpp
-                      Script/Game/Blocks.cpp
-                      Script/Algorithm.h
-                      Script/Resource/ShaderLoad.cpp
-                      Script/Resource/TextureLoad.cpp
-                      Script/Resource/PerlinNoise.cpp
-                      Script/Resource/db_perlin.hpp
-                      Script/Game/world.cpp
-                      Script/Physic/rigidbody.cpp
-                      Script/Physic/PhysicVariable.cpp
-                      Script/Game/Chunks.cpp
-                      Script/Game/skybox.cpp
-                      Script/Game/mapGen.cpp
-                      
+                      Script/Utils/Shader.cpp 
+                      Script/Utils/Texture.cpp
+                      Script/Model.cpp
+                      Script/Mesh.cpp
+                      Script/Application.cpp
+                      Script/Renderer/RenderInfo.h
+                      Script/Physics/AABB.cpp
+                      Script/Entity.cpp
+                      Script/Mesh.cpp
+                      Script/Model.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

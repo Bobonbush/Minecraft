@@ -1,14 +1,8 @@
 #define STB_IMAGE_IMPLEMENTATION
-#include "Texture.h"
-#include "Camera.h"
-#include "Game/game.h"
-
-
+#include "Application.h"
 
 int main() {
-    Game game;
-    
-    game.Run();
-
+    Application app;
+    app.Run();
     return 0;
 }
