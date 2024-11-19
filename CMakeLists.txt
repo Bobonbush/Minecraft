@@ -14,11 +14,13 @@ set(GLAD_PATH "GLAD")
 set(GLM_PATH "GLM")
 set(Utils "Script/Utils")
 set(Script "Script")
+set(JSON "json-develop")
 
 
 
 include_directories(${GLFW_PATH}/include)
 include_directories(${GLAD_PATH}/include)
+include_directories(${JSON}/include)
 include_directories(${GLM_PATH})
 include_directories(${Utils})
 include_directories(${Script})
@@ -39,6 +41,20 @@ add_executable(OPENGL Script/main.cpp
                       Script/Entity.cpp
                       Script/Mesh.cpp
                       Script/Model.cpp
+                      Script/Algorithm.h
+                      Script/Utils/Singleton.h
+                      Script/Renderer/RenderMaster.cpp
+                      Script/Utils/Camera.h
+                      Script/Config.cpp
+                      Script/Utils/File.cpp
+                      Script/Texture&Shader/TextureBind.cpp
+                      Script/Renderer/QuadRenderer.cpp
+                      Script/Texture&Shader/TextureBind.cpp
+                      Script/Texture&Shader/ShaderManager.cpp
+                      Script/States/StateBase.h
+                      Script/States/PlayingState.cpp
+                      Script/Player/player.cpp
+                      
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)
@@ -53,5 +69,5 @@ add_custom_command(TARGET OPENGL POST_BUILD
                        ${ASSETS} $<TARGET_FILE_DIR:OPENGL>/Assets)
 add_custom_command(TARGET OPENGL POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${SHADERDIR} $<TARGET_FILE_DIR:OPENGL>/Shaders)
+                       ${SHADERDIR} $<TARGET_FILE_DIR:OPENGL>/Shader)
         

@@ -7,7 +7,7 @@ class RenderInfo {
 
     public:
 
-    GLuint vao;
+    GLuint vao = 0;
     GLuint indicesCount = 0;
     
     inline void reset() {

@@ -22,9 +22,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5F29886D-62CD-3F8F-81CA-F83DE7C8F0C2}</ProjectGuid>
+    <ProjectGuid>{F08188AE-CC37-32EE-93A8-D4D55F9FE78A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
     <ProjectName>OPENGL</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
@@ -59,25 +59,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">G:\WorkSpace\Minecraft\build\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\WorkSpace\Minecraft\Minecraft\build\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">OPENGL.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">OPENGL</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">G:\WorkSpace\Minecraft\build\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\WorkSpace\Minecraft\Minecraft\build\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">OPENGL.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">OPENGL</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">G:\WorkSpace\Minecraft\build\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\WorkSpace\Minecraft\Minecraft\build\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">OPENGL.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">OPENGL</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">G:\WorkSpace\Minecraft\build\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\WorkSpace\Minecraft\Minecraft\build\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">OPENGL.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">OPENGL</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
@@ -86,27 +86,30 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -116,7 +119,7 @@
     <PostBuildEvent>
       <Message>	</Message>
       <Command>setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Assets G:/WorkSpace/Minecraft/build/Debug/Assets
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory D:/WorkSpace/Minecraft/Minecraft/Assets D:/WorkSpace/Minecraft/Minecraft/build/Debug/Assets
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -125,7 +128,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Shader G:/WorkSpace/Minecraft/build/Debug/Shaders
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory D:/WorkSpace/Minecraft/Minecraft/Shader D:/WorkSpace/Minecraft/Minecraft/build/Debug/Shader
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -136,12 +139,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/WorkSpace/Minecraft/GLFW/lib-vc2022;G:/WorkSpace/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:/WorkSpace/Minecraft/Minecraft/GLFW/lib-vc2022;D:/WorkSpace/Minecraft/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/WorkSpace/Minecraft/build/Debug/OPENGL.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/WorkSpace/Minecraft/build/Debug/OPENGL.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/WorkSpace/Minecraft/Minecraft/build/Debug/OPENGL.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/WorkSpace/Minecraft/Minecraft/build/Debug/OPENGL.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -150,27 +153,31 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -180,7 +187,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message>	</Message>
       <Command>setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Assets G:/WorkSpace/Minecraft/build/Release/Assets
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory D:/WorkSpace/Minecraft/Minecraft/Assets D:/WorkSpace/Minecraft/Minecraft/build/Release/Assets
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -189,7 +196,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Shader G:/WorkSpace/Minecraft/build/Release/Shaders
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory D:/WorkSpace/Minecraft/Minecraft/Shader D:/WorkSpace/Minecraft/Minecraft/build/Release/Shader
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -200,12 +207,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/WorkSpace/Minecraft/GLFW/lib-vc2022;G:/WorkSpace/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:/WorkSpace/Minecraft/Minecraft/GLFW/lib-vc2022;D:/WorkSpace/Minecraft/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/WorkSpace/Minecraft/build/Release/OPENGL.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/WorkSpace/Minecraft/build/Release/OPENGL.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/WorkSpace/Minecraft/Minecraft/build/Release/OPENGL.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/WorkSpace/Minecraft/Minecraft/build/Release/OPENGL.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -214,27 +221,31 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>MinSpace</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -244,7 +255,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message>	</Message>
       <Command>setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Assets G:/WorkSpace/Minecraft/build/MinSizeRel/Assets
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory D:/WorkSpace/Minecraft/Minecraft/Assets D:/WorkSpace/Minecraft/Minecraft/build/MinSizeRel/Assets
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -253,7 +264,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Shader G:/WorkSpace/Minecraft/build/MinSizeRel/Shaders
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory D:/WorkSpace/Minecraft/Minecraft/Shader D:/WorkSpace/Minecraft/Minecraft/build/MinSizeRel/Shader
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -264,12 +275,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/WorkSpace/Minecraft/GLFW/lib-vc2022;G:/WorkSpace/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:/WorkSpace/Minecraft/Minecraft/GLFW/lib-vc2022;D:/WorkSpace/Minecraft/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/WorkSpace/Minecraft/build/MinSizeRel/OPENGL.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/WorkSpace/Minecraft/build/MinSizeRel/OPENGL.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/WorkSpace/Minecraft/Minecraft/build/MinSizeRel/OPENGL.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/WorkSpace/Minecraft/Minecraft/build/MinSizeRel/OPENGL.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -278,26 +289,30 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MinimalRebuild></MinimalRebuild>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\WorkSpace\Minecraft\Minecraft\GLFW\include;D:\WorkSpace\Minecraft\Minecraft\GLAD\include;D:\WorkSpace\Minecraft\Minecraft\json-develop\include;D:\WorkSpace\Minecraft\Minecraft\GLM;D:\WorkSpace\Minecraft\Minecraft\Script\Utils;D:\WorkSpace\Minecraft\Minecraft\Script;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -307,7 +322,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <PostBuildEvent>
       <Message>	</Message>
       <Command>setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Assets G:/WorkSpace/Minecraft/build/RelWithDebInfo/Assets
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory D:/WorkSpace/Minecraft/Minecraft/Assets D:/WorkSpace/Minecraft/Minecraft/build/RelWithDebInfo/Assets
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -316,7 +331,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 setlocal
-D:\CMAKE\bin\cmake.exe -E copy_directory G:/WorkSpace/Minecraft/Shader G:/WorkSpace/Minecraft/build/RelWithDebInfo/Shaders
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory D:/WorkSpace/Minecraft/Minecraft/Shader D:/WorkSpace/Minecraft/Minecraft/build/RelWithDebInfo/Shader
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -327,12 +342,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:/WorkSpace/Minecraft/GLFW/lib-vc2022;G:/WorkSpace/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:/WorkSpace/Minecraft/Minecraft/GLFW/lib-vc2022;D:/WorkSpace/Minecraft/Minecraft/GLFW/lib-vc2022/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>G:/WorkSpace/Minecraft/build/RelWithDebInfo/OPENGL.lib</ImportLibrary>
-      <ProgramDataBaseFile>G:/WorkSpace/Minecraft/build/RelWithDebInfo/OPENGL.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/WorkSpace/Minecraft/Minecraft/build/RelWithDebInfo/OPENGL.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/WorkSpace/Minecraft/Minecraft/build/RelWithDebInfo/OPENGL.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -340,11 +355,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="G:\WorkSpace\Minecraft\CMakeLists.txt">
+    <CustomBuild Include="D:\WorkSpace\Minecraft\Minecraft\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule G:/WorkSpace/Minecraft/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/WorkSpace/Minecraft/Minecraft/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-D:\CMAKE\bin\cmake.exe -SG:/WorkSpace/Minecraft -BG:/WorkSpace/Minecraft/build --check-stamp-file G:/WorkSpace/Minecraft/build/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/WorkSpace/Minecraft/Minecraft -BD:/WorkSpace/Minecraft/Minecraft/build --check-stamp-file D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -352,12 +367,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">G:\WorkSpace\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeCCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeCXXCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeRCCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule G:/WorkSpace/Minecraft/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/WorkSpace/Minecraft/Minecraft/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-D:\CMAKE\bin\cmake.exe -SG:/WorkSpace/Minecraft -BG:/WorkSpace/Minecraft/build --check-stamp-file G:/WorkSpace/Minecraft/build/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/WorkSpace/Minecraft/Minecraft -BD:/WorkSpace/Minecraft/Minecraft/build --check-stamp-file D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -365,12 +380,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">G:\WorkSpace\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeCCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeCXXCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeRCCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule G:/WorkSpace/Minecraft/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/WorkSpace/Minecraft/Minecraft/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-D:\CMAKE\bin\cmake.exe -SG:/WorkSpace/Minecraft -BG:/WorkSpace/Minecraft/build --check-stamp-file G:/WorkSpace/Minecraft/build/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/WorkSpace/Minecraft/Minecraft -BD:/WorkSpace/Minecraft/Minecraft/build --check-stamp-file D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -378,12 +393,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">G:\WorkSpace\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeCCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeCXXCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeRCCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule G:/WorkSpace/Minecraft/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/WorkSpace/Minecraft/Minecraft/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-D:\CMAKE\bin\cmake.exe -SG:/WorkSpace/Minecraft -BG:/WorkSpace/Minecraft/build --check-stamp-file G:/WorkSpace/Minecraft/build/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/WorkSpace/Minecraft/Minecraft -BD:/WorkSpace/Minecraft/Minecraft/build --check-stamp-file D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -391,26 +406,38 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\CMAKE\share\cmake-3.27\Modules\CMakeCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCXXInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeCommonLanguageInclude.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeGenericSystem.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeInitializeConfigs.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeLanguageInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeRCInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInformation.cmake;D:\CMAKE\share\cmake-3.27\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Compiler\MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-Initialize.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-C.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC-CXX.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows-MSVC.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\Windows.cmake;D:\CMAKE\share\cmake-3.27\Modules\Platform\WindowsPaths.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeCXXCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeRCCompiler.cmake;G:\WorkSpace\Minecraft\build\CMakeFiles\3.27.6\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">G:\WorkSpace\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeCCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeCXXCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeRCCompiler.cmake;D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\3.30.0-rc4\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\WorkSpace\Minecraft\Minecraft\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\main.cpp" />
-    <ClCompile Include="G:\WorkSpace\Minecraft\GLAD\src\glad.c" />
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Utils\shader.cpp" />
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Utils\Texture.cpp" />
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Model.cpp" />
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Mesh.cpp" />
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Application.cpp" />
-    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Renderer\RenderInfo.h" />
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Physics\AABB.cpp" />
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Entity.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\main.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\GLAD\src\glad.c" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\shader.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\Texture.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Model.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Mesh.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Application.cpp" />
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\RenderInfo.h" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Physics\AABB.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Entity.cpp" />
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Algorithm.h" />
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\Singleton.h" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\RenderMaster.cpp" />
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\Camera.h" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Config.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\File.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Texture&amp;Shader\TextureBind.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\QuadRenderer.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Texture&amp;Shader\ShaderManager.cpp" />
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\StateBase.h" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\PlayingState.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Player\player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="G:\WorkSpace\Minecraft\build\ZERO_CHECK.vcxproj">
-      <Project>{1A5FB8DB-289D-30E1-9BAC-8DC1CDC95C59}</Project>
+    <ProjectReference Include="D:\WorkSpace\Minecraft\Minecraft\build\ZERO_CHECK.vcxproj">
+      <Project>{3E71DD1C-5819-3E49-981B-68DB220F4500}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

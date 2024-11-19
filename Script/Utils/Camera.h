@@ -27,18 +27,6 @@ const float ZOOM        =  45.0f;
 // An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL
 
 
-struct Plane {
-    glm::vec3 normal = glm::vec3(0.f ,1.f, 0.f);
-    float distance = 0.f;
-
-    void normalize() {
-        float length = glm::length(normal);
-        normal /= length;
-        distance /= length;
-    }
-};
-
-
 class Camera
 {
     
@@ -94,7 +82,6 @@ public:
 
     glm::mat4 GetProjectionMatrix(float width, float height , float near, float far) {
         return glm::perspective(glm::radians(Zoom), width / height, near , far);
-        //return glm::perspective(glm::radians(Zoom), width / height, settings ->  getNear() , settings -> getFar());
     }
 
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)

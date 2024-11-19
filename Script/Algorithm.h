@@ -1,7 +1,6 @@
 #ifndef ALGORITHMS_H
 #define ALGORITHMS_H
 #include <Utils/Texture.h>
-#include <Settings.h>
 
 // SPA : SUPPORT FOR ALGORITHMS
 class SPA {
@@ -21,32 +20,6 @@ class SPA {
             a = max;
         }
     } 
-
-    static void ConvertToNDC(glm::vec3 &position) {
-        Setting* setting = Setting::getInstance();
-        position.x = (position.x / setting->getResolution().x) * 2 - 1;
-        position.y = (position.y / setting -> getResolution().y) * 2 - 1;
-    }
-
-    static void ConvertToNDCUnit(glm::vec3 & force) {
-        Setting* setting = Setting::getInstance();
-        const float Unit = 9049;
-        force = force / Unit;
-    }
-
-    static void ConvertNDCtoScreen(glm::vec3 &position) {
-        Setting* setting = Setting::getInstance();
-        position.x = (position.x + 1) * setting->getResolution().x / 2;
-        position.y = (position.y + 1) * setting->getResolution().y / 2;
-        
-    }
-
-    static void ConvertToNormalUnit(glm::vec3 & force) {
-        Setting* setting = Setting::getInstance();
-        const float Unit = 9049;
-        force = force * Unit;
-    }
-
 
     static void SetSeed(int seed) {
         srand(seed);

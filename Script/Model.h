@@ -2,6 +2,7 @@
 #define MODEL_H
 #include "Mesh.h"
 #include "Renderer/RenderInfo.h"
+#include <iostream>
 class Model {
     private:
     RenderInfo renderInfo;
