@@ -5,11 +5,14 @@
 #include <stdexcept>
 #include <Singleton.h>
 #include <nlohmann/json.hpp>
+#include <stack>
+#include <iostream>
 class File : public Singleton  {
     File() = default;
     static File * instance;
     using json = nlohmann::json;
     json jsonData;
+    std::stack<json> jsonStack;
 
     
 
@@ -26,7 +29,9 @@ class File : public Singleton  {
     std::string ReadFile(const std::string & path);
     void WriteFile(const std::string & path, const std::string & content);
     void SetJson(const std::string & path);
-
+    void SetNextJson(const std::string & Name);
+    void PopJson();
+    void PrintCurrentJson();
     int GetJsonInt(const std::string & key);
     float GetJsonFloat(const std::string & key);
     std::string GetJsonString(const std::string & key);

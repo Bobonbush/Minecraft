@@ -5,6 +5,7 @@
 #include <Texture&Shader/ShaderManager.h>
 #include "Utils/Camera.h"
 #include "Model.h"
+#include "Algorithm.h"
 class QuadRenderer {
     private:
         std::vector<glm::vec3> quads;

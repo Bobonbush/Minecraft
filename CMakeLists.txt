@@ -15,6 +15,7 @@ set(GLM_PATH "GLM")
 set(Utils "Script/Utils")
 set(Script "Script")
 set(JSON "json-develop")
+set(WORLD "Script/World")
 
 
 
@@ -24,7 +25,7 @@ include_directories(${JSON}/include)
 include_directories(${GLM_PATH})
 include_directories(${Utils})
 include_directories(${Script})
-
+include_directories(${WORLD})
 
 link_directories(${GLFW_PATH}/lib-vc2022)
 
@@ -54,7 +55,17 @@ add_executable(OPENGL Script/main.cpp
                       Script/States/StateBase.h
                       Script/States/PlayingState.cpp
                       Script/Player/player.cpp
-                      
+                      Script/Texture&Shader/TextureAtlas.cpp
+                      Script/Renderer/CubeRenderer.cpp
+                      Script/World/Block/BlockDatabase.cpp
+                      Script/World/Block/BlockData.cpp
+                      Script/World/Block/BlockID.h
+                      Script/World/Block/BlockType.cpp
+                      Script/World/Block/ChunkBlock.cpp
+                      Script/World/Chunk/ChunkBuilder.cpp
+                      Script/World/Chunk/ChunkMesh.cpp
+                      Script/World/Chunk/Chunk.h
+                      Script/World/Chunk/ChunkSection.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

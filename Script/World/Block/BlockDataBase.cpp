@@ -1,0 +1,22 @@
+#include "BlockDataBase.h"
+
+BlockDataBase * BlockDataBase::instance = nullptr;
+
+BlockDataBase::BlockDataBase() : textureAtlas("Assets/Default pack.png") {
+    blocks[(unsigned) BLOCKID::Grass] = std::make_unique<DefaultBlock>("Grass");
+    blocks[(unsigned) BLOCKID::Dirt] = std::make_unique<DefaultBlock>("Dirt");
+    blocks[(unsigned) BLOCKID::Stone] = std::make_unique<DefaultBlock>("Stone");
+    blocks[(unsigned) BLOCKID::Air] = std::make_unique<DefaultBlock>("Air");
+}
+
+BlockDataBase::~BlockDataBase() {
+    delete instance;
+}
+
+const BlockType & BlockDataBase::getBlock(BLOCKID id) const {
+    return *blocks[(unsigned) id];
+}
+
+const BlockData & BlockDataBase::getData(BLOCKID id) const {
+    return blocks[(unsigned) id] -> getData();
+}

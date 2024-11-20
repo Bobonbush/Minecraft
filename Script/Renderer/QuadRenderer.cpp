@@ -130,6 +130,7 @@ void QuadRenderer::renderQuads(const glm::mat4 & view, const glm::mat4 &projecti
     }
 
     glBindVertexArray(0);
+    quads.clear();
     
 
 

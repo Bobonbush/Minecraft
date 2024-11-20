@@ -1,4 +1,5 @@
-
+#ifndef SHADERMANAGER_H
+#define SHADERMANAGER_H
 #include "Shader.h"
 #include "Singleton.h"
 #include <map>
@@ -25,3 +26,5 @@ class ShaderManager {
     }
 
 };
+
+#endif // SHADERMANAGER_H

@@ -36,6 +36,20 @@ void File::SetJson(const std::string &path) {
     file.close();
 }
 
+void File::SetNextJson(const std::string &Name) {
+    jsonStack.push(jsonData);
+    jsonData = jsonData[Name];
+}
+
+void File::PrintCurrentJson() {
+    std::cout << jsonData.dump(4) << std::endl;
+}
+
+void File::PopJson() {
+    jsonData = jsonStack.top();
+    jsonStack.pop();
+}
+
 int File::GetJsonInt(const std::string &key) {
     return jsonData[key].get<int>();
 }

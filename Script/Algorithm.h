@@ -21,6 +21,16 @@ class SPA {
         }
     } 
 
+    template<class X> static void RotateArray2f(std::vector<X> & arr, int cnt) {
+        while(cnt--) {
+            for(int i = 0; i < (int) arr.size() - 2; i+= 2) {
+                std::swap(arr[i], arr[i + 2]);
+                std::swap(arr[i + 1] , arr[i +3]);
+            }
+        }
+
+    }
+
     static void SetSeed(int seed) {
         srand(seed);
     }

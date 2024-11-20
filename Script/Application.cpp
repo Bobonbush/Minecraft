@@ -57,7 +57,8 @@ void Application::Update() {
 }
 
 void Application::Render(const glm::mat4 & view, const glm::mat4 &projection ) {
-    //state -> render(renderMaster);
+    renderMaster -> drawCubes(glm::vec3(0.0f, 0.0f, 0.0f));
+    //renderMaster -> drawQuads(glm::vec3(0.0f, 0.0f, 0.0f));
     renderMaster -> finishRender(view, projection);
     
 }
@@ -82,7 +83,7 @@ void Application::FixedUpdate(float xpos, float ypos) {
 }
 
 void Application::Run() {
-    renderMaster -> drawQuads(glm::vec3(0.0f, 0.0f, 0.0f));
+    
     while(!glfwWindowShouldClose(config -> GetWindow())) {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -114,10 +115,13 @@ void Application::Run() {
         lastY = ypos;
         Update();
         Render(view, projection);
+        FixedUpdate(xoffset, yoffset);
+        /*
         while(accumulator >= maxFrameTime) {
             accumulator -= maxFrameTime;
             FixedUpdate(xoffset, yoffset);
         }
+        */
 
         Alpha = accumulator / maxFrameTime;
 
