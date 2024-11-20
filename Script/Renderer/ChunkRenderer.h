@@ -15,6 +15,10 @@ class ChunkRenderer {
         ChunkRenderer();
         void add(const ChunkMesh & mesh);
         void render(const glm::mat4 & view, const glm::mat4 & projection);
+
+        void OutputMeshes() {
+            std::cout << meshes.size() << std::endl;
+        }
 };
 
 #endif // CHUNKRENDERER_H

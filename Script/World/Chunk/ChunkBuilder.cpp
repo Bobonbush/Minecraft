@@ -4,9 +4,6 @@ ChunkBuilder::ChunkBuilder(ChunkSection &chunk) : pChunk(&chunk) {
 }
 
 ChunkBuilder :: ~ChunkBuilder() {
-    delete pChunk;
-    delete pMesh;
-    delete pblockData;
 }
 
 void ChunkBuilder::BuildMesh(ChunkMesh & mesh) {

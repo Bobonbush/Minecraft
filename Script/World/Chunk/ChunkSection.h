@@ -22,4 +22,8 @@ class ChunkSection {
         ChunkBlock getBlock(int x, int y, int z) const;
 
         const glm::vec3 &getPosition() const;
+
+        void outputMesh() {
+            mesh.bufferMesh();
+        }
 };

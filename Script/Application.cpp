@@ -49,6 +49,12 @@ void Application::Init() {
     renderMaster = std::make_unique<RenderMaster>();
     glfwSetInputMode(config -> GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     //state = std::make_unique<PlayingState>();
+
+    ChunkBuilder builder(chunk);
+    builder.BuildMesh(chunk.mesh);
+
+    chunk.outputMesh();
+
 }
 
 
@@ -58,8 +64,8 @@ void Application::Update() {
 
 void Application::Render(const glm::mat4 & view, const glm::mat4 &projection ) {
     renderMaster -> drawCubes(glm::vec3(0.0f, 0.0f, 0.0f));
-    ChunkBuilder builder(chunk);
-    //ChunkMesh mesh;
+    renderMaster -> drawChunk(chunk.mesh);
+    
     //builder.BuildMesh(mesh);
     //renderMaster -> drawChunk(mesh);
     //renderMaster -> drawQuads(glm::vec3(0.0f, 0.0f, 0.0f));
