@@ -16,9 +16,9 @@ void Config::SetVersion() {
 }
 void Config::ChangeConfig() {
 
-    glfwWindowHint(GLFW_SAMPLES, antialiasing);
-    glfwWindowHint(GLFW_DEPTH_BITS, depthBits);
-    glfwWindowHint(GLFW_STENCIL_BITS, stencilBits);
+    //glfwWindowHint(GLFW_SAMPLES, antialiasing);
+    //glfwWindowHint(GLFW_DEPTH_BITS, depthBits);
+    //glfwWindowHint(GLFW_STENCIL_BITS, stencilBits);
 
     glfwSetWindowSize(window, width, height);
     glViewport(0, 0, width, height);
@@ -30,7 +30,6 @@ void Config::ReadConfig() {
     width = file -> GetJsonFloat("width");
     height = file -> GetJsonFloat("height");
 
-    std::cout << width << " " << height << std::endl;
     antialiasing = file -> GetJsonInt("antialiasing");
     depthBits = file -> GetJsonInt("depthBits");
     stencilBits = file -> GetJsonInt("stencilBits");

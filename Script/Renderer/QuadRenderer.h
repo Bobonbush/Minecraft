@@ -8,9 +8,9 @@
 class QuadRenderer {
     private:
         std::vector<glm::vec3> quads;
-        Model quadModel;
+        std::unique_ptr<Model> quadModel;
         std::shared_ptr<Shader> shader;
-        TextureBind texture;
+        std::unique_ptr<TextureBind> texture;
 
         
     

@@ -29,7 +29,7 @@ class Model {
     void addEBO(const std::vector<GLuint> &data);
 
     void bindVao() const;
-
+    
     int getVertexCount() const;
     int getIndicesCount() const;
 

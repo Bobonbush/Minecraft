@@ -48,32 +48,39 @@ void Model::bindVao() const {
 void Model::addData(const Mesh & mesh) {
     genVAO();
     addVBO(3, mesh.vertexPosition);
+
+
     addVBO(2, mesh.textureCoords);
+
     addEBO(mesh.indices);
-    
-    std::cout << "Indices count: " << mesh.indices.size() << std::endl;
-    std::cout << "Vertex count: " << mesh.vertexPosition.size()  << std::endl;
+
     renderInfo.indicesCount = static_cast<GLuint>(mesh.indices.size());
+
+    glBindVertexArray(0);
 }
 
 void Model::addVBO(int dim, const std::vector<GLfloat> &data) {
     GLuint vbo;
+
     glGenBuffers(1, &vbo);
+    
+    //glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(GLfloat), data.data(), GL_STATIC_DRAW);
-    glVertexAttribPointer(static_cast<GLuint>(m_vboCount), dim, GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(static_cast<GLuint>(m_vboCount), dim, GL_FLOAT, GL_FALSE, dim * sizeof(GLfloat), 0);
     glEnableVertexAttribArray(static_cast<GLuint>(m_vboCount));
-    //glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     buffers.push_back(vbo);
     m_vboCount++;
 }
 
 void Model::addEBO(const std::vector<GLuint> & indices) {
     renderInfo.indicesCount = static_cast<GLuint>(indices.size());
+
     GLuint ebo;
     glGenBuffers(1, &ebo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
     buffers.push_back(ebo);
 }
 

@@ -25,6 +25,9 @@ class Application : public Singleton {
         std::unique_ptr<Camera> camera;
         std::unique_ptr<PlayingState> state;
         //StatePlaying state;
+
+        float lastX = -192313.0f;
+        float lastY = -192313.0f;
         void Init();
 
         void Update();
