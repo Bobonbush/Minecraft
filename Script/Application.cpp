@@ -58,6 +58,10 @@ void Application::Update() {
 
 void Application::Render(const glm::mat4 & view, const glm::mat4 &projection ) {
     renderMaster -> drawCubes(glm::vec3(0.0f, 0.0f, 0.0f));
+    ChunkBuilder builder(chunk);
+    //ChunkMesh mesh;
+    //builder.BuildMesh(mesh);
+    //renderMaster -> drawChunk(mesh);
     //renderMaster -> drawQuads(glm::vec3(0.0f, 0.0f, 0.0f));
     renderMaster -> finishRender(view, projection);
     

@@ -59,13 +59,14 @@ add_executable(OPENGL Script/main.cpp
                       Script/Renderer/CubeRenderer.cpp
                       Script/World/Block/BlockDatabase.cpp
                       Script/World/Block/BlockData.cpp
-                      Script/World/Block/BlockID.h
+                      Script/World/Block/Block.cpp
                       Script/World/Block/BlockType.cpp
                       Script/World/Block/ChunkBlock.cpp
                       Script/World/Chunk/ChunkBuilder.cpp
                       Script/World/Chunk/ChunkMesh.cpp
                       Script/World/Chunk/Chunk.h
                       Script/World/Chunk/ChunkSection.cpp
+                      Script/Renderer/ChunkRenderer.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

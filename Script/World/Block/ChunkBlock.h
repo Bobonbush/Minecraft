@@ -13,6 +13,7 @@ class ChunkBlock {
     ChunkBlock() = default;
     
     ChunkBlock(BLOCKID id);
+    
     const BlockData& getData() const;
     const BlockType& getType() const;
 

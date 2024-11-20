@@ -10,6 +10,6 @@ BlockData::BlockData(const std::string & name) {
 
 }
 
-const BlockDataHolder & BlockData::getBlockData(int id) const {
+const BlockDataHolder & BlockData::getBlockData() const {
     return blockData;
 }

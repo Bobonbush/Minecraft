@@ -15,7 +15,7 @@ class BlockData {
     public: 
         BlockData(const std::string &fileName);
 
-        const BlockDataHolder & getBlockData(int id) const;
+        const BlockDataHolder & getBlockData() const;
 
     private :
 
