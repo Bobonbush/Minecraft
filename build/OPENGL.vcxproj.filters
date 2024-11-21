@@ -49,9 +49,6 @@
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Texture&amp;Shader\ShaderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\PlayingState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Player\player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -86,6 +83,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\ChunkRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Maths\FastNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Physics\PhysicCons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Physics\RigidBody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\SceneState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

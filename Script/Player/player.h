@@ -3,14 +3,21 @@
 
 class Player : public Entity, Singleton {
     private:
-        void keyboardInput(float deltaTime);
-        void mouseInput(float deltaTime);
 
         glm::vec3 m_velocity;
-    
-    public:
+        static Player * m_instance;
         Player();
+    public:
+        static Player * GetInstance() {
+            if(m_instance == nullptr) {
+                m_instance = new Player();
+            }
+            return m_instance;
+        }
 
+        ~Player();
+        
+        
         void update(float deltaTime);
 
     

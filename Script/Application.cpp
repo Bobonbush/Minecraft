@@ -44,62 +44,26 @@ void Application::Init() {
     glFrontFace(GL_CCW); // Front faces are counter-clockwise
     */
     config -> ChangeConfig();
-
-    camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
-    renderMaster = std::make_unique<RenderMaster>();
-    glfwSetInputMode(config -> GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     //state = std::make_unique<PlayingState>();
 
-    ChunkBuilder builder(chunk);
-    builder.BuildMesh(chunk.mesh);
-
-    chunk.mesh.bufferMesh();
-
 }
 
 
-void Application::Update() {
-    
+void Application::Update(float deltaTime) {
+    states.Update(deltaTime);
 }
 
-void Application::Render(const glm::mat4 & view, const glm::mat4 &projection ) {
-    renderMaster -> drawChunk(chunk.mesh);
-    
-    //builder.BuildMesh(mesh);
-    //renderMaster -> drawChunk(mesh);
-    //renderMaster -> drawQuads(glm::vec3(0.0f, 0.0f, 0.0f));
-    renderMaster -> finishRender(view, projection);
-    
+void Application::Render( ) {
+    states.render();
 }
 
 void Application::FixedUpdate(float xpos, float ypos) {
-    camera -> ProcessMouseMovement(xpos , ypos);
-
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_W) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::FORWARD, elapsedTime);
-    }
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_S) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::BACKWARD, elapsedTime);
-    }
-
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_A) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::LEFT, elapsedTime);
-    }
-
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_D) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::RIGHT, elapsedTime);
-    }
-
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::UP, elapsedTime);
-    }
-
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::DOWN, elapsedTime);
-    }
+    states.FixedUpdate(xpos, ypos);
 }
 
 void Application::Run() {
+
+    states.pushState(std::make_unique<World>());
     
     while(!glfwWindowShouldClose(config -> GetWindow())) {
 
@@ -107,11 +71,6 @@ void Application::Run() {
         glClearColor(0.2f, 0.3f , 0.7f , 1.f);
         //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         
-        glm::mat4 view = camera -> GetViewMatrix();
-        //view = glm::mat4(1.0f);
-       
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 100.0f);
-        //projection = glm::mat4(1.0f);
         float currentTime = glfwGetTime();
         elapsedTime = currentTime - lastTime;
         lastTime = currentTime;
@@ -120,6 +79,8 @@ void Application::Run() {
         double xpos, ypos;
         
         glfwGetCursorPos(config -> GetWindow(), &xpos, &ypos);
+
+        
 
         if(lastX == -192313.0f) {
             lastX = xpos;   
@@ -131,15 +92,14 @@ void Application::Run() {
         
         lastX = xpos;
         lastY = ypos;
-        Update();
-        Render(view, projection);
-        FixedUpdate(xoffset, yoffset);
-        /*
+        Update(elapsedTime);
+        Render();
+        
         while(accumulator >= maxFrameTime) {
             accumulator -= maxFrameTime;
             FixedUpdate(xoffset, yoffset);
         }
-        */
+        
 
         Alpha = accumulator / maxFrameTime;
 

@@ -432,7 +432,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\QuadRenderer.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Texture&amp;Shader\ShaderManager.cpp" />
     <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\StateBase.h" />
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\PlayingState.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Player\player.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Texture&amp;Shader\TextureAtlas.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\CubeRenderer.cpp" />
@@ -446,6 +445,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\Chunk.h" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkSection.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\ChunkRenderer.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Maths\FastNoise.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\World.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkManager.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Physics\PhysicCons.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Physics\RigidBody.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\SceneState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\WorkSpace\Minecraft\Minecraft\build\ZERO_CHECK.vcxproj">

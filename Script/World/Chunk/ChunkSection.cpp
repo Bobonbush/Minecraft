@@ -1,8 +1,7 @@
 #include "ChunkSection.h"
 
 
-ChunkSection::ChunkSection() {
-    position = glm::vec3(0.0f);
+ChunkSection::ChunkSection(glm::vec3 &position) : position(position) {
     for(int i = 0 ; i < Chunk::CHUNK_VOLUME ; i++) {
         blocks[i] = ChunkBlock(BLOCKID::Grass);
     }

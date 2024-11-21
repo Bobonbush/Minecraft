@@ -1,3 +1,5 @@
+#ifndef CHUNKBUILDER_H
+#define CHUNKBUILDER_H
 #include "ChunkMesh.h"
 #include "ChunkSection.h"
 #include "Chunk.h"
@@ -39,3 +41,5 @@ class ChunkBuilder {
         ~ChunkBuilder();
     
 };
+
+#endif // CHUNKBUILDER_H

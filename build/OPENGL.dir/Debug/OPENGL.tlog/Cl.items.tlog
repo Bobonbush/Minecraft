@@ -14,7 +14,6 @@ D:\WorkSpace\Minecraft\Minecraft\Script\Utils\File.cpp;D:\WorkSpace\Minecraft\Mi
 D:\WorkSpace\Minecraft\Minecraft\Script\Texture&Shader\TextureBind.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\TextureBind.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\QuadRenderer.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\QuadRenderer.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\Texture&Shader\ShaderManager.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\ShaderManager.obj
-D:\WorkSpace\Minecraft\Minecraft\Script\States\PlayingState.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\PlayingState.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\Player\player.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\player.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\Texture&Shader\TextureAtlas.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\TextureAtlas.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\CubeRenderer.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\CubeRenderer.obj
@@ -27,3 +26,9 @@ D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkBuilder.cpp;D:\WorkSpac
 D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkMesh.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\ChunkMesh.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkSection.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\ChunkSection.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\ChunkRenderer.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\ChunkRenderer.obj
+D:\WorkSpace\Minecraft\Minecraft\Script\Maths\FastNoise.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\FastNoise.obj
+D:\WorkSpace\Minecraft\Minecraft\Script\World\World.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\World.obj
+D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkManager.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\ChunkManager.obj
+D:\WorkSpace\Minecraft\Minecraft\Script\Physics\PhysicCons.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\PhysicCons.obj
+D:\WorkSpace\Minecraft\Minecraft\Script\Physics\RigidBody.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\RigidBody.obj
+D:\WorkSpace\Minecraft\Minecraft\Script\States\SceneState.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\SceneState.obj

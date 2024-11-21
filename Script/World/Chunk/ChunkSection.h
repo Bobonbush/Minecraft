@@ -1,3 +1,5 @@
+#ifndef CHUNKSECTION_H
+#define CHUNKSECTION_H
 #include "Chunk.h"
 #include "Block/ChunkBlock.h"
 #include "ChunkMesh.h"
@@ -15,7 +17,8 @@ class ChunkSection {
     public :
         ChunkMesh mesh;
 
-        ChunkSection();
+        ChunkSection(glm::vec3 &position);
+        ChunkSection() = default;
 
         void setBlock(int x, int y, int z, ChunkBlock id);
 
@@ -27,3 +30,5 @@ class ChunkSection {
             mesh.bufferMesh();
         }
 };
+
+#endif // CHUNKSECTION_H

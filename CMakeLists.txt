@@ -53,7 +53,6 @@ add_executable(OPENGL Script/main.cpp
                       Script/Texture&Shader/TextureBind.cpp
                       Script/Texture&Shader/ShaderManager.cpp
                       Script/States/StateBase.h
-                      Script/States/PlayingState.cpp
                       Script/Player/player.cpp
                       Script/Texture&Shader/TextureAtlas.cpp
                       Script/Renderer/CubeRenderer.cpp
@@ -67,6 +66,12 @@ add_executable(OPENGL Script/main.cpp
                       Script/World/Chunk/Chunk.h
                       Script/World/Chunk/ChunkSection.cpp
                       Script/Renderer/ChunkRenderer.cpp
+                      Script/Maths/FastNoise.cpp
+                      Script/World/World.cpp
+                      Script/World/Chunk/ChunkManager.cpp
+                      Script/Physics/PhysicCons.cpp
+                      Script/Physics/RigidBody.cpp
+                      Script/States/SceneState.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

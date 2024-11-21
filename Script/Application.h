@@ -6,7 +6,8 @@
 #include "Utils/Camera.h"
 #include "Config.h"
 #include "Renderer/RenderMaster.h"
-#include "States/PlayingState.h"
+#include "States/SceneState.h"
+#include "World.h"
 
 
 
@@ -20,24 +21,25 @@ class Application : public Singleton {
         float maxFrameTime = 1/ 60.f;
         float Alpha = 1.0f;
         static Application* instance;
-        Config * config;
-        std::unique_ptr<RenderMaster> renderMaster;
-        std::unique_ptr<Camera> camera;
-        std::unique_ptr<PlayingState> state;
-        ChunkSection chunk;
-        //StatePlaying state;
+        
 
+        SceneState states;
+        
+        
+        //StatePlaying state;
         float lastX = -192313.0f;
         float lastY = -192313.0f;
+        
         void Init();
 
-        void Update();
-        void Render(const glm::mat4 & view, const glm::mat4 & projection);
+        void Update(float deltaTime);
+        void Render();
 
         void FixedUpdate(float xpos, float ypos);
         Application();
         ~Application();
     public:
+        Config * config;
         static Application * GetInstance() {
             if(instance == nullptr) {
                 instance = new Application();
