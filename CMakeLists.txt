@@ -45,7 +45,7 @@ add_executable(OPENGL Script/main.cpp
                       Script/Algorithm.h
                       Script/Utils/Singleton.h
                       Script/Renderer/RenderMaster.cpp
-                      Script/Utils/Camera.h
+                      Script/Utils/Camera.cpp
                       Script/Config.cpp
                       Script/Utils/File.cpp
                       Script/Texture&Shader/TextureBind.cpp

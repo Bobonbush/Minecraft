@@ -1,6 +1,7 @@
 #include "ChunkMesh.h"
 #include "ChunkSection.h"
 #include "Chunk.h"
+#include "Algorithm.h"
 
 class ChunkBuilder {
 

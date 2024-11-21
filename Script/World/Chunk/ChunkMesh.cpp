@@ -27,10 +27,17 @@ void ChunkMesh::addFace(const std::vector<GLfloat> & vertices, const std::vector
 void ChunkMesh::bufferMesh() {
     std::cout << "Buffering Mesh" << std::endl;
     std::cout << mesh.vertexPosition.size() << std::endl;
+
+    
     std::cout << mesh.textureCoords.size() << std::endl;
+    for(int i =  0 ; i < mesh.textureCoords.size() ; i+= 2) {
+        mesh.textureCoords[i+1] = 1 - mesh.textureCoords[i+1];
+    }
     std::cout << mesh.indices.size() << std::endl;
 
     Chunkmodel.addData(mesh);
+
+    std::cout << "Buffered Mesh" << std::endl;
 
     mesh.vertexPosition.clear();
     mesh.textureCoords.clear();

@@ -53,7 +53,7 @@ void Application::Init() {
     ChunkBuilder builder(chunk);
     builder.BuildMesh(chunk.mesh);
 
-    chunk.outputMesh();
+    chunk.mesh.bufferMesh();
 
 }
 
@@ -63,7 +63,6 @@ void Application::Update() {
 }
 
 void Application::Render(const glm::mat4 & view, const glm::mat4 &projection ) {
-    renderMaster -> drawCubes(glm::vec3(0.0f, 0.0f, 0.0f));
     renderMaster -> drawChunk(chunk.mesh);
     
     //builder.BuildMesh(mesh);
@@ -77,18 +76,26 @@ void Application::FixedUpdate(float xpos, float ypos) {
     camera -> ProcessMouseMovement(xpos , ypos);
 
     if(glfwGetKey(config -> GetWindow(), GLFW_KEY_W) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(FORWARD, elapsedTime);
+        camera -> ProcessKeyboard(Camera_Movement::FORWARD, elapsedTime);
     }
     if(glfwGetKey(config -> GetWindow(), GLFW_KEY_S) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(BACKWARD, elapsedTime);
+        camera -> ProcessKeyboard(Camera_Movement::BACKWARD, elapsedTime);
     }
 
     if(glfwGetKey(config -> GetWindow(), GLFW_KEY_A) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(LEFT, elapsedTime);
+        camera -> ProcessKeyboard(Camera_Movement::LEFT, elapsedTime);
     }
 
     if(glfwGetKey(config -> GetWindow(), GLFW_KEY_D) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(RIGHT, elapsedTime);
+        camera -> ProcessKeyboard(Camera_Movement::RIGHT, elapsedTime);
+    }
+
+    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
+        camera -> ProcessKeyboard(Camera_Movement::UP, elapsedTime);
+    }
+
+    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+        camera -> ProcessKeyboard(Camera_Movement::DOWN, elapsedTime);
     }
 }
 
@@ -101,9 +108,10 @@ void Application::Run() {
         //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         
         glm::mat4 view = camera -> GetViewMatrix();
-        //iew = glm::mat4(1.0f);
+        //view = glm::mat4(1.0f);
        
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 100.0f);
+        //projection = glm::mat4(1.0f);
         float currentTime = glfwGetTime();
         elapsedTime = currentTime - lastTime;
         lastTime = currentTime;

@@ -5,26 +5,32 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-// Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
-enum Camera_Movement {
-    FORWARD,
-    BACKWARD,
-    LEFT,
-    RIGHT
-};
 
-// Default camera values
-const float YAW         = -90.0f;
-const float PITCH       =  0.0f;
-const float SPEED       =  2.5f;
-const float SENSITIVITY =  0.1f;
-const float ZOOM        =  45.0f;
 
 
 // An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL
+enum class  Camera_Movement : int {
+    FORWARD = 0,
+    BACKWARD,
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN
+};
+
 class Camera
 {
 public:
+
+    // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
+
+
+// Default camera values
+    static const float YAW ;      
+    static const float PITCH;      
+    const float SPEED       =  5.5f;
+    const float SENSITIVITY =  0.1f;
+    const float ZOOM        =  45.0f;
     // camera Attributes
     glm::vec3 Position;
     glm::vec3 Front;
@@ -68,14 +74,18 @@ public:
     void ProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
         float velocity = MovementSpeed * deltaTime;
-        if (direction == FORWARD)
+        if (direction == Camera_Movement::FORWARD)
             Position += Front * velocity;
-        if (direction == BACKWARD)
+        if (direction == Camera_Movement::BACKWARD)
             Position -= Front * velocity;
-        if (direction == LEFT)
+        if (direction == Camera_Movement::LEFT)
             Position -= Right * velocity;
-        if (direction == RIGHT)
+        if (direction == Camera_Movement::RIGHT)
             Position += Right * velocity;
+        if(direction == Camera_Movement::UP)
+            Position += Up * velocity;
+        if(direction == Camera_Movement::DOWN)
+            Position -= Up * velocity;
     }
 
     // processes input received from a mouse input system. Expects the offset value in both the x and y direction.
@@ -125,4 +135,6 @@ private:
         Up    = glm::normalize(glm::cross(Right, Front));
     }
 };
+
+
 #endif

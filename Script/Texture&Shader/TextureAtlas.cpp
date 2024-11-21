@@ -16,17 +16,21 @@ std::vector<GLfloat> TextureAtlas::getTexture(const glm::vec2 & coords) {
     float yMin = y * individualTextureSize / imageSize;
     float yMax = (y + 1) * individualTextureSize / imageSize;
 
+    textureCoords.push_back(xMin);
+    textureCoords.push_back(yMin);
+
+    textureCoords.push_back(xMin);
+    textureCoords.push_back(yMax);
+
     textureCoords.push_back(xMax);
     textureCoords.push_back(yMax);
 
     textureCoords.push_back(xMax);
     textureCoords.push_back(yMin);
 
-    textureCoords.push_back(xMin);
-    textureCoords.push_back(yMin);
+    
 
-    textureCoords.push_back(xMin);
-    textureCoords.push_back(yMax);
+    
 
     return textureCoords;
 }

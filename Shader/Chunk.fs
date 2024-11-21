@@ -1,10 +1,10 @@
 #version 330
 
 out vec4 outColor;
-in vec2 aCoords;
+in vec2 coords;
 
 uniform sampler2D uTexture;
 
 void main() {
-    outColor = texture(uTexture, aCoords);
+    outColor = texture(uTexture, coords);
 }

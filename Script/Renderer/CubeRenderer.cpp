@@ -66,6 +66,8 @@ CubeRenderer::CubeRenderer() {
     for(int i = 0 ; i < 6 * 4 * 2 ; i+= 2) {
        texcoords[i+1] = 1 - texcoords[i+1];
     }
+    
+    
     std::vector<GLuint> indices = {
         0, 1, 3,
         1, 2, 3,

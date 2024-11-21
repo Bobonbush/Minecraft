@@ -7,7 +7,8 @@ BlockData::BlockData(const std::string & name) {
     blockData.topCoords = glm::vec2(file -> GetJsonFloat("topX"), file -> GetJsonFloat("topY"));
     blockData.sideCoords = glm::vec2(file -> GetJsonFloat("sideX"), file -> GetJsonFloat("sideY"));
     blockData.bottomCoords = glm::vec2(file -> GetJsonFloat("bottomX"), file -> GetJsonFloat("bottomY"));
-
+    file ->PopJson();
+    //file->PopJson();
 }
 
 const BlockDataHolder & BlockData::getBlockData() const {
