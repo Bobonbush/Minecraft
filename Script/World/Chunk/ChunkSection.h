@@ -8,7 +8,7 @@
 class ChunkSection {
     private: 
         static bool outOfBounds(int x, int y, int z);
-        static int getIndex(int x, int y, int z);
+        int getIndex(int x, int y, int z) const;
         std::array<ChunkBlock, Chunk::CHUNK_VOLUME> blocks;
         
         
@@ -17,7 +17,7 @@ class ChunkSection {
     public :
         ChunkMesh mesh;
 
-        ChunkSection(glm::vec3 &position);
+        ChunkSection(const glm::vec3& position);
         ChunkSection() = default;
 
         void setBlock(int x, int y, int z, ChunkBlock id);

@@ -18,18 +18,13 @@ class Config : public Singleton {
         GLFWwindow * window;
         static Config * instance;
         Config() = default;
+
+        float RenderChunk = 5;
         
 
     public :
 
-        // Getter Setter
-        float GetWidth() const {
-            return width;
-        }
-
-        float GetHeight() const {
-            return height;
-        }
+        
         
 
         ~Config() {
@@ -45,13 +40,33 @@ class Config : public Singleton {
             return instance;
         }
 
+        // Methods        
+        void ChangeConfig();
+        
+        void ReadConfig();
+
+
+
+
+
+        // Getter Setter
+        
+        float GetRenderChunk() const {
+            return RenderChunk;
+        }
+
+        float GetWidth() const {
+            return width;
+        }
+
+        float GetHeight() const {
+            return height;
+        }
+
         GLFWwindow * GetWindow() const {
             return window;
         }
         void SetVersion();
-        void ChangeConfig();
-        
-        void ReadConfig();
 
         
 };

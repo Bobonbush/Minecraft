@@ -8,6 +8,8 @@ class ChunkManager {
         std::vector<ChunkSection> chunks;
         RenderMaster renderMaster;
         Player m_player;
+
+        float renderDistance = 5;
     public :
         
         void UnloadChunks();
@@ -16,4 +18,6 @@ class ChunkManager {
         void addBlock(int x, int y, int z, ChunkBlock block);
         void removeBlock(int x, int y, int z);
         void renderChunks();
+        void getBlock(float x , float y , float z);
+        void getChunk(float x , float z);
 };

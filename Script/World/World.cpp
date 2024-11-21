@@ -5,19 +5,6 @@ World::World() : StateBase() {
     camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
     renderMaster = std::make_unique<RenderMaster>();
     glfwSetInputMode(Application::GetInstance() -> config -> GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    for(int x = 0 ; x < 1 ; x++) {
-        for(int z = 0 ; z < 1 ; z++) {
-            
-            chunks.push_back(ChunkSection(glm::vec3(x, 0, z)));
-            
-            ChunkSection &chunk = chunks.back();
-
-            ChunkBuilder builder(chunk);
-            builder.BuildMesh(chunk.mesh);
-            chunk.mesh.bufferMesh();
-            
-        }
-    }
 }
 
 void World::render() {

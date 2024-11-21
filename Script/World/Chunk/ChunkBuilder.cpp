@@ -10,7 +10,7 @@ void ChunkBuilder::BuildMesh(ChunkMesh & mesh) {
     pMesh = &mesh;
     AdjacentBlock directions;
 
-    for(int y = 0 ; y <  Chunk::CHUNK_SIZE ; y++) {
+    for(int y = 0 ; y <  Chunk::CHUNK_HEIGHT ; y++) {
         for(int x = 0 ; x < Chunk::CHUNK_SIZE ;  x++) {
             for(int z = 0 ; z < Chunk::CHUNK_SIZE ; z++) { 
                 glm::vec3 position = glm::vec3(x, y, z);
@@ -31,7 +31,6 @@ void ChunkBuilder::BuildMesh(ChunkMesh & mesh) {
                 tryAddFaceToMesh(Block::Right, data.sideCoords, position, directions.right);
                 
                 tryAddFaceToMesh(Block::Back, data.sideCoords, position, directions.back);
-
             }
         }
     }

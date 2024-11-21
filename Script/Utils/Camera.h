@@ -29,8 +29,8 @@ public:
 // Default camera values
     static const float YAW ;      
     static const float PITCH;      
-    const float SPEED       =  5.5f;
-    const float SENSITIVITY =  0.1f;
+    const float SPEED       =  0.25f;
+    const float SENSITIVITY =  0.2f;
     const float ZOOM        =  45.0f;
     // camera Attributes
     glm::vec3 Position;
