@@ -13,14 +13,11 @@ void World::render() {
        
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 100.0f);
         
-    for(auto & chunk : chunks) {
-        renderMaster -> drawChunk(chunk.mesh);
-    }
-    renderMaster -> finishRender(view, projection);
+    chunkManager.renderChunks(view, projection);
 }
 
 void World::Update(float deltaTime) {
-    
+    chunkManager.update();
 }
 
 

@@ -1,15 +1,19 @@
 #ifndef WORLD_H
 #define WORLD_H
-#include "Chunk/ChunkBuilder.h"
 #include "Renderer/RenderMaster.h"
 #include "States/SceneState.h"
 #include "Application.h"
+#include "Chunk/ChunkManager.h"
 
 class World : public StateBase {
     private:
         std::unique_ptr<RenderMaster> renderMaster;
         std::unique_ptr<Camera> camera;
         std::vector<ChunkSection> chunks;
+
+
+        ChunkManager chunkManager;
+
 
         
     public :

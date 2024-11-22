@@ -17,7 +17,19 @@ class Entity
         Entity(const glm::vec3 &pos, const glm::vec3 &rot, const AABB &box) : box(box) , position(pos) , rotation(rot), velocity(glm::vec3(0.0f)) {}
 
         virtual void update(float deltaTime) = 0;
-        virtual void FixedUpdate();
+        virtual void FixedUpdate() = 0;
+
+        glm::vec3 getPosition() const {
+            return position;
+        }
+
+        glm::vec3 getRotation() const {
+            return rotation;
+        }
+
+        glm::vec3 getVelocity() const {
+            return velocity;
+        }
 };
 
 class STATIC_ENTITY : Entity {

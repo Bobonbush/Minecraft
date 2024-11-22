@@ -15,10 +15,14 @@ class Player : public Entity, Singleton {
             return m_instance;
         }
 
-        ~Player();
+        ~Player() {
+            delete m_instance;
+        }
         
         
-        void update(float deltaTime);
+        virtual void update(float deltaTime) override;
+        virtual void FixedUpdate() override;
+    
 
     
 };

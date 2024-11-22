@@ -38,6 +38,8 @@ public:
     glm::vec3 Up;
     glm::vec3 Right;
     glm::vec3 WorldUp;
+
+    Entity * attachedEntity = nullptr;
     // euler Angles
     float Yaw;
     float Pitch;
@@ -69,6 +71,10 @@ public:
     glm::mat4 GetViewMatrix()
     {
         return glm::lookAt(Position, Position + Front, Up);
+    }
+
+    void AttachEntity(Entity * entity) {
+        attachedEntity = entity;
     }
 
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
