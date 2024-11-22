@@ -14,6 +14,8 @@ class World : public StateBase {
 
         ChunkManager chunkManager;
 
+        Player * player;
+
 
         
     public :

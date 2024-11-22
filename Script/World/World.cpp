@@ -5,6 +5,9 @@ World::World() : StateBase() {
     camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
     renderMaster = std::make_unique<RenderMaster>();
     glfwSetInputMode(Application::GetInstance() -> config -> GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    player = Player::GetInstance();
+
+    camera -> attachedEntity = player;
 }
 
 void World::render() {
@@ -18,36 +21,16 @@ void World::render() {
 
 void World::Update(float deltaTime) {
     chunkManager.update();
+    camera -> update();
+    player -> update(deltaTime);
 }
 
 
 void World::FixedUpdate(float xpos, float ypos) {
     camera -> ProcessMouseMovement(xpos , ypos);
+    camera -> FixedUpdate();
 
-    float elapsedTime = 1.f;
+    
 
-    Config * config = Application::GetInstance() -> config;
-
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_W) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::FORWARD, elapsedTime);
-    }
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_S) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::BACKWARD, elapsedTime);
-    }
-
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_A) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::LEFT, elapsedTime);
-    }
-
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_D) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::RIGHT, elapsedTime);
-    }
-
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_SPACE) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::UP, elapsedTime);
-    }
-
-    if(glfwGetKey(config -> GetWindow(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-        camera -> ProcessKeyboard(Camera_Movement::DOWN, elapsedTime);
-    }
+    player -> FixedUpdate();
 }

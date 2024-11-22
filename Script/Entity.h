@@ -30,9 +30,11 @@ class Entity
         glm::vec3 getVelocity() const {
             return velocity;
         }
+
+        virtual void addForce(const glm::vec3 &force) = 0 ;
 };
 
-class STATIC_ENTITY : Entity {
+class STATIC_ENTITY : public Entity {
     public :
         STATIC_ENTITY(const glm::vec3 &pos, const glm::vec3 &rot, const AABB &box) : Entity(pos, rot, box) {}
 
@@ -43,7 +45,51 @@ class STATIC_ENTITY : Entity {
     
 };
 
-class DYNAMIC_ENTITY : Entity {
+class DYNAMIC_ENTITY : public Entity {
+    protected :
+        glm::vec3 acceleration = glm::vec3(0.0f);
+        float mass = 0.f;
+        glm::vec3 force = glm::vec3(0.0f);
+
+        float friction = 0.95f; // By default
+
+        void applyForce() {
+            acceleration += force / mass;
+            force = glm::vec3(0.0f);
+        }
+    public :
+        DYNAMIC_ENTITY(const glm::vec3 &pos, const glm::vec3 &rot, const AABB &box, float mass) : Entity(pos, rot, box) , mass(mass) {}
+        DYNAMIC_ENTITY(const glm::vec3 &pos, const glm::vec3 &rot, float mass) : Entity(pos, rot) , mass(mass) {}
+        DYNAMIC_ENTITY(float mass) : Entity() , mass(mass) {}
+
+        
+
+        void addForce(const glm::vec3 &force) override {
+            //velocity += force / mass;
+            this -> force += force;
+        }
+
+        void update(float deltaTime) override {
+        }
+
+        void FixedUpdate() override {
+
+            applyForce();
+            velocity += acceleration;
+            position += velocity;
+            velocity *= friction;
+            acceleration = glm::vec3(0.0f);
+        }
+
+
+        void setMass(float mass) {
+            this -> mass = mass;
+        }
+
+        void setFriction(float friction) {
+            this -> friction = friction;
+        }
+
 
 };
 

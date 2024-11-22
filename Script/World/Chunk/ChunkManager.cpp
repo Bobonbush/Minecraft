@@ -44,8 +44,11 @@ void ChunkManager::renderChunks(const glm::mat4 &view, const glm::mat4 &projecti
     for(auto & chunk : chunks) {
         renderMaster.drawChunk(chunk.mesh);
     }
+    
 
     renderMaster.finishRender(view, projection);
+
+    //std::cout << "Drawing chunk" << std::endl;
 }
 
 bool ChunkManager::existsChunk(int x, int z) {
@@ -61,17 +64,37 @@ void ChunkManager::update() {
 }
 
 void ChunkManager::UnloadChunks() {
-    chunks.clear();
+    auto playerPos = m_player->getPosition();
+    int playerChunkX = (int) (playerPos.x / Chunk::CHUNK_SIZE);
+    int playerChunkZ = (int) (playerPos.z / Chunk::CHUNK_SIZE);
+
+    int lowerBoundX = playerChunkX - renderDistance;
+    int lowerBoundZ = playerChunkZ - renderDistance;
+    int upperBoundX = playerChunkX + renderDistance;
+    int upperBoundZ = playerChunkZ + renderDistance;
+    for(int i = 0 ; i <= (int) chunks.size()-1 ; i++) {
+        auto & chunk = chunks[i];
+        int chunkX = chunk.getPosition().x;
+        int chunkZ = chunk.getPosition().z;
+        if(chunkX < lowerBoundX || chunkX > upperBoundX || chunkZ < lowerBoundZ || chunkZ > upperBoundZ) {
+            SPA::swap(chunks[i], chunks.back());
+            chunks.pop_back();
+        }
+    }
 }
 
 void ChunkManager::LoadChunks() {
+    UnloadChunks();
+   
 
     auto playerPos = m_player->getPosition();
     int playerChunkX = (int) (playerPos.x / Chunk::CHUNK_SIZE);
     int playerChunkZ = (int) (playerPos.z / Chunk::CHUNK_SIZE);
 
-    for(int x = playerChunkX - renderDistance; x < playerChunkX + renderDistance; x++) {
-        for(int z = playerChunkZ - renderDistance; z < playerChunkZ + renderDistance; z++) {
+    bool stop = false;
+
+    for(int x = playerChunkX - renderDistance; x < playerChunkX + renderDistance && !stop; x++) {
+        for(int z = playerChunkZ - renderDistance; z < playerChunkZ + renderDistance && !stop; z++) {
             bool chunkExists = false;
             for(auto & chunk : chunks) {
                 if(chunk.getPosition().x  == x && chunk.getPosition().z == z) {
@@ -81,7 +104,9 @@ void ChunkManager::LoadChunks() {
             }
             if(!chunkExists) {
                 addChunk(x , z );
+                stop = FirstRender;
             }
         }
     }
+    FirstRender = true;
 }

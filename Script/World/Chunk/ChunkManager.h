@@ -10,6 +10,7 @@ class ChunkManager {
         Player* m_player;
 
         float renderDistance = 1;
+        bool FirstRender = true;
         bool existsChunk(int x, int z);
         void LoadChunks();
         void UnloadChunks();

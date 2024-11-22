@@ -1,5 +1,6 @@
 #ifndef CAMERA_H
 #define CAMERA_H
+#include "Texture.h"
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -77,22 +78,64 @@ public:
         attachedEntity = entity;
     }
 
+    void update() {
+        if(attachedEntity != nullptr) {
+            Position = attachedEntity -> getPosition();
+        }
+        //attachedEntity -> addForce(glm::vec3(0.0f, -9.8f, 0.0f));
+    }
+
+    void FixedUpdate() {
+        float elapsedTime = 1.f;
+        
+        glm::vec3 force = glm::vec3(0.0f);
+        
+        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_PRESS) {
+            force += ProcessKeyboard(Camera_Movement::FORWARD, elapsedTime);
+        }
+        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_S) == GLFW_PRESS) {
+            force += ProcessKeyboard(Camera_Movement::BACKWARD, elapsedTime);
+        }
+    
+        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_A) == GLFW_PRESS) {
+            force += ProcessKeyboard(Camera_Movement::LEFT, elapsedTime);
+        }
+    
+        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_D) == GLFW_PRESS) {
+            force += ProcessKeyboard(Camera_Movement::RIGHT, elapsedTime);
+        }
+    
+        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_SPACE) == GLFW_PRESS) {
+            force += ProcessKeyboard(Camera_Movement::UP, elapsedTime);
+        }
+    
+        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+            force += ProcessKeyboard(Camera_Movement::DOWN, elapsedTime);
+        }
+        if(attachedEntity != nullptr)
+            attachedEntity -> addForce(force);
+        else {
+            Position += force;
+        }
+    }
+
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
-    void ProcessKeyboard(Camera_Movement direction, float deltaTime)
+    glm::vec3 & ProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
         float velocity = MovementSpeed * deltaTime;
         if (direction == Camera_Movement::FORWARD)
-            Position += Front * velocity;
+            return Front * velocity;
         if (direction == Camera_Movement::BACKWARD)
-            Position -= Front * velocity;
+            return  -Front * velocity;
         if (direction == Camera_Movement::LEFT)
-            Position -= Right * velocity;
+            return - Right * velocity;
         if (direction == Camera_Movement::RIGHT)
-            Position += Right * velocity;
+            return Right * velocity;
         if(direction == Camera_Movement::UP)
-            Position += Up * velocity;
+            return  glm::vec3(0.f, 1.f, 0.f) * velocity;
         if(direction == Camera_Movement::DOWN)
-            Position -= Up * velocity;
+            return - glm::vec3(0.f , 1.f, 0.f) * velocity;
+        return glm::vec3(0.0f);
     }
 
     // processes input received from a mouse input system. Expects the offset value in both the x and y direction.

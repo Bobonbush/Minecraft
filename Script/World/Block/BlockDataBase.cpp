@@ -7,6 +7,8 @@ BlockDataBase::BlockDataBase() : textureAtlas("Assets/Default pack.png") {
     blocks[(unsigned) BLOCKID::Dirt] = std::make_unique<DefaultBlock>("Dirt");
     blocks[(unsigned) BLOCKID::Stone] = std::make_unique<DefaultBlock>("Stone");
     blocks[(unsigned) BLOCKID::Air] = std::make_unique<DefaultBlock>("Air");
+    blocks[(unsigned) BLOCKID::CraftingTable] = std::make_unique<DefaultBlock>("Crafting Table");
+    blocks[(unsigned) BLOCKID::Wood] = std::make_unique<DefaultBlock>("Wood");
 }
 
 BlockDataBase::~BlockDataBase() {

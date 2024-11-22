@@ -2,14 +2,14 @@
 
 Player * Player::m_instance = nullptr;
 
-Player::Player() : Entity() {
+Player::Player() : DYNAMIC_ENTITY(10.f) {
     
 }
 
 void Player::update(float deltaTime) {
-    //position += velocity * deltaTime;
+    DYNAMIC_ENTITY::update(deltaTime);
 }
 
 void Player::FixedUpdate() {
-    
+    DYNAMIC_ENTITY::FixedUpdate();
 }

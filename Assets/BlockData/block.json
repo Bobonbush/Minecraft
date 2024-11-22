@@ -19,9 +19,20 @@
         "bottomX" : 0, "bottomY" : 0
     },
     "Stone" : {
-        "topX" : 3, "topY" : 3,
-        "sideX" : 3 , "sideY" : 3,
-        "bottomX" : 3, "bottomY" : 3
+        "topX" : 3, "topY" : 0,
+        "sideX" : 3 , "sideY" : 0,
+        "bottomX" : 3, "bottomY" : 0
+    },
+    "Crafting Table" : {
+        "topX" : 4, "topY" : 0,
+        "sideX" : 7, "sideY" : 0,
+        "bottomX" : 7, "bottomY" : 0
+    },
+
+    "Wood" : {
+        "topX" : 6, "topY" : 0,
+        "sideX" : 5, "sideY" : 0,
+        "bottomX" : 6, "bottomY" : 0
     }
 }
 

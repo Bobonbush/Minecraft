@@ -1,10 +1,8 @@
 #include "Entity.h"
 #include "Singleton.h"
 
-class Player : public Entity, Singleton {
+class Player : public DYNAMIC_ENTITY, Singleton {
     private:
-
-        glm::vec3 m_velocity;
         static Player * m_instance;
         Player();
     public:
@@ -20,8 +18,8 @@ class Player : public Entity, Singleton {
         }
         
         
-        virtual void update(float deltaTime) override;
-        virtual void FixedUpdate() override;
+        void update(float deltaTime) ;
+        void FixedUpdate() ;
     
 
     

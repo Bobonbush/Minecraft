@@ -20,6 +20,8 @@ enum class BLOCKID : int {
     Grass = 1,
     Dirt = 2,
     Stone = 3,
+    CraftingTable = 4,
+    Wood = 5,
 
     TOTAL,
 };

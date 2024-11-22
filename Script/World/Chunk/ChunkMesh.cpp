@@ -5,6 +5,7 @@ ChunkMesh::ChunkMesh() {
 
 void ChunkMesh::addFace(const std::vector<GLfloat> & vertices, const std::vector<GLfloat> &texcoords, const glm::vec3 &position, const glm::vec3 &blockPosition) {
     std::vector<GLfloat> &m_vertices = mesh.vertexPosition;
+
     std::vector<GLfloat> &m_coords = mesh.textureCoords;
     std::vector<GLuint> &m_indices = mesh.indices;
 
@@ -37,7 +38,7 @@ void ChunkMesh::bufferMesh() {
 
     Chunkmodel.addData(mesh);
 
-    std::cout << "Buffered Mesh" << std::endl;
+    
 
     mesh.vertexPosition.clear();
     mesh.textureCoords.clear();
@@ -47,6 +48,7 @@ void ChunkMesh::bufferMesh() {
     mesh.vertexPosition.shrink_to_fit();
     mesh.textureCoords.shrink_to_fit();
     mesh.indices.shrink_to_fit();
+    std::cout << "Buffered Mesh" << std::endl;
 }
 
 const Model & ChunkMesh::getModel() const {

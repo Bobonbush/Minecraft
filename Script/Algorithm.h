@@ -28,7 +28,12 @@ class SPA {
                 std::swap(arr[i + 1] , arr[i +3]);
             }
         }
+    }
 
+    template<class X> static void swap(X & a, X & b) {
+        X temp = a;
+        a = b;
+        b = temp;
     }
 
     static void SetSeed(int seed) {
