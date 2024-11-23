@@ -1,6 +1,7 @@
 #include "ChunkBuilder.h"
 #include "Renderer/RenderMaster.h"
 #include "Player/player.h"
+#include "WorldGenerator/Terrain.h"
 
 
 class ChunkManager {
@@ -8,6 +9,7 @@ class ChunkManager {
         std::vector<ChunkSection> chunks;
         RenderMaster renderMaster;
         Player* m_player;
+        NoiseGenerator noise;
 
         float renderDistance = 1;
         bool FirstRender = true;

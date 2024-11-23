@@ -8,6 +8,7 @@ ChunkManager::ChunkManager() {
 void ChunkManager::addChunk(int x, int z) {
     chunks.push_back(ChunkSection(glm::vec3(x, 0, z)));
     ChunkBuilder builder(chunks.back());
+    noise.BuildChunk(chunks.back());
     builder.BuildMesh(chunks.back().mesh);
     chunks.back().mesh.bufferMesh();
 }
@@ -65,8 +66,8 @@ void ChunkManager::update() {
 
 void ChunkManager::UnloadChunks() {
     auto playerPos = m_player->getPosition();
-    int playerChunkX = (int) (playerPos.x / Chunk::CHUNK_SIZE);
-    int playerChunkZ = (int) (playerPos.z / Chunk::CHUNK_SIZE);
+    int playerChunkX = (int) (playerPos.x / Chunk::CHUNK_SIZE /2);
+    int playerChunkZ = (int) (playerPos.z / Chunk::CHUNK_SIZE /2 );
 
     int lowerBoundX = playerChunkX - renderDistance;
     int lowerBoundZ = playerChunkZ - renderDistance;
@@ -84,12 +85,12 @@ void ChunkManager::UnloadChunks() {
 }
 
 void ChunkManager::LoadChunks() {
-    UnloadChunks();
+    //UnloadChunks();
    
 
     auto playerPos = m_player->getPosition();
-    int playerChunkX = (int) (playerPos.x / Chunk::CHUNK_SIZE);
-    int playerChunkZ = (int) (playerPos.z / Chunk::CHUNK_SIZE);
+    int playerChunkX = (int) (playerPos.x / Chunk::CHUNK_SIZE/2);
+    int playerChunkZ = (int) (playerPos.z / Chunk::CHUNK_SIZE/2);
 
     bool stop = false;
 

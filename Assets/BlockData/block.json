@@ -33,6 +33,24 @@
         "topX" : 6, "topY" : 0,
         "sideX" : 5, "sideY" : 0,
         "bottomX" : 6, "bottomY" : 0
+    },
+
+    "Water" : {
+        "toxX" : 10, "topY" : 0,
+        "sideX" : 10, "sideY" : 0,
+        "bottomX" : 10, "bottomY" : 0
+    },
+
+    "Sand" : {
+        "topX" : 9, "topY" : 0,
+        "sideX" : 9, "sideY" : 0,
+        "bottomX" : 9, "bottomY" : 0
+    },
+
+    "Bedrock" : {
+        "topX" : 11, "topY" : 0,
+        "sideX" : 11, "sideY" : 0,
+        "bottomX" : 11, "bottomY" : 0
     }
 }
 

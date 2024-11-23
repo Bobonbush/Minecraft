@@ -32,3 +32,5 @@ D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkManager.cpp;D:\WorkSpac
 D:\WorkSpace\Minecraft\Minecraft\Script\Physics\PhysicCons.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\PhysicCons.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\Physics\RigidBody.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\RigidBody.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\States\SceneState.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\SceneState.obj
+D:\WorkSpace\Minecraft\Minecraft\Script\Maths\Ray.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\Ray.obj
+D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Terrain.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\Terrain.obj

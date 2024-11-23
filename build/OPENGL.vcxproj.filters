@@ -103,6 +103,12 @@
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\SceneState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Maths\Ray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Terrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\RenderInfo.h">

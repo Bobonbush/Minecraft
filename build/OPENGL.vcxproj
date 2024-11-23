@@ -451,6 +451,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Physics\PhysicCons.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Physics\RigidBody.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\SceneState.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Maths\Ray.cpp" />
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\WorkSpace\Minecraft\Minecraft\build\ZERO_CHECK.vcxproj">

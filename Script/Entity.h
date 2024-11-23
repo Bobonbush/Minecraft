@@ -53,6 +53,9 @@ class DYNAMIC_ENTITY : public Entity {
 
         float friction = 0.95f; // By default
 
+        bool isGrounded = false;
+        bool isFlying = false;
+
         void applyForce() {
             acceleration += force / mass;
             force = glm::vec3(0.0f);

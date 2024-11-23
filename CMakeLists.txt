@@ -72,6 +72,8 @@ add_executable(OPENGL Script/main.cpp
                       Script/Physics/PhysicCons.cpp
                       Script/Physics/RigidBody.cpp
                       Script/States/SceneState.cpp
+                      Script/Maths/Ray.cpp
+                      Script/World/WorldGenerator/Terrain.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)
