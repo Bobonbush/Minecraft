@@ -14,7 +14,7 @@ void World::render() {
     Config * config = Application::GetInstance() -> config;
     glm::mat4 view = camera -> GetViewMatrix();
        
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 1050.0f);
         
     chunkManager.renderChunks(view, projection);
 }

@@ -2,6 +2,8 @@
 
 ChunkManager::ChunkManager() {
     m_player = Player::GetInstance();
+    FirstRender = false;
+    LoadChunks();
 }
 
 
@@ -61,7 +63,7 @@ bool ChunkManager::existsChunk(int x, int z) {
     return false;
 }
 void ChunkManager::update() {
-    LoadChunks();
+    //LoadChunks();
 }
 
 void ChunkManager::UnloadChunks() {
@@ -85,7 +87,7 @@ void ChunkManager::UnloadChunks() {
 }
 
 void ChunkManager::LoadChunks() {
-    //UnloadChunks();
+    UnloadChunks();
    
 
     auto playerPos = m_player->getPosition();

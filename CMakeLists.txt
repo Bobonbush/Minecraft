@@ -74,6 +74,11 @@ add_executable(OPENGL Script/main.cpp
                       Script/States/SceneState.cpp
                       Script/Maths/Ray.cpp
                       Script/World/WorldGenerator/Terrain.cpp
+                      Script/World/WorldGenerator/Biome/Biome.cpp
+                      Script/World/WorldGenerator/Biome/Ocean.cpp
+                      Script/World/WorldGenerator/Biome/grassland.cpp
+                      Script/World/WorldGenerator/Biome/highMountain.cpp
+                      Script/World/WorldGenerator/Biome/Desert.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

@@ -36,7 +36,7 @@
     },
 
     "Water" : {
-        "toxX" : 10, "topY" : 0,
+        "topX" : 10, "topY" : 0,
         "sideX" : 10, "sideY" : 0,
         "bottomX" : 10, "bottomY" : 0
     },

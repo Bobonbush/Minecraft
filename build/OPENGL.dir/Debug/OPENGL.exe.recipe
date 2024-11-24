@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\WorkSpace\Minecraft\Minecraft\build\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>G:\WorkSpace\Minecraft\build\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\WorkSpace\Minecraft\Minecraft\build\Debug\OPENGL.exe</FullPath>
+      <FullPath>G:\WorkSpace\Minecraft\build\Debug\OPENGL.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

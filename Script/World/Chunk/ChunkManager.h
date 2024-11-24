@@ -11,7 +11,7 @@ class ChunkManager {
         Player* m_player;
         NoiseGenerator noise;
 
-        float renderDistance = 1;
+        float renderDistance = 32;
         bool FirstRender = true;
         bool existsChunk(int x, int z);
         void LoadChunks();
