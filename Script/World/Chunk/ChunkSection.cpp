@@ -36,3 +36,8 @@ int ChunkSection::getIndex(int x, int y, int z) const{
 const glm::vec3 &ChunkSection::getPosition() const {
     return position;
 }
+
+
+glm::vec3 ChunkSection::toWorldPosition(int x , int y ,int z) {
+    return glm::vec3(x + position.x * Chunk::CHUNK_SIZE, y + position.y * Chunk::CHUNK_HEIGHT, z + position.z * Chunk::CHUNK_SIZE);
+}

@@ -11,7 +11,7 @@ class ChunkManager {
         Player* m_player;
         NoiseGenerator noise;
 
-        float renderDistance = 32;
+        float renderDistance = 10;
         bool FirstRender = true;
         bool existsChunk(int x, int z);
         void LoadChunks();
@@ -30,6 +30,8 @@ class ChunkManager {
         void addBlock(int x, int y, int z, ChunkBlock block);
         void removeBlock(int x, int y, int z);
         void renderChunks(const glm::mat4& view, const glm::mat4& projection);
+
+        ChunkSection & getChunk(int x, int y, int z);
         //void getBlock(float x , float y , float z);
         //void getChunk(float x, float z);
 };

@@ -23,6 +23,8 @@ void World::Update(float deltaTime) {
     chunkManager.update();
     camera -> update();
     player -> update(deltaTime);
+
+
     
 }
 

@@ -26,9 +26,7 @@ class ChunkSection {
 
         const glm::vec3 &getPosition() const;
 
-        void outputMesh() {
-            mesh.bufferMesh();
-        }
+        glm::vec3 toWorldPosition(int x , int y ,int z);
 };
 
 #endif // CHUNKSECTION_H

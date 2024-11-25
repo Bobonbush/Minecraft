@@ -16,6 +16,10 @@ void ChunkRenderer::render(const glm::mat4 & view, const glm::mat4 & projection)
     shader -> use();
     shader -> setMat4("view", view);
     shader -> setMat4("projection", projection);
+
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CW);
     glActiveTexture(GL_TEXTURE0);
     BlockDataBase::GetInstance() -> textureAtlas.bind();
     glm::mat4 model = glm::mat4(1.0f);
@@ -35,4 +39,5 @@ void ChunkRenderer::render(const glm::mat4 & view, const glm::mat4 & projection)
     glBindVertexArray(0);
     
     meshes.clear();
+    glDisable(GL_CULL_FACE);
 }

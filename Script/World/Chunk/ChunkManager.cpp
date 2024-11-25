@@ -63,7 +63,7 @@ bool ChunkManager::existsChunk(int x, int z) {
     return false;
 }
 void ChunkManager::update() {
-    //LoadChunks();
+    LoadChunks();
 }
 
 void ChunkManager::UnloadChunks() {
@@ -87,7 +87,7 @@ void ChunkManager::UnloadChunks() {
 }
 
 void ChunkManager::LoadChunks() {
-    UnloadChunks();
+    //UnloadChunks();
    
 
     auto playerPos = m_player->getPosition();
@@ -112,4 +112,15 @@ void ChunkManager::LoadChunks() {
         }
     }
     FirstRender = true;
+}
+
+ChunkManager & ChunkManager::getChunk(int x, int y, int z) {
+    int chunkX = x / Chunk::CHUNK_SIZE/2;
+    int chunkZ = z / Chunk::CHUNK_SIZE/2;
+    for(auto & chunk : chunks) {
+        if(chunk.getPosition().x == chunkX && chunk.getPosition().z == chunkZ) {
+            return chunk;
+        }
+    }
+    throw std::out_of_range("Chunk does not exist");
 }
