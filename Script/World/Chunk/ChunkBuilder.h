@@ -4,7 +4,6 @@
 #include "ChunkSection.h"
 #include "Chunk.h"
 #include "Algorithm.h"
-
 class ChunkBuilder {
 
     struct AdjacentBlock {
@@ -30,13 +29,14 @@ class ChunkBuilder {
         ChunkSection* pChunk = nullptr;
         ChunkMesh * pMesh = nullptr;
         const BlockDataHolder* pblockData = nullptr;
-
+        std::vector<ChunkSection*> adj;
         void tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing);
         bool shouldMakeFace(const glm::vec3 position, const BlockDataHolder & blockData);
     
     public :
         int faceCount = 0;
-        ChunkBuilder(ChunkSection &chunk);
+        
+        ChunkBuilder(ChunkSection &chunk, const std::vector<ChunkSection*> & adjChunks);
         void BuildMesh(ChunkMesh & mesh); 
         ~ChunkBuilder();
     

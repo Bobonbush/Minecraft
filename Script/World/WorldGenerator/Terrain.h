@@ -16,8 +16,6 @@ class NoiseGenerator {
         highMountain highMountain;
         Desert desert;
         Desert desertValley;
-
-        void GetBiome();
     public:
         NoiseGenerator() {
             // Biome Noise
@@ -110,7 +108,7 @@ class NoiseGenerator {
             return noise.GetNoise(x, y, z);
         }
 
-        void BuildChunk(ChunkSection &chunk) {
+        void BuildChunk(ChunkSection &chunk , ChunkSection * below) {
             for(int x = 0 ; x < Chunk::CHUNK_SIZE ; x++) {
                 for(int z = 0 ; z < Chunk::CHUNK_SIZE ; z++) {
                     float noiseBiome = noise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
@@ -142,12 +140,16 @@ class NoiseGenerator {
                     }
                     //biome = &highMountain;
                     
-                    for(int y = 0 ; y < Chunk::CHUNK_HEIGHT ; y++) {
-                        BLOCKID id = biome -> getBlocks(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, y, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
+                    for(int y = 0 ; y < Chunk::CHUNK_SIZE ; y++) {
+
+                        BLOCKID id = biome -> getBlocks(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, y + chunk.getPosition().y * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
                         chunk.setBlock(x, y, z, ChunkBlock(id));
                         if(id == BLOCKID::Air) {
                             if(y > 0 && chunk.getBlock(x, y - 1, z) == BLOCKID::Dirt) {
                                 chunk.setBlock(x, y, z, ChunkBlock(BLOCKID::Grass));
+                            }
+                            if(below != nullptr && y == 0 && below -> getBlock(x , Chunk::CHUNK_SIZE-1, z) == BLOCKID :: Dirt) {
+                                chunk.setBlock(x , y , z , ChunkBlock(BLOCKID::Grass)); 
                             }
                         }
                     }

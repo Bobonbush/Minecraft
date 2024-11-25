@@ -18,8 +18,10 @@ class ChunkBlock {
     const BlockType& getType() const;
 
     bool operator == (const ChunkBlock & another) const;
-
-    
+    bool operator != (const ChunkBlock & another) const;
+    const BLOCKID getID() const {
+        return (BLOCKID) id;
+    }
 };
 
 #endif // CHUNKBLOCK_H

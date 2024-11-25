@@ -79,6 +79,7 @@ add_executable(OPENGL Script/main.cpp
                       Script/World/WorldGenerator/Biome/grassland.cpp
                       Script/World/WorldGenerator/Biome/highMountain.cpp
                       Script/World/WorldGenerator/Biome/Desert.cpp
+                      Script/Maths/Frustum.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

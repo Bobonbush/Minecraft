@@ -13,7 +13,8 @@ class World : public StateBase {
 
 
         ChunkManager chunkManager;
-
+        glm::mat4 view;
+        glm::mat4 projection;
         Player * player;
 
 

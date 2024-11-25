@@ -92,16 +92,18 @@ void Application::Run() {
         
         lastX = xpos;
         lastY = ypos;
-        Update(elapsedTime);
-        Render();
 
-        FixedUpdate(xoffset, yoffset);
-        /*
         while(accumulator >= maxFrameTime) {
             accumulator -= maxFrameTime;
             FixedUpdate(xoffset, yoffset);
         }
-        */
+        Alpha = accumulator / maxFrameTime;
+        
+
+        Update(elapsedTime);
+        Render();
+
+        
         
 
         Alpha = accumulator / maxFrameTime;

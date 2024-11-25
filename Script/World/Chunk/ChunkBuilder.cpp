@@ -1,6 +1,6 @@
 #include "ChunkBuilder.h"
 
-ChunkBuilder::ChunkBuilder(ChunkSection &chunk) : pChunk(&chunk) {
+ChunkBuilder::ChunkBuilder(ChunkSection &chunk, const std::vector<ChunkSection*> & adj) : pChunk(&chunk), adj(adj) {
 }
 
 ChunkBuilder :: ~ChunkBuilder() {
@@ -10,7 +10,7 @@ void ChunkBuilder::BuildMesh(ChunkMesh & mesh) {
     pMesh = &mesh;
     AdjacentBlock directions;
 
-    for(int y = 0 ; y <  Chunk::CHUNK_HEIGHT ; y++) {
+    for(int y = 0 ; y <  Chunk::CHUNK_SIZE ; y++) {
         for(int x = 0 ; x < Chunk::CHUNK_SIZE ;  x++) {
             for(int z = 0 ; z < Chunk::CHUNK_SIZE ; z++) { 
                 glm::vec3 position = glm::vec3(x, y, z);
@@ -54,7 +54,79 @@ void ChunkBuilder::tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const
 bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolder & blockData) {
     auto block = pChunk -> getBlock(position.x, position.y, position.z);
 
-   
+    float x = position.x;
+    float y = position.y;
+    float z = position.z;
+
+    if(x < 0 ) {
+        for(auto & chunk : adj) {
+            if(chunk -> getPosition().x == pChunk->getPosition().x - 1) {
+                if(chunk -> getBlock(Chunk::CHUNK_SIZE - 1, y, z) != BLOCKID::Air) {
+                    
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    if(x >= Chunk::CHUNK_SIZE) {
+        for(auto & chunk : adj) {
+            if(chunk -> getPosition().x == pChunk->getPosition().x + 1) {
+                if(chunk -> getBlock(0, y, z) != BLOCKID::Air) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    if(y < 0) {
+        for(auto & chunk : adj) {
+            if(chunk -> getPosition().y == pChunk->getPosition().y - 1) {
+                if(chunk -> getBlock(x, Chunk::CHUNK_SIZE -1, z) != BLOCKID::Air) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    if(y >= Chunk::CHUNK_SIZE) {
+        for(auto & chunk : adj) {
+            if(chunk -> getPosition().y == pChunk->getPosition().y + 1) {
+                if(chunk -> getBlock(x,  0 , z) != BLOCKID::Air) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    if(z < 0) {
+        for(auto & chunk : adj) {
+            
+            if(chunk -> getPosition().z == pChunk->getPosition().z - 1) {
+                if(chunk -> getBlock(x, y,  Chunk::CHUNK_SIZE-1) != BLOCKID::Air) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    if(z >= Chunk::CHUNK_SIZE) {
+        for(auto & chunk : adj) {
+            if(chunk->getPosition().z == pChunk->getPosition().z + 1) {
+                if(chunk -> getBlock(x, y,  0) != BLOCKID::Air) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
     if(block == BLOCKID::Air) {
         return true;
     }

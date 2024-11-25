@@ -11,21 +11,20 @@ World::World() : StateBase() {
 }
 
 void World::render() {
-    Config * config = Application::GetInstance() -> config;
-    glm::mat4 view = camera -> GetViewMatrix();
-       
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 1050.0f);
-        
     chunkManager.renderChunks(view, projection);
 }
 
 void World::Update(float deltaTime) {
-    chunkManager.update();
     camera -> update();
     player -> update(deltaTime);
-
-
     
+    Config * config = Application::GetInstance() -> config;
+    view = camera -> GetViewMatrix();
+       
+    projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 1000.0f);
+    Frustum * frustum = Frustum::GetInstance();
+    frustum -> update(view, projection);
+    chunkManager.update(view , projection);
 }
 
 

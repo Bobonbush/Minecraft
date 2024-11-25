@@ -30,7 +30,7 @@ public:
 // Default camera values
     static const float YAW ;      
     static const float PITCH;      
-    const float SPEED       =  0.25f;
+    const float SPEED       =  0.55f;
     const float SENSITIVITY =  0.2f;
     const float ZOOM        =  45.0f;
     // camera Attributes

@@ -13,3 +13,7 @@ const BlockType& ChunkBlock::getType() const {
 bool ChunkBlock::operator == (const ChunkBlock & another) const {
     return id == another.id;
 }
+
+bool ChunkBlock::operator!=(const ChunkBlock & another) const {
+    return id != another.id;
+}
