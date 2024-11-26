@@ -7,8 +7,8 @@
 
 class Config : public Singleton {
     private : 
-        float width = 1600;
-        float height = 1200;
+        float width = 900;
+        float height = 600;
         int antialiasing = 4;
         const int majorVersion = 4;
         const int minorVersion = 6;
@@ -18,8 +18,6 @@ class Config : public Singleton {
         GLFWwindow * window;
         static Config * instance;
         Config() = default;
-
-        float RenderChunk = 5;
         
 
     public :
@@ -51,9 +49,6 @@ class Config : public Singleton {
 
         // Getter Setter
         
-        float GetRenderChunk() const {
-            return RenderChunk;
-        }
 
         float GetWidth() const {
             return width;

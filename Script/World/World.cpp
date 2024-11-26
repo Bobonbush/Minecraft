@@ -21,7 +21,7 @@ void World::Update(float deltaTime) {
     Config * config = Application::GetInstance() -> config;
     view = camera -> GetViewMatrix();
        
-    projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 1000.0f);
+    projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 2700.0f);
     Frustum * frustum = Frustum::GetInstance();
     frustum -> update(view, projection);
     chunkManager.update(view , projection);

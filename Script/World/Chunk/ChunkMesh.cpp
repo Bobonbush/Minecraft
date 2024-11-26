@@ -10,11 +10,12 @@ void ChunkMesh::addFace(const std::vector<GLfloat> & vertices, const std::vector
     std::vector<GLuint> &m_indices = mesh.indices;
 
     m_coords.insert(m_coords.end(), texcoords.begin(), texcoords.end());
-
+    
     for(int i = 0 , index =0 ; i < 4 ; i++) {
-        m_vertices.push_back(vertices[index++] + position.x * Chunk::CHUNK_SIZE + blockPosition.x);
-        m_vertices.push_back(vertices[index++] + position.y * Chunk::CHUNK_SIZE + blockPosition.y);
-        m_vertices.push_back(vertices[index++] + position.z * Chunk::CHUNK_SIZE + blockPosition.z);
+        
+        m_vertices.push_back(vertices[index++]  + position.x * Chunk::CHUNK_SIZE  + blockPosition.x);
+        m_vertices.push_back(vertices[index++]  + position.y * Chunk::CHUNK_SIZE  + blockPosition.y);
+        m_vertices.push_back(vertices[index++] + position.z * Chunk::CHUNK_SIZE  + blockPosition.z);
     }
 
     m_indices.insert(m_indices.end(), {

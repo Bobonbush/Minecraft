@@ -33,9 +33,10 @@ void Application::Init() {
 
 
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-
+    glDepthFunc(GL_LESS);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    
     /*
     glDepthMask(GL_FALSE);
     glDepthFunc(GL_LESS);
@@ -93,13 +94,14 @@ void Application::Run() {
         lastX = xpos;
         lastY = ypos;
 
+        
         while(accumulator >= maxFrameTime) {
             accumulator -= maxFrameTime;
             FixedUpdate(xoffset, yoffset);
         }
+        //FixedUpdate(xoffset, yoffset);
         Alpha = accumulator / maxFrameTime;
-        
-
+        //FixedUpdate(xoffset, yoffset);
         Update(elapsedTime);
         Render();
 

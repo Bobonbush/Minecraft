@@ -63,7 +63,7 @@ add_executable(OPENGL Script/main.cpp
                       Script/World/Block/ChunkBlock.cpp
                       Script/World/Chunk/ChunkBuilder.cpp
                       Script/World/Chunk/ChunkMesh.cpp
-                      Script/World/Chunk/Chunk.h
+                      Script/World/Chunk/Chunk.cpp
                       Script/World/Chunk/ChunkSection.cpp
                       Script/Renderer/ChunkRenderer.cpp
                       Script/Maths/FastNoise.cpp
@@ -80,6 +80,7 @@ add_executable(OPENGL Script/main.cpp
                       Script/World/WorldGenerator/Biome/highMountain.cpp
                       Script/World/WorldGenerator/Biome/Desert.cpp
                       Script/Maths/Frustum.cpp
+                      Script/Renderer/Skybox.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

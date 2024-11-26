@@ -94,7 +94,7 @@ class NoiseGenerator {
             noise.SetFractalOctaves(8);
             noise.SetFrequency(0.0015);
             noise.SetFractalGain(20.);
-            noise.SetFractalLacunarity(1.015);
+            noise.SetFractalLacunarity(1.0015);
            
             noise.SetSeed(1337);
         }

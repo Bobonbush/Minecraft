@@ -26,7 +26,7 @@ void ChunkManager::addBlock(int x, int y, int z, ChunkBlock block) {
     int chunkY = y / Chunk::CHUNK_SIZE /Chunk::CHUNK_SCALE;
     for(auto & chunk : chunks) {
         if(chunk.getPosition().x == chunkX && chunk.getPosition().z == chunkZ) {
-            chunk.setBlock(x % (Chunk::CHUNK_SIZE *Chunk::CHUNK_SCALE), y % (Chunk::CHUNK_SIZE * Chunk::CHUNK_SCALE), z % (Chunk::CHUNK_SCALE * Chunk::CHUNK_SIZE), block);
+            //chunk.setBlock(x % ( Chunk::CHUNK_SIZE *Chunk::CHUNK_SCALE), y % (Chunk::CHUNK_SIZE * Chunk::CHUNK_SCALE), z % (Chunk::CHUNK_SCALE * Chunk::CHUNK_SIZE), block);
             chunk.mesh.bufferMesh();
             return;
         }
@@ -79,10 +79,13 @@ void ChunkManager::Recover(ChunkSection & chunk , std::vector<ChunkSection*> & a
 }
 
 void ChunkManager::GetRidOfAdjacentChunks(ChunkSection & Chunk) {
+    
     AdjacentChunks directions;
     directions.update(Chunk.getPosition());
     
     std::vector<ChunkSection* > AdjChunks;
+    
+    
     std::vector<ChunkSection*> temp;
     temp.push_back(&Chunk);
 
@@ -121,6 +124,8 @@ void ChunkManager::GetRidOfAdjacentChunks(ChunkSection & Chunk) {
 
         Recover(getChunk(directions.back.x, directions.back.y, directions.back.z), temp);
     }
+    
+    
     
     
     ChunkBuilder builder(Chunk, AdjChunks);
@@ -248,24 +253,20 @@ void ChunkManager::LoadChunks() {
     }
 
     std::sort(validPosition.begin(), validPosition.end(), [&](const glm::vec3 & a, const glm::vec3 & b) {
-        return glm::distance(glm::vec3(playerChunkX, playerChunkY, playerChunkZ), a) > glm::distance(glm::vec3(playerChunkX, playerChunkY, playerChunkZ), b);
+        /*
+        if(a.y != b.y && SPA::abs(a.y - playerChunkY) != SPA::abs(b.y - playerChunkY)) {
+            return SPA::abs(a.y - playerChunkY) > SPA::abs(b.y - playerChunkY);
+        }
+        */
+        return glm::distance(glm::vec3(playerChunkX, playerChunkY, playerChunkZ), a) + SPA::abs(playerChunkY - a.y) > glm::distance(glm::vec3(playerChunkX, playerChunkY, playerChunkZ), b) + SPA::abs(playerChunkY - b.y);
     });
 
     int cnt = 0;
+    
     while(!validPosition.empty() && cnt <= numLoadChunks) {
         addChunk(validPosition.back().x, validPosition.back().y, validPosition.back().z);
         validPosition.pop_back();
         cnt++;
-    }
-
-    firstRender = false;
-
-
-    if(firstRender) {
-        for(auto & pos : validPosition) {
-            addChunk(pos.x, pos.y, pos.z);
-        }
-        firstRender = false;
     }
 }
 

@@ -6,6 +6,7 @@
 #include "WorldGenerator/Terrain.h"
 #include "Algorithm.h"
 #include "Maths/Frustum.h"
+#include <thread>
 
 
 class ChunkManager {
@@ -29,13 +30,14 @@ class ChunkManager {
 
     };
     private:
+        std::vector<std::thread> loadChunkThreads;
         std::vector<ChunkSection> chunks;
         RenderMaster renderMaster;
         Player* m_player;
         NoiseGenerator noise;
 
-        float renderDistance = 3 * Chunk::CHUNK_SCALE;
-        int numLoadChunks = 3;
+        float renderDistance = 15 ;
+        int numLoadChunks = 2;
         bool firstRender = true;
         bool existsChunk(int x,int y, int z);
         void LoadChunks();

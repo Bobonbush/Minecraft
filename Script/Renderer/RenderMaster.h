@@ -4,6 +4,7 @@
 #include "QuadRenderer.h"
 #include "CubeRenderer.h"
 #include "ChunkRenderer.h"
+#include "Skybox.h"
 #include <iostream>
 class Camera;
 
@@ -19,6 +20,7 @@ class RenderMaster {
         std::unique_ptr<QuadRenderer> quadRenderer;
         std::unique_ptr<CubeRenderer> cubeRenderer;
         std::unique_ptr<ChunkRenderer> chunkRenderer;
+        std::unique_ptr<SkyBox> skybox;
 };
 
 #endif // RENDERMASTER_H
