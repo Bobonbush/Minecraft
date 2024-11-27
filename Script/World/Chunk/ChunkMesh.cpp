@@ -27,13 +27,15 @@ void ChunkMesh::addFace(const std::vector<GLfloat> & vertices, const std::vector
 }
 
 void ChunkMesh::bufferMesh() {
-    for(int i =  0 ; i < mesh.textureCoords.size() ; i+= 2) {
-        mesh.textureCoords[i+1] = 1 - mesh.textureCoords[i+1];
-    }
-
-    Chunkmodel.addData(mesh);
-
+    if(has_mesh) {
+        
     
+        for(int i =  0 ; i < mesh.textureCoords.size() ; i+= 2) {
+            mesh.textureCoords[i+1] = 1 - mesh.textureCoords[i+1];
+        }
+
+        Chunkmodel.addData(mesh);
+    }
     
     mesh.vertexPosition.clear();
     mesh.textureCoords.clear();

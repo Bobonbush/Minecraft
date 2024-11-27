@@ -65,7 +65,9 @@ void Application::FixedUpdate(float xpos, float ypos) {
 void Application::Run() {
 
     states.pushState(std::make_unique<World>());
-    
+    float totalTime = 0;
+    int FPS = 0;
+    int cnt = 0;
     while(!glfwWindowShouldClose(config -> GetWindow())) {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -75,8 +77,18 @@ void Application::Run() {
         float currentTime = glfwGetTime();
         elapsedTime = currentTime - lastTime;
         lastTime = currentTime;
+        totalTime += elapsedTime;
+        FPS++;
+        if (totalTime >= 1.0f) {
+            std::cout << "FPS: " << FPS << std::endl;
+            std::cout << "COUNT: " << cnt << std::endl;
+            FPS = 0;
+            totalTime = 0;
+            cnt = 0;
+        }
 
         accumulator += elapsedTime;
+
         double xpos, ypos;
         
         glfwGetCursorPos(config -> GetWindow(), &xpos, &ypos);
@@ -97,6 +109,7 @@ void Application::Run() {
         
         while(accumulator >= maxFrameTime) {
             accumulator -= maxFrameTime;
+            cnt++;
             FixedUpdate(xoffset, yoffset);
         }
         //FixedUpdate(xoffset, yoffset);

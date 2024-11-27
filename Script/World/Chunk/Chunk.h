@@ -5,8 +5,8 @@
 class Chunk {
     public :
         const static int CHUNK_SIZE = 16;
-        const static int CHUNK_HEIGHT = 9;
-        const static int CHUNK_SCALE = 10;
+        const static int CHUNK_HEIGHT = 12;
+        const static int CHUNK_SCALE = 1;
         const static int CHUNK_AREA = CHUNK_SIZE * CHUNK_SIZE;
         const static int CHUNK_VOLUME = CHUNK_SIZE * CHUNK_SIZE * CHUNK_SIZE;
 };

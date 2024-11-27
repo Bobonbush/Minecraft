@@ -4,6 +4,7 @@
 #include "Biome/Ocean.h"
 #include "Biome/highMountain.h"
 #include "Biome/Desert.h"
+#include "Chunk/ChunkBuilder.h"
 
 class NoiseGenerator {
     private:
@@ -109,6 +110,7 @@ class NoiseGenerator {
         }
 
         void BuildChunk(ChunkSection &chunk , ChunkSection * below) {
+            
             for(int x = 0 ; x < Chunk::CHUNK_SIZE ; x++) {
                 for(int z = 0 ; z < Chunk::CHUNK_SIZE ; z++) {
                     float noiseBiome = noise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);

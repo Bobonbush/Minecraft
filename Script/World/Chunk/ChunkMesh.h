@@ -10,8 +10,10 @@ class ChunkMesh {
         Model Chunkmodel;
         Mesh mesh;
         GLuint indexIndex = 0;
+        
     
     public :
+        bool has_mesh = false;
         ChunkMesh();
         void addFace(const std::vector<GLfloat> & vertices, const std::vector<GLfloat> & texCoords, const glm::vec3 & position, const glm::vec3 & blockPosition);
         const Model & getModel() const;

@@ -30,8 +30,8 @@ public:
 // Default camera values
     static const float YAW ;      
     static const float PITCH;      
-    const float SPEED       =  0.85f;
-    const float SENSITIVITY =  0.2f;
+    const float SPEED       =  0.075f;
+    const float SENSITIVITY =  0.1f;
     const float ZOOM        =  45.0f;
     // camera Attributes
     glm::vec3 Position;
@@ -89,6 +89,8 @@ public:
         float elapsedTime = 1.f;
         
         glm::vec3 force = glm::vec3(0.0f);
+
+        
         
         if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_PRESS) {
             force += ProcessKeyboard(Camera_Movement::FORWARD, elapsedTime);
@@ -123,6 +125,9 @@ public:
     glm::vec3 & ProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
         float velocity = MovementSpeed * deltaTime;
+        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
+            velocity *= 2.f;
+        }
         if (direction == Camera_Movement::FORWARD)
             return Front * velocity;
         if (direction == Camera_Movement::BACKWARD)

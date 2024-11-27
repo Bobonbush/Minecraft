@@ -30,20 +30,20 @@ class ChunkManager {
 
     };
     private:
-        std::vector<std::thread> loadChunkThreads;
         std::vector<ChunkSection> chunks;
+        std::vector<ChunkSection> miseryChunk; // This is for the chunks that are not loaded
         RenderMaster renderMaster;
         Player* m_player;
         NoiseGenerator noise;
 
-        float renderDistance = 15 ;
-        int numLoadChunks = 2;
+        float renderDistance = 13 ;
+        int numLoadChunks = 1;
         bool firstRender = true;
         bool existsChunk(int x,int y, int z);
         void LoadChunks();
         void UnloadChunks();
         void Recover(ChunkSection & chunk , std::vector<ChunkSection*> & adj);
-    
+        void addMiseryChunk(int x, int y, int z);
     public :
 
         ChunkManager();

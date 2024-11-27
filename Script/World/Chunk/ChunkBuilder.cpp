@@ -10,6 +10,8 @@ void ChunkBuilder::BuildMesh(ChunkMesh & mesh) {
     pMesh = &mesh;
     AdjacentBlock directions;
 
+    pMesh -> has_mesh = false;
+
     for(int y = 0 ; y <  Chunk::CHUNK_SIZE ; y++) {
         for(int x = 0 ; x < Chunk::CHUNK_SIZE ;  x++) {
             for(int z = 0 ; z < Chunk::CHUNK_SIZE ; z++) { 
@@ -39,7 +41,7 @@ void ChunkBuilder::BuildMesh(ChunkMesh & mesh) {
 void ChunkBuilder::tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing) {
     if(shouldMakeFace(facing, *pblockData)) {
         faceCount++;
-        
+        pMesh -> has_mesh = true;
         auto Coords = BlockDataBase::GetInstance() -> textureAtlas.getTexture(texCoords);
         if(vertices == Block::Right) {
             SPA::RotateArray2f(Coords, 3);

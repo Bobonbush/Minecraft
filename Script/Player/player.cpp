@@ -3,7 +3,7 @@
 Player * Player::m_instance = nullptr;
 
 Player::Player() : DYNAMIC_ENTITY(10.f) {
-    position = glm::vec3(0.f , 450.f , 0.0f);
+    position = glm::vec3(0.f , 150.f , 0.0f);
 }
 
 void Player::update(float deltaTime) {
