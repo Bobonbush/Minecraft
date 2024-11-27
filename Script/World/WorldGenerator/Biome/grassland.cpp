@@ -22,9 +22,6 @@ BLOCKID GrassLand::getBlocks(int x, int y, int z) {
         return BLOCKID::Water;
     }
 
-    if(y == 0) {
-        return BLOCKID::Bedrock;
-    }
     
     return BLOCKID::Air;
 }

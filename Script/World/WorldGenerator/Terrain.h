@@ -1,10 +1,11 @@
+#ifndef NOISEGENERATOR_H
+#define NOISEGENERATOR_H
 #include "Maths/FastNoise.h"
 #include "Chunk/ChunkSection.h"
 #include "Biome/grassland.h"
 #include "Biome/Ocean.h"
 #include "Biome/highMountain.h"
 #include "Biome/Desert.h"
-#include "Chunk/ChunkBuilder.h"
 
 class NoiseGenerator {
     private:
@@ -145,6 +146,9 @@ class NoiseGenerator {
                     for(int y = 0 ; y < Chunk::CHUNK_SIZE ; y++) {
 
                         BLOCKID id = biome -> getBlocks(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, y + chunk.getPosition().y * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
+                        if(y == 0 && chunk.getPosition().y == 0) {
+                            id = BLOCKID::Bedrock;
+                        }
                         chunk.setBlock(x, y, z, ChunkBlock(id));
                         if(id == BLOCKID::Air) {
                             if(y > 0 && chunk.getBlock(x, y - 1, z) == BLOCKID::Dirt) {
@@ -159,3 +163,5 @@ class NoiseGenerator {
             }
         }
 };
+
+#endif

@@ -36,8 +36,8 @@ class ChunkManager {
         Player* m_player;
         NoiseGenerator noise;
 
-        float renderDistance = 13 ;
-        int numLoadChunks = 1;
+        float renderDistance = 12 ;
+        int numLoadChunks = 2;
         bool firstRender = true;
         bool existsChunk(int x,int y, int z);
         void LoadChunks();
@@ -59,10 +59,6 @@ class ChunkManager {
         void removeBlock(int x, int y, int z);
         void renderChunks(const glm::mat4& view, const glm::mat4& projection);
 
-
-    
-
-        void GetRidOfAdjacentChunks(ChunkSection & Chunk);
         //void getBlock(float x , float y , float z);
         //void getChunk(float x, float z);
 };

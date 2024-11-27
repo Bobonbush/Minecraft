@@ -8,6 +8,7 @@ void ChunkMesh::addFace(const std::vector<GLfloat> & vertices, const std::vector
 
     std::vector<GLfloat> &m_coords = mesh.textureCoords;
     std::vector<GLuint> &m_indices = mesh.indices;
+    std::vector<GLfloat> &m_normals = mesh.normals;
 
     m_coords.insert(m_coords.end(), texcoords.begin(), texcoords.end());
     

@@ -8,6 +8,7 @@ class Mesh {
     std::vector<GLfloat> vertexPosition;
     std::vector<GLfloat> textureCoords;
     std::vector<GLuint> indices;
+    std::vector<GLfloat> normals;
 
     Mesh(std::vector<GLfloat> vertexPosition, std::vector<GLfloat> textureCoords, std::vector<GLuint> indices) : vertexPosition(vertexPosition), textureCoords(textureCoords), indices(indices) {}
     Mesh() = default;

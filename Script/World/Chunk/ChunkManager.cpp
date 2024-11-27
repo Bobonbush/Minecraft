@@ -25,7 +25,6 @@ void ChunkManager::addChunk(int x,int y, int z) {
     }
     noise.BuildChunk(chunks.back(), &getChunk(adj.down.x , adj.down.y, adj.down.z));
     Recover(chunks.back(), std::vector<ChunkSection*>());
-    //GetRidOfAdjacentChunks(chunks.back());
 
 }
 
@@ -47,6 +46,7 @@ void ChunkManager::Recover(ChunkSection & chunk , std::vector<ChunkSection*> & a
     std::vector<ChunkSection* > AdjChunks;
     AdjacentChunks directions;
     directions.update(chunk.getPosition());
+    
     if(!existsChunk(directions.left.x ,directions.left.y, directions.left.z)) {
         addMiseryChunk(directions.left.x, directions.left.y, directions.left.z);
     }
@@ -55,14 +55,12 @@ void ChunkManager::Recover(ChunkSection & chunk , std::vector<ChunkSection*> & a
 
     if(!existsChunk(directions.right.x , directions.right.y, directions.right.z)) {
         addMiseryChunk(directions.right.x, directions.right.y, directions.right.z);
-         //Recover(getChunk(directions.right.x, directions.right.y, directions.right.z), temp);
     }
     AdjChunks.push_back(&getChunk(directions.right.x, directions.right.y, directions.right.z)); 
        
 
     if(!existsChunk(directions.up.x , directions.up.y, directions.up.z)) {
         addMiseryChunk(directions.up.x, directions.up.y, directions.up.z);
-        //Recover(getChunk(directions.up.x, directions.up.y, directions.up.z), temp);
     }
     AdjChunks.push_back(&getChunk(directions.up.x, directions.up.y, directions.up.z)); 
        
@@ -70,7 +68,6 @@ void ChunkManager::Recover(ChunkSection & chunk , std::vector<ChunkSection*> & a
     if(!existsChunk(directions.down.x , directions.down.y, directions.down.z)) {
         addMiseryChunk(directions.down.x, directions.down.y, directions.down.z);
         
-        //Recover(getChunk(directions.down.x, directions.down.y, directions.down.z), temp);
     }
     AdjChunks.push_back(&getChunk(directions.down.x, directions.down.y, directions.down.z)); 
 
@@ -78,77 +75,20 @@ void ChunkManager::Recover(ChunkSection & chunk , std::vector<ChunkSection*> & a
     if(!existsChunk(directions.front.x , directions.front.y, directions.front.z)) {
         addMiseryChunk(directions.front.x, directions.front.y, directions.front.z);
         
-        //Recover(getChunk(directions.front.x, directions.front.y, directions.front.z), temp);
     }
     AdjChunks.push_back(&getChunk(directions.front.x, directions.front.y, directions.front.z)); 
 
 
     if(!existsChunk(directions.back.x , directions.back.y, directions.back.z)) {
         addMiseryChunk(directions.back.x, directions.back.y, directions.back.z);
-        //Recover(getChunk(directions.back.x, directions.back.y, directions.back.z), temp);
     }
     AdjChunks.push_back(&getChunk(directions.back.x, directions.back.y, directions.back.z)); 
-
+    
     
     
     ChunkBuilder builder(chunk, AdjChunks);
     builder.BuildMesh(chunk.mesh);
     chunk.mesh.bufferMesh();
-}
-
-void ChunkManager::GetRidOfAdjacentChunks(ChunkSection & Chunk) {
-    
-    AdjacentChunks directions;
-    directions.update(Chunk.getPosition());
-     
-    std::vector<ChunkSection* > AdjChunks;
-    
-    
-    std::vector<ChunkSection*> temp;
-    temp.push_back(&Chunk);
-
-    // Check if the chunk is at the edge of the world
-    
-    if(existsChunk(directions.left.x ,directions.left.y, directions.left.z)) {
-        AdjChunks.push_back(&getChunk(directions.left.x, directions.left.y, directions.left.z));
-        Recover(getChunk(directions.left.x, directions.left.y, directions.left.z), temp);
-    }
-
-    if(existsChunk(directions.right.x , directions.right.y, directions.right.z)) {
-        AdjChunks.push_back(&getChunk(directions.right.x, directions.right.y, directions.right.z)); 
-        Recover(getChunk(directions.right.x, directions.right.y, directions.right.z), temp);
-    }
-
-    if(existsChunk(directions.up.x , directions.up.y, directions.up.z)) {
-        AdjChunks.push_back(&getChunk(directions.up.x, directions.up.y, directions.up.z)); 
-       
-        Recover(getChunk(directions.up.x, directions.up.y, directions.up.z), temp);
-    }
-
-    if(existsChunk(directions.down.x , directions.down.y, directions.down.z)) {
-        AdjChunks.push_back(&getChunk(directions.down.x, directions.down.y, directions.down.z)); 
-
-        Recover(getChunk(directions.down.x, directions.down.y, directions.down.z), temp);
-    }
-
-    if(existsChunk(directions.front.x , directions.front.y, directions.front.z)) {
-        AdjChunks.push_back(&getChunk(directions.front.x, directions.front.y, directions.front.z)); 
-
-        Recover(getChunk(directions.front.x, directions.front.y, directions.front.z), temp);
-    }
-
-    if(existsChunk(directions.back.x , directions.back.y, directions.back.z)) {
-        AdjChunks.push_back(&getChunk(directions.back.x, directions.back.y, directions.back.z)); 
-
-        Recover(getChunk(directions.back.x, directions.back.y, directions.back.z), temp);
-    }
-    
-    
-    
-    
-    ChunkBuilder builder(Chunk, AdjChunks);
-    builder.BuildMesh(Chunk.mesh);
-    Chunk.mesh.bufferMesh();
 }
 
 void ChunkManager::removeBlock(int x, int y, int z) {
@@ -208,7 +148,6 @@ bool ChunkManager::existsChunk(int x,int y, int z) {
 void ChunkManager::update(const glm::mat4 & view, const glm::mat4 &projection) {
     LoadChunks();
     miseryChunk.clear();
-
 }
 
 void ChunkManager::UnloadChunks() {
@@ -260,7 +199,7 @@ void ChunkManager::LoadChunks() {
             
             for(int z = playerChunkZ - renderDistance; z < playerChunkZ + renderDistance ; z++) {
                 bool chunkExists = false;
-                if(glm::distance(glm::vec3(playerChunkX,0, playerChunkZ), glm::vec3(x, 0, z)) > renderDistance) {
+                if(glm::distance(glm::vec3(playerChunkX, 0, playerChunkZ), glm::vec3(x, 0, z)) > renderDistance) {
                     continue;
                 }
 
@@ -315,6 +254,5 @@ ChunkSection& ChunkManager::getChunk(int x, int y, int z) {
             return chunk;
         }
     }
-    std::cout << "Chunk not found" << std::endl;
     return chunks[0];
 }

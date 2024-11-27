@@ -3,15 +3,17 @@ out vec4 FragColor;
 
 float fog_maxdist = 2200.0;
 float fog_mindist = 0.01;
-float fog_density = 0.01;
+float fog_density = 0.02;
 float gradient = 2.;
 
-vec4 fogColor = vec4(0.2 ,  0.01 ,  0.01  , 1.0);
+vec4 fogColor = vec4(0.01 ,  0.01 ,  0.1  , 1.0);
 
 in vec2 TexCoord;
 uniform sampler2D samplerTexture;
 uniform float alpha;
 in vec4 positionRelativeToCamera;
+
+
 
 void main()
 {

@@ -14,11 +14,5 @@ BLOCKID Ocean::getBlocks(int x, int y, int z) {
         }
     }
 
-    
-
-    if(y == 0) {
-        return BLOCKID::Bedrock;
-    }
-
     return BLOCKID::Water;
 }

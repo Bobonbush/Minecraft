@@ -51,6 +51,9 @@ void Model::addData(const Mesh & mesh) {
 
 
     addVBO(2, mesh.textureCoords);
+    
+    if(!mesh.normals.empty())
+        addVBO(3, mesh.normals);
 
     addEBO(mesh.indices);
 

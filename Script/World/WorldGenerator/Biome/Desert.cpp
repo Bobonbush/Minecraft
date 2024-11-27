@@ -21,10 +21,6 @@ BLOCKID Desert::getBlocks(int x, int y, int z) {
     if(y < water_max) {
         return BLOCKID::Water;
     }
-
-    if(y == 0) {
-        return BLOCKID::Bedrock;
-    }
     
     return BLOCKID::Air;
 }
