@@ -1,6 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 #include "Physics/AABB.h"
+#include "Physics/PhysicCons.h"
 
 class Entity
 {
@@ -72,15 +73,26 @@ class DYNAMIC_ENTITY : public Entity {
             this -> force += force;
         }
 
+        void ApplyGravity() {
+            addForce(glm::vec3(0.0f, -PhysicConst::GRAVITY * mass , 0.f));
+        }
+
         void update(float deltaTime) override {
         }
 
         void FixedUpdate() override {
-
+            if(!isFlying) {
+                ApplyGravity();
+                
+            }
             applyForce();
             velocity += acceleration;
             position += velocity;
-            velocity *= friction;
+            velocity.x *= friction;
+            velocity.z *= friction;
+            if(isFlying) {
+                velocity.y *= friction;
+            }
             acceleration = glm::vec3(0.0f);
         }
 

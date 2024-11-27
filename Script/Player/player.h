@@ -1,5 +1,8 @@
+#ifndef PLAYER_H
+#define PLAYER_H
 #include "Entity.h"
 #include "Singleton.h"
+#include "Texture&Shader/ShaderManager.h"
 
 class Player : public DYNAMIC_ENTITY, Singleton {
     private:
@@ -24,3 +27,5 @@ class Player : public DYNAMIC_ENTITY, Singleton {
 
     
 };
+
+#endif // PLAYER_H

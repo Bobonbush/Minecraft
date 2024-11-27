@@ -25,18 +25,19 @@ void ChunkBuilder::BuildMesh(ChunkMesh & mesh) {
                 pblockData = &block.getData().getBlockData();
                 auto &data = *pblockData;
                 directions.update(x, y, z);
-                tryAddFaceToMesh(Block::Front, data.sideCoords, position, directions.front);
-                tryAddFaceToMesh(Block::Top, data.topCoords, position, directions.up);
+                tryAddFaceToMesh(Block::Front, Block::frontNormal, data.sideCoords, position, directions.front);
+                tryAddFaceToMesh(Block::Top, Block::upNormal, data.topCoords, position, directions.up);
                 
-                tryAddFaceToMesh(Block::Bottom, data.bottomCoords, position, directions.down);
-                tryAddFaceToMesh(Block::Left, data.sideCoords, position, directions.left);
-                tryAddFaceToMesh(Block::Right, data.sideCoords, position, directions.right);
+                tryAddFaceToMesh(Block::Bottom, Block::downNormal, data.bottomCoords, position, directions.down);
+                tryAddFaceToMesh(Block::Left, Block::leftNormal, data.sideCoords, position, directions.left);
+                tryAddFaceToMesh(Block::Right, Block::rightNormal, data.sideCoords, position, directions.right);
                 
-                tryAddFaceToMesh(Block::Back, data.sideCoords, position, directions.back);
+                tryAddFaceToMesh(Block::Back, Block::backNormal,data.sideCoords, position, directions.back);
             }
         }
     }
 }
+
 
 void ChunkBuilder::tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing) {
     if(shouldMakeFace(facing, *pblockData)) {
@@ -47,6 +48,22 @@ void ChunkBuilder::tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const
             SPA::RotateArray2f(Coords, 3);
         }
         pMesh -> addFace(vertices, Coords, pChunk -> getPosition(), Blockposition);
+        if(vertices == Block::Right) {
+            SPA::RotateArray2f(Coords, 1);
+        }
+    }
+}
+
+
+void ChunkBuilder::tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const std::vector<GLfloat> & normals, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing) {
+    if(shouldMakeFace(facing, *pblockData)) {
+        faceCount++;
+        pMesh -> has_mesh = true;
+        auto Coords = BlockDataBase::GetInstance() -> textureAtlas.getTexture(texCoords);
+        if(vertices == Block::Right) {
+            SPA::RotateArray2f(Coords, 3);
+        }
+        pMesh -> addFace(vertices, normals, Coords, pChunk -> getPosition(), Blockposition);
         if(vertices == Block::Right) {
             SPA::RotateArray2f(Coords, 1);
         }

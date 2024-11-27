@@ -31,6 +31,7 @@ class ChunkBuilder {
         const BlockDataHolder* pblockData = nullptr;
         std::vector<ChunkSection*> adj;
         void tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing);
+        void tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const std::vector<GLfloat> & normals, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing);
         bool shouldMakeFace(const glm::vec3 position, const BlockDataHolder & blockData);
     
     public :

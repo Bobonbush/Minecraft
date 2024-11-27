@@ -12,6 +12,13 @@ class Block {
     const static std::vector<GLfloat> Right;
     const static std::vector<GLfloat> Front;
     const static std::vector<GLfloat> Back; 
+
+    const static std::vector<GLfloat> upNormal;
+    const static std::vector<GLfloat> downNormal;
+    const static std::vector<GLfloat> leftNormal;
+    const static std::vector<GLfloat> rightNormal;
+    const static std::vector<GLfloat> frontNormal;
+    const static std::vector<GLfloat> backNormal;
 };
 
 

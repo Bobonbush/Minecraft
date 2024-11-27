@@ -16,6 +16,7 @@ class ChunkMesh {
         bool has_mesh = false;
         ChunkMesh();
         void addFace(const std::vector<GLfloat> & vertices, const std::vector<GLfloat> & texCoords, const glm::vec3 & position, const glm::vec3 & blockPosition);
+        void addFace(const std::vector<GLfloat> & vertices, const std::vector<GLfloat> & normals, const std::vector<GLfloat> & texCoords, const glm::vec3 & position, const glm::vec3 & blockPosition);
         const Model & getModel() const;
 
         void bufferMesh();
