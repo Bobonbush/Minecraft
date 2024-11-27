@@ -14,6 +14,8 @@ void ChunkRenderer::render(const glm::mat4 & view, const glm::mat4 & projection)
     shader -> use();
     shader -> setMat4("view", view);
     shader -> setMat4("projection", projection);
+    shader -> setVec3("viewPos", Player::GetInstance() -> getPosition());
+    shader -> setVec3("lightPos", Player::GetInstance() -> getPosition() + glm::vec3(0.0f, 300.0f, 0.0f));
 
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);

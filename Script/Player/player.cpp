@@ -17,9 +17,4 @@ void Player::FixedUpdate() {
         isFlying ^= 1;
     }
     DYNAMIC_ENTITY::FixedUpdate();
-    ShaderManager::GetInstance() -> getShader("solid") -> setVec3("viewPos", position);
-    glm::vec3 eye = position;
-    eye += glm::vec3(0.0f, 300.0f, 0.0f);
-    ShaderManager::GetInstance() -> getShader("solid") -> setVec3("lightPos", eye); 
-    
 }

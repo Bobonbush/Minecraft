@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include <Texture&Shader/TextureBind.h>
 #include <Texture&Shader/ShaderManager.h>
+#include "Player/Player.h"
 
 class ChunkRenderer {
     private:

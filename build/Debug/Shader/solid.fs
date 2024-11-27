@@ -12,9 +12,9 @@ in vec4 positionRelativeToCamera;
 in vec3 FragPos;
 in vec3 Normal;
 
-uniform vec3 lightPos = vec3(0.0, 400.0, 0.0);
-uniform vec3 viewPos = vec3(0.0, 0.0, 0.0);
-uniform vec3 lightColor = vec3(1 ,  1 ,  1);
+uniform vec3 lightPos;
+uniform vec3 viewPos;
+uniform vec3 lightColor = vec3(1.0 ,  1.0 ,  1.0);
 
 float ambientStrength = 0.1;
 float specularStrength = 0.5;
@@ -78,6 +78,4 @@ void main()
     FragColor = FragColor * vec4(result, 1.0);
     FragColor = mix(FragColor, fogColor, visibility);
     FragColor.a = 1 - alpha;
-    //FragColor = result;
-    if(FragColor.a < 0.1) discard;
 }
