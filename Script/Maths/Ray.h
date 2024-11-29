@@ -9,8 +9,9 @@ class Ray {
     public:
 
         Ray(const Camera &camera) {
-            this->ray_direction = camera.Front;
+            this->ray_direction = glm::normalize(camera.Front);
             this->ray_start = camera.Position;
+            this-> ray_end = camera.Position;
             
         }
 

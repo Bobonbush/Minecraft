@@ -39,7 +39,7 @@ class ChunkManager {
         float renderDistance = 12 ;
         int numLoadChunks = 2;
         bool firstRender = true;
-        bool existsChunk(int x,int y, int z);
+        
         void LoadChunks();
         void UnloadChunks();
         void Recover(ChunkSection & chunk , std::vector<ChunkSection*> & adj);
@@ -55,10 +55,16 @@ class ChunkManager {
         
         ChunkSection & getChunk(int x,int y, int z);
         void addChunk(int x, int y, int z);
-        void addBlock(int x, int y, int z, ChunkBlock block);
-        void removeBlock(int x, int y, int z);
+        
         void renderChunks(const glm::mat4& view, const glm::mat4& projection);
+        bool existsChunk(int x, int y, int z);
 
+        void addBlock(float x, float y, float z, ChunkBlock block);
+        void removeBlock(float x, float y, float z);
+        bool existsBlock(float x, float y, float z);
+        ChunkBlock getBlock(float x, float y, float z);
+        glm::vec3 getBlockPosition(float x, float y, float z);
+        void setBlock(int x, int y, int z, BLOCKID id);
         //void getBlock(float x , float y , float z);
         //void getChunk(float x, float z);
 };

@@ -39,8 +39,6 @@ public:
     glm::vec3 Up;
     glm::vec3 Right;
     glm::vec3 WorldUp;
-
-    Entity * attachedEntity = nullptr;
     // euler Angles
     float Yaw;
     float Pitch;
@@ -48,6 +46,7 @@ public:
     float MovementSpeed;
     float MouseSensitivity;
     float Zoom;
+    Entity * attachedEntity = nullptr;
 
     // constructor with vectors
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
@@ -74,55 +73,19 @@ public:
         return glm::lookAt(Position, Position + Front, Up);
     }
 
-    void AttachEntity(Entity * entity) {
+    void attachEntity(Entity * entity) {
         attachedEntity = entity;
     }
+
 
     void update() {
         if(attachedEntity != nullptr) {
             Position = attachedEntity -> getPosition();
         }
-        //attachedEntity -> addForce(glm::vec3(0.0f, -9.8f, 0.0f));
-    }
-
-    void FixedUpdate() {
-        float elapsedTime = 1.f;
-        
-        glm::vec3 force = glm::vec3(0.0f);
-
-        
-        
-        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_PRESS) {
-            force += ProcessKeyboard(Camera_Movement::FORWARD, elapsedTime);
-        }
-        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_S) == GLFW_PRESS) {
-            force += ProcessKeyboard(Camera_Movement::BACKWARD, elapsedTime);
-        }
-    
-        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_A) == GLFW_PRESS) {
-            force += ProcessKeyboard(Camera_Movement::LEFT, elapsedTime);
-        }
-    
-        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_D) == GLFW_PRESS) {
-            force += ProcessKeyboard(Camera_Movement::RIGHT, elapsedTime);
-        }
-    
-        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_SPACE) == GLFW_PRESS) {
-            force += ProcessKeyboard(Camera_Movement::UP, elapsedTime);
-        }
-    
-        if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-            force += ProcessKeyboard(Camera_Movement::DOWN, elapsedTime);
-        }
-        if(attachedEntity != nullptr)
-            attachedEntity -> addForce(force);
-        else {
-            Position += force;
-        }
     }
 
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
-    glm::vec3 & ProcessKeyboard(Camera_Movement direction, float deltaTime)
+    const glm::vec3 & ProcessKeyboard(Camera_Movement direction, float deltaTime) const
     {
         float velocity = MovementSpeed * deltaTime;
         if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {

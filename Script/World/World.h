@@ -4,7 +4,7 @@
 #include "States/SceneState.h"
 #include "Application.h"
 #include "Chunk/ChunkManager.h"
-
+#include "States/PlayingState.h"
 class World : public StateBase {
     private:
         std::unique_ptr<RenderMaster> renderMaster;
@@ -16,6 +16,9 @@ class World : public StateBase {
         glm::mat4 view;
         glm::mat4 projection;
         Player * player;
+        PlayingState* playingState;
+        Cursor * cursor;
+        Config * config;
 
 
         

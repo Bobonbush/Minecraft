@@ -19,6 +19,8 @@ class Block {
     const static std::vector<GLfloat> rightNormal;
     const static std::vector<GLfloat> frontNormal;
     const static std::vector<GLfloat> backNormal;
+
+    const static std::vector<glm::vec3> normals;
 };
 
 

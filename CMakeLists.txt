@@ -81,6 +81,10 @@ add_executable(OPENGL Script/main.cpp
                       Script/World/WorldGenerator/Biome/Desert.cpp
                       Script/Maths/Frustum.cpp
                       Script/Renderer/Skybox.cpp
+                      Script/States/PlayingState.cpp
+                      Script/States/Cursor.cpp
+                      Script/Player/Inventory.cpp
+                      Script/Renderer/hitbox.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

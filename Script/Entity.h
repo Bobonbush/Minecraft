@@ -81,9 +81,9 @@ class DYNAMIC_ENTITY : public Entity {
         }
 
         void FixedUpdate() override {
+            isGrounded = (velocity.y == 0.0f);
             if(!isFlying) {
                 ApplyGravity();
-                
             }
             applyForce();
             velocity += acceleration;
@@ -104,6 +104,20 @@ class DYNAMIC_ENTITY : public Entity {
         void setFriction(float friction) {
             this -> friction = friction;
         }
+
+
+        void setFlying(bool flying) {
+            isFlying = flying;
+        }
+
+        bool isOnGround() {
+            return isGrounded;
+        }
+
+        bool Flying() {
+            return isFlying;
+        }
+
 
 
 };
