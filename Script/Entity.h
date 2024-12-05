@@ -2,6 +2,8 @@
 #define ENTITY_H
 #include "Physics/AABB.h"
 #include "Physics/PhysicCons.h"
+#include <vector>
+#include "Block/Block.h"
 
 class Entity
 {
@@ -12,7 +14,7 @@ class Entity
         glm::vec3 rotation;
     public:
         Entity() : box(glm::vec3(0.0f, 0.0f, 0.0f)) , position(glm::vec3(0.0f)) , rotation(glm::vec3(0.0f)), velocity(glm::vec3(0.0f)) {}
-
+        Entity(const glm::vec3& dim) : box(dim) {}
         Entity(const glm::vec3 &pos , const glm::vec3 & rot) : box(glm::vec3(0.0f, 0.0f, 0.0f)) , position(pos) , rotation(rot), velocity(glm::vec3(0.0f)) {}
 
         Entity(const glm::vec3 &pos, const glm::vec3 &rot, const AABB &box) : box(box) , position(pos) , rotation(rot), velocity(glm::vec3(0.0f)) {}
@@ -35,17 +37,6 @@ class Entity
         virtual void addForce(const glm::vec3 &force) = 0 ;
 };
 
-class STATIC_ENTITY : public Entity {
-    public :
-        STATIC_ENTITY(const glm::vec3 &pos, const glm::vec3 &rot, const AABB &box) : Entity(pos, rot, box) {}
-
-        STATIC_ENTITY(const glm::vec3 &pos, const glm::vec3 &rot) : Entity(pos, rot) {}
-
-        STATIC_ENTITY() : Entity() {}
-    
-    
-};
-
 class DYNAMIC_ENTITY : public Entity {
     protected :
         glm::vec3 acceleration = glm::vec3(0.0f);
@@ -57,44 +48,30 @@ class DYNAMIC_ENTITY : public Entity {
         bool isGrounded = false;
         bool isFlying = false;
 
+        std::vector<AABB> nearBoxes;
+
         void applyForce() {
             acceleration += force / mass;
             force = glm::vec3(0.0f);
         }
+
+        void resolveCollision();
+
+        bool getColliding(AABB &boxe);
+
     public :
         DYNAMIC_ENTITY(const glm::vec3 &pos, const glm::vec3 &rot, const AABB &box, float mass) : Entity(pos, rot, box) , mass(mass) {}
         DYNAMIC_ENTITY(const glm::vec3 &pos, const glm::vec3 &rot, float mass) : Entity(pos, rot) , mass(mass) {}
         DYNAMIC_ENTITY(float mass) : Entity() , mass(mass) {}
-
+        DYNAMIC_ENTITY(const glm::vec3& dim) : Entity(dim) {}
         
 
-        void addForce(const glm::vec3 &force) override {
-            //velocity += force / mass;
-            this -> force += force;
-        }
+        void addForce(const glm::vec3 &force) override;
+        void ApplyGravity();
 
-        void ApplyGravity() {
-            addForce(glm::vec3(0.0f, -PhysicConst::GRAVITY * mass , 0.f));
-        }
+        void update(float deltaTime) override;
 
-        void update(float deltaTime) override {
-        }
-
-        void FixedUpdate() override {
-            isGrounded = (velocity.y == 0.0f);
-            if(!isFlying) {
-                ApplyGravity();
-            }
-            applyForce();
-            velocity += acceleration;
-            position += velocity;
-            velocity.x *= friction;
-            velocity.z *= friction;
-            if(isFlying) {
-                velocity.y *= friction;
-            }
-            acceleration = glm::vec3(0.0f);
-        }
+        void FixedUpdate() override;
 
 
         void setMass(float mass) {
@@ -117,6 +94,11 @@ class DYNAMIC_ENTITY : public Entity {
         bool Flying() {
             return isFlying;
         }
+
+        void addCollisioner(const std::vector<AABB> &boxe);
+
+        
+        
 
 
 

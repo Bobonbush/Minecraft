@@ -17,6 +17,8 @@ class PlayingState : Singleton {
 
         Cursor * cursor;
 
+        std::vector<DYNAMIC_ENTITY*> entities; 
+
         PlayingState();
         HitBox hitBox;
 
@@ -44,6 +46,8 @@ class PlayingState : Singleton {
             }
         }
 
+        void EntityProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection);
+        void PlayerProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection);
         void ProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 &view, const glm::mat4 & projection);
 
         

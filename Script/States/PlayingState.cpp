@@ -9,6 +9,7 @@ PlayingState::PlayingState() {
     }
     player = Player::GetInstance();
     cursor = Cursor::GetInstance();
+    entities.push_back(player);
     glfwSetKeyCallback(glfwGetCurrentContext(), key_callback);
 }
 
@@ -74,24 +75,33 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
 
         chunkManager.addBlock(position.x, position.y, position.z, ChunkBlock(BLOCKID::Grass));
     }
-
-    //glDisable(GL_BLEND);
     
 }
 
-void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection)  {
-
-    for(int i = 0 ; i < 256 ; i++) {
-        if( i == GLFW_KEY_C && pressed[i] == true && glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_C) == GLFW_RELEASE) {
-            player -> setFlying(!player -> Flying());
-            pressed[i] = false;
+void PlayingState::EntityProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
+    for(DYNAMIC_ENTITY * &entity : entities) {
+        float distance = 2.f;
+        std::vector<AABB> hitboxes;
+        for(int x = -distance; x <= distance ; x++) {
+            for(int y = -distance; y <= distance ; y++) {
+                for(int z = -distance; z <= distance ; z++) {
+                    glm::vec3 position = entity -> getPosition() + glm::vec3(x, y, z) * static_cast<float>(Chunk::CHUNK_SCALE);
+                    
+                    if(chunkManager.existsBlock(position.x, position.y, position.z)) {
+                        
+                        glm::vec3 blockPosition = chunkManager.getBlockPosition(position.x, position.y, position.z);
+                        hitboxes.push_back(AABB(glm::vec3(Chunk::CHUNK_SCALE)));
+                        hitboxes.back().update(blockPosition);
+                    }
+                }
+            }
         }
 
-        if(glfwGetKey(glfwGetCurrentContext(), i) == GLFW_PRESS) {
-            pressed[i] = true;
-        }
-    }
+        entity -> addCollisioner(hitboxes);
+    } 
+}
 
+void PlayingState::PlayerProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
     glm::vec3 force = glm::vec3(0.f);
     float elapsedTime = 1.f;
     if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_PRESS) {
@@ -117,7 +127,23 @@ void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunk
         force += camera.ProcessKeyboard(Camera_Movement::DOWN, elapsedTime);
     }
 
-    
-
     player -> addForce(force);
+}
+
+
+void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection)  {
+
+    for(int i = 0 ; i < 256 ; i++) {
+        if( i == GLFW_KEY_C && pressed[i] == true && glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_C) == GLFW_RELEASE) {
+            player -> setFlying(!player -> Flying());
+            pressed[i] = false;
+        }
+
+        if(glfwGetKey(glfwGetCurrentContext(), i) == GLFW_PRESS) {
+            pressed[i] = true;
+        }
+    }
+
+    PlayerProcess(camera, chunkManager, view, projection);
+    EntityProcess(camera, chunkManager, view, projection);
 }

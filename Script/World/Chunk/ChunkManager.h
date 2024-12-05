@@ -37,7 +37,7 @@ class ChunkManager {
         NoiseGenerator noise;
 
         float renderDistance = 12 ;
-        int numLoadChunks = 2;
+        int numLoadChunks = 1;
         bool firstRender = true;
         
         void LoadChunks();

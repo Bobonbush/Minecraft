@@ -30,7 +30,7 @@ public:
 // Default camera values
     static const float YAW ;      
     static const float PITCH;      
-    const float SPEED       =  0.035f;
+    const float SPEED       =  0.07;
     const float SENSITIVITY =  0.1f;
     const float ZOOM        =  45.0f;
     // camera Attributes
@@ -82,6 +82,7 @@ public:
         if(attachedEntity != nullptr) {
             Position = attachedEntity -> getPosition();
         }
+        Position.y += 1.f;
     }
 
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
@@ -89,16 +90,28 @@ public:
     {
         float velocity = MovementSpeed * deltaTime;
         if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
-            velocity *= 2.f;
+            velocity *= 1.5f;
         }
-        if (direction == Camera_Movement::FORWARD)
-            return Front * velocity;
-        if (direction == Camera_Movement::BACKWARD)
-            return  -Front * velocity;
-        if (direction == Camera_Movement::LEFT)
-            return - Right * velocity;
-        if (direction == Camera_Movement::RIGHT)
-            return Right * velocity;
+        if (direction == Camera_Movement::FORWARD) {
+            glm::vec3 force = glm::vec3(Front.x, 0.f, Front.z);
+            force = glm::normalize(force);
+            return force * velocity;
+        }
+        if (direction == Camera_Movement::BACKWARD) {
+            glm::vec3 force = glm::vec3(Front.x, 0.f, Front.z);
+            force = glm::normalize(force);
+            return -force * velocity;
+        }
+        if (direction == Camera_Movement::LEFT) {
+            glm::vec3 force = glm::vec3(Right.x, 0.f, Right.z);
+            force = glm::normalize(force);
+            return -force * velocity;
+        }
+        if (direction == Camera_Movement::RIGHT) {
+            glm::vec3 force = glm::vec3(Right.x, 0.f, Right.z);
+            force = glm::normalize(force);
+            return force * velocity;
+        }
         if(direction == Camera_Movement::UP)
             return  glm::vec3(0.f, 1.f, 0.f) * velocity;
         if(direction == Camera_Movement::DOWN)
