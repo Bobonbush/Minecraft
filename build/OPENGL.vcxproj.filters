@@ -160,6 +160,9 @@
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\TextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\SoundEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\WorkSpace\Minecraft\Script\Renderer\RenderInfo.h">

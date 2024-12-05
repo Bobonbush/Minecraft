@@ -16,6 +16,7 @@ set(Utils "Script/Utils")
 set(Script "Script")
 set(JSON "json-develop")
 set(WORLD "Script/World")
+set(Sound "irrKlang")
 
 
 
@@ -26,11 +27,13 @@ include_directories(${GLM_PATH})
 include_directories(${Utils})
 include_directories(${Script})
 include_directories(${WORLD})
+include_directories(${Sound}/include)
 set(FreeType_PATH "FreeType")
 
 link_directories(${GLFW_PATH}/lib-vc2022)
 include_directories(${FreeType_PATH}/include)
 link_directories(${FreeType_PATH}/objs)
+link_directories(${Sound}/lib/Winx64-visualStudio)
 
 add_executable(OPENGL Script/main.cpp
                       GLAD/src/glad.c
@@ -93,14 +96,19 @@ add_executable(OPENGL Script/main.cpp
                       Script/Player/InventoryBox.cpp
                       Script/Player/InventoryBuilder.cpp
                       Script/Texture&Shader/TextureManager.cpp
+                      Script/Texture&Shader/SoundEngine.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)
+target_link_libraries(OPENGL freetype)
+target_link_libraries(OPENGL irrKlang)
 
 
 set(ASSETS "${CMAKE_CURRENT_SOURCE_DIR}/Assets")
 set(SHADERDIR "${CMAKE_CURRENT_SOURCE_DIR}/Shader")
 set(AssimpDir "${CMAKE_CURRENT_SOURCE_DIR}/Assimp/bin/Release")
+set(FREETYPE "${CMAKE_CURRENT_SOURCE_DIR}/FreeType/objs")
+set(IRRKLANG "${CMAKE_CURRENT_SOURCE_DIR}/irrKlang/lib/Winx64-visualStudio")
 
 add_custom_command(TARGET OPENGL POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -108,4 +116,12 @@ add_custom_command(TARGET OPENGL POST_BUILD
 add_custom_command(TARGET OPENGL POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                        ${SHADERDIR} $<TARGET_FILE_DIR:OPENGL>/Shader)
+
+add_custom_command(TARGET OPENGL POST_BUILD
+                       COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${FREETYPE} $<TARGET_FILE_DIR:OPENGL>)
+
+add_custom_command(TARGET OPENGL POST_BUILD 
+                       COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${IRRKLANG} $<TARGET_FILE_DIR:OPENGL>)
         
