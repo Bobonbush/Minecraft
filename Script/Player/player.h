@@ -8,7 +8,7 @@ class Player : public DYNAMIC_ENTITY, Singleton {
     private:
         static Player * m_instance;
         Player();
-        const float JUMP_FORCE = 1.1f;
+        const float JUMP_FORCE = 1.25f;
     public:
         static Player * GetInstance() {
             if(m_instance == nullptr) {

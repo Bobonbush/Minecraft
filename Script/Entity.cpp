@@ -22,10 +22,10 @@ void DYNAMIC_ENTITY::FixedUpdate() {
     velocity += acceleration;
     resolveCollision();
     
-    if(isGrounded) {
-        velocity.x *= friction;
-        velocity.z *= friction;
-    }
+    
+    velocity.x *= friction;
+    velocity.z *= friction;
+    
     
 
     if(isFlying) {

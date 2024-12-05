@@ -399,7 +399,7 @@ void ChunkManager::LoadChunks() {
     Frustum * frustum = Frustum::GetInstance();
     for(int x = playerChunkX - renderDistance; x < playerChunkX + renderDistance ; x++) {
         
-        for(int y = SPA::max(playerChunkY - renderDistance, 0.0f); y < SPA::min( playerChunkY + renderDistance, 1.0f * Chunk::CHUNK_HEIGHT); y++) {
+        for(int y = SPA::max(playerChunkY - renderDistance/ 2.f, 0.0f); y < SPA::min( playerChunkY + renderDistance/2.f, 1.0f * Chunk::CHUNK_HEIGHT); y++) {
             
             for(int z = playerChunkZ - renderDistance; z < playerChunkZ + renderDistance ; z++) {
                 bool chunkExists = false;

@@ -98,7 +98,7 @@ void PlayingState::EntityProcess(const Camera & camera, ChunkManager & chunkMana
         }
 
         entity -> addCollisioner(hitboxes);
-    } 
+    }
 }
 
 void PlayingState::PlayerProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
