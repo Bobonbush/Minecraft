@@ -14,6 +14,7 @@ class TextureManager : public Singleton {   // Proxy x Singleton
         }
         return instance;
     }
+    
     ~TextureManager();
     GLuint getTexture(const char * path);
 };
