@@ -4,7 +4,7 @@ out vec4 FragColor;
 float fog_density = 0.02;
 float gradient = 2.;
 
-vec4 fogColor = vec4( 0.1 ,  0.1 ,  0.4  , 1.0);
+vec4 fogColor = vec4( 0.6 ,  0.6 ,  0.6  , 1.0);
 
 in vec2 TexCoord;
 uniform sampler2D samplerTexture;

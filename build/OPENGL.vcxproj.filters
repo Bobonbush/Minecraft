@@ -145,6 +145,21 @@
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\hitbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\SpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InteractiveBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\WorkSpace\Minecraft\Script\Renderer\RenderInfo.h">

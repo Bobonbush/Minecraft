@@ -4,17 +4,22 @@
 #include "memory.h"
 
 
-class BoxHandle {
-    private:
-        
-        unsigned int VAO, VBO, EBO;
-        unsigned int m_texture[2]; // on and off
-        std::shared_ptr<Shader> m_shader;
-        bool pressed[2];
-        bool chosen;
-};
-
 class Inventory {
+    public : 
+        // Constraints for the inventory
+        const static float MAX_SIZE;
+        const static int MAX_ROW = 4;
+        const static int MAX_COL = 9;
+        const static int MAX_BOX = MAX_ROW * MAX_COL;
+
+        const static int handCol = 9;  
+        const static int handRow = 1;
     private:
+
+        Inventory();
+        ~Inventory();
+
+        void update();
+        void render();
         
 };

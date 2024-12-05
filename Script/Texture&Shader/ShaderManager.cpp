@@ -3,6 +3,10 @@
 ShaderManager * ShaderManager::instance = nullptr;
 
 void ShaderManager::addShader(const std::string & name, const std::string & vertexPath, const std::string & fragmentPath) {
+    if(shaders.find(name) != shaders.end()) {
+        //std::cout << "Shader already exists" << std::endl;
+        return ;
+    }
     shaders[name] = std::make_shared<Shader>(vertexPath.c_str(), fragmentPath.c_str());
 }
 

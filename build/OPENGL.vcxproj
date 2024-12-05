@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -103,10 +103,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -150,7 +150,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -167,10 +167,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -214,7 +214,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -231,10 +231,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -278,7 +278,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -294,10 +294,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\WorkSpace\Minecraft\GLFW\include;G:\WorkSpace\Minecraft\GLAD\include;G:\WorkSpace\Minecraft\json-develop\include;G:\WorkSpace\Minecraft\GLM;G:\WorkSpace\Minecraft\Script\Utils;G:\WorkSpace\Minecraft\Script;G:\WorkSpace\Minecraft\Script\World;G:\WorkSpace\Minecraft\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -449,6 +449,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\States\Cursor.cpp" />
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\Inventory.cpp" />
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\hitbox.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\SpriteRenderer.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InteractiveBox.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryBox.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryBuilder.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="G:\WorkSpace\Minecraft\build\ZERO_CHECK.vcxproj">

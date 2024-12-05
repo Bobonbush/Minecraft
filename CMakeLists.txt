@@ -26,9 +26,11 @@ include_directories(${GLM_PATH})
 include_directories(${Utils})
 include_directories(${Script})
 include_directories(${WORLD})
+set(FreeType_PATH "FreeType")
 
 link_directories(${GLFW_PATH}/lib-vc2022)
-
+include_directories(${FreeType_PATH}/include)
+link_directories(${FreeType_PATH}/objs)
 
 add_executable(OPENGL Script/main.cpp
                       GLAD/src/glad.c
@@ -85,6 +87,12 @@ add_executable(OPENGL Script/main.cpp
                       Script/States/Cursor.cpp
                       Script/Player/Inventory.cpp
                       Script/Renderer/hitbox.cpp
+                      Script/Renderer/SpriteRenderer.cpp
+                      Script/Player/Inventory.cpp
+                      Script/Player/InteractiveBox.cpp
+                      Script/Player/InventoryBox.cpp
+                      Script/Player/InventoryBuilder.cpp
+                      Script/Texture&Shader/TextureManager.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)
