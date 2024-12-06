@@ -18,6 +18,11 @@ void ChunkManager::addChunk(int x,int y, int z) {
         return ;
     }
 
+    if(chunkMap.find(HashFunction(x, y, z)) != chunkMap.end()) {
+        chunks.push_back(chunkMap[HashFunction(x, y, z)]);
+        return ;
+    }
+
     chunks.push_back(ChunkSection(glm::vec3(x, y, z)));
     AdjacentChunks adj;
     adj.update(chunks.back().getPosition());
@@ -374,6 +379,7 @@ void ChunkManager::UnloadChunks() {
         }
         if(chunkY < lowerBoundY || chunkY > upperBoundY) {
             SPA::swap(chunks[i], chunks.back());
+            chunkMap[HashFunction(chunkX, chunkY, chunkZ)] = chunks.back();
             chunks.pop_back();
         }
     }
@@ -460,4 +466,8 @@ ChunkSection& ChunkManager::getChunk(int x, int y, int z) {
     }
     std::cout << "NGU"<<'\n';
     return chunks[0];
+}
+
+long long ChunkManager::HashFunction(int x ,int y ,int z) {
+    return (long long)x * 73856093 ^ (long long)y * 19349663 ^ (long long)z * 83492791;
 }

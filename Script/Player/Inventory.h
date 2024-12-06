@@ -1,3 +1,5 @@
+#ifndef INVENTORY_H
+#define INVENTORY_H
 #include "Texture.h"
 #include "Texture&Shader/ShaderManager.h"
 #include "Texture&Shader/TextureAtlas.h"
@@ -14,12 +16,7 @@ class Inventory {
 
         const static int handCol = 9;  
         const static int handRow = 1;
-    private:
-
-        Inventory();
-        ~Inventory();
-
-        void update();
-        void render();
         
 };
+
+#endif // INVENTORY_H

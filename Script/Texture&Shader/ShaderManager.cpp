@@ -17,3 +17,4 @@ std::shared_ptr<Shader> ShaderManager::getShader(const std::string &name) {
     }
     return shaders[name];
 }
+

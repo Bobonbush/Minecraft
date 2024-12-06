@@ -7,6 +7,7 @@
 #include "Algorithm.h"
 #include "Maths/Frustum.h"
 #include <thread>
+#include <map>
 
 
 class ChunkManager {
@@ -36,6 +37,8 @@ class ChunkManager {
         Player* m_player;
         NoiseGenerator noise;
 
+        std::map<long long , ChunkSection> chunkMap;
+
         float renderDistance = 12 ;
         int numLoadChunks = 1;
         bool firstRender = true;
@@ -48,6 +51,8 @@ class ChunkManager {
 
         ChunkManager();
         ~ChunkManager() = default;
+
+        long long HashFunction(int x ,int y ,int z);
 
         
         

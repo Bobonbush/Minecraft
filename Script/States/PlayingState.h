@@ -38,11 +38,9 @@ class PlayingState : Singleton {
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
             }
             if(key == GLFW_KEY_LEFT_ALT && action == GLFW_PRESS) {
-                if(glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED) {
-                    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-                } else {
-                    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-                }
+                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            }else {
+                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
             }
         }
 

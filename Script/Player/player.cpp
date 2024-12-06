@@ -2,7 +2,7 @@
 
 Player * Player::m_instance = nullptr;
 
-Player::Player() : DYNAMIC_ENTITY(glm::vec3(0.5f , 2.f, 0.5f)) {
+Player::Player() : DYNAMIC_ENTITY(glm::vec3(0.5f , 1.7f, 0.5f)) {
     position = glm::vec3(0.f , 150.f , 0.0f);
     rotation = glm::vec3(0.f);
     velocity = glm::vec3(0.f);

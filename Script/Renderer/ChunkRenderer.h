@@ -13,6 +13,8 @@ class ChunkRenderer {
         std::shared_ptr<Shader> shader;
 
     public:
+        
+        
         ChunkRenderer();
         void add(const ChunkMesh & mesh);
         void render(const glm::mat4 & view, const glm::mat4 & projection);

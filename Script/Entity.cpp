@@ -132,6 +132,7 @@ void DYNAMIC_ENTITY::resolveCollision() {
 }
 
 bool DYNAMIC_ENTITY::getColliding( AABB & boxe) {
+    box.update(position);
     glm::vec3 minBox =  boxe.getVP(glm::vec3(1.f) /2.f);
     glm::vec3 maxBox =  boxe.getVN(glm::vec3(1.f)/2.f);
     glm::vec3 minBox2 = box.getVP(glm::vec3(1.f)/2.f);

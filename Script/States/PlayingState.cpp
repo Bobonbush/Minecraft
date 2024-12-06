@@ -48,7 +48,10 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
                 //std::cout << x <<  " " << y << " " << z << std::endl;
             exists = true;
             blockPosition = chunkManager.getBlockPosition(position.x, position.y, position.z);
+
             hitBox.Draw(blockPosition, glm::vec3(1.f), view, projection);
+                
+            
             break;
         }
     }
@@ -72,8 +75,10 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
             }
         }
         
-
-        chunkManager.addBlock(position.x, position.y, position.z, ChunkBlock(BLOCKID::Grass));
+        AABB box(glm::vec3(1.f * Chunk::CHUNK_SCALE));
+        box.update(position);
+        if(!player -> getColliding(box))
+            chunkManager.addBlock(position.x, position.y, position.z, ChunkBlock(BLOCKID::Grass));
     }
     
 }

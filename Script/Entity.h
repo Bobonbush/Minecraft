@@ -57,7 +57,7 @@ class DYNAMIC_ENTITY : public Entity {
 
         void resolveCollision();
 
-        bool getColliding(AABB &boxe);
+        
 
     public :
         DYNAMIC_ENTITY(const glm::vec3 &pos, const glm::vec3 &rot, const AABB &box, float mass) : Entity(pos, rot, box) , mass(mass) {}
@@ -96,6 +96,7 @@ class DYNAMIC_ENTITY : public Entity {
         }
 
         void addCollisioner(const std::vector<AABB> &boxe);
+        bool getColliding(AABB &boxe);
 
         
         

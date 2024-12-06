@@ -4,6 +4,8 @@ ChunkRenderer::ChunkRenderer() {
     shader = ShaderManager::GetInstance() -> getShader("solid");
 }
 
+
+
 void ChunkRenderer::add(const ChunkMesh & mesh) {
     meshes.push_back(&mesh);
 }

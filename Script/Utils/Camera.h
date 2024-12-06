@@ -82,7 +82,7 @@ public:
         if(attachedEntity != nullptr) {
             Position = attachedEntity -> getPosition();
         }
-        Position.y += 1.f;
+        Position.y += 0.65f;
     }
 
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)

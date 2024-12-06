@@ -4,7 +4,7 @@ out vec4 FragColor;
 float fog_density = 0.02;
 float gradient = 2.;
 
-vec4 fogColor = vec4( 0.6 ,  0.6 ,  0.6  , 1.0);
+vec4 fogColor = vec4( 0.5 ,  0.5 ,  0.7  , 1.0);
 
 in vec2 TexCoord;
 uniform sampler2D samplerTexture;
@@ -14,16 +14,16 @@ in vec3 Normal;
 
 uniform vec3 lightPos;
 uniform vec3 viewPos;
-uniform vec3 lightColor = vec3(1.0 ,  1.0 ,  1.0);
+uniform vec3 lightColor = vec3(0.9 ,  0.9 ,  0.9);
 
-float ambientStrength = 0.1;
+float ambientStrength = 0.5;
 float specularStrength = 0.5;
 float shininess = 32.0;
 
 float getFogFactor(float dist, float farPlane)
 {
     float FogMax = 1.0 * farPlane;
-    float FogMin = 0.25 * farPlane;
+    float FogMin = 0.1 * farPlane;
     if(dist > FogMax) return 1.0;
     if(dist < FogMin) return 0.0;   
     return (dist - FogMin) / (FogMax - FogMin);
@@ -31,7 +31,7 @@ float getFogFactor(float dist, float farPlane)
 
 float getFogFactorAlpha(float d , float nearPlane, float farPlane) {
     float FogMax = 1.0 * farPlane;
-    float FogMin = 0.5 * farPlane;
+    float FogMin = 0.25 * farPlane;
 
     if(d > FogMax) return 1.0;
     if(d < FogMin) return 0.0;
@@ -77,5 +77,5 @@ void main()
     vec3 result = lightCalculation(norm, lightDir, viewDir);
     FragColor = FragColor * vec4(result, 1.0);
     FragColor = mix(FragColor, fogColor, visibility);
-    FragColor.a = 1 - alpha;
+    FragColor.a = alpha;
 }
