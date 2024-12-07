@@ -523,10 +523,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\hitbox.cpp" />
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\SpriteRenderer.cpp" />
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InteractiveBox.cpp" />
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryBox.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryHandBox.cpp" />
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryBuilder.cpp" />
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\TextureManager.cpp" />
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\SoundEngine.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Item\item.cpp" />
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="G:\WorkSpace\Minecraft\build\ZERO_CHECK.vcxproj">

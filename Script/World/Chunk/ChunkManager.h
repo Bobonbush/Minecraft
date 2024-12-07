@@ -37,7 +37,7 @@ class ChunkManager {
         Player* m_player;
         NoiseGenerator noise;
 
-        std::map<long long , ChunkSection> chunkMap;
+        std::map<long long , ChunkSection*> chunkMap;
 
         float renderDistance = 12 ;
         int numLoadChunks = 1;

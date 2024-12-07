@@ -7,6 +7,8 @@ ChunkSection::ChunkSection(const glm::vec3 &position) : position(position) {
     }
 }
 
+
+
 void ChunkSection::setBlock(int x, int y, int z, ChunkBlock block) {
     if (outOfBounds(x, y, z)) {
         return;

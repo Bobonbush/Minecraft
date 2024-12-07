@@ -3,12 +3,15 @@
 #include "Entity.h"
 #include "Singleton.h"
 #include "Texture&Shader/ShaderManager.h"
+#include "InventoryManager.h"
 
 class Player : public DYNAMIC_ENTITY, Singleton {
     private:
         static Player * m_instance;
-        Player();
         const float JUMP_FORCE = 1.35f;
+        std::unique_ptr<InventoryManager> inventory;
+        Player();
+        
     public:
         static Player * GetInstance() {
             if(m_instance == nullptr) {
@@ -24,6 +27,11 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         
         void update(float deltaTime) ;
         void FixedUpdate() ;
+        void Render() ;
+
+        std::shared_ptr<Item> getCurrentItem() {
+            return inventory -> getCurrentItem();
+        }
     
 
     

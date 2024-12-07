@@ -151,7 +151,7 @@
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InteractiveBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryBox.cpp">
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryHandBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryBuilder.cpp">
@@ -161,6 +161,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\SoundEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Item\item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

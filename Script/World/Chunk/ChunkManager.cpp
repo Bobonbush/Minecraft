@@ -18,11 +18,6 @@ void ChunkManager::addChunk(int x,int y, int z) {
         return ;
     }
 
-    if(chunkMap.find(HashFunction(x, y, z)) != chunkMap.end()) {
-        chunks.push_back(chunkMap[HashFunction(x, y, z)]);
-        return ;
-    }
-
     chunks.push_back(ChunkSection(glm::vec3(x, y, z)));
     AdjacentChunks adj;
     adj.update(chunks.back().getPosition());
@@ -379,7 +374,7 @@ void ChunkManager::UnloadChunks() {
         }
         if(chunkY < lowerBoundY || chunkY > upperBoundY) {
             SPA::swap(chunks[i], chunks.back());
-            chunkMap[HashFunction(chunkX, chunkY, chunkZ)] = chunks.back();
+            chunkMap[HashFunction(chunkX, chunkY, chunkZ)] = &chunks.back();
             chunks.pop_back();
         }
     }

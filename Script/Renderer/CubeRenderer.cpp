@@ -1,11 +1,15 @@
 #include "CubeRenderer.h"
 
-
+CubeRenderer * CubeRenderer::instance = nullptr;
 CubeRenderer::CubeRenderer() {
     cubeModel = std::make_unique<Model>();
-    shader = ShaderManager::GetInstance() -> getShader("solid");  
+    ShaderManager::GetInstance() -> addShader("Screen", "Shader/Screen.vs", "Shader/Screen.fs");
+    shader = ShaderManager::GetInstance() -> getShader("Screen");  
     texture = std::make_unique<TextureAtlas>("Assets/Default pack.png");
+}
 
+
+void CubeRenderer::LoadData(const glm::vec2 & topCoords, const glm::vec2 & sideCoords,  const glm::vec2 & bottomCoords) {
     std::vector<GLfloat> vertices = {
                 // Front
                 0.5f, 0.5f, 0.5f,
@@ -46,9 +50,9 @@ CubeRenderer::CubeRenderer() {
                 0.5f, 0.5f, -0.5f
     };
 
-    auto top = texture -> getTexture(glm::vec2(2, 0));
-    auto side = texture -> getTexture(glm::vec2(1, 0));
-    auto bottom = texture -> getTexture(glm::vec2(0, 0));
+    auto top = BlockDataBase::GetInstance() -> textureAtlas.getTexture(topCoords);
+    auto side = BlockDataBase::GetInstance() -> textureAtlas.getTexture(sideCoords);
+    auto bottom = BlockDataBase::GetInstance() -> textureAtlas.getTexture(bottomCoords);
     SPA::RotateArray2f(side, 2);
     std::vector<GLfloat> texcoords;
     texcoords.insert(texcoords.begin(), side.begin(), side.end()); // Front
@@ -83,18 +87,18 @@ CubeRenderer::CubeRenderer() {
         21, 22, 23
     };
 
+
     cubeModel -> addData(Mesh(vertices, texcoords, indices));
 }
+
 
 void CubeRenderer::add(const glm::vec3 & position) {
     cubes.push_back(position);
 }
 
-void CubeRenderer::renderCubes(const glm::mat4 & view, const glm::mat4 &projection) {
+void CubeRenderer::renderCubes(const glm::mat4 & view, const glm::mat4 &projection, const glm::vec3 & size) {
     shader -> use();
 
-    shader -> setMat4("view", view);
-    shader -> setMat4("projection", projection);
     cubeModel -> bindVao();
     glActiveTexture(GL_TEXTURE0);
     texture -> bind();
@@ -102,6 +106,9 @@ void CubeRenderer::renderCubes(const glm::mat4 & view, const glm::mat4 &projecti
     for(auto & cube : cubes) {
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, cube);
+        model = glm::rotate(model, glm::radians(45.f), glm::vec3(0.0, 0.5f, 0.f));
+        model = glm::rotate(model , glm::radians(180.f), glm::vec3(0.f, 0.f, 1.f));
+        model = glm::scale(model, size);
         shader -> setMat4("model", model);
         glDrawElements(GL_TRIANGLES, cubeModel -> getIndicesCount(), GL_UNSIGNED_INT, 0);
     }

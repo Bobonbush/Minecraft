@@ -7,6 +7,8 @@
 class SpriteRenderer : Singleton {
     private :
     unsigned int quadVAO;
+    unsigned int quadVBO;
+    unsigned int quadEBO;
     static SpriteRenderer * instance;
 
     std::shared_ptr<Shader> shader;
@@ -25,6 +27,8 @@ class SpriteRenderer : Singleton {
 
     ~SpriteRenderer() {
         glDeleteVertexArrays(1, &quadVAO);
+        glDeleteBuffers(1, &quadVBO);
+        glDeleteBuffers(1, &quadEBO);
         delete instance;
     }
     void DrawSprite(unsigned int texture, glm::vec2 position, glm::vec2 size, float rotate, glm::vec3 color, glm::mat4 view , glm::mat4 projection);

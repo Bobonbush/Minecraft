@@ -61,6 +61,10 @@ class Config : public Singleton {
         GLFWwindow * GetWindow() const {
             return window;
         }
+
+        float GetAspectRatio() const {
+            return width / height;
+        }
         void SetVersion();
 
         

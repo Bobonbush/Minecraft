@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Release/OPENGL.exe"
+			"path" : "MinSizeRel/OPENGL.exe"
 		},
 		{
-			"path" : "Release/OPENGL.pdb"
+			"path" : "MinSizeRel/OPENGL.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -54,19 +54,19 @@
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 102,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
-				"line" : 103,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
 				"line" : 104,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 105,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 106,
 				"parent" : 0
 			},
 			{
@@ -131,7 +131,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG"
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG"
 				}
 			],
 			"includes" : 
@@ -236,14 +236,16 @@
 				54,
 				55,
 				56,
-				57
+				57,
+				58,
+				59
 			]
 		},
 		{
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /W3 /MD /O2 /Ob2 /DNDEBUG"
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /MD /O1 /Ob1 /DNDEBUG"
 				}
 			],
 			"includes" : 
@@ -304,7 +306,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG",
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O1 /Ob1 /DNDEBUG",
 				"role" : "flags"
 			},
 			{
@@ -419,7 +421,9 @@
 				54,
 				55,
 				56,
-				57
+				57,
+				58,
+				59
 			]
 		},
 		{
@@ -758,7 +762,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Script/Player/InventoryBox.cpp",
+			"path" : "Script/Player/InventoryHandBox.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -777,6 +781,18 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "Script/Texture&Shader/SoundEngine.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Script/Item/item.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Script/Player/InventoryManager.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

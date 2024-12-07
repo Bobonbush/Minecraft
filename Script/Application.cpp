@@ -47,6 +47,8 @@ void Application::Init() {
     config -> ChangeConfig();
     //state = std::make_unique<PlayingState>();
 
+    Block::initBlockMap();
+
 }
 
 

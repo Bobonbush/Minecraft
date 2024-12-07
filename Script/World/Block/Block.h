@@ -21,6 +21,10 @@ class Block {
     const static std::vector<GLfloat> backNormal;
 
     const static std::vector<glm::vec3> normals;
+
+    static std::map<int , std::string> blockMap;
+
+    static void initBlockMap();
 };
 
 

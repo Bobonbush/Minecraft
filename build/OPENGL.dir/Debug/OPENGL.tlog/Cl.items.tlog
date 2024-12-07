@@ -48,7 +48,9 @@ G:\WorkSpace\Minecraft\Script\Player\Inventory.cpp;G:\WorkSpace\Minecraft\build\
 G:\WorkSpace\Minecraft\Script\Renderer\hitbox.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\hitbox.obj
 G:\WorkSpace\Minecraft\Script\Renderer\SpriteRenderer.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\SpriteRenderer.obj
 G:\WorkSpace\Minecraft\Script\Player\InteractiveBox.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\InteractiveBox.obj
-G:\WorkSpace\Minecraft\Script\Player\InventoryBox.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\InventoryBox.obj
+G:\WorkSpace\Minecraft\Script\Player\InventoryHandBox.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\InventoryHandBox.obj
 G:\WorkSpace\Minecraft\Script\Player\InventoryBuilder.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\InventoryBuilder.obj
 G:\WorkSpace\Minecraft\Script\Texture&Shader\TextureManager.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\TextureManager.obj
 G:\WorkSpace\Minecraft\Script\Texture&Shader\SoundEngine.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\SoundEngine.obj
+G:\WorkSpace\Minecraft\Script\Item\item.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\item.obj
+G:\WorkSpace\Minecraft\Script\Player\InventoryManager.cpp;G:\WorkSpace\Minecraft\build\OPENGL.dir\Debug\InventoryManager.obj

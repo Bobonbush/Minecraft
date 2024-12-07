@@ -74,11 +74,22 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
                 position = surface;
             }
         }
+
+        std::shared_ptr<Item> item = player -> getCurrentItem();
         
-        AABB box(glm::vec3(1.f * Chunk::CHUNK_SCALE));
-        box.update(position);
-        if(!player -> getColliding(box))
-            chunkManager.addBlock(position.x, position.y, position.z, ChunkBlock(BLOCKID::Grass));
+        if(item != nullptr && item -> getType() == "Block") {
+            AABB box(glm::vec3(1.f * Chunk::CHUNK_SCALE));
+            box.update(position);
+            BLOCKID id = std::dynamic_pointer_cast<BlockItem>(item) -> getID();
+            if(id != BLOCKID::Air) {
+
+            
+                if(!player -> getColliding(box)) {
+                    chunkManager.addBlock(position.x, position.y, position.z, ChunkBlock(id));
+                }
+            }
+        }
+        
     }
     
 }
