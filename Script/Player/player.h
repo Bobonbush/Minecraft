@@ -32,6 +32,14 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         std::shared_ptr<Item> getCurrentItem() {
             return inventory -> getCurrentItem();
         }
+
+        void RemoveItem(std::shared_ptr<Item> item) {
+            inventory -> RemoveItem(item);
+        }
+
+        void addBlockItem(BLOCKID id, int number) {
+            inventory -> addBlockItem(id, number);
+        }
     
 
     

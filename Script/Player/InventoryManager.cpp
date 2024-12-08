@@ -27,10 +27,13 @@ InventoryManager::InventoryManager() {
 
     chosenKey[0] = true;
 
-    addBlockItem(BLOCKID::Grass, 1);
+    addBlockItem(BLOCKID::Grass, 10);
     addBlockItem(BLOCKID::Dirt, 1);
     addBlockItem(BLOCKID::Stone, 1);
     addBlockItem(BLOCKID::Wood, 1);
+    addBlockItem(BLOCKID::Leaf, 1);
+    addBlockItem(BLOCKID::CraftingTable, 1);
+    addBlockItem(BLOCKID::TearWood, 1);
     
 }
 
@@ -63,11 +66,30 @@ void InventoryManager::addBlockItem(BLOCKID id, int number) {
     std::pair<int, int> pos = FindItem(id);
     if(pos.first == -1) return ;
 
+    if(items[pos.first][pos.second] != nullptr) {
+        items[pos.first][pos.second] -> addNumber(number);
+        return ;
+    }
+
     items[pos.first][pos.second] = std::make_shared<BlockItem>(id, number, Block::blockMap[(int)id]); 
     if(pos.first * Inventory::MAX_COL + pos.second < Inventory::handCol) {
         handBox -> setBoxItem(items[pos.first][pos.second], pos.first * Inventory::MAX_COL + pos.second + 1);
     }
     
+}
+
+void InventoryManager::RemoveItem(std::shared_ptr<Item> item)  {
+    std::pair<int ,int> pos = FindItem(item -> getID());
+    if(items[pos.first][pos.second] != nullptr) {
+                //items[row][col] = nullptr;
+        items[pos.first][pos.second] -> use();
+        if(items[pos.first][pos.second] -> getNumber() == 0) {
+            items[pos.first][pos.second] = nullptr;
+            if(pos.first * Inventory::MAX_COL + pos.second < Inventory::handCol) {
+                handBox -> unsetBoxItem(pos.first * Inventory::MAX_COL + pos.second + 1);
+            }
+        }
+    }
 }
 
 void InventoryManager::update() {

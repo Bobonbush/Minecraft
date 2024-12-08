@@ -6,6 +6,7 @@
 #include "Renderer/SpriteRenderer.h"
 #include "Config.h"
 #include "Inventory.h"
+#include "Algorithm.h"
 
 
 class InventoryBox {
@@ -21,6 +22,8 @@ class InventoryBox {
         int number = -1;
 
         SpriteRenderer* m_spriteRenderer;
+
+        static std::unique_ptr<TextHandler> textLoader;
     public :
         InventoryBox(glm::vec2 position, glm::vec2 size, int number);
         ~InventoryBox();

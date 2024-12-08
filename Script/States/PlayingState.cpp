@@ -50,7 +50,7 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
             blockPosition = chunkManager.getBlockPosition(position.x, position.y, position.z);
 
             hitBox.Draw(blockPosition, glm::vec3(1.f), view, projection);
-                
+            
             
             break;
         }
@@ -59,7 +59,9 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
     if(exists == false) return ;
 
     if(input == Cursor::MOUSE_EVENT::LEFT_CLICK) {
+        ChunkBlock block = chunkManager.getBlock(blockPosition.x, blockPosition.y, blockPosition.z);
         chunkManager.removeBlock(blockPosition.x, blockPosition.y, blockPosition.z);
+        player -> addBlockItem(block.getID(), 1);
     }
 
     if(input == Cursor::MOUSE_EVENT::RIGHT_CLICK) {
@@ -86,6 +88,7 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
             
                 if(!player -> getColliding(box)) {
                     chunkManager.addBlock(position.x, position.y, position.z, ChunkBlock(id));
+                    player -> RemoveItem(item);
                 }
             }
         }

@@ -28,6 +28,8 @@ class InventoryManager {
         void addItem(std::shared_ptr<Item> item, int row, int col) {
             items[currentItem / Inventory::MAX_COL][currentItem % Inventory::MAX_COL] = item;
         }
+        
+        void RemoveItem( std::shared_ptr<Item> item);
 
         std::pair<int,int> FindItem(BLOCKID  id);
         void addBlockItem(BLOCKID id, int number);

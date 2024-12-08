@@ -39,6 +39,10 @@ class InventoryHandBox {
         void setBoxItem(std::shared_ptr<Item> _item, int number) {
             box[number - 1] -> setItem(_item);
         }
+
+        void unsetBoxItem(int number) {
+            box[number - 1] -> unsetItem();
+        }
 };
 
 #endif

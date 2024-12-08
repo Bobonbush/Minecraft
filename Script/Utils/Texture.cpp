@@ -230,7 +230,7 @@ void TextHandler::LoadFont(const char* font , unsigned int Size) {
 
     for(unsigned char c = 0; c < 128; c++){
         if(FT_Load_Char(face, c, FT_LOAD_RENDER)){
-            std::cout << "ERROR::FREETYPE: Failed to load Glyph" << std::endl;
+            std::cout << "ERROR::FREETYPE: Failed to load Glyph ";
             continue;
         }
 
@@ -273,6 +273,8 @@ void TextHandler::LoadFont(const char* font , unsigned int Size) {
 void TextHandler:: RenderMiddleText(std::string text , float x, float y , float scale, glm::vec3 color, float offset, const glm::vec2 & windowSize){
     shader -> use();
     shader -> setVec3("textColor", color);
+    shader -> setMat4("projection", glm::mat4(1.0f));
+
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(VAO);
 
@@ -283,7 +285,7 @@ void TextHandler:: RenderMiddleText(std::string text , float x, float y , float 
     for(p = text.begin(); p != text.end(); p++ ) {
         Character ch = Characters[*p];
         maximum += ((ch.Advance >> 6) * scale) / windowSize.x + offset;
-        float h = ch.Size.y * scale;
+        float h = ch.Size.y * scale / windowSize.y;
         if(y + h > maximum_y) maximum_y = y + h;
     }
 

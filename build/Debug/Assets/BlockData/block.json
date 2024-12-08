@@ -51,6 +51,17 @@
         "topX" : 11, "topY" : 0,
         "sideX" : 11, "sideY" : 0,
         "bottomX" : 11, "bottomY" : 0
+    },
+
+    "Leaf" : {
+        "topX" : 8, "topY" : 0,
+        "sideX" : 8, "sideY" : 0,
+        "bottomX" : 8, "bottomY" : 0
+    },
+    "TearWood" : {
+        "topX" : 7, "topY" : 0,
+        "sideX" : 7, "sideY" : 0,
+        "bottomX" : 7, "bottomY" : 0
     }
 }
 

@@ -17,7 +17,6 @@ BlockItem::BlockItem(BLOCKID id, int number,const std::string& name) : Item(numb
 
     stats.id = id;
     stats.number = number;
-
 }
 
 BlockItem::~BlockItem() {

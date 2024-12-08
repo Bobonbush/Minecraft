@@ -39,6 +39,10 @@ class Item {
         stats.number += number;
     }
 
+    void use() {
+        stats.number--;
+    }
+
     void setPosition(const glm::vec3 & pos) {
         position = pos;
     }

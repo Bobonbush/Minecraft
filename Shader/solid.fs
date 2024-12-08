@@ -64,6 +64,10 @@ void main()
 {
     FragColor = texture(samplerTexture, TexCoord);
     float dist = length(positionRelativeToCamera.xyz);
+    if(FragColor.a < 0.1)
+    {
+        discard;
+    }
 
     float visibility = getFogFactor(dist, 160.0);
     float alpha = getFogFactorAlpha(dist, 0.1, 160.0);

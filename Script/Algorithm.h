@@ -79,6 +79,15 @@ class SPA {
         return lerp(a, b, t);
     }
 
+    template<class X> static std::string convertNumberToString(X number) {
+        std::string str = "";
+        while(number) {
+            str += (char)('0' + number % 10);
+            number /= 10;
+        }
+        std::reverse(str.begin(), str.end());
+        return str;
+    }
 };
 
 

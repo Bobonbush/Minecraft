@@ -39,6 +39,7 @@ enum class BLOCKID : int {
     Sand = 7,
     Bedrock = 8,
     Leaf = 9,
+    TearWood = 10,
 
     TOTAL,
 };
