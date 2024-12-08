@@ -19,6 +19,9 @@ PlayingState::~PlayingState() {
 
 void PlayingState::ProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
     MouseProcess(camera, chunkManager, view, projection);
+
+    
+    
 }
 
 void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
@@ -158,9 +161,25 @@ void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunk
             pressed[i] = false;
         }
 
+        if(pressed[i] == true && i == GLFW_KEY_E && glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_E) == GLFW_RELEASE) {
+            player -> openInventory();
+            if(player -> isOpeningInventory()) {
+                Config * config = Config::GetInstance();
+                config -> SetMouseActive(true);
+            }
+            else {
+                Config * config = Config::GetInstance();
+                config -> SetMouseActive(false);
+            }
+
+            pressed[i] = false;
+        }
+
         if(glfwGetKey(glfwGetCurrentContext(), i) == GLFW_PRESS) {
             pressed[i] = true;
         }
+
+        
     }
 
     PlayerProcess(camera, chunkManager, view, projection);

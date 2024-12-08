@@ -37,10 +37,11 @@ class PlayingState : Singleton {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
                 glfwSetWindowShouldClose(window, GLFW_TRUE);
             }
+            Config * config = Config::GetInstance();
             if(key == GLFW_KEY_LEFT_ALT && action == GLFW_PRESS) {
-                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-            }else {
-                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+                config -> SetMouseActive(true);
+            }else if(key == GLFW_KEY_LEFT_ALT && action == GLFW_RELEASE) {
+                config -> SetMouseActive(false);
             }
         }
 

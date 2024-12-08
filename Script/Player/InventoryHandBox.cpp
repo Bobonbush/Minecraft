@@ -39,6 +39,4 @@ void InventoryHandBox::Render() {
     float readlSizeX = size.x / config -> GetWidth() * 16; // 16 x 16 pic
     float readlSizeY = size.y / config -> GetHeight() * 16;
 
-    
-
 }

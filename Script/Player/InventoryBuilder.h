@@ -3,6 +3,6 @@
 
 
 class InventoryBuilder {
-
+    private:
     
 };

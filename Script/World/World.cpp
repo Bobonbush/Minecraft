@@ -22,8 +22,6 @@ void World::render() {
 void World::Update(float deltaTime) {
     camera -> update();
     player -> update(deltaTime);
-    
-    
     view = camera -> GetViewMatrix();
        
     projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 160.0f);
@@ -40,8 +38,11 @@ void World::Update(float deltaTime) {
 
 
 void World::FixedUpdate(float xpos, float ypos) {
+    
+    
+    if(!config -> GetMouseActive()) {
+        camera -> ProcessMouseMovement(xpos, ypos);
+    }
     playingState -> FixedProcessState(*camera, chunkManager, view , projection);
-    camera -> ProcessMouseMovement(xpos, ypos);
-
     player -> FixedUpdate();
 }

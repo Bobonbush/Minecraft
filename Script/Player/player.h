@@ -11,6 +11,8 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         const float JUMP_FORCE = 1.35f;
         std::unique_ptr<InventoryManager> inventory;
         Player();
+
+        bool openingInventory = false;
         
     public:
         static Player * GetInstance() {
@@ -39,6 +41,14 @@ class Player : public DYNAMIC_ENTITY, Singleton {
 
         void addBlockItem(BLOCKID id, int number) {
             inventory -> addBlockItem(id, number);
+        }
+
+        void openInventory() {
+            openingInventory ^= 1;
+        }
+
+        bool isOpeningInventory() {
+            return openingInventory;
         }
     
 

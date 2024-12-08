@@ -17,6 +17,8 @@ class Config : public Singleton {
 
         GLFWwindow * window;
         static Config * instance;
+
+        bool HidingMouse = false;
         Config() = default;
         
 
@@ -66,6 +68,15 @@ class Config : public Singleton {
             return width / height;
         }
         void SetVersion();
+
+        bool GetMouseActive() const {
+            return HidingMouse;
+        }
+
+        void SetMouseActive(bool active) {
+            glfwSetInputMode(window, GLFW_CURSOR, !active ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+            HidingMouse = active;
+        }
 
         
 };

@@ -93,7 +93,7 @@ class NoiseGenerator {
 
             // Biome Noise
             noise.SetNoiseType(FastNoise::SimplexFractal);
-            noise.SetFractalOctaves(8);
+            noise.SetFractalOctaves(4);
             noise.SetFrequency(0.0015);
             noise.SetFractalGain(20.);
             noise.SetFractalLacunarity(1.0015);
