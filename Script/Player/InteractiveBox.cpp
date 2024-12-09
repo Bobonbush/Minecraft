@@ -2,9 +2,9 @@
 
 std::unique_ptr<TextHandler> InventoryBox::textLoader = nullptr;
 
-InventoryBox::InventoryBox(glm::vec2 position, glm::vec2 size, int number) : m_position(position), m_size(size), number(number) {
+InventoryBox::InventoryBox(glm::vec2 position, glm::vec2 size, int number, const std::string& off) : m_position(position), m_size(size), number(number) {
     TextureManager * textureManager = TextureManager::getInstance();
-    m_texture[0] = textureManager -> getTexture("Assets/Inventory/off.png");
+    m_texture[0] = textureManager -> getTexture(off.c_str());
     m_texture[1] = textureManager -> getTexture("Assets/Inventory/on.png");
     m_spriteRenderer = SpriteRenderer::getInstance();
     if(textLoader == nullptr) {

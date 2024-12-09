@@ -13,7 +13,7 @@ InventoryHandBox::InventoryHandBox() {
     position.x = 0.f - (size.x * Inventory::handCol/2) + offset * Inventory::handCol/2;
 
     for(int i = 0; i < Inventory::handCol; i++) {
-        box[i] = std::make_unique<InventoryBox>(glm::vec2(position.x + i * size.x - offset * i, position.y), size, i+1);
+        box[i] = std::make_unique<InventoryBox>(glm::vec2(position.x + i * size.x - offset * i, position.y), size, i+1, "Assets/Inventory/off.png");
     }
 
     spriteRenderer = SpriteRenderer::getInstance();

@@ -25,7 +25,7 @@ class InventoryBox {
 
         static std::unique_ptr<TextHandler> textLoader;
     public :
-        InventoryBox(glm::vec2 position, glm::vec2 size, int number);
+        InventoryBox(glm::vec2 position, glm::vec2 size, int number, const std::string& off);
         ~InventoryBox();
 
         void update();
