@@ -8,22 +8,8 @@ class Ray {
         glm::vec3 ray_direction;
     public:
 
-        Ray(const Camera &camera) {
-            this->ray_direction = glm::normalize(camera.Front);
-            this->ray_start = camera.Position;
-            this-> ray_end = camera.Position;
-            
-        }
-
-        const glm::vec3& getRayEnd() const {
-            return ray_end;
-        }
-
-        void step(float scale) {
-            ray_end += ray_direction * scale;
-        }
-
-        const float getLength() const {
-            return glm::length(ray_end - ray_start);
-        }
+        Ray(const Camera &camera);
+        const glm::vec3& getRayEnd() const;
+        void step(float scale);
+        const float getLength() const;
 };

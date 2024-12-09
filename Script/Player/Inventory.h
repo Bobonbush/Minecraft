@@ -16,6 +16,7 @@ class Inventory {
 
         const static int handCol = 9;  
         const static int handRow = 1;
+        const static glm::vec2 BoxSize ;
         
 };
 

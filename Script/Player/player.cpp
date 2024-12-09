@@ -26,8 +26,5 @@ void Player::FixedUpdate() {
 
 void Player::Render() {
     inventory -> Render();
-    if(openingInventory) {
-        return ;
-    }
 }
 

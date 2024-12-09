@@ -94,7 +94,11 @@ void Application::Run() {
         double xpos, ypos;
         
         glfwGetCursorPos(config -> GetWindow(), &xpos, &ypos);
+        float x = xpos;
+        float y = ypos;
 
+        float width = config -> GetWidth();
+        float height = config -> GetHeight();
         
 
         if(lastX == -192313.0f) {

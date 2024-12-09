@@ -45,6 +45,7 @@ class Player : public DYNAMIC_ENTITY, Singleton {
 
         void openInventory() {
             openingInventory ^= 1;
+            inventory -> ShowInventoryBox();
         }
 
         bool isOpeningInventory() {

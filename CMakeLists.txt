@@ -94,11 +94,11 @@ add_executable(OPENGL Script/main.cpp
                       Script/Player/Inventory.cpp
                       Script/Player/InteractiveBox.cpp
                       Script/Player/InventoryHandBox.cpp
-                      Script/Player/InventoryBuilder.cpp
                       Script/Texture&Shader/TextureManager.cpp
                       Script/Texture&Shader/SoundEngine.cpp
                       Script/Item/Item.cpp
                       Script/Player/InventoryManager.cpp
+                      Script/Player/InventorySection.cpp
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

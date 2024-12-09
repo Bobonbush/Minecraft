@@ -1,12 +1,12 @@
 #include "item.h"
 
-Item::Item(int number) : stats({number}) {
+Item::Item() : stats({0}) {
 }
 
 Item::~Item() {
 }
 
-BlockItem::BlockItem(BLOCKID id, int number,const std::string& name) : Item(number), data(name) {
+BlockItem::BlockItem(BLOCKID id,const std::string& name) : Item(), data(name) {
     
     cubeRenderer = CubeRenderer::getInstance();
 
@@ -16,7 +16,7 @@ BlockItem::BlockItem(BLOCKID id, int number,const std::string& name) : Item(numb
     data = blockDataBase -> getData(id);
 
     stats.id = id;
-    stats.number = number;
+    stats.number = 0;
 }
 
 BlockItem::~BlockItem() {
@@ -29,7 +29,7 @@ void BlockItem::Render() {
     cubeRenderer -> LoadData(top, side, bottom);
     cubeRenderer -> add(position);
     
-    glm::vec3 size = glm::vec3(0.05f);
+    glm::vec3 size = glm::vec3(0.03f);
     size.y *= Config:: GetInstance() -> GetAspectRatio();
     
     cubeRenderer -> renderCubes(glm::mat4(1.0f), glm::mat4(1.0f), size);
@@ -44,7 +44,7 @@ Item::Stats BlockItem::getStats() {
     return stats;
 }
 
-SpriteItem::SpriteItem(const std::string & path, int number) : Item(number) {
+SpriteItem::SpriteItem(const std::string & path, int number) : Item() {
     spriteRenderer = SpriteRenderer::getInstance();
 }
 
@@ -62,3 +62,5 @@ void SpriteItem::update() {
 Item::Stats SpriteItem::getStats() {
     return stats;
 }
+
+

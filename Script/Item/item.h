@@ -10,7 +10,8 @@ class Item {
     
 
     public:
-
+    
+    const int maxStack = 64;
     struct Stats {
         int number;
         BLOCKID id;
@@ -28,15 +29,18 @@ class Item {
     glm::vec3 position;
     public :
 
-    Item(int number);
+    Item();
     ~Item();
 
     virtual void Render() = 0;
     virtual void update() = 0;
     virtual Stats getStats() = 0;
 
-    void addNumber(int number) {
+    int addNumber(int number) {
         stats.number += number;
+        int lefty = SPA::max(0, stats.number - maxStack);
+        SPA::clamp(stats.number, 0, maxStack);
+        return lefty;
     }
 
     void use() {
@@ -63,6 +67,10 @@ class Item {
         return stats.number;
     }
 
+    bool isFull() {
+        return stats.number == maxStack;
+    }
+
 };
 
 class BlockItem : public Item {
@@ -71,7 +79,7 @@ class BlockItem : public Item {
         BLOCKID id;
         BlockData data;
     public:
-        BlockItem(BLOCKID id, int number, const std::string& name);
+        BlockItem(BLOCKID id, const std::string& name);
         ~BlockItem();
         void Render() override;
         void update() override;

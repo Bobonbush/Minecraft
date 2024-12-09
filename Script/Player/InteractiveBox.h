@@ -24,26 +24,33 @@ class InventoryBox {
         SpriteRenderer* m_spriteRenderer;
 
         static std::unique_ptr<TextHandler> textLoader;
+
+        int m_number = 0;
+        unsigned int fakeTexture = -1;
+        bool hasFake = false;
     public :
-        InventoryBox(glm::vec2 position, glm::vec2 size, int number, const std::string& off);
+    
+        enum class State : int {
+                HEAD = 1,
+                BODY = 2,
+                LEG = 3,
+                Boot = 4,
+                None = 0 
+        };
+        InventoryBox(glm::vec2 position, glm::vec2 size, int number, const std::string& off, const State & state);
         ~InventoryBox();
 
         void update();
         void Render();
 
-        void isChosen() {
-            m_chosen = true;
-        }
+        void isChosen();
 
-        void setItem(std::shared_ptr<Item> _item) {
-            item = _item;
-            empty = false;
-        }
+        void setItem(std::shared_ptr<Item> _item);
+        void unsetItem();
 
-        void unsetItem() {
-            item = nullptr;
-            empty = true;
-        }
+        bool isEmpty();
+
+        bool Choose();
 };
 
 #endif // INVENTORYBOX_H

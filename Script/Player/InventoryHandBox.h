@@ -27,22 +27,16 @@ class InventoryHandBox {
         void update();
         void Render();
 
-        std::shared_ptr<Item> getItem() {
-            return item;
-        }
+        std::shared_ptr<Item> getItem();
 
-        void ChooseItem(int number) {
-            box[number -1] -> isChosen();
-        }
+        void ChooseItem(int number);
 
 
-        void setBoxItem(std::shared_ptr<Item> _item, int number) {
-            box[number - 1] -> setItem(_item);
-        }
+        void setBoxItem(std::shared_ptr<Item> _item, int number);
 
-        void unsetBoxItem(int number) {
-            box[number - 1] -> unsetItem();
-        }
+        void unsetBoxItem(int number);
+
+        bool FreeSlot();
 };
 
 #endif

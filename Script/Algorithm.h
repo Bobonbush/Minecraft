@@ -88,6 +88,11 @@ class SPA {
         std::reverse(str.begin(), str.end());
         return str;
     }
+
+    static void convertToNDC(float &x , float &y, float width , float height) {
+        x = (2.0f * x) / width - 1.0f;
+        y = 1.0f - (2.0f * y) / height;
+    }
 };
 
 

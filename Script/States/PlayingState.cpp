@@ -185,3 +185,15 @@ void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunk
     PlayerProcess(camera, chunkManager, view, projection);
     EntityProcess(camera, chunkManager, view, projection);
 }
+
+void PlayingState::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
+    }
+    Config * config = Config::GetInstance();
+    if(key == GLFW_KEY_LEFT_ALT && action == GLFW_PRESS) {
+        config -> SetMouseActive(true);
+    }else if(key == GLFW_KEY_LEFT_ALT && action == GLFW_RELEASE) {
+        config -> SetMouseActive(false);
+    }
+}
