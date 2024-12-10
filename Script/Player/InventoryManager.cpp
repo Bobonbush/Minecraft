@@ -2,7 +2,6 @@
 
 
 InventoryManager::InventoryManager() {
-    handBox = std::make_unique<InventoryHandBox>();
     items.resize(Inventory::MAX_ROW);
     for(int i = 0; i < Inventory::MAX_ROW; i++) {
         items[i].resize(Inventory::MAX_COL);
@@ -32,13 +31,25 @@ InventoryManager::InventoryManager() {
     glm::vec2 size = glm::vec2(Inventory::BoxSize.x * aspect  , Inventory::BoxSize.y);
     size *= 1.f ;
     float offset = 0.005f;
-    glm::vec2 position = glm::vec2(0.0f , 0.0f);
+    glm::vec2 position = glm::vec2(0.5f , 0.5f);
+
+    offset = 0.005f;
+
+    position.y = -1.f + size.y/2.f;
+    position.x = 0.f - (size.x * Inventory::handCol/2) + offset * Inventory::handCol/2;
+
+    sections.push_back(std::make_unique<InventorySection>(position, size, 1, Inventory::handCol, InventorySection::Type::Hand));
+
+
+
+    position = glm::vec2(0.0f, 0.0f);
     position.y = -0.5f + size.y * Inventory::MAX_ROW/2.f - offset * Inventory::MAX_ROW/2;
     position.x = 0.f - (size.x * Inventory::MAX_COL/2) + offset * Inventory::MAX_COL/2;
 
     sections.push_back(std::make_unique<InventorySection>(position, size, Inventory::MAX_ROW-1, Inventory::MAX_COL, InventorySection::Type::Inventory));
     chosenKey[0] = true;
     sections[0] -> Activation();
+    sections[1] -> Activation();
 
     position = glm::vec2(position.x , 0.0f);
 
@@ -83,9 +94,9 @@ void InventoryManager::addItem(std::shared_ptr<Item> item, int row, int col) {
     }
     items[row][col] = item;
     if(row * Inventory::MAX_COL + col < Inventory::handCol) {
-        handBox -> setBoxItem(item, row * Inventory::MAX_COL + col + 1);
+        sections[0] -> setBoxItem(item, row * Inventory::MAX_COL + col);
     }else {
-        sections[0] -> setBoxItem(item, row * Inventory::MAX_COL + col - Inventory::handCol);
+        sections[1] -> setBoxItem(item, row * Inventory::MAX_COL + col - Inventory::handCol);
     }
 }
 
@@ -153,9 +164,9 @@ void InventoryManager::addBlockItem(BLOCKID id, int number) {
     
         items[pos.first][pos.second] = std::make_shared<BlockItem>(id, Block::blockMap[(int)id]); 
         if(pos.first * Inventory::MAX_COL + pos.second < Inventory::handCol) {
-            handBox -> setBoxItem(items[pos.first][pos.second], pos.first * Inventory::MAX_COL + pos.second + 1);
+            sections[0] -> setBoxItem(items[pos.first][pos.second], pos.first * Inventory::MAX_COL + pos.second);
         }else {
-            sections[0] -> setBoxItem(items[pos.first][pos.second], pos.first * Inventory::MAX_COL + pos.second  - Inventory::handCol);
+            sections[1] -> setBoxItem(items[pos.first][pos.second], pos.first * Inventory::MAX_COL + pos.second  - Inventory::handCol);
         }
         number = items[pos.first][pos.second] -> addNumber(number);
     }
@@ -167,9 +178,9 @@ int InventoryManager::addBlockItem(BLOCKID id, int number, int row, int col) {
     }
     items[row][col] = std::make_shared<BlockItem>(id, Block::blockMap[(int)id]);
     if(row * Inventory::MAX_COL + col < Inventory::handCol) {
-        handBox -> setBoxItem(items[row][col], row * Inventory::MAX_COL + col + 1);
+        sections[0] -> setBoxItem(items[row][col], row * Inventory::MAX_COL + col);
     }else {
-        sections[0] -> setBoxItem(items[row][col], row * Inventory::MAX_COL + col - Inventory::handCol);
+        sections[1] -> setBoxItem(items[row][col], row * Inventory::MAX_COL + col - Inventory::handCol);
     }
     number = items[row][col] -> addNumber(number);
     return number;
@@ -183,7 +194,7 @@ void InventoryManager::RemoveItem(std::shared_ptr<Item> item)  {
         if(items[pos.first][pos.second] -> getNumber() == 0) {
             items[pos.first][pos.second] = nullptr;
             if(pos.first * Inventory::MAX_COL + pos.second < Inventory::handCol) {
-                handBox -> unsetBoxItem(pos.first * Inventory::MAX_COL + pos.second + 1);
+                sections[0] -> unsetBoxItem(pos.first * Inventory::MAX_COL + pos.second);
             }
         }
     }
@@ -193,7 +204,7 @@ void InventoryManager::RemoveItem(int row , int col) {
     if(items[row][col] != nullptr) {
         items[row][col] = nullptr;
         if(row * Inventory::MAX_COL + col < Inventory::handCol) {
-            handBox -> unsetBoxItem(row * Inventory::MAX_COL + col + 1);
+            sections[0] -> unsetBoxItem(row * Inventory::MAX_COL + col);
         }
 
     }
@@ -209,7 +220,6 @@ void InventoryManager::update() {
         section -> update();
     }
 
-    handBox -> update();
     for(int i = 0; i < Inventory::handCol; i++) {
         if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_1 + i) == GLFW_PRESS) {
             for(int j = 0; j < Inventory::handCol; j++) {
@@ -222,7 +232,7 @@ void InventoryManager::update() {
 
     for(int i = 0 ; i < Inventory::handCol && !ShowInventory ; i++) {
         if(chosenKey[i]) {
-            handBox -> ChooseItem(i+1);
+            sections[0] -> ChooseItem(i);
             currentItem = i;
         }
     }
@@ -253,8 +263,10 @@ void InventoryManager::Render() {
         if(currentItemChoose != nullptr && currentItemChoose -> isPick == true) {
             currentItemChoose -> Render();
         }
+        return ;
     }
-    handBox -> Render();
+    sections[0] -> Render();
+    //handBox -> Render();
 }
 
 std::shared_ptr<Item> InventoryManager::getCurrentItem() {
@@ -283,7 +295,6 @@ void InventoryManager::MouseUpdate(const float & xpos , const float & ypos) {
         currentItemChoose -> setPosition(glm::vec3(xpos, ypos, 0.0f));
     }
 
-    handBox -> MouseUpdate(xpos, ypos);
     for(std::unique_ptr<InventorySection> & section : sections) {
         section -> MouseUpdate(xpos, ypos);
     }

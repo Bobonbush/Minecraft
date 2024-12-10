@@ -151,9 +151,6 @@
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InteractiveBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\InventoryHandBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\TextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

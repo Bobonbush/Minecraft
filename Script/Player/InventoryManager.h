@@ -1,12 +1,10 @@
 #ifndef INVENTORYMANAGER_H
 #define INVENTORYMANAGER_H
-#include "InventoryHandBox.h"
 #include "Block/Block.h"
 #include "InventorySection.h"
 class InventoryManager {
     private:
-        std::unique_ptr<InventoryHandBox> handBox;
-        std::vector<std::vector<std::shared_ptr<Item>>> items;   // Bot-Left pivot
+        std::vector<std::vector<std::shared_ptr<Item>>> items; // All items inside Player's Inventory   // Bot-Left pivot
 
         bool chosenKey[Inventory::handCol];
         std::vector<std::unique_ptr<InventorySection>> sections;

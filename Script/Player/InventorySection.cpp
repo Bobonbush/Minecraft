@@ -187,8 +187,16 @@ bool InventorySection::PlaceItem(std::shared_ptr<Item> & item) {
 bool InventorySection:: PlaceItem(std::shared_ptr<Item> & item, bool one) {
     if(itemChoose == nullptr) return false ;
     if(itemChoose -> isEmpty()) {
-        itemChoose -> setItem(item);
-        item = nullptr;
+        int old = item -> getNumber();
+        item -> addNumber(-item -> getNumber() + 1);
+        std::shared_ptr <Item> temp = nullptr;
+        temp = item -> clone();
+        itemChoose -> setItem(temp);
+        item -> addNumber(old -2);
+        if(item -> getNumber() == 0) {
+            item = nullptr;
+        }
+
         return true;
     }
 

@@ -13,7 +13,7 @@ class Item {
 
     public:
     
-    const int maxStack = 64;
+    const int maxStack = 63;
 
     static std::unique_ptr<TextHandler> textLoader;
 
@@ -45,6 +45,7 @@ class Item {
     virtual void Render() = 0;
     virtual void update() = 0;
     virtual Stats getStats() = 0;
+    virtual std::shared_ptr<Item> clone() = 0;
 
     int addNumber(int number) {
         stats.number += number;
@@ -112,6 +113,9 @@ class BlockItem : public Item {
         void Render() override;
         void update() override;
         Stats getStats() override;
+        std::shared_ptr<Item> clone() override {
+            return std::make_shared<BlockItem>(*this);
+        }
 
 };
 
@@ -125,6 +129,10 @@ class SpriteItem : public Item {
         void Render() override;
         void update() override;
         Stats getStats();
+
+        std::shared_ptr<Item> clone() override {
+            return std::make_shared<SpriteItem>(*this);
+        }
 
         
 };
