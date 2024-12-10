@@ -29,7 +29,7 @@ void BlockItem::Render() {
     cubeRenderer -> LoadData(top, side, bottom);
     cubeRenderer -> add(position);
     
-    glm::vec3 size = glm::vec3(0.03f);
+    glm::vec3 size = glm::vec3(0.035f);
     size.y *= Config:: GetInstance() -> GetAspectRatio();
     
     cubeRenderer -> renderCubes(glm::mat4(1.0f), glm::mat4(1.0f), size);

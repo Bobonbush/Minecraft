@@ -17,12 +17,14 @@ InventorySection::InventorySection(const glm::vec2 & position, const  glm::vec2&
     }
 
     if(type == Type::Inventory) {
+
+        float aspect = 1.f/Config::GetInstance() -> GetAspectRatio();
         for(int i = 0; i < numROW; i++) {
 
             const float offset = 0.005f;
             Boxes[i].resize(numCOLLUM);
             for(int j = 0; j < numCOLLUM; j++) {
-                Boxes[i][j] = std::make_shared<InventoryBox>(glm::vec2(position.x + j * size.x - offset * j, position.y - i * size.y + offset * i), size, i * numCOLLUM + j + 1, "Assets/Inventory/off.png", InventoryBox::State::None);
+                Boxes[i][j] = std::make_shared<InventoryBox>(glm::vec2(position.x + j * size.x - offset * j, position.y - i * size.y + offset / aspect * i), size, i * numCOLLUM + j + 1, "Assets/Inventory/off.png", InventoryBox::State::None);
             }
         }
     }

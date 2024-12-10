@@ -25,6 +25,11 @@ void PlayingState::ProcessState(const Camera & camera, ChunkManager & chunkManag
 }
 
 void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
+    
+    if(player -> isOpeningInventory()) {
+        return ;
+    }
+    
     int input = cursor -> GetInput();
 
 
