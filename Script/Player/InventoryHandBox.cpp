@@ -43,6 +43,10 @@ std::shared_ptr<Item>InventoryHandBox::getItem(){
     return item;
 }
 
+std::shared_ptr<Item> InventoryHandBox::getCursorItem() {
+    return cursorItem;
+}
+
 void InventoryHandBox::ChooseItem(int number) {
     box[number -1] -> isChosen();
 }
@@ -69,6 +73,7 @@ void InventoryHandBox::MouseUpdate(const float &xpos, const float &ypos) {
     for(int i = 0; i < Inventory::handCol; i++) {
         if(box[i] -> isMouseOnBox(xpos, ypos)) {
             box[i] -> isChosen();
+            cursorItem = box[i] -> getItem();
         }
     }
 }

@@ -11,7 +11,7 @@ class Item {
 
     public:
     
-    const int maxStack = 64;
+    const int maxStack = 1;
     struct Stats {
         int number;
         BLOCKID id;
@@ -27,7 +27,12 @@ class Item {
 
     Stats stats;
     glm::vec3 position;
+
+    bool isHold = false;
+    
     public :
+
+    bool isPick = false;
 
     Item();
     ~Item();
@@ -67,8 +72,21 @@ class Item {
         return stats.number;
     }
 
+
     bool isFull() {
         return stats.number == maxStack;
+    }
+
+    void PickUp() {
+        isPick = true;
+    }
+
+    void Drop() {
+        isPick = false;
+    }
+
+    const glm::vec3 & getPosition() const {
+        return position;
     }
 
 };

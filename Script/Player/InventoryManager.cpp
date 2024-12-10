@@ -64,6 +64,44 @@ InventoryManager::~InventoryManager() {
 }
 
 
+std::pair<int ,int > InventoryManager::FindPickedUpItem() {
+    for(int i = 0; i < Inventory::MAX_ROW; i++) {
+        for(int j = 0; j < Inventory::MAX_COL; j++) {
+            if(items[i][j] != nullptr && items[i][j] -> isPick) {
+                return std::make_pair(i, j);
+            }
+        }
+    }
+    return std::make_pair(-1, -1);
+}
+
+void InventoryManager::addItem(std::shared_ptr<Item> item, int row, int col) {
+    if(items[row][col] != nullptr) {
+        //items[row][col] -> addNumber(item -> getNumber());
+        throw std::runtime_error("Cannot add more item");
+        return ;
+    }
+    items[row][col] = item;
+    if(row * Inventory::MAX_COL + col < Inventory::handCol) {
+        handBox -> setBoxItem(item, row * Inventory::MAX_COL + col + 1);
+    }else {
+        sections[0] -> setBoxItem(item, row * Inventory::MAX_COL + col - Inventory::handCol);
+    }
+}
+
+std::pair<int ,int> InventoryManager::FindPickedUpItem(std::shared_ptr<Item> item) {
+    for(int i = 0; i < Inventory::MAX_ROW; i++) {
+        for(int j = 0; j < Inventory::MAX_COL; j++) {
+            if(items[i][j] == nullptr) continue;
+            if(items[i][j] == item && items[i][j] -> isPick) {
+                return std::make_pair(i, j);
+            }
+        }
+    }
+    return std::make_pair(-1, -1);
+}
+
+
 std::pair<int ,int > InventoryManager::FindSlotForItem(BLOCKID id) {
     
     std::pair<int ,int > nearest_Empty = std::make_pair(-1, -1);
@@ -83,6 +121,12 @@ std::pair<int ,int > InventoryManager::FindSlotForItem(BLOCKID id) {
     }
     return nearest_Empty;
 }
+
+
+const std::shared_ptr<Item> InventoryManager::getCursorItem() const {
+    return currentItemChoose;
+}
+
 
 std::pair<int ,int> InventoryManager::FindItem(BLOCKID id) {
     for(int i = 0; i < Inventory::MAX_ROW; i++) {
@@ -152,14 +196,18 @@ void InventoryManager::RemoveItem(int row , int col) {
         items[row][col] = nullptr;
         if(row * Inventory::MAX_COL + col < Inventory::handCol) {
             handBox -> unsetBoxItem(row * Inventory::MAX_COL + col + 1);
-        }else {
+        }else if(row < Inventory::MAX_ROW && col < Inventory::MAX_COL){
             sections[0] -> unsetBoxItem(row * Inventory::MAX_COL + col - Inventory::handCol);
         }
-        
+
     }
 }
 
 void InventoryManager::update() {
+    
+    if(currentItemChoose != nullptr && currentItemChoose -> isPick == true) {
+        currentItemChoose -> update();
+    }
     for(std::unique_ptr<InventorySection> & section : sections) {
         section -> update();
     }
@@ -175,7 +223,7 @@ void InventoryManager::update() {
         }
     }
 
-    for(int i = 0 ; i < Inventory::handCol ; i++) {
+    for(int i = 0 ; i < Inventory::handCol && !ShowInventory ; i++) {
         if(chosenKey[i]) {
             handBox -> ChooseItem(i+1);
             currentItem = i;
@@ -186,6 +234,8 @@ void InventoryManager::update() {
 
 void InventoryManager::Render() {
     if(ShowInventory) {
+
+        
         SpriteRenderer * spriteRenderer = SpriteRenderer::getInstance();
         
         glm::vec2 position = glm::vec2(0.0f, 0.0f);
@@ -201,12 +251,12 @@ void InventoryManager::Render() {
             section -> Render();
         }
 
-        
+        if(currentItemChoose != nullptr && currentItemChoose -> isPick == true) {
+            currentItemChoose -> Render();
+        }
     }
     handBox -> Render();
 }
-
-
 
 std::shared_ptr<Item> InventoryManager::getCurrentItem() {
     return items[currentItem / Inventory::MAX_COL][currentItem % Inventory::MAX_COL];
@@ -226,17 +276,50 @@ void InventoryManager::ShowInventoryBox() {
 
 
 void InventoryManager::MouseUpdate(const float & xpos , const float & ypos) {
-    
-    currentItemChoose = nullptr;
+
+    if(currentItemChoose != nullptr && currentItemChoose -> isPick == true) {
+        currentItemChoose -> setPosition(glm::vec3(xpos, ypos, 0.f));
+    }else {
+        currentItemChoose = nullptr;
+    }
     handBox -> MouseUpdate(xpos, ypos);
-    for(std::unique_ptr<InventorySection> & section : sections) {
-        if(!section -> isActive()) {
-            continue;
+    if(handBox -> getCursorItem() != nullptr) {
+        if(currentItemChoose == nullptr || currentItemChoose -> isPick == false) {
+            currentItemChoose = handBox -> getCursorItem();
         }
-
-        section -> MouseUpdate(xpos, ypos);
-
+    }else {
 
     
+        for(std::unique_ptr<InventorySection> & section : sections) {
+            if(!section -> isActive()) {
+                continue;
+            }
+            section -> MouseUpdate(xpos, ypos);
+            if(section -> getCursorItem() != nullptr) {
+    
+                if(currentItemChoose == nullptr || currentItemChoose -> isPick == false) {
+                    currentItemChoose = section -> getCursorItem();
+                }
+                break;
+            }
+        }
+    }
+}
 
+void InventoryManager::PickItem() {
+    if(currentItemChoose == nullptr) {
+        return ;
+    }
+
+    if(currentItemChoose -> isPick == true) {
+        currentItemChoose -> Drop();
+        addItem(currentItemChoose, currentItemPosition.first, currentItemPosition.second);
+        
+        return ;
+    }
+
+    currentItemChoose -> PickUp();
+    currentItemPosition = FindPickedUpItem();
+    RemoveItem(currentItemPosition.first, currentItemPosition.second);
+    
 }

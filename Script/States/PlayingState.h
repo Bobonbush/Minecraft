@@ -16,7 +16,8 @@ class PlayingState : Singleton {
         static PlayingState * m_instance;
 
         Cursor * cursor;
-
+        std::shared_ptr<Item> MouseHoldingItem;
+ 
         std::vector<DYNAMIC_ENTITY*> entities; 
 
         PlayingState();

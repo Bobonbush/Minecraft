@@ -17,6 +17,8 @@ class InventoryHandBox {
 
         std::shared_ptr<InventoryBox> handBox;
 
+        std::shared_ptr<Item> cursorItem;
+
         std::shared_ptr<Item> item;          // Item in hand
 
         int number = -1;
@@ -28,6 +30,7 @@ class InventoryHandBox {
         void Render();
 
         std::shared_ptr<Item> getItem();
+        std::shared_ptr<Item> getCursorItem();
 
         void ChooseItem(int number);
 

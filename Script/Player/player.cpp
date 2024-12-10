@@ -8,11 +8,13 @@ Player::Player() : DYNAMIC_ENTITY(glm::vec3(0.5f , 1.7f, 0.5f)) {
     velocity = glm::vec3(0.f);
     mass = 10.f;
     inventory = std::make_unique<InventoryManager>();
+    currentItem = nullptr;
 }
 
 void Player::update(float deltaTime) {
     DYNAMIC_ENTITY::update(deltaTime);
     inventory -> update();
+    currentItem = inventory -> getCurrentItem();
 }
 
 void Player::FixedUpdate() {
@@ -26,10 +28,17 @@ void Player::FixedUpdate() {
 
 void Player::Render() {
     inventory -> Render();
+    if(currentItem == nullptr) {
+        
+        return ;
+    }
 }
 
 
-void Player::InventoryUpdate(const float & xpos, const float & ypos) {
+void Player::InventoryUpdate(const float & xpos, const float & ypos, const int & input) {
     inventory -> MouseUpdate(xpos, ypos);
+    if(input == Cursor::MOUSE_EVENT::LEFT_CLICK) {
+        inventory -> PickItem();
+    }
 }
 

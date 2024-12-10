@@ -19,7 +19,7 @@ class InventorySection {
         std::vector<std::vector<std::shared_ptr<InventoryBox>>> Boxes;
 
         std::unique_ptr<InventoryBox> ResultBox;
-        std::shared_ptr<InventoryBox> itemChoose;
+        std::shared_ptr<Item> itemChoose;
         SpriteRenderer* spriteRenderer; // For behind renderer
         int numROW = Inventory::MAX_ROW;
         int numCOLLUM = Inventory::MAX_COL;
@@ -51,7 +51,7 @@ class InventorySection {
         void update();
         void Render();
 
-        std::shared_ptr<InventoryBox> getItem();
+        std::shared_ptr<Item> getCursorItem();
         void ChooseItem(int number);
         void setBoxItem(std::shared_ptr<Item> _item, int number);
         void unsetBoxItem(int number);

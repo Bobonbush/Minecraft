@@ -23,6 +23,7 @@ BlockItem::~BlockItem() {
 }
 
 void BlockItem::Render() {
+    glDisable(GL_DEPTH_TEST);
     glm::vec2 top = data.getBlockData().topCoords;
     glm::vec2 side = data.getBlockData().sideCoords;
     glm::vec2 bottom = data.getBlockData().bottomCoords;   
@@ -33,7 +34,7 @@ void BlockItem::Render() {
     size.y *= Config:: GetInstance() -> GetAspectRatio();
     
     cubeRenderer -> renderCubes(glm::mat4(1.0f), glm::mat4(1.0f), size);
-    
+    glEnable(GL_DEPTH_TEST);
 }
 
 void BlockItem::update() {
@@ -52,7 +53,9 @@ SpriteItem::~SpriteItem() {
 }
 
 void SpriteItem::Render() {
+    glDisable(GL_DEPTH_TEST);
     spriteRenderer -> DrawSprite(texture, glm::vec2(0.f), glm::vec2(0.1f), 0.f, glm::vec3(1.f), glm::mat4(1.0f), glm::mat4(1.0f));
+    glEnable(GL_DEPTH_TEST);
 }
 
 void SpriteItem::update() {

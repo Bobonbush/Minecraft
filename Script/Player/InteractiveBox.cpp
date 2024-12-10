@@ -110,6 +110,10 @@ bool InventoryBox::isMouseOnBox(const float& xpos , const float& ypos) {
 }
 
 
+std::shared_ptr<Item> InventoryBox::getItem() {
+    return item;
+}
+
 
 
 

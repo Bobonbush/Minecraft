@@ -48,6 +48,8 @@ class InventoryBox {
         void setItem(std::shared_ptr<Item> _item);
         void unsetItem();
 
+        std::shared_ptr<Item> getItem();
+
         bool isEmpty();
 
         bool Choose();

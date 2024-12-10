@@ -83,7 +83,7 @@ void InventorySection::Render() {
     }
 }
 
-std::shared_ptr<InventoryBox> InventorySection::getItem() {
+std::shared_ptr<Item> InventorySection::getCursorItem() {
     return itemChoose;
 }
 
@@ -122,12 +122,17 @@ bool InventorySection::Activation() {
 void InventorySection::MouseUpdate(const float & xpos, const float & ypos) {
     itemChoose = nullptr;
     for(int i = 0; i < numROW; i++) {
+        bool found = false;
         for(int j = 0; j < numCOLLUM; j++) {
             if(Boxes[i][j] -> isMouseOnBox(xpos, ypos)) {
                 Boxes[i][j] -> isChosen();
-                itemChoose = Boxes[i][j];
+                itemChoose = Boxes[i][j] -> getItem();
+                found = true;
+                break;
+                
             }
         }
+        if(found) break;
     }
 }
 

@@ -4,12 +4,14 @@
 #include "Singleton.h"
 #include "Texture&Shader/ShaderManager.h"
 #include "InventoryManager.h"
+#include "States/Cursor.h"
 
 class Player : public DYNAMIC_ENTITY, Singleton {
     private:
         static Player * m_instance;
         const float JUMP_FORCE = 1.35f;
         std::unique_ptr<InventoryManager> inventory;
+        std::shared_ptr<Item> currentItem;
         Player();
 
         bool openingInventory = false;
@@ -30,9 +32,13 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         void update(float deltaTime) ;
         void FixedUpdate() ;
         void Render() ;
-        void InventoryUpdate(const float & xpos, const float & ypos);
+        void InventoryUpdate(const float & xpos, const float & ypos, const int & input);
 
         std::shared_ptr<Item> getCurrentItem() {
+            return inventory -> getCurrentItem();
+        }
+
+        std::shared_ptr<Item> getCursorItem() {
             return inventory -> getCurrentItem();
         }
 

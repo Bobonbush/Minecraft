@@ -19,9 +19,6 @@ PlayingState::~PlayingState() {
 
 void PlayingState::ProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
     MouseProcess(camera, chunkManager, view, projection);
-
-    
-    
 }
 
 void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
@@ -29,12 +26,16 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
     if(player -> isOpeningInventory()) {
         double xpos,ypos;
         glfwGetCursorPos(glfwGetCurrentContext(), &xpos, &ypos);
-
+        
         float x = xpos;
         float y = ypos;
 
         SPA::convertToNDC(x, y, Config::GetInstance() -> GetWidth(), Config::GetInstance() -> GetHeight());
-        player -> InventoryUpdate(x , y);
+        
+        player -> InventoryUpdate(x , y, cursor -> GetInput());
+        
+
+        MouseHoldingItem = player -> getCurrentItem();
         return ;
     }
     
