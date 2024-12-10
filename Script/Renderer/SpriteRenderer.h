@@ -34,6 +34,9 @@ class SpriteRenderer : Singleton {
     void DrawSprite(unsigned int texture, glm::vec2 position, glm::vec2 size, float rotate, glm::vec3 color, glm::mat4 view , glm::mat4 projection);
     void initRenderData(int pivot = 0);
 
+    void DrawSprite(unsigned int texture, glm::vec2 position, glm::vec2 size, float rotate, glm::vec3 color, glm::mat4 view , glm::mat4 projection, float );
+    
+
     void setShader(std::shared_ptr<Shader> _shader) {
         shader = _shader;
     }

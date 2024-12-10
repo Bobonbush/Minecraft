@@ -64,3 +64,11 @@ bool InventoryHandBox::FreeSlot() {
     }
     return false;
 }
+
+void InventoryHandBox::MouseUpdate(const float &xpos, const float &ypos) {
+    for(int i = 0; i < Inventory::handCol; i++) {
+        if(box[i] -> isMouseOnBox(xpos, ypos)) {
+            box[i] -> isChosen();
+        }
+    }
+}

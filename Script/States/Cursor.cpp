@@ -56,6 +56,11 @@ Cursor::~Cursor() {
 }
 
 void Cursor::Draw( const float halfX , const float halfY) {
+
+    Config * config = Config::GetInstance();
+    if(config -> GetMouseActive()) {
+        return;
+    }
     m_shader -> use();
     glBindVertexArray(VAO);
     glm::mat4 model = glm::mat4(1.0f);

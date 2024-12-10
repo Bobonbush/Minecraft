@@ -13,6 +13,9 @@ class InventoryManager {
         int currentItem = 0;
 
         bool ShowInventory = false;
+
+        std::shared_ptr<InventoryBox> currentItemChoose;
+        glm::vec2 currentItemPosition;
     public :
         InventoryManager();
         ~InventoryManager();
@@ -24,17 +27,18 @@ class InventoryManager {
 
         std::shared_ptr<Item> GetItem(int row, int col);
         void RemoveItem( std::shared_ptr<Item> item);
+        void RemoveItem(int row, int col);
 
         std::pair<int,int> FindSlotForItem(BLOCKID  id);
         std::pair<int,int> FindItem(BLOCKID id);
         void addBlockItem(BLOCKID id, int number);
+        int addBlockItem(BLOCKID id, int number, int row, int col);
 
         void setItem(std::shared_ptr<Item> item);
-        
-        void SwapItem(int row ,int col ,int sectionNumber);
-        void SwapItem(int row, int col, int row2 , int col2,  int sectionNumber1, int sectionNumber2);
-        void SwapItem(int row, int col, int handCol, bool hand);
         void ShowInventoryBox();
+
+        void MouseUpdate(const float & xpos, const float & ypos);
+        
 };
 
 #endif // INVENTORYMANAGER_H

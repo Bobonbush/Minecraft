@@ -51,6 +51,8 @@ class InventoryBox {
         bool isEmpty();
 
         bool Choose();
+
+        bool isMouseOnBox(const float & xpos, const float& ypos);
 };
 
 #endif // INVENTORYBOX_H

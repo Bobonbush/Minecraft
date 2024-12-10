@@ -30,6 +30,7 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         void update(float deltaTime) ;
         void FixedUpdate() ;
         void Render() ;
+        void InventoryUpdate(const float & xpos, const float & ypos);
 
         std::shared_ptr<Item> getCurrentItem() {
             return inventory -> getCurrentItem();

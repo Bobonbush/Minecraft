@@ -17,7 +17,9 @@ class InventorySection {
 
     private :
         std::vector<std::vector<std::shared_ptr<InventoryBox>>> Boxes;
-        std::shared_ptr<Item> item;
+
+        std::unique_ptr<InventoryBox> ResultBox;
+        std::shared_ptr<InventoryBox> itemChoose;
         SpriteRenderer* spriteRenderer; // For behind renderer
         int numROW = Inventory::MAX_ROW;
         int numCOLLUM = Inventory::MAX_COL;
@@ -25,7 +27,14 @@ class InventorySection {
 
         glm::vec2 size;
 
+        bool Active = false;
+
         Type type;
+
+        unsigned int rightArrow;
+
+        glm::vec2 rightArrowPosition;
+        glm::vec2 rightArrowSize;
 
         
         
@@ -42,12 +51,16 @@ class InventorySection {
         void update();
         void Render();
 
-        std::shared_ptr<Item> getItem();
+        std::shared_ptr<InventoryBox> getItem();
         void ChooseItem(int number);
         void setBoxItem(std::shared_ptr<Item> _item, int number);
         void unsetBoxItem(int number);
         const Type getType() const;
         void setType(const Type & type);
+        void MouseUpdate(const float & xpos, const float & ypos);
+        
+        bool isActive();
+        bool Activation();
 
 
 

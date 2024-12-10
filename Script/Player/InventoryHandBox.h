@@ -37,6 +37,8 @@ class InventoryHandBox {
         void unsetBoxItem(int number);
 
         bool FreeSlot();
+
+        void MouseUpdate(const float & xpos, const float & ypos);
 };
 
 #endif

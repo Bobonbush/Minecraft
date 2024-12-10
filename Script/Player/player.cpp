@@ -28,3 +28,8 @@ void Player::Render() {
     inventory -> Render();
 }
 
+
+void Player::InventoryUpdate(const float & xpos, const float & ypos) {
+    inventory -> MouseUpdate(xpos, ypos);
+}
+

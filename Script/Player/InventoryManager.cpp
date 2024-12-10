@@ -30,7 +30,7 @@ InventoryManager::InventoryManager() {
     float aspect = 1.f/config -> GetAspectRatio();
 
     glm::vec2 size = glm::vec2(Inventory::BoxSize.x * aspect  , Inventory::BoxSize.y);
-    
+    size *= 1.f ;
     float offset = 0.005f;
     glm::vec2 position = glm::vec2(0.0f , 0.0f);
     position.y = -0.5f + size.y * Inventory::MAX_ROW/2.f - offset * Inventory::MAX_ROW/2;
@@ -38,8 +38,25 @@ InventoryManager::InventoryManager() {
 
     sections.push_back(std::make_unique<InventorySection>(position, size, Inventory::MAX_ROW-1, Inventory::MAX_COL, InventorySection::Type::Inventory));
     chosenKey[0] = true;
+    sections[0] -> Activation();
 
+    position = glm::vec2(position.x , 0.0f);
+
+    //size *= 1.2f;
+    offset = 0.075f;
+    //position.x -= size.x/2.f;
+    position.y = 0.5f + size.y * 4/2.f - offset * 4/2;
+
+    sections.push_back(std::make_unique<InventorySection>(position, size, 4, 1, InventorySection::Type::Weapon));
+    sections.back() -> Activation();
+    position.x += size.x * 1.75 + offset * 2;
+    position.y = 0.5f +  size.y * 4/2.f - offset * 4 /2.f;
+
+    position.y -= size.y  + offset ;
+    sections.push_back(std::make_unique<InventorySection>(position, size, 2, 2, InventorySection::Type::Crafting));
     addBlockItem(BLOCKID::Grass, 64);
+
+    sections.back() -> Activation();
     
 }
 
@@ -98,7 +115,21 @@ void InventoryManager::addBlockItem(BLOCKID id, int number) {
         }
         number = items[pos.first][pos.second] -> addNumber(number);
     }
-    
+}
+
+int InventoryManager::addBlockItem(BLOCKID id, int number, int row, int col) {
+    if(items[row][col] != nullptr) {
+        return items[row][col] -> getNumber(); // cannot add more
+    }
+    items[row][col] = std::make_shared<BlockItem>(id, Block::blockMap[(int)id]);
+    if(row * Inventory::MAX_COL + col < Inventory::handCol) {
+        handBox -> setBoxItem(items[row][col], row * Inventory::MAX_COL + col + 1);
+    }else {
+        sections[0] -> setBoxItem(items[row][col], row * Inventory::MAX_COL + col - Inventory::handCol);
+    }
+    number = items[row][col] -> addNumber(number);
+    return number;
+
 }
 
 void InventoryManager::RemoveItem(std::shared_ptr<Item> item)  {
@@ -109,13 +140,26 @@ void InventoryManager::RemoveItem(std::shared_ptr<Item> item)  {
             items[pos.first][pos.second] = nullptr;
             if(pos.first * Inventory::MAX_COL + pos.second < Inventory::handCol) {
                 handBox -> unsetBoxItem(pos.first * Inventory::MAX_COL + pos.second + 1);
+            }else {
+                sections[0] -> unsetBoxItem(pos.first * Inventory::MAX_COL + pos.second - Inventory::handCol);
             }
         }
     }
 }
 
-void InventoryManager::update() {
+void InventoryManager::RemoveItem(int row , int col) {
+    if(items[row][col] != nullptr) {
+        items[row][col] = nullptr;
+        if(row * Inventory::MAX_COL + col < Inventory::handCol) {
+            handBox -> unsetBoxItem(row * Inventory::MAX_COL + col + 1);
+        }else {
+            sections[0] -> unsetBoxItem(row * Inventory::MAX_COL + col - Inventory::handCol);
+        }
+        
+    }
+}
 
+void InventoryManager::update() {
     for(std::unique_ptr<InventorySection> & section : sections) {
         section -> update();
     }
@@ -142,9 +186,22 @@ void InventoryManager::update() {
 
 void InventoryManager::Render() {
     if(ShowInventory) {
+        SpriteRenderer * spriteRenderer = SpriteRenderer::getInstance();
+        
+        glm::vec2 position = glm::vec2(0.0f, 0.0f);
+        glm::vec2 size = glm::vec2(2.0f, 2.0f);
+        glEnable(GL_BLEND);
+        glDisable(GL_DEPTH_TEST);
+        spriteRenderer -> setShader(ShaderManager::GetInstance() -> getShader("clear"));
+        spriteRenderer -> DrawSprite(TextureManager::getInstance() -> getTexture("Assets/Inventory/clear.png"), position, size, 0.f, glm::vec3(1.f), glm::mat4(1.0f), glm::mat4(1.0f), 0.8f);
+        glDisable(GL_BLEND);
+        glEnable(GL_DEPTH_TEST);
+        
         for(std::unique_ptr<InventorySection> & section : sections) {
             section -> Render();
         }
+
+        
     }
     handBox -> Render();
 }
@@ -165,4 +222,21 @@ void InventoryManager::setItem(std::shared_ptr<Item> item) {
 
 void InventoryManager::ShowInventoryBox() {
     ShowInventory ^= 1;
+}
+
+
+void InventoryManager::MouseUpdate(const float & xpos , const float & ypos) {
+    
+    currentItemChoose = nullptr;
+    handBox -> MouseUpdate(xpos, ypos);
+    for(std::unique_ptr<InventorySection> & section : sections) {
+        if(!section -> isActive()) {
+            continue;
+        }
+
+        section -> MouseUpdate(xpos, ypos);
+
+
+    
+
 }

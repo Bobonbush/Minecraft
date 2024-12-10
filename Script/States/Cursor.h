@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "Utils/Singleton.h"
 #include "Texture&Shader/ShaderManager.h"
+#include "Config.h"
 
 
 class Cursor : public Singleton {

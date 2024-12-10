@@ -49,10 +49,13 @@ void SpriteRenderer::initRenderData(int pivot) {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
+    ShaderManager * shaderManager = ShaderManager::GetInstance();
+    shaderManager -> addShader("clear", "Shader/clear.vs", "Shader/clear.fs");
 }
 
 void SpriteRenderer :: DrawSprite(unsigned int texture, glm::vec2 position, glm::vec2 size, float rotate, glm::vec3 color, glm::mat4 view , glm::mat4 projection){
     this -> shader -> use();
+    glEnable(GL_BLEND);
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(position, 0.0f));
 
@@ -66,4 +69,25 @@ void SpriteRenderer :: DrawSprite(unsigned int texture, glm::vec2 position, glm:
     glBindVertexArray(quadVAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+    glDisable(GL_BLEND);
+}
+
+void SpriteRenderer :: DrawSprite(unsigned int texture, glm::vec2 position, glm::vec2 size, float rotate, glm::vec3 color, glm::mat4 view , glm::mat4 projection, float alpha){
+    this -> shader -> use();
+    glEnable(GL_BLEND);
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(position, 0.0f));
+
+    model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f));
+ 
+    model = glm::scale(model, glm::vec3(size, 1.0f));
+    shader -> setFloat("alpha", alpha);
+    shader -> setInt("uTexture", 0);
+    shader -> setMat4("model", model);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindVertexArray(quadVAO);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+    glDisable(GL_BLEND);
 }

@@ -71,7 +71,7 @@ void InventoryBox::Render() {
         m_spriteRenderer -> setShader(ShaderManager::GetInstance() -> getShader("Screen"));
         glm::mat4 projection = glm::mat4(1.0f);
         glm::mat4 view = glm::mat4(1.0f);
-        m_spriteRenderer -> DrawSprite(fakeTexture, m_position, m_size /1.1f, 0.f, glm::vec3(1.f), view , projection);
+        m_spriteRenderer -> DrawSprite(fakeTexture, m_position , m_size /1.2f, 0.f, glm::vec3(1.f), view , projection);
     }
 
     
@@ -102,6 +102,11 @@ bool InventoryBox::isEmpty() {
 
 bool InventoryBox::Choose() {
     return m_chosen;
+}
+
+
+bool InventoryBox::isMouseOnBox(const float& xpos , const float& ypos) {
+    return xpos >= m_position.x - m_size.x/2.f && xpos <= m_position.x + m_size.x/2.f && ypos >= m_position.y - m_size.y/2.f && ypos <= m_position.y + m_size.y/2.f;
 }
 
 

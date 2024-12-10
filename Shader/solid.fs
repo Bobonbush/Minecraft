@@ -23,7 +23,7 @@ float shininess = 32.0;
 float getFogFactor(float dist, float farPlane)
 {
     float FogMax = 1.0 * farPlane;
-    float FogMin = 0.1 * farPlane;
+    float FogMin = 0.5 * farPlane;
     if(dist > FogMax) return 1.0;
     if(dist < FogMin) return 0.0;   
     return (dist - FogMin) / (FogMax - FogMin);
@@ -31,7 +31,7 @@ float getFogFactor(float dist, float farPlane)
 
 float getFogFactorAlpha(float d , float nearPlane, float farPlane) {
     float FogMax = 1.0 * farPlane;
-    float FogMin = 0.25 * farPlane;
+    float FogMin = 0.75 * farPlane;
 
     if(d > FogMax) return 1.0;
     if(d < FogMin) return 0.0;
@@ -81,5 +81,10 @@ void main()
     vec3 result = lightCalculation(norm, lightDir, viewDir);
     FragColor = FragColor * vec4(result, 1.0);
     FragColor = mix(FragColor, fogColor, visibility);
-    FragColor.a = alpha;
+    FragColor.a = 1 - alpha;
+
+    if(FragColor.a == 0)
+    {
+        discard;
+    }
 }
