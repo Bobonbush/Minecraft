@@ -49,6 +49,7 @@ class InventoryManager {
 
         void MouseUpdate(const float & xpos, const float & ypos);
         void PickItem();
+        void PlaceOneItem();
 };
 
 #endif // INVENTORYMANAGER_H

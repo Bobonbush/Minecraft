@@ -184,8 +184,6 @@ void InventoryManager::RemoveItem(std::shared_ptr<Item> item)  {
             items[pos.first][pos.second] = nullptr;
             if(pos.first * Inventory::MAX_COL + pos.second < Inventory::handCol) {
                 handBox -> unsetBoxItem(pos.first * Inventory::MAX_COL + pos.second + 1);
-            }else {
-                sections[0] -> unsetBoxItem(pos.first * Inventory::MAX_COL + pos.second - Inventory::handCol);
             }
         }
     }
@@ -196,8 +194,6 @@ void InventoryManager::RemoveItem(int row , int col) {
         items[row][col] = nullptr;
         if(row * Inventory::MAX_COL + col < Inventory::handCol) {
             handBox -> unsetBoxItem(row * Inventory::MAX_COL + col + 1);
-        }else if(row < Inventory::MAX_ROW && col < Inventory::MAX_COL){
-            sections[0] -> unsetBoxItem(row * Inventory::MAX_COL + col - Inventory::handCol);
         }
 
     }
@@ -207,6 +203,7 @@ void InventoryManager::update() {
     
     if(currentItemChoose != nullptr && currentItemChoose -> isPick == true) {
         currentItemChoose -> update();
+    
     }
     for(std::unique_ptr<InventorySection> & section : sections) {
         section -> update();
@@ -234,6 +231,8 @@ void InventoryManager::update() {
 
 void InventoryManager::Render() {
     if(ShowInventory) {
+
+    
 
         
         SpriteRenderer * spriteRenderer = SpriteRenderer::getInstance();
@@ -276,50 +275,57 @@ void InventoryManager::ShowInventoryBox() {
 
 
 void InventoryManager::MouseUpdate(const float & xpos , const float & ypos) {
-
-    if(currentItemChoose != nullptr && currentItemChoose -> isPick == true) {
-        currentItemChoose -> setPosition(glm::vec3(xpos, ypos, 0.f));
-    }else {
-        currentItemChoose = nullptr;
+    if(!ShowInventory) {
+        return ;
     }
-    handBox -> MouseUpdate(xpos, ypos);
-    if(handBox -> getCursorItem() != nullptr) {
-        if(currentItemChoose == nullptr || currentItemChoose -> isPick == false) {
-            currentItemChoose = handBox -> getCursorItem();
-        }
-    }else {
 
-    
+    if(currentItemChoose != nullptr) {
+        currentItemChoose -> setPosition(glm::vec3(xpos, ypos, 0.0f));
+    }
+
+    handBox -> MouseUpdate(xpos, ypos);
+    for(std::unique_ptr<InventorySection> & section : sections) {
+        section -> MouseUpdate(xpos, ypos);
+    }
+
+}
+void InventoryManager::PickItem() {
+
+    if(currentItemChoose != nullptr) {
+        currentItemChoose -> Drop();
         for(std::unique_ptr<InventorySection> & section : sections) {
-            if(!section -> isActive()) {
-                continue;
-            }
-            section -> MouseUpdate(xpos, ypos);
-            if(section -> getCursorItem() != nullptr) {
-    
-                if(currentItemChoose == nullptr || currentItemChoose -> isPick == false) {
-                    currentItemChoose = section -> getCursorItem();
+            if(section -> isActive()) {
+
+                if(section -> PlaceItem(currentItemChoose) || currentItemChoose == nullptr) {
+                    return ;
                 }
+            }
+        }
+
+        if(currentItemChoose != nullptr) {
+            currentItemChoose -> PickUp();
+        }
+        return ;
+    }
+    for(std::unique_ptr<InventorySection> & section : sections) {
+        if(section -> isActive()) {
+            section -> PickItem();
+            currentItemChoose = section -> getCursorItem();
+            if(currentItemChoose != nullptr) {
+                currentItemChoose -> PickUp();
                 break;
             }
         }
     }
 }
 
-void InventoryManager::PickItem() {
-    if(currentItemChoose == nullptr) {
-        return ;
+void InventoryManager::PlaceOneItem() {
+    if(currentItemChoose == nullptr) return ;
+    for(std::unique_ptr<InventorySection> & section : sections) {
+        if(section -> isActive()) {
+            if(section -> PlaceItem(currentItemChoose, true)) {
+                return ;
+            }
+        }
     }
-
-    if(currentItemChoose -> isPick == true) {
-        currentItemChoose -> Drop();
-        addItem(currentItemChoose, currentItemPosition.first, currentItemPosition.second);
-        
-        return ;
-    }
-
-    currentItemChoose -> PickUp();
-    currentItemPosition = FindPickedUpItem();
-    RemoveItem(currentItemPosition.first, currentItemPosition.second);
-    
 }

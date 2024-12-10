@@ -1,16 +1,12 @@
 #include "InteractiveBox.h"
 
-std::unique_ptr<TextHandler> InventoryBox::textLoader = nullptr;
 
 InventoryBox::InventoryBox(glm::vec2 position, glm::vec2 size, int number, const std::string& off, const State & state) : m_position(position), m_size(size), number(number) {
     TextureManager * textureManager = TextureManager::getInstance();
     m_texture[0] = textureManager -> getTexture(off.c_str());
     m_texture[1] = textureManager -> getTexture("Assets/Inventory/on.png");
     m_spriteRenderer = SpriteRenderer::getInstance();
-    if(textLoader == nullptr) {
-        textLoader = std::make_unique<TextHandler>();
-        textLoader -> LoadFont("Assets/Font/Revamped.ttf", 12);
-    }
+    
 
     if(state != State::None) {
         //item = std::make_shared<Item>(state);
@@ -57,14 +53,7 @@ void InventoryBox::Render() {
     m_chosen = false;
     
     if(!empty) {
-
-        int number = item -> getNumber();
-        glEnable(GL_DEPTH_TEST);
-        textLoader -> RenderMiddleText(SPA::convertNumberToString(number), m_position.x + m_size.x/3.f , m_position.y + m_size.y /3.f, 1.75f, glm::vec3(0.8f, 0.4f , 0.7f), 0.f, glm::vec2(config -> GetWidth(), config -> GetHeight()));
-        glDisable(GL_DEPTH_TEST);
-
         item -> Render();
-        
     }
 
     if(hasFake) {
@@ -114,10 +103,9 @@ std::shared_ptr<Item> InventoryBox::getItem() {
     return item;
 }
 
-
-
-
-
+const glm::vec2 InventoryBox::getPosition() const {
+    return m_position;
+}
 
 
 

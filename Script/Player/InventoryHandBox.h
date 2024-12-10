@@ -10,12 +10,13 @@
 class InventoryHandBox {
     private:
         SpriteRenderer* spriteRenderer; 
-        std::unique_ptr<InventoryBox> box[Inventory::handCol];
+        std::shared_ptr<InventoryBox> box[Inventory::handCol];
         glm::vec2 position;
         glm::vec2 size;
         glm::vec3 color;
 
         std::shared_ptr<InventoryBox> handBox;
+        std::shared_ptr<InventoryBox> itemChoose;
 
         std::shared_ptr<Item> cursorItem;
 
@@ -42,6 +43,10 @@ class InventoryHandBox {
         bool FreeSlot();
 
         void MouseUpdate(const float & xpos, const float & ypos);
+
+        void PickItem();
+
+        
 };
 
 #endif

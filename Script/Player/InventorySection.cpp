@@ -6,6 +6,7 @@ InventorySection::InventorySection(const glm::vec2 & position, const  glm::vec2&
     ResultBox = nullptr;
 
     spriteRenderer = SpriteRenderer::getInstance();
+    
 
     if(type == Type::Weapon) {
         InventoryBox::State states[4] = {InventoryBox::State::HEAD, InventoryBox::State::BODY, InventoryBox::State::LEG, InventoryBox::State::Boot};
@@ -29,7 +30,16 @@ InventorySection::InventorySection(const glm::vec2 & position, const  glm::vec2&
                 Boxes[i][j] = std::make_shared<InventoryBox>(glm::vec2(position.x + j * size.x - offset * j, position.y - i * size.y + offset / aspect * i), size, i * numCOLLUM + j + 1, "Assets/Inventory/off.png", InventoryBox::State::None);
             }
         }
-    }else {
+    } else if (type == Type::Hand) {
+        float aspect = 1.f/Config::GetInstance() -> GetAspectRatio();
+        for(int i = 0 ; i < numROW; i++) {
+            const float offset = 0.005f;
+            Boxes[i].resize(numCOLLUM);
+            for(int j = 0; j < numCOLLUM; j++) {
+                Boxes[i][j] = std::make_shared<InventoryBox>(glm::vec2(position.x + j * size.x - offset * j, position.y - i * size.y + offset / aspect * i), size, i * numCOLLUM + j + 1, "Assets/Inventory/off.png", InventoryBox::State::None);
+            }
+        }
+    } else {
         rightArrow = TextureManager::getInstance() -> getTexture("Assets/Inventory/rightArrow.png");
         if(type == Type::Crafting) {
     
@@ -84,7 +94,7 @@ void InventorySection::Render() {
 }
 
 std::shared_ptr<Item> InventorySection::getCursorItem() {
-    return itemChoose;
+    return cursorItem;
 }
 
 void InventorySection::ChooseItem(int number) {
@@ -121,18 +131,80 @@ bool InventorySection::Activation() {
 
 void InventorySection::MouseUpdate(const float & xpos, const float & ypos) {
     itemChoose = nullptr;
+    cursorItem = nullptr;
     for(int i = 0; i < numROW; i++) {
         bool found = false;
         for(int j = 0; j < numCOLLUM; j++) {
             if(Boxes[i][j] -> isMouseOnBox(xpos, ypos)) {
                 Boxes[i][j] -> isChosen();
-                itemChoose = Boxes[i][j] -> getItem();
+                itemChoose = Boxes[i][j];
                 found = true;
                 break;
-                
             }
         }
         if(found) break;
     }
+}
+
+
+void InventorySection::PickItem() {
+    if(itemChoose != nullptr) {
+        cursorItem = itemChoose -> getItem();
+        if(cursorItem != nullptr) {
+            cursorItem -> PickUp();
+        }
+        itemChoose -> unsetItem();
+        itemChoose = nullptr;
+    }
+}
+
+bool InventorySection::PlaceItem(std::shared_ptr<Item> & item) {
+    if(itemChoose == nullptr) return false ;
+    if(itemChoose -> isEmpty()) {
+        itemChoose -> setItem(item);
+        item = nullptr;
+        return true;
+    }
+
+    if(itemChoose -> getItem() -> getID() == item -> getID()) {
+        int left = itemChoose -> getItem() -> addNumber(item -> getNumber());
+        if(left != 0) {
+            item -> addNumber(- (item -> getNumber() - left));
+            return false;
+        }else {
+            item = nullptr;
+            return true;
+        }
+    }else {
+        std::shared_ptr<Item> temp = itemChoose -> getItem();
+        itemChoose -> setItem(item);
+        item = temp;
+        return true;
+    }
+    return false;
+}
+
+bool InventorySection:: PlaceItem(std::shared_ptr<Item> & item, bool one) {
+    if(itemChoose == nullptr) return false ;
+    if(itemChoose -> isEmpty()) {
+        itemChoose -> setItem(item);
+        item = nullptr;
+        return true;
+    }
+
+    if(itemChoose -> getItem() -> getID() == item -> getID()) {
+        
+        int left = itemChoose -> getItem() -> addNumber(1);
+        item -> addNumber(-1);
+        if(left != 0) {
+            item -> addNumber(1);
+            return false;
+        }else if(item -> getNumber() == 0) {
+            item = nullptr;
+        }
+        return true;
+    }
+    
+    return false;
 }
 

@@ -6,12 +6,17 @@
 #include "Renderer/CubeRenderer.h"
 #include "Renderer/SpriteRenderer.h"
 #include "Config.h"
+#include "Player/Inventory.h"
+
 class Item {
     
 
     public:
     
-    const int maxStack = 1;
+    const int maxStack = 64;
+
+    static std::unique_ptr<TextHandler> textLoader;
+
     struct Stats {
         int number;
         BLOCKID id;
@@ -46,6 +51,11 @@ class Item {
         int lefty = SPA::max(0, stats.number - maxStack);
         SPA::clamp(stats.number, 0, maxStack);
         return lefty;
+    }
+
+    int getOne() {
+        stats.number--;
+        return 1;
     }
 
     void use() {

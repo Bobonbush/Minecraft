@@ -13,7 +13,7 @@ InventoryHandBox::InventoryHandBox() {
     position.x = 0.f - (size.x * Inventory::handCol/2) + offset * Inventory::handCol/2;
 
     for(int i = 0; i < Inventory::handCol; i++) {
-        box[i] = std::make_unique<InventoryBox>(glm::vec2(position.x + i * size.x - offset * i, position.y), size, i+1, "Assets/Inventory/off.png", InventoryBox::State::None);
+        box[i] = std::make_shared<InventoryBox>(glm::vec2(position.x + i * size.x - offset * i, position.y), size, i+1, "Assets/Inventory/off.png", InventoryBox::State::None);
     }
 
     spriteRenderer = SpriteRenderer::getInstance();
@@ -73,7 +73,23 @@ void InventoryHandBox::MouseUpdate(const float &xpos, const float &ypos) {
     for(int i = 0; i < Inventory::handCol; i++) {
         if(box[i] -> isMouseOnBox(xpos, ypos)) {
             box[i] -> isChosen();
+            itemChoose = box[i];
             cursorItem = box[i] -> getItem();
+            break;
         }
     }
 }
+
+
+void InventoryHandBox::PickItem() {
+    if(itemChoose != nullptr) {
+        cursorItem = itemChoose -> getItem();
+        if(cursorItem != nullptr) {
+            cursorItem -> PickUp();
+        }
+        itemChoose -> unsetItem();
+        itemChoose = nullptr;
+    }
+}
+
+

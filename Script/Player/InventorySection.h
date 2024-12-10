@@ -8,6 +8,7 @@ class InventorySection {
 
     public :
         enum Type {
+            Hand,
             Inventory,
             Crafting,
             Chest,
@@ -19,7 +20,8 @@ class InventorySection {
         std::vector<std::vector<std::shared_ptr<InventoryBox>>> Boxes;
 
         std::unique_ptr<InventoryBox> ResultBox;
-        std::shared_ptr<Item> itemChoose;
+        std::shared_ptr<InventoryBox> itemChoose;
+        std::shared_ptr<Item> cursorItem;
         SpriteRenderer* spriteRenderer; // For behind renderer
         int numROW = Inventory::MAX_ROW;
         int numCOLLUM = Inventory::MAX_COL;
@@ -61,6 +63,11 @@ class InventorySection {
         
         bool isActive();
         bool Activation();
+
+        bool PlaceItem(std::shared_ptr<Item> & item); // True if the item is placed or false if the item is not placed
+        bool PlaceItem(std::shared_ptr<Item> & item, bool one);  // one is flag for right click 
+        void PickItem();
+    
 
 
 

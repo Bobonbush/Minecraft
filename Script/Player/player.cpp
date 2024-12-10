@@ -40,5 +40,9 @@ void Player::InventoryUpdate(const float & xpos, const float & ypos, const int &
     if(input == Cursor::MOUSE_EVENT::LEFT_CLICK) {
         inventory -> PickItem();
     }
+
+    if(input == Cursor::MOUSE_EVENT::RIGHT_CLICK) {
+        inventory -> PlaceOneItem();
+    }
 }
 

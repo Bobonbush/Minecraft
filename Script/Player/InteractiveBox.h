@@ -23,8 +23,6 @@ class InventoryBox {
 
         SpriteRenderer* m_spriteRenderer;
 
-        static std::unique_ptr<TextHandler> textLoader;
-
         int m_number = 0;
         unsigned int fakeTexture = -1;
         bool hasFake = false;
@@ -55,6 +53,8 @@ class InventoryBox {
         bool Choose();
 
         bool isMouseOnBox(const float & xpos, const float& ypos);
+
+        const glm::vec2 getPosition() const;
 };
 
 #endif // INVENTORYBOX_H
