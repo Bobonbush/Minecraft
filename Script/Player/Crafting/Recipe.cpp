@@ -99,6 +99,21 @@ CraftingRecipeDataBase::CraftingRecipeDataBase() {
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Planks"));
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Crafting Table"));
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Sticks"));
+
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Iron Sword"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper Sword"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser Sword"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Blue Sword"));
+
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Iron Pickaxe"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper Pickaxe"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser Pickaxe"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Blue Pickaxe"));
+
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Iron Axe"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper Axe"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser Axe"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Blue Axe"));
 }
 
 CraftingRecipeDataBase::~CraftingRecipeDataBase() {

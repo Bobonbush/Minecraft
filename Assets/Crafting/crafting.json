@@ -25,6 +25,122 @@
             "Result" : "Stick",
             "Recipe": "010010000",
             "Number" : 4
+        },
+        "Iron Sword" : {
+            "Ingredients" : [
+                "Iron",
+                "Stick"
+            ],
+            "Result" : "Iron_Sword",
+            "Recipe": "100100200",
+            "Number" : 1
+        },
+
+        "Laser Sword" : {
+            "Ingredients" : [
+                "Laser",
+                "Stick"
+            ],
+            "Result" : "Laser_Sword",
+            "Recipe": "100100200",
+            "Number" : 1
+        },
+
+        "Blue Sword" : {
+            "Ingredients" : [
+                "Blue",
+                "Stick"
+            ],
+            "Result" : "Blue_Sword",
+            "Recipe": "100100200",
+            "Number" : 1
+        },
+
+        "Copper Sword" : {
+            "Ingredients" : [
+                "Copper",
+                "Stick"
+            ],
+            "Result" : "Copper_Sword",
+            "Recipe": "100100200",
+            "Number" : 1
+        },
+
+        "Iron Pickaxe" : {
+            "Ingredients" : [
+                "Iron",
+                "Stick"
+            ],
+            "Result" : "Iron_Pickage",
+            "Recipe": "111020020",
+            "Number" : 1
+        },
+
+        "Laser Pickaxe" : {
+            "Ingredients" : [
+                "Laser",
+                "Stick"
+            ],
+            "Result" : "Laser_Pickage",
+            "Recipe": "111020020",
+            "Number" : 1
+        },
+
+        "Blue Pickaxe" : {
+            "Ingredients" : [
+                "Blue",
+                "Stick"
+            ],
+            "Result" : "Blue_Pickage",
+            "Recipe": "111020020",
+            "Number" : 1
+        },
+
+        "Copper Pickaxe" : {
+            "Ingredients" : [
+                "Copper",
+                "Stick"
+            ],
+            "Result" : "Copper_Pickage",
+            "Recipe": "111020020",
+            "Number" : 1
+        },
+
+        "Iron Axe" : {
+            "Ingredients" : [
+                "Iron",
+                "Stick"
+            ],
+            "Result" : "Iron_Axe",
+            "Recipe": "110120020",
+            "Number" : 1
+        },
+        "Laser Axe" : {
+            "Ingredients" : [
+                "Laser",
+                "Stick"
+            ],
+            "Result" : "Laser_Axe",
+            "Recipe": "110120020",
+            "Number" : 1
+        },
+        "Blue Axe" : {
+            "Ingredients" : [
+                "Blue",
+                "Stick"
+            ],
+            "Result" : "Blue_Axe",
+            "Recipe": "110120020",
+            "Number" : 1
+        },
+        "Copper Axe" : {
+            "Ingredients" : [
+                "Copper",
+                "Stick"
+            ],
+            "Result" : "Copper_Axe",
+            "Recipe": "110120020",
+            "Number" : 1
         }
     },
     "Furnace" : {
