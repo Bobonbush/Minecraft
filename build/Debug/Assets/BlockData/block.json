@@ -62,6 +62,22 @@
         "topX" : 7, "topY" : 0,
         "sideX" : 7, "sideY" : 0,
         "bottomX" : 7, "bottomY" : 0
+    },
+    "BlueOre" : {
+        "topX" : 12, "topY" : 0,
+        "sideX" : 12, "sideY" : 0,
+        "bottomX" : 12, "bottomY" : 0
+    },
+    "CopperOre" : {
+        "topX" : 14, "topY" : 0,
+        "sideX" : 14, "sideY" : 0,
+        "bottomX" : 14, "bottomY" : 0
+    },
+
+    "LaserOre" : {
+        "topX" : 13, "topY" : 0,
+        "sideX" : 13, "sideY" : 0,
+        "bottomX" : 13, "bottomY" : 0
     }
 }
 

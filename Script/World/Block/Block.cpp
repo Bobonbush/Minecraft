@@ -113,6 +113,9 @@ void Block::initBlockMap() {
     blockMap[static_cast<int>(BLOCKID::Bedrock)] = "Bedrock";
     blockMap[static_cast<int>(BLOCKID::Leaf)] = "Leaf";
     blockMap[static_cast<int>(BLOCKID::TearWood)] = "TearWood";
+    blockMap[static_cast<int>(BLOCKID::BlueOre)] = "BlueOre";
+    blockMap[static_cast<int>(BLOCKID::CopperOre)] = "CopperOre";
+    blockMap[static_cast<int>(BLOCKID::LaserOre)] = "LaserOre";
     
 
 

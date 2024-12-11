@@ -42,7 +42,9 @@ enum class BLOCKID : int {
     Bedrock = 8,
     Leaf = 9,
     TearWood = 10,
-
+    BlueOre = 11,
+    CopperOre = 12,
+    LaserOre = 13,
     TOTAL,
 };
 
