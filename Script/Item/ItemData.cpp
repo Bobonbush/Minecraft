@@ -2,8 +2,9 @@
 
 
 ItemData::ItemData(const std::string &fileName) {
+    std::cout << fileName <<'\n';
     File * file = File::GetInstance();
-    file -> SetJson("Assets/ItemData/item.json");
+    file -> SetJson("Assets/item.json");
     file -> SetNextJson(fileName);
     itemData.coords = glm::vec2(file -> GetJsonFloat("x"), file -> GetJsonFloat("y"));
     file -> PopJson();

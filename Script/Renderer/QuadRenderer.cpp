@@ -71,7 +71,7 @@ void QuadRenderer::renderQuads(const glm::mat4 & view, const glm::mat4 &projecti
         //model = glm::rotate(model, glm::radians((float)glfwGetTime() * 50), glm::vec3(1.0f, 0.0f, 1.0f));
         
         model = glm::scale(model, size);
-        //shader -> setMat4("model", model);
+        shader -> setMat4("model", model);
 
         glDrawElements(GL_TRIANGLES, quadModel -> getIndicesCount(), GL_UNSIGNED_INT, 0);
     }

@@ -65,8 +65,12 @@ InventoryManager::InventoryManager() {
 
     position.y -= size.y  + offset ;
     sections.push_back(std::make_unique<InventorySection>(position, size, 2, 2, InventorySection::Type::Crafting));
-    addBlockItem(BLOCKID::Grass, 64);
-
+    addItem( (int)BLOCKID::Grass, 64);
+    addItem((int)ItemID::Sword, 1);
+    addItem((int)ItemID::Axe, 1);
+    addItem((int)ItemID::Bow, 1);
+    addItem((int)ItemID::Arrow, 64);
+    addItem((int)ItemID::Pickage, 1);
     sections.back() -> Activation();
     
 }
@@ -174,10 +178,52 @@ int InventoryManager::addBlockItem(BLOCKID id, int number, int row, int col) {
 }
 
 void InventoryManager::addSpriteItem(ItemID id , int number) {
+    while(number > 0) {
+        std::pair<int, int> pos = FindSlotForItem((int) id);
+        if(pos.first == -1) return ;
+        if(items[pos.first][pos.second] != nullptr) {
+            number = items[pos.first][pos.second] -> addNumber(number);
+            continue;
+        }
+        items[pos.first][pos.second] = std::make_shared<SpriteItem>(id, ItemDataBase::GetInstance() -> getItemName(id));    
+        if(pos.first * Inventory::MAX_COL + pos.second < Inventory::handCol) {
+            sections[0] -> setBoxItem(items[pos.first][pos.second], pos.first * Inventory::MAX_COL + pos.second);
+        }else {
+            sections[1] -> setBoxItem(items[pos.first][pos.second], pos.first * Inventory::MAX_COL + pos.second - Inventory::handCol);
+        }
+        number = items[pos.first][pos.second] -> addNumber(number);
+    }
 
 }
 
 int InventoryManager::addSpriteItem(ItemID id ,int number ,int row ,int col) {
+    if(items[row][col] != nullptr) {
+        return items[row][col] -> getNumber();
+    }
+    items[row][col] = std::make_shared<SpriteItem>(id, ItemDataBase::GetInstance() -> getItemName(id));
+    if(row * Inventory::MAX_COL + col < Inventory::handCol) {
+        sections[0] -> setBoxItem(items[row][col], row * Inventory::MAX_COL + col);
+    }else {
+        sections[1] -> setBoxItem(items[row][col], row * Inventory::MAX_COL + col - Inventory::handCol);
+    }
+    number = items[row][col] -> addNumber(number);
+    return number;
+}
+
+void InventoryManager::addItem(int id ,int number) {
+    if(id < (int) BLOCKID::TOTAL) {
+        addBlockItem((BLOCKID) id, number);
+    }else {
+        addSpriteItem((ItemID) id, number);
+    } 
+}
+
+void InventoryManager::addItem(int id , int number ,int row ,int col) {
+    if(id < (int) BLOCKID::TOTAL) {
+        addBlockItem((BLOCKID) id, number, row, col);
+    }else {
+        addSpriteItem((ItemID) id, number, row, col);
+    }
 }
 
 void InventoryManager::RemoveItem(std::shared_ptr<Item> item)  {

@@ -3,7 +3,7 @@
 #include "TextureBind.h"
 class TextureAtlas : public TextureBind {
     private:
-        int imageSize;
+        std::pair<int,int> imageSize;
         int individualTextureSize;
     
     public:

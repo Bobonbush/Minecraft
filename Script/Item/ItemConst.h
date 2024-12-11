@@ -19,7 +19,10 @@ class ItemConst {
 
 enum class ItemID : int {
     Sword = BLOCKID::TOTAL,
-
+    Bow,
+    Arrow,
+    Pickage,
+    Axe,
     TOTAL,
 };
 

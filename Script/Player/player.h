@@ -47,7 +47,7 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         }
 
         void addBlockItem(BLOCKID id, int number) {
-            inventory -> addBlockItem(id, number);
+            inventory -> addItem((int) id, number);
         }
 
         void openInventory() {

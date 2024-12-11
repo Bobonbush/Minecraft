@@ -83,7 +83,6 @@ SpriteItem::~SpriteItem() {
 }
 
 void SpriteItem::Render() {
-    return ;
     Config * config = Config::GetInstance();
     int number = stats.number;
     glm::vec2 m_size = Inventory::BoxSize;
@@ -91,16 +90,15 @@ void SpriteItem::Render() {
     m_size.x *= aspect;
 
     glDisable(GL_DEPTH_TEST);
-    if(number > 1) {
-        textLoader -> RenderMiddleText(SPA::convertNumberToString(number), position.x + m_size.x/3.5f , position.y + m_size.y/3.5f, 1.55f, glm::vec3(0.8f, 0.4f , 0.7f), 0.f, glm::vec2(config -> GetWidth(), config -> GetHeight()));
-    }
+    textLoader -> RenderMiddleText(SPA::convertNumberToString(number), position.x + m_size.x/3.5f , position.y + m_size.y/3.5f, 1.55f, glm::vec3(0.8f, 0.4f , 0.7f), 0.f, glm::vec2(config -> GetWidth(), config -> GetHeight()));
+    
     glEnable(GL_DEPTH_TEST);
 
     glm::vec2 coords = data.getItemData().coords;
     quadRenderer -> LoadData(coords);
     quadRenderer -> add(position);
 
-    glm::vec3 size = glm::vec3(0.035f);
+    glm::vec3 size = glm::vec3(0.055f);
     size.y *= Config:: GetInstance() -> GetAspectRatio();
 
     quadRenderer -> renderQuads(glm::mat4(1.0f), glm::mat4(1.0f), size);
