@@ -77,6 +77,8 @@ SpriteItem::SpriteItem(ItemID id , const std::string &name) : Item(), data(name)
     stats.id = (int) id;
     stats.number = 0;
 
+    maxStack = ItemConst::getMaxStack(id);
+
 }
 
 SpriteItem::~SpriteItem() {
@@ -90,7 +92,8 @@ void SpriteItem::Render() {
     m_size.x *= aspect;
 
     glDisable(GL_DEPTH_TEST);
-    textLoader -> RenderMiddleText(SPA::convertNumberToString(number), position.x + m_size.x/3.5f , position.y + m_size.y/3.5f, 1.55f, glm::vec3(0.8f, 0.4f , 0.7f), 0.f, glm::vec2(config -> GetWidth(), config -> GetHeight()));
+    if(number > 1)
+        textLoader -> RenderMiddleText(SPA::convertNumberToString(number), position.x + m_size.x/3.5f , position.y + m_size.y/3.5f, 1.55f, glm::vec3(0.8f, 0.4f , 0.7f), 0.f, glm::vec2(config -> GetWidth(), config -> GetHeight()));
     
     glEnable(GL_DEPTH_TEST);
 

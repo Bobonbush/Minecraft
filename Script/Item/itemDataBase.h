@@ -19,7 +19,9 @@ class ItemDataBase : public Singleton {
         static ItemDataBase * GetInstance() {
             if(instance == nullptr) {
                 instance = new ItemDataBase();
+                ItemConst::initBlockMap();
             }
+
             return instance;
         }
 

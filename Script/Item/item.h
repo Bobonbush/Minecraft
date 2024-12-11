@@ -15,7 +15,7 @@ class Item {
 
     public:
     
-    const int maxStack = 64;
+    int maxStack = 64;
 
     static std::unique_ptr<TextHandler> textLoader;
 

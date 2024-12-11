@@ -3,6 +3,16 @@
 #define ITEMCONST_H
 #include "Block/Block.h"
 
+
+enum class ItemID : int {
+    Sword = BLOCKID::TOTAL,
+    Bow,
+    Arrow,
+    Pickage,
+    Axe,
+    TOTAL,
+};
+
 class ItemConst {
 
     enum class Type {
@@ -15,15 +25,10 @@ class ItemConst {
         static std::map<int , Type> itemMap;
 
         static void initBlockMap();
+
+        static int getMaxStack( ItemID & id);
 };
 
-enum class ItemID : int {
-    Sword = BLOCKID::TOTAL,
-    Bow,
-    Arrow,
-    Pickage,
-    Axe,
-    TOTAL,
-};
+
 
 #endif // ITEMCONST_H

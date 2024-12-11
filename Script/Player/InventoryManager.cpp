@@ -70,7 +70,7 @@ InventoryManager::InventoryManager() {
     addItem((int)ItemID::Axe, 1);
     addItem((int)ItemID::Bow, 1);
     addItem((int)ItemID::Arrow, 64);
-    addItem((int)ItemID::Pickage, 1);
+    addItem((int)ItemID::Pickage, 3);
     sections.back() -> Activation();
     
 }
