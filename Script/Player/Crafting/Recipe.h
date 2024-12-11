@@ -2,6 +2,9 @@
 #define RECIPE_H
 #include "Utils/File.h"
 #include "Utils/Singleton.h"
+#include "Block/Block.h"
+#include "Item/ItemDataBase.h"
+#include "Algorithm.h"
 
 class Recipe {
 
@@ -15,17 +18,43 @@ class Recipe {
         
         
        
-        std::vector<std::pair<int ,int >> ingredients;
+        std::vector<std::string> ingredients;
         std::string result;
         std::string RecipeFormula;
         int number = 0;
         Type type;
+
+        int matrix[3][3];
+        
+        void Convert();
+
         
     public:
         
         Recipe(const Type & type, const std::string & name);
         Recipe() = default;
         ~Recipe() = default;
+        
+        bool isMatch(const std::vector<std::vector<int>> & matrix);
+        const std::string & getResult() const;
+
+        const int getNumber() const {
+            return number;
+        }
+
+        void Debug() {
+            std::cout << "Recipe : " << result << std::endl;
+            std::cout << "Ingredients : ";
+            for(auto & ingredient : ingredients) {
+                std::cout << ingredient << " ";
+            }
+            std::cout << std::endl;
+            std::cout << "Formula : " << RecipeFormula << std::endl;
+            std::cout << "Number : " << number << std::endl;
+            std::cout << "Type : " << (int) type << std::endl;
+        }
+
+        
 };
 
 
@@ -34,6 +63,7 @@ class CraftingRecipeDataBase : Singleton {
 
         std::vector<Recipe> recipes;
         Recipe::Type type;
+        int number = 1;
 
         CraftingRecipeDataBase();
 
@@ -46,8 +76,12 @@ class CraftingRecipeDataBase : Singleton {
             }
             return instance;
         }
-        ~CraftingRecipeDataBase() {
-            delete instance;
+        ~CraftingRecipeDataBase();
+
+        std::string isMatch(const std::vector<std::vector<int>> & matrix);
+
+        const int getInstantNumber() const {
+            return number;
         }
 
 

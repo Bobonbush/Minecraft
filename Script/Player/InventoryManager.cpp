@@ -59,19 +59,35 @@ InventoryManager::InventoryManager() {
     position.y = 0.5f + size.y * 4/2.f - offset * 4/2;
 
     sections.push_back(std::make_unique<InventorySection>(position, size, 4, 1, InventorySection::Type::Weapon));
-    sections.back() -> Activation();
+    //sections.back() -> Activation();
     position.x += size.x * 1.75 + offset * 2;
     position.y = 0.5f +  size.y * 4/2.f - offset * 4 /2.f;
 
     position.y -= size.y  + offset ;
     sections.push_back(std::make_unique<InventorySection>(position, size, 2, 2, InventorySection::Type::Crafting));
+    //sections.back() -> Activation();
+    position = glm::vec2(0.0f, 0.0f);
+    position.y = 0.5f + size.y * 3.f/2.f - offset * 3.f/2.f;
+    position.x = 0.f - (size.x * 3.f/2) * 1.f/(aspect) * 1.5f + offset * 3.f/2 ;
+
+
+
+
+    sections.push_back(std::make_unique<InventorySection>(position, size, 3, 3, InventorySection::Type::CraftingTable));
+    sections.back() -> Activation();
+
     addItem( (int)BLOCKID::Grass, 64);
-    addItem((int)ItemID::Sword, 1);
-    addItem((int)ItemID::Axe, 1);
+    addItem((int)ItemID::Blue_Sword, 1);
+    addItem((int)ItemID::Iron_Axe, 1);
     addItem((int)ItemID::Bow, 1);
     addItem((int)ItemID::Arrow, 64);
-    addItem((int)ItemID::Pickage, 3);
-    sections.back() -> Activation();
+    addItem((int)ItemID::Iron_Pickage, 3);
+    addItem((int)ItemID::Iron_Helmet, 1);
+    addItem((int)ItemID::Copper_Chestplate, 1);
+    addItem((int)ItemID::Laser_Leggings, 1);
+    addItem((int)ItemID::Blue_Boots, 1);
+    addItem((int) BLOCKID::Wood, 64);
+    addItem((int)BLOCKID::TearWood, 64);
     
 }
 
@@ -256,6 +272,9 @@ void InventoryManager::update() {
     
     }
     for(std::unique_ptr<InventorySection> & section : sections) {
+        if(!section -> isActive()) {
+            continue;
+        }
         section -> update();
     }
 
@@ -296,6 +315,9 @@ void InventoryManager::Render() {
         glEnable(GL_DEPTH_TEST);
         
         for(std::unique_ptr<InventorySection> & section : sections) {
+            if(!section -> isActive()) {
+                continue;
+            }
             section -> Render();
         }
 
@@ -335,6 +357,9 @@ void InventoryManager::MouseUpdate(const float & xpos , const float & ypos) {
     }
 
     for(std::unique_ptr<InventorySection> & section : sections) {
+        if(!section -> isActive()) {
+            continue;
+        }
         section -> MouseUpdate(xpos, ypos);
     }
 

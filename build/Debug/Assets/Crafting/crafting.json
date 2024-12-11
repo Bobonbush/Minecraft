@@ -1,20 +1,29 @@
 {
     "Craft" : {
         "Crafting Table" : {
-            "Ingredients" : {
-                "Wood" : 4
-            },
+            "Ingredients" : [
+                "TearWood"
+            ],
             "Result" : "Crafting Table",
-            "Recipe": "110110001", 
+            "Recipe": "000110110", 
             "Number" : 1
         },
         
         "Planks" : {
-            "Ingredients" : {
-                "Wood" : 1
-            },
+            "Ingredients" : [
+                "Wood"
+            ],
             "Result" : "TearWood",
             "Recipe": "100000000",
+            "Number" : 4
+        },
+
+        "Sticks" : {
+            "Ingredients" : [
+                "TearWood"
+            ],
+            "Result" : "Stick",
+            "Recipe": "010010000",
             "Number" : 4
         }
     },

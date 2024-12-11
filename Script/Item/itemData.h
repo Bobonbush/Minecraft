@@ -16,7 +16,7 @@ class ItemData {
 
     private:
     
-            ItemDataHolder itemData;
+        ItemDataHolder itemData;
 };
 
 #endif // ITEMDATAHOLDER_H

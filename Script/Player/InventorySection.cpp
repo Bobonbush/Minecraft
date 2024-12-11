@@ -1,9 +1,13 @@
 #include "InventorySection.h"
 
+
+CraftingRecipeDataBase * InventorySection::recipe = nullptr;
+
 InventorySection::InventorySection(const glm::vec2 & position, const  glm::vec2& size, int row, int col, const Type &type ) : position(position), size(size), numROW(row), numCOLLUM(col), type(type) {
     Boxes.resize(numROW);
 
     ResultBox = nullptr;
+
 
     spriteRenderer = SpriteRenderer::getInstance();
     
@@ -54,12 +58,34 @@ InventorySection::InventorySection(const glm::vec2 & position, const  glm::vec2&
     
             glm::vec2 ResultPosition = glm::vec2(position.x + size.x * 3 + offset * 2, position.y - size.y/2.f);
             
-            ResultBox = std::make_unique<InventoryBox>(ResultPosition, size, 0, "Assets/Inventory/off.png", InventoryBox::State::None);
+            ResultBox = std::make_shared<InventoryBox>(ResultPosition, size, 0, "Assets/Inventory/off.png", InventoryBox::State::None);
             rightArrowPosition =  ResultPosition;
             rightArrowSize = size/1.5f;
             rightArrowPosition.x -= size.x  + offset;
         }
 
+        if(type == Type::CraftingTable) {
+            float aspect = 1.f/ Config::GetInstance() -> GetAspectRatio();
+            const float offset = 0.005f;
+            for(int i = 0; i < numROW; i++) {
+                Boxes[i].resize(numCOLLUM);
+                for(int j = 0; j < numCOLLUM; j++) {
+                    Boxes[i][j] = std::make_shared<InventoryBox>(glm::vec2(position.x + j * size.x - offset * j, position.y - i * size.y + offset / aspect * i), size, i * numCOLLUM + j + 1, "Assets/Inventory/off.png", InventoryBox::State::None);
+                }
+            }
+    
+            glm::vec2 ResultPosition = glm::vec2(position.x + size.x * (numROW + 1) + offset * (numROW) , position.y - size.y);
+            
+            ResultBox = std::make_shared<InventoryBox>(ResultPosition, size, 0, "Assets/Inventory/off.png", InventoryBox::State::None);
+            rightArrowPosition =  ResultPosition;
+            rightArrowSize = size/1.5f;
+            rightArrowPosition.x -= size.x  + offset;
+        }
+
+    }
+
+    if(recipe == nullptr) {
+        recipe = CraftingRecipeDataBase::GetInstance();
     }
 
 }
@@ -74,9 +100,15 @@ void InventorySection::update() {
         }
     }
 
-    if(type == Type::Crafting) {
-        // Check if the formula is match with the recipe
+    if(ResultBox != nullptr) {
+        CreateRecipe();
     }
+
+    if(ResultBox != nullptr) {
+        ResultBox -> update();
+    }
+
+    
 }
 
 void InventorySection::Render() {
@@ -125,13 +157,19 @@ bool InventorySection::isActive() {
 }
 
 bool InventorySection::Activation() {
-    Active ^= 1;
+    Active = true;
+    return Active;
+}
+
+bool InventorySection::Disactivation() {
+    Active = false;
     return Active;
 }
 
 void InventorySection::MouseUpdate(const float & xpos, const float & ypos) {
     itemChoose = nullptr;
     cursorItem = nullptr;
+    isResultBox = false;
     for(int i = 0; i < numROW; i++) {
         bool found = false;
         for(int j = 0; j < numCOLLUM; j++) {
@@ -144,11 +182,68 @@ void InventorySection::MouseUpdate(const float & xpos, const float & ypos) {
         }
         if(found) break;
     }
+
+    if(ResultBox != nullptr) {
+        if(ResultBox -> isMouseOnBox(xpos, ypos)) {
+            ResultBox -> isChosen();
+            itemChoose = ResultBox;
+            isResultBox = true;
+        }
+    }
 }
 
 
 void InventorySection::PickItem() {
+
+    
     if(itemChoose != nullptr) {
+        if(isResultBox) {
+            cursorItem = ResultBox -> getItem();
+            if(cursorItem != nullptr) {
+                cursorItem -> PickUp();
+            }
+            ResultBox -> unsetItem();
+            
+            int minimal = 0;
+            if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+                
+                for(int i = 0; i < numROW; i++) {
+                    for(int j = 0; j < numCOLLUM; j++) {
+                        if(Boxes[i][j] -> isEmpty()) {
+                            continue;
+                        }
+                        if(minimal == 0) {
+                            minimal = Boxes[i][j] -> getItem() -> getNumber();
+                        }else {
+                            minimal = SPA::min(minimal, Boxes[i][j] -> getItem() -> getNumber());
+                        }
+                    }
+                }
+                
+            }else minimal = 1;
+            int basicNum = cursorItem -> getNumber();
+            int left = cursorItem -> addNumber( (minimal-1) * basicNum);
+            left /= basicNum;
+            minimal -= left;
+            for(int i = 0; i < numROW; i++) {
+                for(int j = 0; j < numCOLLUM; j++) {
+                    if(Boxes[i][j] -> isEmpty()) {
+                        continue;
+                    }
+                    std::cout << Boxes[i][j] -> getItem() -> getNumber() << std::endl;
+
+                    Boxes[i][j] -> getItem() -> addNumber(-minimal);
+                    //std::cout << Boxes[i][j] -> getItem() -> getNumber() << std::endl;
+                    if(Boxes[i][j] -> getItem() -> getNumber() == 0) {
+                        Boxes[i][j] -> unsetItem();
+                    }
+                    
+                }
+            }
+            itemChoose -> unsetItem();
+            itemChoose = nullptr;
+            return ;
+        }
         cursorItem = itemChoose -> getItem();
         if(cursorItem != nullptr) {
             cursorItem -> PickUp();
@@ -160,6 +255,7 @@ void InventorySection::PickItem() {
 
 bool InventorySection::PlaceItem(std::shared_ptr<Item> & item) {
     if(itemChoose == nullptr) return false ;
+    if(isResultBox) return false;
     if(itemChoose -> isEmpty()) {
         itemChoose -> setItem(item);
         item = nullptr;
@@ -168,8 +264,12 @@ bool InventorySection::PlaceItem(std::shared_ptr<Item> & item) {
 
     if(itemChoose -> getItem() -> getID() == item -> getID()) {
         int left = itemChoose -> getItem() -> addNumber(item -> getNumber());
+        if(type == Type::Crafting) {
+            CreateRecipe();
+        }
         if(left != 0) {
             item -> addNumber(- (item -> getNumber() - left));
+            
             return false;
         }else {
             item = nullptr;
@@ -177,8 +277,10 @@ bool InventorySection::PlaceItem(std::shared_ptr<Item> & item) {
         }
     }else {
         std::shared_ptr<Item> temp = itemChoose -> getItem();
+        item -> Drop();
         itemChoose -> setItem(item);
         item = temp;
+        item -> PickUp();
         return true;
     }
     return false;
@@ -201,7 +303,7 @@ bool InventorySection:: PlaceItem(std::shared_ptr<Item> & item, bool one) {
     }
 
     if(itemChoose -> getItem() -> getID() == item -> getID()) {
-        
+       
         int left = itemChoose -> getItem() -> addNumber(1);
         item -> addNumber(-1);
         if(left != 0) {
@@ -211,8 +313,60 @@ bool InventorySection:: PlaceItem(std::shared_ptr<Item> & item, bool one) {
             item = nullptr;
         }
         return true;
+    }    
+    return false;
+}
+
+void InventorySection::CreateRecipe() {
+
+    
+
+    if(ResultBox == nullptr) return ;
+    std::vector<std::vector<int>> matrix(3, std::vector<int>(3, 0));
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            matrix[i][j] = 0;
+        }
     }
     
-    return false;
+    for(int i = 0; i < numROW; i++) {
+        for(int j = 0; j < numCOLLUM; j++) {
+            if(Boxes[i][j] -> isEmpty()) {
+                matrix[i][j] = 0;
+            }else {
+                matrix[i][j] = Boxes[i][j] -> getItem() -> getID();
+            }
+        }
+    }
+
+    SPA::ShiftFullyToTopLeft(matrix);
+    //std::cout << std::endl;
+
+
+    std::string result = recipe -> isMatch(matrix);
+    
+    if(result == "null") {
+        ResultBox -> unsetItem();
+        return ;
+    }
+    int number = recipe -> getInstantNumber();
+
+    int id = ItemDataBase::GetInstance() -> getItemID(result);
+
+    std::shared_ptr<Item> item = nullptr;
+
+    if(id < (int) BLOCKID::TOTAL) {
+
+        item = std::make_shared<BlockItem>((BLOCKID) id, ItemDataBase::GetInstance() -> getItemName((ItemID) id));
+        
+    }else {
+        item = std::make_shared<SpriteItem>((ItemID) id, ItemDataBase::GetInstance() -> getItemName((ItemID) id));
+    }
+
+    item -> addNumber(number);
+
+    ResultBox -> setItem(item);
+
+    
 }
 

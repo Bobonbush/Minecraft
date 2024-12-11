@@ -99,6 +99,7 @@ const std::vector<glm::vec3> Block::normals = {
 
 
 std::map<int , std::string> Block::blockMap;
+std::map<std::string , int > Block::blockMapReverse;
 
 void Block::initBlockMap() {
     blockMap[static_cast<int>(BLOCKID::Air)] = "Air";
@@ -112,7 +113,14 @@ void Block::initBlockMap() {
     blockMap[static_cast<int>(BLOCKID::Bedrock)] = "Bedrock";
     blockMap[static_cast<int>(BLOCKID::Leaf)] = "Leaf";
     blockMap[static_cast<int>(BLOCKID::TearWood)] = "TearWood";
+    
 
+
+    for(auto & block : blockMap) {
+        blockMapReverse[block.second] = block.first;
+    }
 }
+
+
 
 

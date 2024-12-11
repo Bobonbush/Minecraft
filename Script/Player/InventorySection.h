@@ -3,6 +3,7 @@
 #include "Inventory.h"
 #include "InteractiveBox.h"
 #include <vector>
+#include "Crafting/Recipe.h"
 
 class InventorySection {
 
@@ -13,13 +14,16 @@ class InventorySection {
             Crafting,
             Chest,
             Furnace,
-            Weapon
+            Weapon,
+            CraftingTable
         };
+
+        static CraftingRecipeDataBase * recipe;
 
     private :
         std::vector<std::vector<std::shared_ptr<InventoryBox>>> Boxes;
 
-        std::unique_ptr<InventoryBox> ResultBox;
+        std::shared_ptr<InventoryBox> ResultBox;
         std::shared_ptr<InventoryBox> itemChoose;
         std::shared_ptr<Item> cursorItem;
         SpriteRenderer* spriteRenderer; // For behind renderer
@@ -37,6 +41,8 @@ class InventorySection {
 
         glm::vec2 rightArrowPosition;
         glm::vec2 rightArrowSize;
+
+        bool isResultBox = false;
 
         
         
@@ -63,10 +69,13 @@ class InventorySection {
         
         bool isActive();
         bool Activation();
+        bool Disactivation();
 
         bool PlaceItem(std::shared_ptr<Item> & item); // True if the item is placed or false if the item is not placed
         bool PlaceItem(std::shared_ptr<Item> & item, bool one);  // one is flag for right click 
         void PickItem();
+
+        void CreateRecipe();
     
 
 

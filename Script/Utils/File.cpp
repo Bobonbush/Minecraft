@@ -65,3 +65,11 @@ std::string File::GetJsonString(const std::string &key) {
 bool File::GetJsonBool(const std::string &key) {
     return jsonData[key].get<bool>();
 }
+
+std::vector<std::string> File::GetJsonArray( const std::string &key) {
+    std::vector<std::string> result;
+    for (auto &element : jsonData[key]) {
+        result.push_back(element.get<std::string>());
+    }
+    return result;
+}

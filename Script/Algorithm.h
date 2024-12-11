@@ -93,6 +93,64 @@ class SPA {
         x = (2.0f * x) / width - 1.0f;
         y = 1.0f - (2.0f * y) / height;
     }
+
+    static void ShiftFullyToTopLeft(std::vector<std::vector<int>> & matrix) {
+        int row = matrix.size();
+        int col = matrix[0].size();
+
+        int top = 0;
+
+        for(int i = 0 ; i < row; i++) {
+            bool isZero = true;
+            for(int j = 0; j < col; j++) {
+                if(matrix[i][j] != 0) {
+                    isZero = false;
+                    break;
+                }
+            }
+            if(isZero) {
+                top++;
+            } else {
+                break;
+            }
+        }
+
+        int left = 0;
+
+        for(int i = 0 ; i < col; i++) {
+            bool isZero = true;
+            for(int j = 0; j < row; j++) {
+                if(matrix[j][i] != 0) {
+                    isZero = false;
+                    break;
+                }
+            }
+            if(isZero) {
+                left++;
+            } else {
+                break;
+            }
+        }
+
+
+        for(int i = 0 ; i < row - top; i++) {
+            for(int j = 0 ; j < col - left; j++) {
+                matrix[i][j] = matrix[i + top][j + left];
+            }
+        }
+
+        for(int i = 0 ; i < top; i++) {
+            for(int j = 0 ; j < col; j++) {
+                matrix[row - i - 1][j] = 0;
+            }
+        }
+
+        for(int i = 0 ; i < left; i++) {
+            for(int j = 0 ; j < row; j++) {
+                matrix[j][col - i - 1] = 0;
+            }
+        }
+    }
 };
 
 

@@ -175,6 +175,11 @@ void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunk
             pressed[i] = false;
         }
 
+        if(i == GLFW_KEY_ESCAPE && pressed[i] == true && glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_ESCAPE) == GLFW_RELEASE) {
+            player -> CloseInventory();
+            pressed[i] = false;
+        }
+
         if(pressed[i] == true && i == GLFW_KEY_E && glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_E) == GLFW_RELEASE) {
             player -> openInventory();
             if(player -> isOpeningInventory()) {
@@ -201,13 +206,17 @@ void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunk
 }
 
 void PlayingState::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    /*
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
     }
-    Config * config = Config::GetInstance();
+    */
+    //Config * config = Config::GetInstance();
+    /*
     if(key == GLFW_KEY_LEFT_ALT && action == GLFW_PRESS) {
         config -> SetMouseActive(true);
     }else if(key == GLFW_KEY_LEFT_ALT && action == GLFW_RELEASE) {
         config -> SetMouseActive(false);
     }
+    */
 }

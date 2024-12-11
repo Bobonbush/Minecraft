@@ -101,6 +101,7 @@ add_executable(OPENGL Script/main.cpp
                       Script/Item/ItemConst.cpp
                       Script/Item/ItemData.cpp
                       Script/Item/ItemDataBase.cpp
+                      Script/Player/Crafting/recipe.cpp
                       
 )
         

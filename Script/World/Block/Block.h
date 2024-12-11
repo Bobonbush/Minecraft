@@ -23,8 +23,10 @@ class Block {
     const static std::vector<glm::vec3> normals;
 
     static std::map<int , std::string> blockMap;
+    static std::map<std::string , int > blockMapReverse;
 
     static void initBlockMap();
+
 };
 
 

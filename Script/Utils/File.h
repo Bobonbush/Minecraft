@@ -36,6 +36,7 @@ class File : public Singleton  {
     float GetJsonFloat(const std::string & key);
     std::string GetJsonString(const std::string & key);
     bool GetJsonBool(const std::string & key);
+    std::vector<std::string> GetJsonArray(const std::string & key);
 };
 
 #endif // FILE_H
