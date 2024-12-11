@@ -18,8 +18,6 @@ class InventoryManager {
         std::pair<int ,int > FindPickedUpItem();
         std::pair<int ,int> FindPickedUpItem(std::shared_ptr<Item> item);
 
-        void addItem(std::shared_ptr<Item> item, int row, int col);
-
         
     public :
         InventoryManager();
@@ -37,10 +35,14 @@ class InventoryManager {
         void RemoveItem( std::shared_ptr<Item> item);
         void RemoveItem(int row, int col);
 
-        std::pair<int,int> FindSlotForItem(BLOCKID  id);
-        std::pair<int,int> FindItem(BLOCKID id);
+        std::pair<int,int> FindSlotForItem(int id);
+        std::pair<int,int> FindItem(int id);
         void addBlockItem(BLOCKID id, int number);
         int addBlockItem(BLOCKID id, int number, int row, int col);
+        void addSpriteItem(ItemID id ,int number);
+        int addSpriteItem(ItemID id , int number, int row , int col);
+        void addItem(int id ,int number);
+        void addItem(int id , int number ,int row ,int col);
 
         void setItem(std::shared_ptr<Item> item);
         void ShowInventoryBox();

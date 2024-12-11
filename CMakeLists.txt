@@ -98,6 +98,10 @@ add_executable(OPENGL Script/main.cpp
                       Script/Item/Item.cpp
                       Script/Player/InventoryManager.cpp
                       Script/Player/InventorySection.cpp
+                      Script/Item/ItemConst.cpp
+                      Script/Item/ItemData.cpp
+                      Script/Item/ItemDataBase.cpp
+                      
 )
         
 target_link_libraries(OPENGL glfw3 opengl32)

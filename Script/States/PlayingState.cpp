@@ -99,7 +99,7 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
         if(item != nullptr && item -> getType() == "Block") {
             AABB box(glm::vec3(1.f * Chunk::CHUNK_SCALE));
             box.update(position);
-            BLOCKID id = std::dynamic_pointer_cast<BlockItem>(item) -> getID();
+            BLOCKID id = (BLOCKID) std::dynamic_pointer_cast<BlockItem>(item) -> getID();
             if(id != BLOCKID::Air) {
 
             

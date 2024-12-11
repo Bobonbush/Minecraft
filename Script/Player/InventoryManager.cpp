@@ -86,20 +86,6 @@ std::pair<int ,int > InventoryManager::FindPickedUpItem() {
     return std::make_pair(-1, -1);
 }
 
-void InventoryManager::addItem(std::shared_ptr<Item> item, int row, int col) {
-    if(items[row][col] != nullptr) {
-        //items[row][col] -> addNumber(item -> getNumber());
-        throw std::runtime_error("Cannot add more item");
-        return ;
-    }
-    items[row][col] = item;
-    if(row * Inventory::MAX_COL + col < Inventory::handCol) {
-        sections[0] -> setBoxItem(item, row * Inventory::MAX_COL + col);
-    }else {
-        sections[1] -> setBoxItem(item, row * Inventory::MAX_COL + col - Inventory::handCol);
-    }
-}
-
 std::pair<int ,int> InventoryManager::FindPickedUpItem(std::shared_ptr<Item> item) {
     for(int i = 0; i < Inventory::MAX_ROW; i++) {
         for(int j = 0; j < Inventory::MAX_COL; j++) {
@@ -113,7 +99,7 @@ std::pair<int ,int> InventoryManager::FindPickedUpItem(std::shared_ptr<Item> ite
 }
 
 
-std::pair<int ,int > InventoryManager::FindSlotForItem(BLOCKID id) {
+std::pair<int ,int > InventoryManager::FindSlotForItem(int id) {
     
     std::pair<int ,int > nearest_Empty = std::make_pair(-1, -1);
     for(int i = 0; i < Inventory::MAX_ROW; i++) {
@@ -139,7 +125,7 @@ const std::shared_ptr<Item> InventoryManager::getCursorItem() const {
 }
 
 
-std::pair<int ,int> InventoryManager::FindItem(BLOCKID id) {
+std::pair<int ,int> InventoryManager::FindItem(int id) {
     for(int i = 0; i < Inventory::MAX_ROW; i++) {
         for(int j = 0; j < Inventory::MAX_COL; j++) {
             if(items[i][j] != nullptr && items[i][j] -> getID() == id) {
@@ -155,7 +141,7 @@ void InventoryManager::addBlockItem(BLOCKID id, int number) {
     while(number > 0) {
 
     
-        std::pair<int, int> pos = FindSlotForItem(id);
+        std::pair<int, int> pos = FindSlotForItem( (int) id);
         if(pos.first == -1) return ;   
         if(items[pos.first][pos.second] != nullptr) {
             number = items[pos.first][pos.second] -> addNumber(number);
@@ -185,6 +171,13 @@ int InventoryManager::addBlockItem(BLOCKID id, int number, int row, int col) {
     number = items[row][col] -> addNumber(number);
     return number;
 
+}
+
+void InventoryManager::addSpriteItem(ItemID id , int number) {
+
+}
+
+int InventoryManager::addSpriteItem(ItemID id ,int number ,int row ,int col) {
 }
 
 void InventoryManager::RemoveItem(std::shared_ptr<Item> item)  {

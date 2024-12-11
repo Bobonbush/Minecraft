@@ -1,0 +1,31 @@
+{
+    "Craft" : {
+        "Crafting Table" : {
+            "Ingredients" : {
+                "Wood" : 4
+            },
+            "Result" : "Crafting Table",
+            "Recipe": "110110001", 
+            "Number" : 1
+        },
+        
+        "Planks" : {
+            "Ingredients" : {
+                "Wood" : 1
+            },
+            "Result" : "TearWood",
+            "Recipe": "100000000",
+            "Number" : 4
+        }
+    },
+    "Furnace" : {
+        "Wood" : {
+            "Result" : "Charcoal",
+            "Number" : 1
+        },
+        "Iron Ore" : {
+            "Result" : "Iron Ingot",
+            "Number" : 1
+        }
+    }
+}

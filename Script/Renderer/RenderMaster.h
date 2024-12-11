@@ -17,7 +17,6 @@ class RenderMaster {
 
         void finishRender(const glm::mat4 & view, const glm::mat4 & projection);
     private:
-        std::unique_ptr<QuadRenderer> quadRenderer;
         std::unique_ptr<ChunkRenderer> chunkRenderer;
         std::unique_ptr<SkyBox> skybox;
 };

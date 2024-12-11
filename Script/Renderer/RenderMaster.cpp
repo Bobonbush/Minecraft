@@ -2,7 +2,6 @@
 
 
 RenderMaster::RenderMaster() {
-    quadRenderer = std::make_unique<QuadRenderer>();
     chunkRenderer = std::make_unique<ChunkRenderer>();
     skybox = std::make_unique<SkyBox>();
 }
@@ -11,7 +10,6 @@ void RenderMaster::drawChunk(const ChunkMesh & mesh) {
     chunkRenderer -> add(mesh);
 }
 void RenderMaster::drawQuads(const glm::vec3 & pos) {
-    quadRenderer -> add(pos);
 }
 
 void RenderMaster::drawCubes(const glm::vec3 & pos) {

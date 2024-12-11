@@ -4,22 +4,25 @@
 #include "Block/BlockDataBase.h"
 #include "Model.h"
 #include "Renderer/CubeRenderer.h"
+#include "Renderer/QuadRenderer.h"
 #include "Renderer/SpriteRenderer.h"
 #include "Config.h"
 #include "Player/Inventory.h"
+#include "itemDataBase.h"
 
 class Item {
     
 
     public:
     
-    const int maxStack = 63;
+    const int maxStack = 64;
 
     static std::unique_ptr<TextHandler> textLoader;
 
     struct Stats {
         int number;
-        BLOCKID id;
+        int id;
+        
         
 
         const bool operator == (const Stats & other) const {
@@ -75,8 +78,8 @@ class Item {
         return type;
     }
 
-    const BLOCKID getID() const {
-        return stats.id;
+    const int getID() const {
+        return  stats.id;
     }
 
     const int getNumber() const {
@@ -121,14 +124,15 @@ class BlockItem : public Item {
 
 class SpriteItem : public Item {
     private:
-        SpriteRenderer * spriteRenderer;
-        unsigned int texture;
+        QuadRenderer * quadRenderer;
+        ItemDataBase * itemDataBase;
+        ItemData data;
     public:
-        SpriteItem(const std::string & path, int number);
+        SpriteItem(ItemID id ,const std::string & name);
         ~SpriteItem();
         void Render() override;
         void update() override;
-        Stats getStats();
+        Stats getStats() override;
 
         std::shared_ptr<Item> clone() override {
             return std::make_shared<SpriteItem>(*this);

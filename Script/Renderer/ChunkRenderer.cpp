@@ -1,6 +1,9 @@
 #include "ChunkRenderer.h"
 
 ChunkRenderer::ChunkRenderer() {
+    ShaderManager * shaderManager = ShaderManager::GetInstance();
+    shaderManager->addShader("solid", "Shader/solid.vs", "Shader/solid.fs");
+    
     shader = ShaderManager::GetInstance() -> getShader("solid");
 }
 

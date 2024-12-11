@@ -12,7 +12,6 @@ void ShaderManager::addShader(const std::string & name, const std::string & vert
 
 std::shared_ptr<Shader> ShaderManager::getShader(const std::string &name) {
     if(shaders.find(name) == shaders.end()) {
-        std::cout << "Shader not found" << std::endl;
         return nullptr;
     }
     return shaders[name];

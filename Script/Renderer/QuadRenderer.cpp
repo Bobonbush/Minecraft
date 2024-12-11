@@ -1,99 +1,42 @@
 #include "QuadRenderer.h"
 
+
+QuadRenderer * QuadRenderer::instance = nullptr;
+
 QuadRenderer::QuadRenderer() {
     quadModel = std::make_unique<Model>();
 
     
-    quadModel -> addData(
-        Mesh(
-            {
-                0.5f, 0.5f, 0.5f,
-                0.5f, -0.5f, 0.5f,
-                -0.5f, -0.5f, 0.5f,
-                -0.5f, 0.5f, 0.5f,
-
-                -0.5f, 0.5f, 0.5f,
-                -0.5f, 0.5f, -0.5f,
-                0.5f, 0.5f, -0.5f,
-                0.5f, 0.5f, 0.5f,
-
-                0.5f, -0.5f, 0.5f,
-                0.5f, -0.5f, -0.5f,
-                -0.5f, -0.5f, -0.5f,
-                -0.5f, -0.5f, 0.5f,
-
-                -0.5f, 0.5f, 0.5f,
-                -0.5f, -0.5f, 0.5f,
-                -0.5f, -0.5f, -0.5f,
-                -0.5f, 0.5f, -0.5f,
-
-                0.5f, 0.5f, 0.5f,
-                0.5f, 0.5f, -0.5f,
-                0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f, 0.5f,
-
-                -0.5f, 0.5f, -0.5f,
-                -0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f, -0.5f,
-                0.5f, 0.5f, -0.5f
-            },
-            
-            {
-                1.0f , 1.0f,
-                1.0f, 0.0f, 
-                0.0f, 0.0f,
-                0.0f, 1.0f,
-
-                0.0f, 1.0f,
-                0.0f, 0.0f,
-                1.0f, 0.0f,
-                1.0f, 1.0f,
-
-                1.0f, 1.0f,
-                1.0f, 0.0f,
-                0.0f, 0.0f,
-                0.0f, 1.0f,
-
-                1.0f, 1.0f,
-                1.0f, 0.0f,
-                0.0f, 0.0f,
-                0.0f, 1.0f,
-
-                1.0f, 1.0f,
-                1.0f, 0.0f,
-                0.0f, 0.0f,
-                0.0f, 1.0f,
-
-                1.0f, 1.0f,
-                1.0f, 0.0f,
-                0.0f, 0.0f,
-                0.0f, 1.0f
-            },
-            {
-                0, 1, 3,
-                1, 2, 3,
-                4, 5, 7,
-                5, 6, 7,
-                8, 9, 11,
-                9, 10, 11,
-                12, 13, 15,
-                13, 14, 15,
-                16, 17, 19,
-                17, 18, 19,
-                20, 21, 23,
-                21, 22, 23
-
-            }
-        )
-    );
-
+    ShaderManager::GetInstance() -> addShader("Screen", "Shader/Screen.vs", "Shader/Screen.fs");
+    shader = ShaderManager::GetInstance() -> getShader("Screen");  
+    texture = std::make_unique<TextureAtlas>("Assets/Items/items.png");
     
+}
 
-    ShaderManager * shaderManager = ShaderManager::GetInstance();
-    shaderManager->addShader("solid", "Shader/solid.vs", "Shader/solid.fs");
-    shader = shaderManager->getShader("solid");
-    texture = std::make_unique<TextureBind>("Assets/dirt.png");
+void QuadRenderer::LoadData(const glm::vec2 &coords) {
+    std::vector<GLfloat> vertices = {
+        0.5f, 0.5f, 0.5f,
+        0.5f, -0.5f, 0.5f,
+        -0.5f, -0.5f, 0.5f,
+        -0.5f, 0.5f, 0.5f
+    };
 
+    auto textureCoords = ItemDataBase::GetInstance() -> textureAtlas.getTexture(coords);
+
+    std::vector<GLfloat> texcoords;
+
+    texcoords.insert(texcoords.begin(), textureCoords.begin(), textureCoords.end());
+
+    for(int i = 0 ; i < 4 * 2 ; i+= 2) {
+        texcoords[i+1] = 1 - texcoords[i+1];
+    }
+
+    std::vector<GLuint> indices = {
+        0, 1, 3,
+        1, 2, 3
+    };
+
+    quadModel -> addData(Mesh(vertices, texcoords, indices));
     
 }
 
@@ -101,7 +44,7 @@ void QuadRenderer::add(const glm::vec3 & position) {
     quads.push_back(position);
 }
 
-void QuadRenderer::renderQuads(const glm::mat4 & view, const glm::mat4 &projection) {
+void QuadRenderer::renderQuads(const glm::mat4 & view, const glm::mat4 &projection, const glm::vec3 & size) {
 
     shader -> use();
 
@@ -115,19 +58,26 @@ void QuadRenderer::renderQuads(const glm::mat4 & view, const glm::mat4 &projecti
 
     shader -> setMat4("projection", projection);
 
+    glDisable(GL_BLEND);
+    glEnable(GL_DEPTH_TEST);
+
     glm::mat4 model = glm::mat4(1.0f);
     shader -> setMat4("model", model);
 
     for(auto & quad : quads) {
         
         model = glm::mat4(1.0f);
-        //model = glm::translate(model, quad);
+        model = glm::translate(model, quad);
         //model = glm::rotate(model, glm::radians((float)glfwGetTime() * 50), glm::vec3(1.0f, 0.0f, 1.0f));
-
+        
+        model = glm::scale(model, size);
         //shader -> setMat4("model", model);
 
         glDrawElements(GL_TRIANGLES, quadModel -> getIndicesCount(), GL_UNSIGNED_INT, 0);
     }
+
+    glDisable(GL_DEPTH_TEST);
+
 
     glBindVertexArray(0);
     quads.clear();
