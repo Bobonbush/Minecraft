@@ -37,7 +37,7 @@ class Item {
     
     public :
 
-    bool isPick = false;
+    bool isPick = false; 
 
     Item();
     ~Item();
