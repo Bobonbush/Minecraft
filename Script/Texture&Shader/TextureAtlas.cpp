@@ -34,3 +34,7 @@ std::vector<GLfloat> TextureAtlas::getTexture(const glm::vec2 & coords) {
 
     return textureCoords;
 }
+
+void TextureAtlas::setIndividualTextureSize(const int & size) {
+    individualTextureSize = size;
+}

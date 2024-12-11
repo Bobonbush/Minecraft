@@ -98,6 +98,13 @@ void SpriteItem::Render() {
     glEnable(GL_DEPTH_TEST);
 
     glm::vec2 coords = data.getItemData().coords;
+
+    if(ItemConst::itemMap[stats.id] == ItemConst::Type::Mineral) {
+        quadRenderer -> Mineral = true;
+    }else {
+        quadRenderer -> Mineral = false;
+    }
+    
     quadRenderer -> LoadData(coords);
     quadRenderer -> add(position);
 

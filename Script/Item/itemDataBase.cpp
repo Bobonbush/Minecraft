@@ -4,7 +4,7 @@ ItemDataBase * ItemDataBase::instance = nullptr;
 
 ItemDataBase::ItemDataBase() : textureAtlas("Assets/items/items.png"), MineralAtlas("Assets/items/mineral.png") {
     // Item
-    
+    MineralAtlas.setIndividualTextureSize(32);
     items[(unsigned) ItemID::Iron_Sword - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Iron_Sword");
     items[(unsigned) ItemID::Copper_Sword - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Copper_Sword");
     items[(unsigned) ItemID::Laser_Sword - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Laser_Sword");
@@ -44,6 +44,12 @@ ItemDataBase::ItemDataBase() : textureAtlas("Assets/items/items.png"), MineralAt
     items[(unsigned) ItemID::Blue_Boots - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Blue_Boots");
     
     items[(unsigned) ItemID::Stick - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Stick");
+    
+    items[(unsigned) ItemID::Iron - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Iron");
+    items[(unsigned) ItemID::Copper - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Copper");
+    items[(unsigned) ItemID::Laser - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Laser");
+    items[(unsigned) ItemID::Blue - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Blue");
+
     initItemMap();
 }
 
@@ -87,6 +93,12 @@ void ItemDataBase::initItemMap() {
     itemMap[ItemID::Blue_Boots] = "Blue_Boots";
 
     itemMap[ItemID::Stick] = "Stick";
+
+      
+    itemMap[ItemID::Iron] = "Iron";
+    itemMap[ItemID::Copper] = "Copper";
+    itemMap[ItemID::Laser] = "Laser";
+    itemMap[ItemID::Blue] = "Blue";
 
 
     for(auto & item : itemMap) {

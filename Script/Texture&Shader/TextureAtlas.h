@@ -9,6 +9,7 @@ class TextureAtlas : public TextureBind {
     public:
         TextureAtlas(const std::string &path);
         std::vector<GLfloat> getTexture(const glm::vec2& coords);
+        void setIndividualTextureSize(const int & size);
 };
 
 #endif // TEXTUREATLAS_H

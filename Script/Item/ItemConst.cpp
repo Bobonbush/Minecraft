@@ -43,7 +43,12 @@ void ItemConst::initBlockMap() {
     itemMap[static_cast<int>(ItemID::Laser_Boots)] = Type::Armor;
     itemMap[static_cast<int>(ItemID::Blue_Boots)] = Type::Armor;
 
-    itemMap[static_cast<int>(ItemID::Stick)] = Type::Mineral;
+    itemMap[static_cast<int>(ItemID::Stick)] = Type::Consumable;
+
+    itemMap[static_cast<int>(ItemID::Iron)] = Type::Mineral;
+    itemMap[static_cast<int>(ItemID::Copper)] = Type::Mineral;
+    itemMap[static_cast<int>(ItemID::Laser)] = Type::Mineral;
+    itemMap[static_cast<int>(ItemID::Blue)] = Type::Mineral;
 
 
 }

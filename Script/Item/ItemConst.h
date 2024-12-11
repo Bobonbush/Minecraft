@@ -46,21 +46,28 @@ enum class ItemID : int {
     Blue_Boots,
 
     Stick,
+
+    Iron,
+    Copper,
+    Laser,
+    Blue,
     
     TOTAL,
 };
 
 class ItemConst {
 
-    enum class Type {
-        Weapon = 1,
-        Armor = 2,
-        Consumable = 3,
-        Mineral = 4,
-        Tool = 5
-    };
+    
 
     public :
+
+        enum class Type {
+            Weapon = 1,
+            Armor = 2,
+            Consumable = 3,
+            Mineral = 4,
+            Tool = 5
+        };
         static std::map<int , Type> itemMap;
 
         static void initBlockMap();

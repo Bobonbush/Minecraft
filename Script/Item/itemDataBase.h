@@ -16,6 +16,8 @@ class ItemDataBase : public Singleton {
         std::array<std::unique_ptr<ItemData>, (unsigned) ItemID::TOTAL - (unsigned)BLOCKID::TOTAL >  items;
         std::map<ItemID, std::string> itemMap;  
         std::map<std::string , int> ReverseitemMap;
+
+        
     public:
         static ItemDataBase * GetInstance() {
             if(instance == nullptr) {
@@ -34,6 +36,8 @@ class ItemDataBase : public Singleton {
 
         TextureAtlas textureAtlas;
         TextureAtlas MineralAtlas;
+
+        
 };
 
 #endif // ITEMDATABASE_H

@@ -90,6 +90,7 @@ InventoryManager::InventoryManager() {
     addItem((int)BLOCKID::TearWood, 64);
 
     addItem((int)BLOCKID::CraftingTable, 1);
+    addItem((int)ItemID::Laser , 1);
     
 }
 
