@@ -52,15 +52,28 @@ class Player : public DYNAMIC_ENTITY, Singleton {
 
         void openInventory() {
             openingInventory ^= 1;
+            if(!openingInventory) {
+                UsingNormalInventory();
+            }
             inventory -> ShowInventoryBox();
         }
 
         void CloseInventory() {
             openingInventory = false;
+            UsingNormalInventory();
+            inventory -> CloseInventory();
         }
 
         bool isOpeningInventory() {
             return openingInventory;
+        }
+
+        void UsingCraftingTable() {
+            inventory -> UsingCraftingTable();
+        }
+
+        void UsingNormalInventory() {
+            inventory -> UsingNormalInventory();
         }
     
 

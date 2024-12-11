@@ -47,10 +47,14 @@ class InventoryManager {
 
         void setItem(std::shared_ptr<Item> item);
         void ShowInventoryBox();
+        void CloseInventory();
 
         void MouseUpdate(const float & xpos, const float & ypos);
         void PickItem();
         void PlaceOneItem();
+
+        void UsingCraftingTable();
+        void UsingNormalInventory();
 };
 
 #endif // INVENTORYMANAGER_H

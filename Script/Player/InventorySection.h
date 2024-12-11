@@ -76,6 +76,10 @@ class InventorySection {
         void PickItem();
 
         void CreateRecipe();
+
+        std::shared_ptr<Item> getItem(int row, int col) {
+            return Boxes[row][col] -> getItem();
+        }
     
 
 

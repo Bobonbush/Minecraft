@@ -1,6 +1,6 @@
 {
-    "width" : 1400, 
-    "height" : 800, 
+    "width" : 2100, 
+    "height" : 1200, 
     "antialiasing" : 8,
     "depthBits" : 24, 
     "stencilBits" : 8, 

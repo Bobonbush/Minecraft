@@ -83,6 +83,22 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
 
     if(input == Cursor::MOUSE_EVENT::RIGHT_CLICK) {
         glm::vec3 position = blockPosition;
+
+        ChunkBlock block = chunkManager.getBlock(position.x, position.y, position.z);
+        
+        if(block.getID() == BLOCKID::CraftingTable) {
+            player -> openInventory();
+            if(player -> isOpeningInventory() == false) {
+                throw std::runtime_error("Error");
+            }
+
+            Config * config = Config::GetInstance();
+            config -> SetMouseActive(true);
+            player -> UsingCraftingTable();
+
+            return ;
+        }
+        
         //glm::vec3 normalize = glm::vec3(0.f);
         float distance = 10000.f;
         for(int i = 0 ; i < 6 ; i++) {
@@ -168,17 +184,28 @@ void PlayingState::PlayerProcess(const Camera & camera, ChunkManager & chunkMana
 
 
 void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection)  {
+    if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        //glfwSetWindowShouldClose(glfwGetCurrentContext(), GLFW_TRUE);
+        player -> CloseInventory();
+    }
+    
+    Config * config = Config::GetInstance();
+    if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_ALT) == GLFW_PRESS) {
+        config -> SetMouseActive(true);
+    }else if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_ALT) == GLFW_RELEASE) {
+        if(!player -> isOpeningInventory()) {
 
+        
+            config -> SetMouseActive(false);
+        }
+    }
     for(int i = 0 ; i < 256 ; i++) {
         if( i == GLFW_KEY_C && pressed[i] == true && glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_C) == GLFW_RELEASE) {
             player -> setFlying(!player -> Flying());
             pressed[i] = false;
         }
 
-        if(i == GLFW_KEY_ESCAPE && pressed[i] == true && glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_ESCAPE) == GLFW_RELEASE) {
-            player -> CloseInventory();
-            pressed[i] = false;
-        }
+        
 
         if(pressed[i] == true && i == GLFW_KEY_E && glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_E) == GLFW_RELEASE) {
             player -> openInventory();
