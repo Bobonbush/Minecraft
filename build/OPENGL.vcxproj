@@ -525,11 +525,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\SceneState.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Maths\Ray.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Terrain.cpp" />
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\Biome.cpp" />
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\Ocean.cpp" />
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\grassland.cpp" />
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\highMountain.cpp" />
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\Desert.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Maths\Frustum.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\Skybox.cpp" />
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\PlayingState.cpp" />

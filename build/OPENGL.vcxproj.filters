@@ -112,21 +112,6 @@
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Terrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\Biome.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\Ocean.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\grassland.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\highMountain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\Desert.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Maths\Frustum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

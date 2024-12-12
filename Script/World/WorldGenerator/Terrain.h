@@ -2,103 +2,57 @@
 #define NOISEGENERATOR_H
 #include "Maths/FastNoise.h"
 #include "Chunk/ChunkSection.h"
-#include "Biome/grassland.h"
-#include "Biome/Ocean.h"
-#include "Biome/highMountain.h"
-#include "Biome/Desert.h"
 
 class NoiseGenerator {
     private:
         FastNoise noise;
+        FastNoise biomeNoise;
+        FastNoise caveNoise;
+        FastNoise ClimateNoise;
         //std::vector<std::vector<>>
         float waterSurface = 0.5f;
-        GrassLand grassLand;
-        GrassLand grassLandValley;
-        Ocean ocean;
-        highMountain highMountain;
-        Desert desert;
-        Desert desertValley;
     public:
         NoiseGenerator() {
-            // Biome Noise
-
-            // highMountain
             
-            noise.SetNoiseType(FastNoise::SimplexFractal);
-            noise.SetFractalOctaves(10);
-            noise.SetFrequency(0.15);
-            noise.SetFractalGain(2.);
-            noise.SetFractalLacunarity(0.75);
-            
-            noise.SetSeed(15324);
-
-            highMountain.setFastNoise(noise);
-
-            // GrassLand
-/*
-            noise.SetNoiseType(FastNoise::SimplexFractal);
-            noise.SetFractalOctaves(10);
-            noise.SetFrequency(0.002);
-            noise.SetFractalGain(2.);
-            noise.SetFractalLacunarity(1.05);
-            noise.SetSeed(15324);
-            */
-            grassLand.setFastNoise(noise);
-            // GrassLand Valley
-/*
-            noise.SetNoiseType(FastNoise::SimplexFractal);
-            noise.SetFractalOctaves(4);
-            noise.SetFrequency(0.002);
-            noise.SetFractalGain(2.);
-            noise.SetFractalLacunarity(0.95);
-            noise.SetSeed(15324);
-            */
-            grassLandValley.setFastNoise(noise);
-            // Desert
-            
- /*
-            noise.SetNoiseType(FastNoise::SimplexFractal);
-            noise.SetFractalOctaves(4);
-            noise.SetFrequency(0.002);
-            noise.SetFractalGain(2.);
-            noise.SetFractalLacunarity(1.25);
-            noise.SetSeed(15324);
-            grassLand.setFastNoise(noise);
-            ́*/
-            desert.setFastNoise(noise);
-
-            // Desert Valley
-            /*
-            noise.SetNoiseType(FastNoise::SimplexFractal);
-            noise.SetFractalOctaves(10);
-            noise.SetFrequency(0.002);
-            noise.SetFractalGain(2.);
-            noise.SetFractalLacunarity(0.75);
-            noise.SetSeed(15324);
-            */
-            desertValley.setFastNoise(noise);
-
-            
-
-            // Ocean
-            /*
-            noise.SetNoiseType(FastNoise::SimplexFractal);
-            noise.SetFractalOctaves(10);
-            noise.SetFrequency(0.1);
-            noise.SetFractalGain(1.);
-            noise.SetFractalLacunarity(0.5);
-            noise.SetSeed(15324);
-            */
-            ocean.setFastNoise(noise);
 
             // Biome Noise
             noise.SetNoiseType(FastNoise::SimplexFractal);
-            noise.SetFractalOctaves(4);
+            noise.SetFractalOctaves(3);
             noise.SetFrequency(0.0015);
-            noise.SetFractalGain(20.);
-            noise.SetFractalLacunarity(1.0015);
+            noise.SetFractalGain(0.5);
+            noise.SetFractalLacunarity(1.8);
+            noise.SetFractalType(FastNoise::RigidMulti);
            
             noise.SetSeed(1337);
+
+            // Biome Noise
+            biomeNoise.SetNoiseType(FastNoise::SimplexFractal);
+            biomeNoise.SetFractalOctaves(3);
+            biomeNoise.SetFrequency(0.005);
+            biomeNoise.SetFractalGain(0.5);
+            biomeNoise.SetFractalLacunarity(1.8);
+            biomeNoise.SetFractalType(FastNoise::RigidMulti);
+
+            biomeNoise.SetSeed(1337);
+
+            caveNoise.SetNoiseType(FastNoise::SimplexFractal);
+            caveNoise.SetFractalOctaves(3);
+            caveNoise.SetFrequency(0.025);
+            caveNoise.SetFractalGain(0.5);
+            caveNoise.SetFractalLacunarity(1.8);
+            caveNoise.SetFractalType(FastNoise::RigidMulti);
+
+            caveNoise.SetSeed(1337);
+
+            ClimateNoise.SetNoiseType(FastNoise::SimplexFractal);
+            ClimateNoise.SetFractalOctaves(3);
+            ClimateNoise.SetFrequency(0.025);
+            ClimateNoise.SetFractalGain(0.5);
+            ClimateNoise.SetFractalLacunarity(1.8);
+            ClimateNoise.SetFractalType(FastNoise::RigidMulti);
+
+            ClimateNoise.SetSeed(1337);
+
         }
 
         float getNoise(float x, float z) {
@@ -115,37 +69,23 @@ class NoiseGenerator {
             for(int x = 0 ; x < Chunk::CHUNK_SIZE ; x++) {
                 for(int z = 0 ; z < Chunk::CHUNK_SIZE ; z++) {
                     float noiseBiome = noise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
-                    Biome * biome = nullptr;
-                    noiseBiome = (noiseBiome + 1) / 2;
-                    //std::cout << noiseBiome << std::endl;
-                    if(noiseBiome < 0.35) {
-                        biome = &ocean;
-                        //std::cout << "Ocean" << std::endl;
-                    }
-                    else if(noiseBiome < 0.4) {
-                        //std::cout << "Desert" << std::endl;
-                        biome = &desert;
-                    } else if(noiseBiome < 0.45) {
-                        //std::cout << "DesertValley" << std::endl;
-                        biome = &desertValley;
-                    } else if(noiseBiome < 0.55) {
-                        biome = &grassLandValley;
-                    }  else if(noiseBiome < 0.8) {
-                        //std::cout << "GrassLandValley" << std::endl;
-                        
-                        biome = &grassLand;
-                    }
-                    
-                     else {
-                        biome = &highMountain;
-                        //std::cout << "High Mountain" << std::endl;
-
-                    }
-                    //biome = &highMountain;
-                    
+                    noiseBiome *= biomeNoise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
+                    float height = noiseBiome * 100 + 100;
                     for(int y = 0 ; y < Chunk::CHUNK_SIZE ; y++) {
+                        BLOCKID id = BLOCKID::Air;
+                        float yPos = y + chunk.getPosition().y * Chunk::CHUNK_SIZE;
+                        float caveNoises = caveNoise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, y + chunk.getPosition().y * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
+                        float climate = ClimateNoise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
+                        
+                        if(yPos > height || caveNoises < 0.) {
+                            //std::cout << yPos << " " << height << '\n';
+                            chunk.setBlock(x, y, z, ChunkBlock(id));
+                            continue;
+                        }
 
-                        BLOCKID id = biome -> getBlocks(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, y + chunk.getPosition().y * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
+                        
+                        id = BLOCKID::Stone;
+
                         if(y == 0 && chunk.getPosition().y == 0) {
                             id = BLOCKID::Bedrock;
                         }

@@ -35,11 +35,6 @@ D:\WorkSpace\Minecraft\Minecraft\Script\Physics\RigidBody.cpp;D:\WorkSpace\Minec
 D:\WorkSpace\Minecraft\Minecraft\Script\States\SceneState.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\SceneState.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\Maths\Ray.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\Ray.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Terrain.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\Terrain.obj
-D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\Biome.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\Biome.obj
-D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\Ocean.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\Ocean.obj
-D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\grassland.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\grassland.obj
-D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\highMountain.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\highMountain.obj
-D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome\Desert.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\Desert.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\Maths\Frustum.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\Frustum.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\Skybox.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\Skybox.obj
 D:\WorkSpace\Minecraft\Minecraft\Script\States\PlayingState.cpp;D:\WorkSpace\Minecraft\Minecraft\build\OPENGL.dir\Debug\PlayingState.obj
