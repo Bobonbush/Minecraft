@@ -24,8 +24,10 @@ void ChunkRenderer::render(const glm::mat4 & view, const glm::mat4 & projection)
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CW);
+    //glDisable(GL_CULL_FACE);
     glActiveTexture(GL_TEXTURE0);
     glEnable(GL_BLEND);
+    //glDisable(GL_BLEND);
     BlockDataBase::GetInstance() -> textureAtlas.bind();
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::scale(model, glm::vec3(Chunk::CHUNK_SCALE, Chunk::CHUNK_SCALE, Chunk::CHUNK_SCALE));

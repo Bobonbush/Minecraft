@@ -7,7 +7,7 @@
 class ChunkBlock {
     private:
         int id = 1;
-    
+        bool Opaque = false;
     public :
 
     ChunkBlock() = default;
@@ -22,6 +22,8 @@ class ChunkBlock {
     const BLOCKID getID() const {
         return (BLOCKID) id;
     }
+
+    bool isOpaque() const;
 };
 
 #endif // CHUNKBLOCK_H

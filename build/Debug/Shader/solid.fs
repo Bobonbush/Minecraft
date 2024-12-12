@@ -82,7 +82,7 @@ void main()
     FragColor = FragColor * vec4(result, 1.0);
     FragColor = mix(FragColor, fogColor, visibility);
     FragColor.a *= 1 - alpha;
-
+    
     if(FragColor.a < 0.1)
     {
         discard;

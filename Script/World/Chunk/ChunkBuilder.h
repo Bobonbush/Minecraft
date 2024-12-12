@@ -29,6 +29,8 @@ class ChunkBuilder {
         ChunkSection* pChunk = nullptr;
         ChunkMesh * pMesh = nullptr;
         const BlockDataHolder* pblockData = nullptr;
+
+        bool isOquaqe = false;
         std::vector<ChunkSection*> adj;
         void tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing);
         void tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const std::vector<GLfloat> & normals, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing);

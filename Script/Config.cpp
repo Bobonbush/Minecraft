@@ -14,6 +14,7 @@ void Config::SetVersion() {
     }
     srand(time(NULL));
     seed = rand();
+    seed = 15324;
     glfwMakeContextCurrent(window);
 }
 void Config::ChangeConfig() {

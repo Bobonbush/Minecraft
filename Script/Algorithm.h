@@ -156,6 +156,12 @@ class SPA {
         return rand() % max;
     }
 
+    static float BilinearInterpolation(float x, float y, float x1, float y1, float x2, float y2, float q11, float q12, float q21, float q22) {
+        float r1 = ((x2 - x) / (x2 - x1)) * q11 + ((x - x1) / (x2 - x1)) * q21;
+        float r2 = ((x2 - x) / (x2 - x1)) * q12 + ((x - x1) / (x2 - x1)) * q22;
+        return ((y2 - y) / (y2 - y1)) * r1 + ((y - y1) / (y2 - y1)) * r2;
+    }
+
 };
 
 

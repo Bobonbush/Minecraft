@@ -102,7 +102,7 @@ class NoiseGenerator {
                         surface = 50.f;
 
                         waterLevel_min = 35;
-                        waterLevel_max = 74;
+                        waterLevel_max = 76;
                     }
 
                     if(biome == Biomes::Biome::Grassland) {
@@ -111,7 +111,7 @@ class NoiseGenerator {
                         surface = 70.f;
 
                         waterLevel_min = 50;
-                        waterLevel_max = 74;
+                        waterLevel_max = 76;
                     }
 
                     if(biome == Biomes::Biome::Mountain) {
@@ -132,6 +132,8 @@ class NoiseGenerator {
                         HeightScale = 150.f;
                         probabilityofCave = 0.35f;
                     }
+
+                     int highest = noiseBiome * 3 + 1;
                     
 
                     noiseBiome *= HeightScale;
@@ -146,7 +148,7 @@ class NoiseGenerator {
                     
                     
                     
-                    int highest = SPA::RandomInt(3, 5);
+                   
                     float caveprobability = caveNoise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
                     caveprobability = (caveprobability + 1) / 2;
 
@@ -171,9 +173,10 @@ class NoiseGenerator {
                         }
 
                         if(yPos > height && biome != Biomes::Biome::Sea) {
-                            chunk.setBlock(x, y, z, ChunkBlock(id));
-                            continue;
+                            break;
                         }
+
+                        
 
                         if(biome == Biomes::Biome::Sea) {
                             if(yPos > waterLevel_max) {

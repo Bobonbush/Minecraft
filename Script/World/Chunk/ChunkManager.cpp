@@ -19,21 +19,9 @@ void ChunkManager::addChunk(int x,int y, int z) {
     }
 
     chunks.push_back(ChunkSection(glm::vec3(x, y, z)));
-    AdjacentChunks adj;
-    adj.update(chunks.back().getPosition());
-    if(!existsChunk(adj.down.x , adj.down.y , adj.down.z)) {
-        addMiseryChunk(adj.down.x, adj.down.y, adj.down.z);
-    }
 
-
-    if(existsChunk(adj.down.x , adj.down.y , adj.down.z)) {
-        noise.BuildChunk(chunks.back());
-    }else {
-
-        noise.BuildChunk(chunks.back());
-    }
+    noise.BuildChunk(chunks.back());
     Recover(chunks.back(), std::vector<ChunkSection*>());
-
 }
 
 

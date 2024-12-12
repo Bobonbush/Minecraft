@@ -3,7 +3,7 @@
 
 ChunkSection::ChunkSection(const glm::vec3 &position) : position(position) {
     for(int i = 0 ; i < Chunk::CHUNK_VOLUME ; i++) {
-        blocks[i] = ChunkBlock(BLOCKID::Stone);
+        blocks[i] = ChunkBlock(BLOCKID::Air);
     }
 }
 
