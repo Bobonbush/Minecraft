@@ -81,9 +81,9 @@ void main()
     vec3 result = lightCalculation(norm, lightDir, viewDir);
     FragColor = FragColor * vec4(result, 1.0);
     FragColor = mix(FragColor, fogColor, visibility);
-    FragColor.a = 1 - alpha;
+    FragColor.a *= 1 - alpha;
 
-    if(FragColor.a == 0)
+    if(FragColor.a < 0.1)
     {
         discard;
     }

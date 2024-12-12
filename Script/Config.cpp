@@ -7,15 +7,17 @@ void Config::SetVersion() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minorVersion);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     window = glfwCreateWindow(width, height, "Elden Craft", NULL, NULL);
-
+    
     if(!window) {
         std::cout << "Failed to create window" << std::endl;
         return;
     }
+    srand(time(NULL));
+    seed = rand();
     glfwMakeContextCurrent(window);
 }
 void Config::ChangeConfig() {
-
+    
     //glfwWindowHint(GLFW_SAMPLES, antialiasing);
     //glfwWindowHint(GLFW_DEPTH_BITS, depthBits);
     //glfwWindowHint(GLFW_STENCIL_BITS, stencilBits);

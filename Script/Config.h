@@ -15,6 +15,8 @@ class Config : public Singleton {
         int depthBits = 24;
         int stencilBits = 8;
 
+        int seed = 0;
+
         GLFWwindow * window;
         static Config * instance;
 
@@ -76,6 +78,10 @@ class Config : public Singleton {
         void SetMouseActive(bool active) {
             glfwSetInputMode(window, GLFW_CURSOR, !active ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
             HidingMouse = active;
+        }
+
+        const int GetSeed() const {
+            return seed;
         }
 
         

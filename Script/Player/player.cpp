@@ -19,6 +19,7 @@ void Player::update(float deltaTime) {
 
 void Player::FixedUpdate() {
     DYNAMIC_ENTITY::FixedUpdate();
+
     if(isOnGround()) {
         if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_SPACE) == GLFW_PRESS) {
             addForce(glm::vec3(0.f, JUMP_FORCE, 0.f));

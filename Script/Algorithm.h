@@ -151,6 +151,11 @@ class SPA {
             }
         }
     }
+
+    static int RandomInt(int max) {
+        return rand() % max;
+    }
+
 };
 
 
