@@ -299,7 +299,7 @@ ChunkBlock ChunkManager::getBlock(float x, float y, float z) {
     z -= chunkZ * Chunk::CHUNK_SIZE * Chunk::CHUNK_SCALE;
 
     if(x < 0 || y < 0 || z < 0 || x > 15 || y > 15 || z > 15) {
-        std::cout << "CLGT" << '\n';
+        //std::cout << "CLGT" << '\n';
         //return BLOCKID::Air;
     }
     

@@ -100,6 +100,7 @@ const std::vector<glm::vec3> Block::normals = {
 
 std::map<int , std::string> Block::blockMap;
 std::map<std::string , int > Block::blockMapReverse;
+std::map<int , float> Block::blockHardness;
 
 void Block::initBlockMap() {
     blockMap[static_cast<int>(BLOCKID::Air)] = "Air";
@@ -116,12 +117,23 @@ void Block::initBlockMap() {
     blockMap[static_cast<int>(BLOCKID::BlueOre)] = "BlueOre";
     blockMap[static_cast<int>(BLOCKID::CopperOre)] = "CopperOre";
     blockMap[static_cast<int>(BLOCKID::LaserOre)] = "LaserOre";
+
+    blockHardness[static_cast<int>(BLOCKID::Air)] = 0;
+    blockHardness[static_cast<int>(BLOCKID::Grass)] = 1.5;
+    blockHardness[static_cast<int>(BLOCKID::Dirt)] = 1.5;
+    blockHardness[static_cast<int>(BLOCKID::Stone)] = 3.f;
+    blockHardness[static_cast<int>(BLOCKID::Wood)] = 2.f;
     
 
 
     for(auto & block : blockMap) {
         blockMapReverse[block.second] = block.first;
     }
+}
+
+
+const float Block::GetBlockHardness(int id) {
+    return Block::blockHardness[id];
 }
 
 

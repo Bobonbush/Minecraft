@@ -6,6 +6,8 @@
 #include "Cursor.h"
 #include "Chunk/ChunkManager.h"
 #include "Renderer/hitbox.h"
+#include "Timer.h"
+#include "Renderer/AnimationBoxRenderer.h"
 
 class PlayingState : Singleton {
     private:
@@ -19,6 +21,12 @@ class PlayingState : Singleton {
         std::shared_ptr<Item> MouseHoldingItem;
  
         std::vector<DYNAMIC_ENTITY*> entities; 
+
+        std::unique_ptr<AnimationBox> breakingBox;
+
+        int BlockChoose = -1;
+
+        Timer timer;
 
         PlayingState();
         HitBox hitBox;
@@ -38,7 +46,7 @@ class PlayingState : Singleton {
 
         void EntityProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection);
         void PlayerProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection);
-        void ProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 &view, const glm::mat4 & projection);
+        void ProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 &view, const glm::mat4 & projection, const float &deltaTime);
 
         
 

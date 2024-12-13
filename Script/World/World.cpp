@@ -31,7 +31,7 @@ void World::Update(float deltaTime) {
     
     frustum -> update(view, projection);
     chunkManager.update(view , projection);
-    playingState -> ProcessState(*camera, chunkManager, view, projection);
+    playingState -> ProcessState(*camera, chunkManager, view, projection, deltaTime);
 
 
 }

@@ -10,6 +10,10 @@ class TextureAtlas : public TextureBind {
         TextureAtlas(const std::string &path);
         std::vector<GLfloat> getTexture(const glm::vec2& coords);
         void setIndividualTextureSize(const int & size);
+
+        float getSpaceBetween() const {
+            return 1.0f / (float)individualTextureSize;
+        }
 };
 
 #endif // TEXTUREATLAS_H

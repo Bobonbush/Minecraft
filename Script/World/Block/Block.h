@@ -24,8 +24,11 @@ class Block {
 
     static std::map<int , std::string> blockMap;
     static std::map<std::string , int > blockMapReverse;
+    static std::map<int , float> blockHardness;
 
     static void initBlockMap();
+
+    static const float GetBlockHardness(int id);
 
 };
 

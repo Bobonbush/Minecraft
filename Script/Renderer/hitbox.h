@@ -2,6 +2,8 @@
 #define HITBOX_H
 #include "Texture&Shader/ShaderManager.h"
 #include "Texture.h"
+#include "Texture&Shader/TextureAtlas.h"
+#include "Model.h"
 
 
 class HitBox {   // Just use to draw a hitbox
@@ -16,5 +18,6 @@ class HitBox {   // Just use to draw a hitbox
         
         void Draw(const glm::vec3 & position,const glm::vec3 & scale, const glm::mat4 & view, const glm::mat4 & projection );
 };
+
 
 #endif // HITBOX_H

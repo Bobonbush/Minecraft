@@ -1,6 +1,7 @@
 #include "ItemConst.h"
 
 std::map<int , ItemConst::Type> ItemConst::itemMap;
+std::map<int ,float> ItemConst::itemEfficiency;
 
 
 void ItemConst::initBlockMap() {
@@ -50,6 +51,24 @@ void ItemConst::initBlockMap() {
     itemMap[static_cast<int>(ItemID::Laser)] = Type::Mineral;
     itemMap[static_cast<int>(ItemID::Blue)] = Type::Mineral;
 
+    itemEfficiency[static_cast<int>(ItemID::Iron_Sword)] = 0.0f;
+    itemEfficiency[static_cast<int>(ItemID::Copper_Sword)] = 0.0f;
+    itemEfficiency[static_cast<int>(ItemID::Laser_Sword)] = 0.0f;
+    itemEfficiency[static_cast<int>(ItemID::Blue_Sword)] = 0.0f;
+
+    itemEfficiency[static_cast<int>(ItemID::Bow)] = 0.0f;
+    itemEfficiency[static_cast<int>(ItemID::Arrow)] = 0.0f;
+
+    itemEfficiency[static_cast<int>(ItemID::Iron_Pickage)] = 1.0f;
+    itemEfficiency[static_cast<int>(ItemID::Copper_Pickage)] = 2.0f;
+    itemEfficiency[static_cast<int>(ItemID::Laser_Pickage)] = 3.0f;
+    itemEfficiency[static_cast<int>(ItemID::Blue_Pickage)] = 4.0f;
+
+    itemEfficiency[static_cast<int>(ItemID::Iron_Axe)] = 1.0f;
+    itemEfficiency[static_cast<int>(ItemID::Copper_Axe)] = 2.0f;
+    itemEfficiency[static_cast<int>(ItemID::Laser_Axe)] = 3.0f;
+    itemEfficiency[static_cast<int>(ItemID::Blue_Axe)] = 4.0f;
+
 
 }
 
@@ -65,4 +84,8 @@ int ItemConst::getMaxStack( ItemID & id) {
     }
     return 64;
         
+}
+
+const float ItemConst::getItemEfficiency(const int &id) {
+    return itemEfficiency[id];
 }

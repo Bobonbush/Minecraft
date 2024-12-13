@@ -69,10 +69,12 @@ class ItemConst {
             Tool = 5
         };
         static std::map<int , Type> itemMap;
+        static std::map<int , float> itemEfficiency;   // Default Item = 0
 
         static void initBlockMap();
 
         static int getMaxStack( ItemID & id);
+        static const float getItemEfficiency(const int &id);
 };
 
 

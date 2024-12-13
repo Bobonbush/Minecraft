@@ -11,14 +11,20 @@ PlayingState::PlayingState() {
     cursor = Cursor::GetInstance();
     entities.push_back(player);
     glfwSetKeyCallback(glfwGetCurrentContext(), key_callback);
+
+    breakingBox = std::make_unique<AnimationBox>(4, "Assets/breaking.png", 16);
 }
 
 PlayingState::~PlayingState() {
     delete m_instance;
 }
 
-void PlayingState::ProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
+void PlayingState::ProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection, const float &deltaTime) {
     MouseProcess(camera, chunkManager, view, projection);
+    if(BlockChoose != -1) {
+        timer.Update(deltaTime);
+    }
+
 }
 
 void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
@@ -75,10 +81,37 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
 
     if(exists == false) return ;
 
-    if(input == Cursor::MOUSE_EVENT::LEFT_CLICK) {
+    if(input == Cursor::MOUSE_EVENT::LEFT_CLICK || input == Cursor::MOUSE_EVENT::LEFT_HOLD) {
         ChunkBlock block = chunkManager.getBlock(blockPosition.x, blockPosition.y, blockPosition.z);
-        chunkManager.removeBlock(blockPosition.x, blockPosition.y, blockPosition.z);
-        player -> addBlockItem(block.getID(), 1);
+        
+        std::shared_ptr<Item> item = player -> getCurrentItem();
+        
+        
+        int id = -1;
+        if(item != nullptr) {
+            id = item -> getID();
+        }
+
+        if( (int) block.getID() == BlockChoose && timer.isFinished() && id == timer.getInUse() && blockPosition == timer.getBlockPosition()) {
+            
+            chunkManager.removeBlock(blockPosition.x, blockPosition.y, blockPosition.z);
+            player -> addBlockItem(block.getID(), 1);
+            
+        }else if( (int) block.getID() != BlockChoose || id != timer.getInUse() || blockPosition != timer.getBlockPosition()) {
+            BlockChoose = (int) block.getID();
+            
+            timer = Timer(Block::GetBlockHardness(BlockChoose), ItemConst::getItemEfficiency(id));
+            if(item == nullptr) {
+                timer.setInUse(-1);
+            }else timer.setInUse((int)item->getID());
+            timer.setBlockPosition(blockPosition);
+        }else {
+            breakingBox -> Render(blockPosition, glm::vec3(1.f), timer.getCurrentTime(), timer.getMaxTime(), view, projection);
+        }
+        
+    } else {
+        BlockChoose = -1;
+        timer.Reset();
     }
 
     if(input == Cursor::MOUSE_EVENT::RIGHT_CLICK) {

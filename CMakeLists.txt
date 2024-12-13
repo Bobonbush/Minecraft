@@ -98,6 +98,8 @@ add_executable(OPENGL Script/main.cpp
                       Script/Item/ItemDataBase.cpp
                       Script/Player/Crafting/recipe.cpp
                       Script/World/WorldGenerator/Biome.cpp
+                      Script/States/timer.cpp
+                      Script/Renderer/AnimationBoxRenderer.cpp
                       
 )
         
