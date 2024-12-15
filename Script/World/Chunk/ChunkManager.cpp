@@ -210,7 +210,7 @@ bool ChunkManager::existsBlock(float x ,float y ,float z) {
     //x -= negX;
     //y -= negY;
     //z -= negZ;
-    return chunk.getBlock(x, y, z).getID() != BLOCKID::Air;
+    return chunk.getBlock(x, y, z).getID() != BLOCKID::Air && chunk.getBlock(x, y, z).getID() != BLOCKID::Water;
 }
 
 void ChunkManager::removeBlock(float x, float y, float z) {

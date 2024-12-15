@@ -117,18 +117,51 @@ void Block::initBlockMap() {
     blockMap[static_cast<int>(BLOCKID::BlueOre)] = "BlueOre";
     blockMap[static_cast<int>(BLOCKID::CopperOre)] = "CopperOre";
     blockMap[static_cast<int>(BLOCKID::LaserOre)] = "LaserOre";
+    blockMap[static_cast<int>(BLOCKID::CoalOre)] = "CoalOre";
+    blockMap[static_cast<int>(BLOCKID::SpecialWood)] = "SpecialWood";
+    blockMap[static_cast<int>(BLOCKID::SpecialLeaf)] = "SpecialLeaf";
+    blockMap[static_cast<int>(BLOCKID::Cactus)] = "Cactus";
+    blockMap[static_cast<int>(BLOCKID::TNT)] = "TNT";
 
-    blockHardness[static_cast<int>(BLOCKID::Air)] = 0;
-    blockHardness[static_cast<int>(BLOCKID::Grass)] = 1.5;
-    blockHardness[static_cast<int>(BLOCKID::Dirt)] = 1.5;
-    blockHardness[static_cast<int>(BLOCKID::Stone)] = 3.f;
-    blockHardness[static_cast<int>(BLOCKID::Wood)] = 2.f;
+    blockMap[static_cast<int>(BLOCKID::Coal_Block)] = "Coal Block";
+    blockMap[static_cast<int>(BLOCKID::Copper_Block)] = "Copper Block";
+    blockMap[static_cast<int>(BLOCKID::Laser_Block)] = "Laser Block";
+    blockMap[static_cast<int>(BLOCKID::Blue_Block)] = "Blue Block";
+
     
 
 
     for(auto & block : blockMap) {
         blockMapReverse[block.second] = block.first;
     }
+
+    initBlockHardness();
+}
+void Block::initBlockHardness() {
+
+    blockHardness[static_cast<int>(BLOCKID::Air)] = 0;
+    blockHardness[static_cast<int>(BLOCKID::Grass)] = 1.;
+    blockHardness[static_cast<int>(BLOCKID::Dirt)] = 1.;
+    blockHardness[static_cast<int>(BLOCKID::Stone)] = 3.f;
+    blockHardness[static_cast<int>(BLOCKID::Wood)] = 2.f;
+    blockHardness[static_cast<int>(BLOCKID::CraftingTable)] = 2.f;
+    blockHardness[static_cast<int>(BLOCKID::Water)] = 0.f;
+    blockHardness[static_cast<int>(BLOCKID::Sand)] = 1.5;
+    blockHardness[static_cast<int>(BLOCKID::Bedrock)] = 1000000.f;
+    blockHardness[static_cast<int>(BLOCKID::Leaf)] = 0.5;
+    blockHardness[static_cast<int>(BLOCKID::TearWood)] = 2.f;
+    blockHardness[static_cast<int>(BLOCKID::BlueOre)] = 15.f;
+    blockHardness[static_cast<int>(BLOCKID::CopperOre)] = 5.f;
+    blockHardness[static_cast<int>(BLOCKID::LaserOre)] = 10.f;
+    blockHardness[static_cast<int>(BLOCKID::CoalOre)] = 3.f;
+    blockHardness[static_cast<int>(BLOCKID::SpecialWood)] = 15.f;
+    blockHardness[static_cast<int>(BLOCKID::SpecialLeaf)] = 15.5;
+    blockHardness[static_cast<int>(BLOCKID::Cactus)] = 1.5;
+    blockHardness[static_cast<int>(BLOCKID::TNT)] = 0.f;
+    blockHardness[static_cast<int>(BLOCKID::Coal_Block)] = 3.f;
+    blockHardness[static_cast<int>(BLOCKID::Copper_Block)] = 5.f;
+    blockHardness[static_cast<int>(BLOCKID::Laser_Block)] = 10.f;
+    blockHardness[static_cast<int>(BLOCKID::Blue_Block)] = 15.f;
 }
 
 

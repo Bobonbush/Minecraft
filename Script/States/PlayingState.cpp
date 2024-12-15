@@ -95,15 +95,24 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
         if( (int) block.getID() == BlockChoose && timer.isFinished() && id == timer.getInUse() && blockPosition == timer.getBlockPosition()) {
             
             chunkManager.removeBlock(blockPosition.x, blockPosition.y, blockPosition.z);
-            player -> addBlockItem(block.getID(), 1);
-            
+            if(ItemConst::validTool( (int)block.getID(), id)) {
+                int itemID = ItemConst::getItemDrop((int)block.getID());
+                player -> addItem(itemID, 1);
+            }
         }else if( (int) block.getID() != BlockChoose || id != timer.getInUse() || blockPosition != timer.getBlockPosition()) {
             BlockChoose = (int) block.getID();
+
+            float efficiency = ItemConst::getItemEfficiency(id);
+
+            if(!ItemConst::validEfficiency(id, (int)block.getID())) {
+               efficiency = 0.f;
+            }
             
-            timer = Timer(Block::GetBlockHardness(BlockChoose), ItemConst::getItemEfficiency(id));
+            timer = Timer(Block::GetBlockHardness(BlockChoose), efficiency);
             if(item == nullptr) {
                 timer.setInUse(-1);
             }else timer.setInUse((int)item->getID());
+
             timer.setBlockPosition(blockPosition);
         }else {
             breakingBox -> Render(blockPosition, glm::vec3(1.f), timer.getCurrentTime(), timer.getMaxTime(), view, projection);

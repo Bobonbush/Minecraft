@@ -83,16 +83,15 @@ add_executable(OPENGL Script/main.cpp
                       Script/Renderer/Skybox.cpp
                       Script/States/PlayingState.cpp
                       Script/States/Cursor.cpp
-                      Script/Player/Inventory.cpp
+                      Script/Player/Inventory/Inventory.cpp
                       Script/Renderer/hitbox.cpp
                       Script/Renderer/SpriteRenderer.cpp
-                      Script/Player/Inventory.cpp
-                      Script/Player/InteractiveBox.cpp
+                      Script/Player/Inventory/InteractiveBox.cpp
                       Script/Texture&Shader/TextureManager.cpp
                       Script/Texture&Shader/SoundEngine.cpp
                       Script/Item/Item.cpp
-                      Script/Player/InventoryManager.cpp
-                      Script/Player/InventorySection.cpp
+                      Script/Player/Inventory/InventoryManager.cpp
+                      Script/Player/Inventory/InventorySection.cpp
                       Script/Item/ItemConst.cpp
                       Script/Item/ItemData.cpp
                       Script/Item/ItemDataBase.cpp

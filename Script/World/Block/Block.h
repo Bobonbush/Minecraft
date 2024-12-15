@@ -27,6 +27,7 @@ class Block {
     static std::map<int , float> blockHardness;
 
     static void initBlockMap();
+    static void initBlockHardness();
 
     static const float GetBlockHardness(int id);
 
@@ -45,9 +46,19 @@ enum class BLOCKID : int {
     Bedrock = 8,
     Leaf = 9,
     TearWood = 10,
-    BlueOre = 11,
+    CoalOre = 11,
     CopperOre = 12,
     LaserOre = 13,
+    BlueOre = 14,
+    SpecialWood = 15,
+    SpecialLeaf = 16,
+    Cactus = 17,
+    TNT = 18,
+    Coal_Block = 19,
+    Copper_Block = 20,
+    Laser_Block = 21,
+    Blue_Block = 22,
+    
     TOTAL,
 };
 

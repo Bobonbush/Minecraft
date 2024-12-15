@@ -49,7 +49,10 @@ ItemDataBase::ItemDataBase() : textureAtlas("Assets/items/items.png"), MineralAt
     items[(unsigned) ItemID::Copper - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Copper");
     items[(unsigned) ItemID::Laser - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Laser");
     items[(unsigned) ItemID::Blue - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Blue");
-
+    items[(unsigned) ItemID::Coal - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Coal");
+    
+    items[(unsigned) ItemID::Apple - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Apple");
+    items[(unsigned) ItemID::GoldenApple - (unsigned) BLOCKID::TOTAL] = std::make_unique<ItemData>("Golden Apple");
     initItemMap();
 }
 
@@ -99,6 +102,10 @@ void ItemDataBase::initItemMap() {
     itemMap[ItemID::Copper] = "Copper";
     itemMap[ItemID::Laser] = "Laser";
     itemMap[ItemID::Blue] = "Blue";
+    itemMap[ItemID::Coal] = "Coal";
+
+    itemMap[ItemID::Apple] = "Apple";
+    itemMap[ItemID::GoldenApple] = "Golden Apple";
 
 
     for(auto & item : itemMap) {

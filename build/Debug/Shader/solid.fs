@@ -4,7 +4,7 @@ out vec4 FragColor;
 float fog_density = 0.02;
 float gradient = 2.;
 
-vec4 fogColor = vec4( 0.5 ,  0.5 ,  0.7  , 1.0);
+vec4 fogColor = vec4( 0.01 ,  0.01 ,  0.1  , 1.0);
 
 in vec2 TexCoord;
 uniform sampler2D samplerTexture;
@@ -14,7 +14,7 @@ in vec3 Normal;
 
 uniform vec3 lightPos;
 uniform vec3 viewPos;
-uniform vec3 lightColor = vec3(0.9 ,  0.9 ,  0.9);
+uniform vec3 lightColor = vec3(0.6,  0.3 ,  0.8);
 
 float ambientStrength = 0.5;
 float specularStrength = 0.5;

@@ -51,6 +51,10 @@ enum class ItemID : int {
     Copper,
     Laser,
     Blue,
+    Coal,
+
+    Apple,
+    GoldenApple,
     
     TOTAL,
 };
@@ -66,15 +70,30 @@ class ItemConst {
             Armor = 2,
             Consumable = 3,
             Mineral = 4,
-            Tool = 5
+            Tool = 5,
+            Food = 6,
         };
         static std::map<int , Type> itemMap;
         static std::map<int , float> itemEfficiency;   // Default Item = 0
-
+        static std::map<int ,int> ItemDrop;
+        static std::map<int , glm::vec2> RequiredTool;
+        
         static void initBlockMap();
+        static void initRequiredTool();
+        static void initItemDropMap();
+
+        const static  bool validTool(const int & blockID, const int & itemID);
+
+
+        const static  glm::vec2 getRequiredTool(const int & ID);
+        const static  int getItemDrop(const int & ID);
+
+
 
         static int getMaxStack( ItemID & id);
         static const float getItemEfficiency(const int &id);
+
+        static const bool validEfficiency(const int & id, const  int& blockID);
 };
 
 

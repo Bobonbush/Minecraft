@@ -17,6 +17,16 @@ BlockDataBase::BlockDataBase() : textureAtlas("Assets/Default pack.png") {
     blocks[(unsigned) BLOCKID::BlueOre] = std::make_unique<DefaultBlock>("BlueOre");
     blocks[(unsigned) BLOCKID::CopperOre] = std::make_unique<DefaultBlock>("CopperOre");
     blocks[(unsigned) BLOCKID::LaserOre] = std::make_unique<DefaultBlock>("LaserOre");
+    blocks[(unsigned) BLOCKID::CoalOre] = std::make_unique<DefaultBlock>("CoalOre");
+    blocks[(unsigned) BLOCKID::SpecialLeaf] = std::make_unique<DefaultBlock>("SpecialLeaf");
+    blocks[(unsigned) BLOCKID::SpecialWood] = std::make_unique<DefaultBlock>("SpecialWood");
+    blocks[(unsigned) BLOCKID::Cactus] = std::make_unique<DefaultBlock>("Cactus");
+    blocks[(unsigned) BLOCKID::TNT] = std::make_unique<DefaultBlock>("TNT");
+
+    blocks[(unsigned) BLOCKID::Coal_Block] = std::make_unique<DefaultBlock>("Coal Block");
+    blocks[(unsigned) BLOCKID::Copper_Block] = std::make_unique<DefaultBlock>("Copper Block");
+    blocks[(unsigned) BLOCKID::Laser_Block] = std::make_unique<DefaultBlock>("Laser Block");
+    blocks[(unsigned) BLOCKID::Blue_Block] = std::make_unique<DefaultBlock>("Blue Block");    
 }
 
 

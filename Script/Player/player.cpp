@@ -9,12 +9,15 @@ Player::Player() : DYNAMIC_ENTITY(glm::vec3(0.5f , 1.7f, 0.5f)) {
     mass = 10.f;
     inventory = std::make_unique<InventoryManager>();
     currentItem = nullptr;
+    SunBox = std::make_shared<AnimationBox>(1, "Assets/Sun.png", 16);
+
 }
 
 void Player::update(float deltaTime) {
     DYNAMIC_ENTITY::update(deltaTime);
     inventory -> update();
     currentItem = inventory -> getCurrentItem();
+    
 }
 
 void Player::FixedUpdate() {
@@ -27,8 +30,13 @@ void Player::FixedUpdate() {
     }
 }
 
-void Player::Render() {
+void Player::Render(const glm::mat4 & view, const glm::mat4 & projection) {
     inventory -> Render();
+    glm::vec3 sunPosition = glm::vec3(position.x, position.y +  150.f, position.z);
+    SunBox -> Render(sunPosition, glm::vec3(15.f), 0.f, 0.f, view, projection);
+
+    ShaderManager::GetInstance() -> getShader("solid") -> setVec3("lightPosition", glm::vec3(sunPosition));
+    
     if(currentItem == nullptr) {
         
         return ;
@@ -45,5 +53,19 @@ void Player::InventoryUpdate(const float & xpos, const float & ypos, const int &
     if(input == Cursor::MOUSE_EVENT::RIGHT_CLICK) {
         inventory -> PlaceOneItem();
     }
+}
+
+
+void Player::RemoveItem(std::shared_ptr<Item> item) {
+    inventory -> RemoveItem(item);
+}
+
+void Player::addItem(int id, int number)  {
+    if(id == -1) return ;
+    inventory -> addItem((int) id, number);
+}
+
+std::shared_ptr<Item> Player::getCurrentItem() {
+    return inventory -> getCurrentItem();
 }
 

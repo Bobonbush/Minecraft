@@ -16,6 +16,7 @@ class ChunkSection {
 
     public :
         ChunkMesh mesh;
+        ChunkMesh waterMesh;
 
         ChunkSection(const glm::vec3& position);
         ChunkSection() = default;

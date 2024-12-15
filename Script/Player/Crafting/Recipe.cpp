@@ -48,6 +48,7 @@ void Recipe::Convert() {
                 else {
                     matrix[i][j] = 0;
                 }
+
             }
         }
 
@@ -62,9 +63,12 @@ void Recipe::Convert() {
 
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
+                
                 matrix[i][j] = temp[i][j];
             }
+        
         }
+
 
         
 
@@ -95,6 +99,8 @@ CraftingRecipeDataBase::CraftingRecipeDataBase() {
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Crafting Table"));
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Sticks"));
 
+    
+
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Iron Sword"));
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper Sword"));
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser Sword"));
@@ -109,6 +115,43 @@ CraftingRecipeDataBase::CraftingRecipeDataBase() {
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper Axe"));
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser Axe"));
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Blue Axe"));
+
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Iron Helmet"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser Helmet"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper Helmet"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Blue Helmet"));
+
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Iron Chestplate"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser Chestplate"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper Chestplate"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Blue Chestplate"));
+
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Iron Leggings"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser Leggings"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper Leggings"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Blue Leggings"));
+
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Iron Boots"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser Boots"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper Boots"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Blue Boots"));
+    
+    
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Coal Block"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper Block"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser Block"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Blue Block"));
+
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "TNT"));
+    
+
+    
+
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Blue"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Coal"));
+    
 }
 
 CraftingRecipeDataBase::~CraftingRecipeDataBase() {

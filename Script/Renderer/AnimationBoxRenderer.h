@@ -22,7 +22,6 @@ class AnimationBox {
 
         
         void Render(const glm::vec3 & position, const glm::vec3 & scale, const float currentTime, const float maxTime, const glm::mat4 & view, const glm::mat4 & projection);
-
 };
 
 #endif // ANIMATIONBOXRENDERER_H

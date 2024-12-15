@@ -78,6 +78,58 @@
         "topX" : 13, "topY" : 0,
         "sideX" : 13, "sideY" : 0,
         "bottomX" : 13, "bottomY" : 0
+    },
+
+    "CoalOre" : {
+        "topX" : 15, "topY" : 0,
+        "sideX" : 15, "sideY" : 0,
+        "bottomX" : 15, "bottomY" : 0
+    },
+    "SpecialWood" : {
+        "topX" : 0, "topY" : 1,
+        "sideX" : 0, "sideY" : 1,
+        "bottomX" : 0, "bottomY" : 1
+    },
+
+    "SpecialLeaf" : {
+        "topX" : 1, "topY" : 1,
+        "sideX" : 1, "sideY" : 1,
+        "bottomX" : 1, "bottomY" : 1
+    },
+    "Cactus" : {
+        "topX" : 3, "topY" : 1,
+        "sideX" : 2, "sideY" : 1,
+        "bottomX" : 3, "bottomY" : 1
+    },
+
+    "TNT" : {
+        "topX" : 5, "topY" : 1,
+        "sideX" : 4, "sideY" : 1,
+        "bottomX" : 4, "bottomY" : 1
+    },
+
+    "Blue Block" : {
+        "topX" : 6, "topY" : 1,
+        "sideX" : 6, "sideY" : 1,
+        "bottomX" : 6, "bottomY" : 1
+    },
+
+    "Laser Block" : {
+        "topX" : 7, "topY" : 1,
+        "sideX" : 7, "sideY" : 1,
+        "bottomX" : 7, "bottomY" : 1
+    },
+
+    "Copper Block" : {
+        "topX" : 8, "topY" : 1,
+        "sideX" : 8, "sideY" : 1,
+        "bottomX" : 8, "bottomY" : 1
+    },
+
+    "Coal Block" : {
+        "topX" : 9, "topY" : 1,
+        "sideX" : 9, "sideY" : 1,
+        "bottomX" : 9, "bottomY" : 1
     }
 }
 

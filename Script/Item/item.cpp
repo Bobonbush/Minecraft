@@ -108,7 +108,7 @@ void SpriteItem::Render() {
     quadRenderer -> LoadData(coords);
     quadRenderer -> add(position);
 
-    glm::vec3 size = glm::vec3(0.055f);
+    glm::vec3 size = glm::vec3(0.075f);
     size.y *= Config:: GetInstance() -> GetAspectRatio();
 
     quadRenderer -> renderQuads(glm::mat4(1.0f), glm::mat4(1.0f), size);

@@ -22,14 +22,11 @@ void ChunkBuilder::BuildMesh(ChunkMesh & mesh) {
                     continue;
                 }
                 isOquaqe = false;
-                if(block == BLOCKID::Water) {
-                    isOquaqe = true;
-                    
-                }
 
                 pblockData = &block.getData().getBlockData();
                 auto &data = *pblockData;
                 directions.update(x, y, z);
+
                 tryAddFaceToMesh(Block::Front, Block::frontNormal, data.sideCoords, position, directions.front);
                 tryAddFaceToMesh(Block::Top, Block::upNormal, data.topCoords, position, directions.up);
                 
@@ -87,10 +84,7 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
         for(auto & chunk : adj) {
             if(chunk -> getPosition().x == pChunk->getPosition().x - 1) {
 
-                if(isOquaqe && chunk -> getBlock(Chunk::CHUNK_SIZE-1 , y , z) == BLOCKID::Water) {
-                    return false;
-                }
-                if(chunk -> getBlock(Chunk::CHUNK_SIZE - 1, y, z) != BLOCKID::Air && (chunk -> getBlock(Chunk::CHUNK_SIZE - 1, y, z) != BLOCKID::Water)) {
+                if(chunk -> getBlock(Chunk::CHUNK_SIZE - 1, y, z) != BLOCKID::Air) {
                     return false;
                 }
 
@@ -104,12 +98,8 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
         for(auto & chunk : adj) {
             
             if(chunk -> getPosition().x == pChunk->getPosition().x + 1 ) {
-                if(chunk->getBlock(0,y,z) == BLOCKID::Water && isOquaqe ) {
-                    return false;
-
-                }
                 
-                if(chunk -> getBlock(0, y, z) != BLOCKID::Air && chunk -> getBlock(0, y, z) != BLOCKID::Water) {
+                if(chunk -> getBlock(0, y, z) != BLOCKID::Air) {
                     return false;
                 }
 
@@ -122,7 +112,7 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
     if(y < 0) {
         for(auto & chunk : adj) {
             if(chunk -> getPosition().y == pChunk->getPosition().y - 1) {
-                if(chunk -> getBlock(x, Chunk::CHUNK_SIZE -1, z) != BLOCKID::Air && chunk -> getBlock(x, Chunk::CHUNK_SIZE -1, z) != BLOCKID::Water) {
+                if(chunk -> getBlock(x, Chunk::CHUNK_SIZE -1, z) != BLOCKID::Air) {
                     return false;
                 }
             }
@@ -133,7 +123,7 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
     if(y >= Chunk::CHUNK_SIZE) {
         for(auto & chunk : adj) {
             if(chunk -> getPosition().y == pChunk->getPosition().y + 1) {
-                if(chunk -> getBlock(x,  0 , z) != BLOCKID::Air && chunk -> getBlock(x,  0 , z) != BLOCKID::Water) {
+                if(chunk -> getBlock(x,  0 , z) != BLOCKID::Air) {
                     return false;
                 }
 
@@ -148,15 +138,10 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
             
             
             if(chunk -> getPosition().z == pChunk->getPosition().z - 1) {
-                if(chunk -> getBlock(x, y,  Chunk::CHUNK_SIZE-1) == BLOCKID::Water && isOquaqe) {
-                    
-                    return false;
-                }
                 
-                if(chunk -> getBlock(x, y,  Chunk::CHUNK_SIZE-1) != BLOCKID::Air && chunk -> getBlock(x, y,  Chunk::CHUNK_SIZE-1) != BLOCKID::Water) {
+                if(chunk -> getBlock(x, y,  Chunk::CHUNK_SIZE-1) != BLOCKID::Air) {
                     return false;
                 }
-
                 
             }
         }
@@ -166,11 +151,7 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
     if(z >= Chunk::CHUNK_SIZE) {
         for(auto & chunk : adj) {
             if(chunk->getPosition().z == pChunk->getPosition().z + 1) {
-                if(chunk -> getBlock(x, y,  0) == BLOCKID::Water && isOquaqe) {
-                    return false;
-                }
-                if(chunk -> getBlock(x, y,  0) != BLOCKID::Air && chunk -> getBlock(x, y,  0) != BLOCKID::Water) {
-                    
+                if(chunk -> getBlock(x, y,  0) != BLOCKID::Air ) {
                     return false;
                 }
                 

@@ -3,8 +3,9 @@
 #include "Entity.h"
 #include "Singleton.h"
 #include "Texture&Shader/ShaderManager.h"
-#include "InventoryManager.h"
+#include "Inventory/InventoryManager.h"
 #include "States/Cursor.h"
+#include "Renderer/AnimationBoxRenderer.h"
 
 class Player : public DYNAMIC_ENTITY, Singleton {
     private:
@@ -12,6 +13,8 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         const float JUMP_FORCE = 1.35f;
         std::unique_ptr<InventoryManager> inventory;
         std::shared_ptr<Item> currentItem;
+
+        std::shared_ptr<AnimationBox> SunBox;
         Player();
 
         bool openingInventory = false;
@@ -31,24 +34,20 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         
         void update(float deltaTime) ;
         void FixedUpdate() ;
-        void Render() ;
+        void Render(const glm::mat4 & view, const glm::mat4 & projection) ;
         void InventoryUpdate(const float & xpos, const float & ypos, const int & input);
 
-        std::shared_ptr<Item> getCurrentItem() {
-            return inventory -> getCurrentItem();
-        }
-
+        std::shared_ptr<Item> getCurrentItem();
+        
+        /*
         std::shared_ptr<Item> getCursorItem() {
             return inventory -> getCurrentItem();
         }
+        */
 
-        void RemoveItem(std::shared_ptr<Item> item) {
-            inventory -> RemoveItem(item);
-        }
+        void RemoveItem(std::shared_ptr<Item> item);
 
-        void addBlockItem(BLOCKID id, int number) {
-            inventory -> addItem((int) id, number);
-        }
+        void addItem(int id, int number);
 
         void openInventory() {
             openingInventory ^= 1;

@@ -16,7 +16,7 @@ World::World() : StateBase() {
 void World::render() {
     chunkManager.renderChunks(view, projection);
     cursor -> Draw( config -> GetWidth() / 2, config -> GetHeight() / 2);
-    player -> Render();
+    player -> Render(view , projection);
 }
 
 void World::Update(float deltaTime) {

@@ -7,7 +7,7 @@
 #include "Renderer/QuadRenderer.h"
 #include "Renderer/SpriteRenderer.h"
 #include "Config.h"
-#include "Player/Inventory.h"
+#include "Player/Inventory/Inventory.h"
 #include "itemDataBase.h"
 
 class Item {
