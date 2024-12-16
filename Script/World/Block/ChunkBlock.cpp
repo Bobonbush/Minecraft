@@ -1,8 +1,12 @@
 #include "ChunkBlock.h"
 
 ChunkBlock::ChunkBlock(BLOCKID id) : id((int) id) {
-    if(id == BLOCKID::Air || id == BLOCKID::Water) {
+    if(id == BLOCKID::Air || id == BLOCKID::Water || id == BLOCKID::SpecialLeaf || id == BLOCKID::Leaf) {
         Opaque = true;
+    }
+
+    if(id == BLOCKID::Water) {
+        Water = true;
     }
 }
 

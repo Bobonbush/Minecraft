@@ -28,19 +28,23 @@ class ChunkBuilder {
     private:
         ChunkSection* pChunk = nullptr;
         ChunkMesh * pMesh = nullptr;
+        ChunkMesh * pWaterMesh = nullptr;
         const BlockDataHolder* pblockData = nullptr;
 
         bool isOquaqe = false;
         std::vector<ChunkSection*> adj;
         void tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing);
-        void tryAddFaceToMesh(const std::vector<GLfloat> & vertices, const std::vector<GLfloat> & normals, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing);
+        void tryAddFaceToMesh(ChunkMesh * cMesh, const std::vector<GLfloat> & vertices, const std::vector<GLfloat> & normals, const glm::vec2 & texCoords, const glm::vec3 Blockposition,  const glm::vec3 & facing);
+        
         bool shouldMakeFace(const glm::vec3 position, const BlockDataHolder & blockData);
+        void BuildOquaques(int x ,int y ,int z);
     
     public :
         int faceCount = 0;
         
         ChunkBuilder(ChunkSection &chunk, const std::vector<ChunkSection*> & adjChunks);
-        void BuildMesh(ChunkMesh & mesh); 
+        void BuildMesh(ChunkMesh & mesh, ChunkMesh & waterMesh); 
+        
         ~ChunkBuilder();
     
 };

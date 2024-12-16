@@ -13,7 +13,7 @@ class RenderMaster {
         RenderMaster();
         void drawQuads(const glm::vec3 & pos);
         void drawCubes(const glm::vec3 & pos);
-        void drawChunk(const ChunkMesh & mesh);
+        void drawChunk(const ChunkMesh & mesh, const ChunkMesh & waterMesh);
 
         void finishRender(const glm::mat4 & view, const glm::mat4 & projection);
     private:

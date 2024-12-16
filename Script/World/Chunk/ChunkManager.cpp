@@ -76,8 +76,9 @@ void ChunkManager::Recover(ChunkSection & chunk , std::vector<ChunkSection*> & a
     
     
     ChunkBuilder builder(chunk, AdjChunks);
-    builder.BuildMesh(chunk.mesh);
+    builder.BuildMesh(chunk.mesh, chunk.waterMesh);
     chunk.mesh.bufferMesh();
+    chunk.waterMesh.bufferMesh();
 }
 
 
@@ -99,7 +100,7 @@ void ChunkManager::renderChunks(const glm::mat4 &view, const glm::mat4 &projecti
         }
 
         
-        renderMaster.drawChunk(chunk.mesh);
+        renderMaster.drawChunk(chunk.mesh, chunk.waterMesh);
     }
 
 

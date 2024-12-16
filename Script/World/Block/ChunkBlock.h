@@ -8,6 +8,7 @@ class ChunkBlock {
     private:
         int id = 1;
         bool Opaque = false;
+        bool Water = false;
     public :
 
     ChunkBlock() = default;
@@ -24,6 +25,9 @@ class ChunkBlock {
     }
 
     bool isOpaque() const;
+    bool isLiquid() const {
+        return Water;
+    }
 };
 
 #endif // CHUNKBLOCK_H

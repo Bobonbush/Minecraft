@@ -6,8 +6,8 @@ RenderMaster::RenderMaster() {
     skybox = std::make_unique<SkyBox>();
 }
 
-void RenderMaster::drawChunk(const ChunkMesh & mesh) {
-    chunkRenderer -> add(mesh);
+void RenderMaster::drawChunk(const ChunkMesh & mesh, const ChunkMesh & waterMesh) {
+    chunkRenderer -> add(mesh, waterMesh);
 }
 void RenderMaster::drawQuads(const glm::vec3 & pos) {
 }
