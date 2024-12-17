@@ -69,8 +69,8 @@ void main()
         discard;
     }
 
-    float visibility = getFogFactor(dist, 160.0);
-    float alpha = getFogFactorAlpha(dist, 0.1, 160.0);
+    float visibility = getFogFactor(dist, 192.0);
+    float alpha = getFogFactorAlpha(dist, 0.1, 192.0);
     
     
     

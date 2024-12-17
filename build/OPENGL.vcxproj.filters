@@ -1,201 +1,201 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\main.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\GLAD\src\glad.c">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\GLAD\src\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Utils\shader.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Utils\Texture.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Model.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Mesh.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Application.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Physics\AABB.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Physics\AABB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Entity.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\RenderMaster.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\RenderMaster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Utils\Camera.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Config.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Utils\File.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\File.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\TextureBind.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Texture&amp;Shader\TextureBind.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\QuadRenderer.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\QuadRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\ShaderManager.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Texture&amp;Shader\ShaderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\player.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Player\player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\TextureAtlas.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Texture&amp;Shader\TextureAtlas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\CubeRenderer.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\CubeRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\Block\BlockDataBase.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Block\BlockDataBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\Block\BlockData.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Block\BlockData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\Block\Block.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Block\Block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\Block\BlockType.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Block\BlockType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\Block\ChunkBlock.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Block\ChunkBlock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\Chunk\ChunkBuilder.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\Chunk\ChunkMesh.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\Chunk\Chunk.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\Chunk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\Chunk\ChunkSection.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\ChunkRenderer.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\ChunkRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Maths\FastNoise.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Maths\FastNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\World.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\Chunk\ChunkManager.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\Chunk\ChunkManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Physics\PhysicCons.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Physics\PhysicCons.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Physics\RigidBody.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Physics\RigidBody.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\States\SceneState.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\SceneState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Maths\Ray.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Maths\Ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\WorldGenerator\Terrain.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Terrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Maths\Frustum.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Maths\Frustum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\Skybox.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\Skybox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\States\PlayingState.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\PlayingState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\States\Cursor.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\Cursor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\Inventory\Inventory.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Player\Inventory\Inventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\hitbox.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\hitbox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\SpriteRenderer.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\SpriteRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\Inventory\InteractiveBox.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Player\Inventory\InteractiveBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\TextureManager.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Texture&amp;Shader\TextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\SoundEngine.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Texture&amp;Shader\SoundEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Item\item.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Item\item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\Inventory\InventoryManager.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Player\Inventory\InventoryManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\Inventory\InventorySection.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Player\Inventory\InventorySection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Item\ItemConst.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Item\ItemConst.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Item\ItemData.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Item\ItemData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Item\itemDataBase.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Item\itemDataBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Player\Crafting\Recipe.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Player\Crafting\Recipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\World\WorldGenerator\Biome.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\World\WorldGenerator\Biome.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\States\timer.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Renderer\AnimationBoxRenderer.cpp">
+    <ClCompile Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\AnimationBoxRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Renderer\RenderInfo.h">
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Renderer\RenderInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Algorithm.h">
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Algorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="G:\WorkSpace\Minecraft\Script\Utils\Singleton.h">
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\Utils\Singleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="G:\WorkSpace\Minecraft\Script\States\StateBase.h">
+    <ClInclude Include="D:\WorkSpace\Minecraft\Minecraft\Script\States\StateBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="G:\WorkSpace\Minecraft\CMakeLists.txt" />
+    <CustomBuild Include="D:\WorkSpace\Minecraft\Minecraft\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{5E6BBC2A-8187-3B73-820F-82CB0BC2E501}</UniqueIdentifier>
+      <UniqueIdentifier>{D64172EA-31B7-3F58-A275-FFEEF939E3F8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{4CD78F6C-D6A7-3D51-97F0-D546C573C022}</UniqueIdentifier>
+      <UniqueIdentifier>{F035ECA5-E349-31F3-B822-F57B84F0376E}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

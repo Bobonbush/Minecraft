@@ -37,9 +37,18 @@ class ChunkManager {
         Player* m_player;
         NoiseGenerator noise;
 
-        std::map<long long , ChunkSection*> chunkMap;
+        struct Vec3Comparator {
+            bool operator()(const glm::vec3& lhs, const glm::vec3& rhs) const {
+                if (lhs.x != rhs.x) return lhs.x < rhs.x;
+                if (lhs.y != rhs.y) return lhs.y < rhs.y;
+                return lhs.z < rhs.z;
+            }
+};
 
-        float renderDistance = 12 ;
+
+        std::map<glm::vec3 , std::array<ChunkBlock, Chunk::CHUNK_VOLUME>, Vec3Comparator> chunkMap;
+
+        float renderDistance = 15;
         int numLoadChunks = 1;
         bool firstRender = true;
         
@@ -52,7 +61,7 @@ class ChunkManager {
         ChunkManager();
         ~ChunkManager() = default;
 
-        long long HashFunction(int x ,int y ,int z);
+        glm::vec3 HashFunction(int x ,int y ,int z);
 
         
         

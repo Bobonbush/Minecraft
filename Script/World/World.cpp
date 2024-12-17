@@ -24,7 +24,7 @@ void World::Update(float deltaTime) {
     player -> update(deltaTime);
     view = camera -> GetViewMatrix();
        
-    projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 160.0f); // 160
+    projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 192.0f); // 160
 
     
     Frustum * frustum = Frustum::GetInstance();

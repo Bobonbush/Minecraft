@@ -117,9 +117,7 @@ void Application::Run() {
             cnt++;
             FixedUpdate(xoffset, yoffset);
         }
-        //FixedUpdate(xoffset, yoffset);
         Alpha = accumulator / maxFrameTime;
-        //FixedUpdate(xoffset, yoffset);
         Update(elapsedTime);
         Render();
 

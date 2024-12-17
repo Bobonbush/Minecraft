@@ -28,6 +28,14 @@ class ChunkSection {
         const glm::vec3 &getPosition() const;
 
         glm::vec3 toWorldPosition(int x , int y ,int z);
+
+        std::array<ChunkBlock, Chunk::CHUNK_VOLUME> & getBlocks() {
+            return blocks;
+        }
+
+        void setBlocks(const std::array<ChunkBlock, Chunk::CHUNK_VOLUME> & _blocks) {
+            blocks = _blocks;
+        }
 };
 
 #endif // CHUNKSECTION_H
