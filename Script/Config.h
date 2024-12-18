@@ -7,8 +7,8 @@
 
 class Config : public Singleton {
     private : 
-        float width = 900;
-        float height = 600;
+        static float width;
+        static float height;
         int antialiasing = 4;
         const int majorVersion = 4;
         const int minorVersion = 6;
@@ -47,7 +47,9 @@ class Config : public Singleton {
         
         void ReadConfig();
 
-        static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+        static void framebuffer_size_callback(GLFWwindow* window, int _width, int _height) {
+            width = _width;
+            height = _height;
             glViewport(0, 0, width, height);
         }
 

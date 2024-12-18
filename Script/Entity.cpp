@@ -16,6 +16,7 @@ void DYNAMIC_ENTITY::FixedUpdate() {
     if(!isFlying) {
         ApplyGravity();
     }
+    oldWalking = Walking;
     
     isGrounded = false;
     applyForce();
@@ -26,8 +27,24 @@ void DYNAMIC_ENTITY::FixedUpdate() {
     velocity.x *= friction;
     velocity.z *= friction;
 
+    if(SPA::abs(velocity.x) < 0.00001f ) {
+        velocity.x = 0;
+    }
+
+    if(SPA::abs(velocity.z) < 0.00001f ) {
+        velocity.z = 0;
+    }
+
+
+
     if(UnderWater) {
         velocity.y *= friction*1.25f;
+    }
+
+    if(velocity.x != 0 || velocity.z != 0) {
+        Walking = true;
+    }else {
+        Walking = false;
     }
     
     

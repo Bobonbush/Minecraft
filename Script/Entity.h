@@ -4,6 +4,7 @@
 #include "Physics/PhysicCons.h"
 #include <vector>
 #include "Block/Block.h"
+#include "Algorithm.h"
 
 class Entity
 {
@@ -59,6 +60,8 @@ class DYNAMIC_ENTITY : public Entity {
         bool isFlying = false;
 
         bool UnderWater = false;
+        bool Walking = false;
+        bool oldWalking = false;
 
         std::vector<AABB> nearBoxes;
 
@@ -124,6 +127,17 @@ class DYNAMIC_ENTITY : public Entity {
 
         const bool isUnderWater() const {
             return UnderWater;
+        }
+
+        const bool isWalking() const {
+            if(Walking == oldWalking) {
+                return false;
+            }
+            return Walking;
+        }
+
+        const bool StopWalking() const {
+            return !Walking;
         }
 
         

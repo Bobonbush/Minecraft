@@ -28,7 +28,7 @@ class MainScreen : public WaitingStage {
 
         std::unique_ptr<SpriteAnimator> Pickaxe;
 
-        float afterIntroMaxTime = 0.75f;
+        float afterIntroMaxTime = 2.75f;
         float afterIntroCurrentTime = 0.f;
 
         unsigned int Pickage;

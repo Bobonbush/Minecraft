@@ -2,6 +2,9 @@
 
 Config* Config::instance = nullptr;
 
+float Config::width = 0;
+float Config::height = 0;
+
 void Config::SetVersion() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, majorVersion);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minorVersion);
