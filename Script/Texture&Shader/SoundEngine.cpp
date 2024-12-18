@@ -1,10 +1,13 @@
 #include "SoundEngine.h"
 
+
+SoundEngine * SoundEngine::instance = nullptr;
 SoundEngine::SoundEngine() {
     Init();
 }
 
 SoundEngine::~SoundEngine() {
+    delete instance;
     Drop();
 }
 
@@ -49,5 +52,4 @@ void SoundEngine::SetSoundVolume(float volume) {
 void SoundEngine::SetSoundPosition(float x, float y, float z) {
     engine -> setListenerPosition(vec3df(x, y, z), vec3df(0, 0, 1));
 }
-
 

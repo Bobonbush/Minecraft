@@ -99,6 +99,14 @@ add_executable(OPENGL Script/main.cpp
                       Script/World/WorldGenerator/Biome.cpp
                       Script/States/timer.cpp
                       Script/Renderer/AnimationBoxRenderer.cpp
+                      Script/Utils/Random.h
+                      Script/Utils/InteractiveBar.cpp
+                      Script/Menu/mainScreen.cpp
+                      Script/Menu/menu.cpp
+                      Script/Menu/UIUtil.cpp
+                      Script/States/MenuState.cpp
+                      Script/Menu/optionMenu.cpp
+                      Script/Texture&Shader/SoundManager.cpp
                       
 )
         

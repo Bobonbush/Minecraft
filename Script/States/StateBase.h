@@ -10,9 +10,11 @@ class StateBase {
         virtual ~StateBase() noexcept = default;
 
         virtual void render() = 0;
-        virtual void Update(float deltaTime) = 0;
+        virtual void Update(float deltaTime, const float &xpos , const float &ypos) = 0;
 
         virtual void FixedUpdate(float xpos, float ypos) = 0;
+
+        virtual std::unique_ptr<StateBase> isNext() = 0;
 };
 
 #endif // STATEBASE_H

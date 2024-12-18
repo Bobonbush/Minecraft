@@ -10,8 +10,18 @@ class SoundEngine : Singleton {
     private:
         irrklang::ISoundEngine* engine;
         void Init();
-    public:
+
+        static SoundEngine * instance;
         SoundEngine();
+    public:
+
+        static SoundEngine * GetInstance() {
+            if(instance == nullptr) {
+                instance = new SoundEngine();
+            }
+            return instance;
+        }
+        
         ~SoundEngine();
         
         void PlaySound(const char* path);
@@ -22,6 +32,7 @@ class SoundEngine : Singleton {
         void Drop();
         void SetSoundVolume(float volume);
         void SetSoundPosition(float x, float y, float z);
+        void StopSound(const char* path);
 
 };
 

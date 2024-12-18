@@ -289,13 +289,15 @@ void TextHandler:: RenderMiddleText(std::string text , float x, float y , float 
         if(y + h > maximum_y) maximum_y = y + h;
     }
 
-    if(maximum_y > 0.95f) {
-        y -= (maximum_y - 0.95f);
+    /*
+    if(maximum_y > 1.00f) {
+        y -= (maximum_y - 1.00f) /2.f;
     }
 
-    if(maximum > 0.95f) {
-        x -= (maximum - 0.95f);
+    if(maximum > 1.00f) {
+        x -= (maximum - 1.00f) /4.f ;
     }
+    */
 
     x -= (maximum - x) / 2;
     y -= (maximum_y - y) / 2;

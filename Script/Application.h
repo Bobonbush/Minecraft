@@ -8,6 +8,7 @@
 #include "Renderer/RenderMaster.h"
 #include "States/SceneState.h"
 #include "World.h"
+#include "Menu/Menu.h"
 
 
 
@@ -32,7 +33,7 @@ class Application : public Singleton {
         
         void Init();
 
-        void Update(float deltaTime);
+        void Update(float deltaTime, const float &xpos, const float &ypos);
         void Render();
 
         void FixedUpdate(float xpos, float ypos);

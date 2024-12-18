@@ -12,6 +12,8 @@ class Entity
         glm::vec3 position;
         glm::vec3 velocity;
         glm::vec3 rotation;
+
+        float head = 0.0f;
     public:
         Entity() : box(glm::vec3(0.0f, 0.0f, 0.0f)) , position(glm::vec3(0.0f)) , rotation(glm::vec3(0.0f)), velocity(glm::vec3(0.0f)) {}
         Entity(const glm::vec3& dim) : box(dim) {}
@@ -34,6 +36,14 @@ class Entity
             return velocity;
         }
 
+        void setHeadPosition(float head) {
+            this -> head = head;
+        }
+
+        const glm::vec3 getHeadPosition() const {
+            return glm::vec3(position.x, position.y + head, position.z);
+        }
+
         virtual void addForce(const glm::vec3 &force) = 0 ;
 };
 
@@ -47,6 +57,8 @@ class DYNAMIC_ENTITY : public Entity {
 
         bool isGrounded = false;
         bool isFlying = false;
+
+        bool UnderWater = false;
 
         std::vector<AABB> nearBoxes;
 
@@ -82,6 +94,14 @@ class DYNAMIC_ENTITY : public Entity {
             this -> friction = friction;
         }
 
+        void ApplyFriction(float friction) {
+            this -> friction = friction;
+        }
+
+        void ApplyFriction() {
+            this -> friction =  0.95f;  // By default
+        }
+
 
         void setFlying(bool flying) {
             isFlying = flying;
@@ -97,6 +117,14 @@ class DYNAMIC_ENTITY : public Entity {
 
         void addCollisioner(const std::vector<AABB> &boxe);
         bool getColliding(AABB &boxe);
+        
+        void isUnderWater(const bool & UnderWater) {
+            this -> UnderWater = UnderWater;
+        }
+
+        const bool isUnderWater() const {
+            return UnderWater;
+        }
 
         
         

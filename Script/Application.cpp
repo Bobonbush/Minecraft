@@ -51,8 +51,8 @@ void Application::Init() {
 }
 
 
-void Application::Update(float deltaTime) {
-    states.Update(deltaTime);
+void Application::Update(float deltaTime, const float &xpos, const float &ypos) {
+    states.Update(deltaTime, xpos, ypos);
 }
 
 void Application::Render( ) {
@@ -65,15 +65,16 @@ void Application::FixedUpdate(float xpos, float ypos) {
 
 void Application::Run() {
 
-    states.pushState(std::make_unique<World>());
+    states.pushState(std::make_unique<Menu>());
     float totalTime = 0;
     int FPS = 0;
     int cnt = 0;
     while(!glfwWindowShouldClose(config -> GetWindow())) {
 
+        
+        //glClearColor(0.5f, 0.5f , 0.7f , 1.f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(0.5f, 0.5f , 0.7f , 1.f);
-        //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         
         float currentTime = glfwGetTime();
         elapsedTime = currentTime - lastTime;
@@ -118,7 +119,9 @@ void Application::Run() {
             FixedUpdate(xoffset, yoffset);
         }
         Alpha = accumulator / maxFrameTime;
-        Update(elapsedTime);
+
+        SPA::convertToNDC(x, y, width, height);
+        Update(elapsedTime, x, y);
         Render();
 
         

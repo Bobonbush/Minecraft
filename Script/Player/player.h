@@ -3,9 +3,13 @@
 #include "Entity.h"
 #include "Singleton.h"
 #include "Texture&Shader/ShaderManager.h"
+#include "Texture&Shader/TextureManager.h"
 #include "Inventory/InventoryManager.h"
 #include "States/Cursor.h"
 #include "Renderer/AnimationBoxRenderer.h"
+#include "InteractiveBar.h"
+#include "Renderer/SpriteRenderer.h"
+#include "Texture&Shader/SoundManager.h"
 
 class Player : public DYNAMIC_ENTITY, Singleton {
     private:
@@ -18,6 +22,17 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         Player();
 
         bool openingInventory = false;
+
+        float losingMeatMaxTime = 100.5f;
+        float losingMeatCurrentTime = 0.f;
+
+        float losingBubbleMaxTime = 3.0f;
+        float losingBubbleCurrentTime = 0.f;
+
+        float exhaustConst = 0.5f;
+
+        SpriteRenderer * spriteRenderer;
+        TextureManager * textureManager;
         
     public:
         static Player * GetInstance() {
@@ -26,6 +41,14 @@ class Player : public DYNAMIC_ENTITY, Singleton {
             }
             return m_instance;
         }
+
+        int health = 9;
+        int meat = 9;
+        int bubble = 9;
+
+        std::unique_ptr<InteractiveBar> healthBar;
+        std::unique_ptr<InteractiveBar> meatBar;
+        std::unique_ptr<InteractiveBar> bubbleBar;
 
         ~Player() {
             delete m_instance;
@@ -74,6 +97,9 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         void UsingNormalInventory() {
             inventory -> UsingNormalInventory();
         }
+
+
+        
     
 
     

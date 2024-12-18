@@ -48,7 +48,7 @@ class ChunkManager {
 
         std::map<glm::vec3 , std::array<ChunkBlock, Chunk::CHUNK_VOLUME>, Vec3Comparator> chunkMap;
 
-        float renderDistance = 15;
+        float renderDistance = 12;
         int numLoadChunks = 1;
         bool firstRender = true;
         
@@ -77,8 +77,8 @@ class ChunkManager {
         void removeBlock(float x, float y, float z);
         bool existsBlock(float x, float y, float z);
         ChunkBlock getBlock(float x, float y, float z);
+        ChunkBlock getOquaques(float x, float y, float z);
         glm::vec3 getBlockPosition(float x, float y, float z);
-        void setBlock(int x, int y, int z, BLOCKID id);
         //void getBlock(float x , float y , float z);
         //void getChunk(float x, float z);
 };

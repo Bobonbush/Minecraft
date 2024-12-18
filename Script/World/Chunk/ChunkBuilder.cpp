@@ -28,7 +28,7 @@ void ChunkBuilder::BuildOquaques(int x ,int y ,int z) {
             ChunkBlock blockBelow = pChunk -> getBlock(x, y - 1, z);
             if(blockBelow == BLOCKID::Air) {
                 pChunk -> setBlock(x, y-1, z, block.getID());
-                return;
+               // return;
             }
         }
     }
@@ -150,8 +150,6 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
                         return false;
                     }
                 }
-
-                
             }
         }
         return true;
@@ -165,6 +163,8 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
                     if(chunk -> getBlock(0, y, z).isLiquid()) {
                         return false;
                     }
+
+                    
 
                 }else {
                     if(!chunk -> getBlock(0, y, z).isOpaque()) {
@@ -180,7 +180,7 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
         for(auto & chunk : adj) {
             if(chunk -> getPosition().y == pChunk->getPosition().y - 1) {
                 if(isOquaqe) {
-                    if(!chunk -> getBlock(x, Chunk::CHUNK_SIZE -1, z).isLiquid()) {
+                    if(chunk -> getBlock(x, Chunk::CHUNK_SIZE -1, z).isLiquid()) {
                         return false;
                     }
                 }else {
@@ -198,7 +198,7 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
         for(auto & chunk : adj) {
             if(chunk -> getPosition().y == pChunk->getPosition().y + 1) {
                 if(isOquaqe) {
-                    if(!chunk -> getBlock(x, 0, z).isLiquid()) {
+                    if(chunk -> getBlock(x, 0, z).isLiquid()) {
                         return false;
                     }
                 }else {

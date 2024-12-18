@@ -213,11 +213,11 @@ void PlayingState::PlayerProcess(const Camera & camera, ChunkManager & chunkMana
         force += camera.ProcessKeyboard(Camera_Movement::RIGHT, elapsedTime);
     }
     
-    if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_SPACE) == GLFW_PRESS && player -> Flying()) {
+    if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_SPACE) == GLFW_PRESS && (player -> Flying() || player -> isUnderWater())) {
         force += camera.ProcessKeyboard(Camera_Movement::UP, elapsedTime);
     }
     
-    if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && player -> Flying()) {
+    if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && (player -> Flying() || player -> isUnderWater())) {
         force += camera.ProcessKeyboard(Camera_Movement::DOWN, elapsedTime);
     }
 
@@ -230,6 +230,18 @@ void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunk
         //glfwSetWindowShouldClose(glfwGetCurrentContext(), GLFW_TRUE);
         player -> CloseInventory();
     }
+
+
+    glm::vec3 headPosition = player -> getHeadPosition();
+    
+    ChunkBlock block = chunkManager.getBlock(headPosition.x, headPosition.y, headPosition.z);
+    if(block.getID() == BLOCKID::Water) {
+        player -> isUnderWater(true);
+    }else {
+        player -> isUnderWater(false);
+    }
+    
+
     
     Config * config = Config::GetInstance();
     if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_ALT) == GLFW_PRESS) {

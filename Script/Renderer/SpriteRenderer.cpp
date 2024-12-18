@@ -64,6 +64,7 @@ void SpriteRenderer :: DrawSprite(unsigned int texture, glm::vec2 position, glm:
     model = glm::scale(model, glm::vec3(size, 1.0f));
     shader -> setInt("uTexture", 0);
     shader -> setMat4("model", model);
+    shader -> setFloat("alpha", 1.0f);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
     glBindVertexArray(quadVAO);

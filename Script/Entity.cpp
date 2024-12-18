@@ -25,6 +25,10 @@ void DYNAMIC_ENTITY::FixedUpdate() {
     
     velocity.x *= friction;
     velocity.z *= friction;
+
+    if(UnderWater) {
+        velocity.y *= friction*1.25f;
+    }
     
     
 

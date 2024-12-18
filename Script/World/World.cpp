@@ -11,6 +11,8 @@ World::World() : StateBase() {
     camera -> attachEntity(player);
     config = Application::GetInstance() -> config;
     playingState = PlayingState::GetInstance();
+
+    _next = nullptr;
 }
 
 void World::render() {
@@ -19,12 +21,12 @@ void World::render() {
     player -> Render(view , projection);
 }
 
-void World::Update(float deltaTime) {
+void World::Update(float deltaTime, const float &xpos , const float &ypos) {
     camera -> update();
     player -> update(deltaTime);
     view = camera -> GetViewMatrix();
        
-    projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 192.0f); // 160
+    projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 160.0f); // 160
 
     
     Frustum * frustum = Frustum::GetInstance();

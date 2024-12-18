@@ -7,6 +7,9 @@ class SceneState {
     private: 
 
         std::stack<std::unique_ptr<StateBase>> states;
+
+        float changeBetweenState = 0.0f;
+        float changeBetweenStateMax = 0.5f;
         
     public:
         SceneState() = default;
@@ -14,7 +17,7 @@ class SceneState {
 
         void render();
 
-        void Update(float deltaTime);
+        void Update(float deltaTime, const float &xpos, const float &ypos);
 
         void FixedUpdate(float xpos, float ypos);
 

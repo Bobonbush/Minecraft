@@ -18,12 +18,17 @@ void Config::SetVersion() {
 }
 void Config::ChangeConfig() {
     
-    //glfwWindowHint(GLFW_SAMPLES, antialiasing);
-    //glfwWindowHint(GLFW_DEPTH_BITS, depthBits);
-    //glfwWindowHint(GLFW_STENCIL_BITS, stencilBits);
+    glfwWindowHint(GLFW_SAMPLES, antialiasing);
+    glEnable(GL_MULTISAMPLE);
+    glfwWindowHint(GLFW_DEPTH_BITS, depthBits);
+    glfwWindowHint(GLFW_STENCIL_BITS, stencilBits);
+
+    
 
     glfwSetWindowSize(window, width, height);
     glViewport(0, 0, width, height);
+
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 }
 
 void Config::ReadConfig() {

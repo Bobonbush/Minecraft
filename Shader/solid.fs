@@ -4,7 +4,7 @@ out vec4 FragColor;
 float fog_density = 0.02;
 float gradient = 2.;
 
-vec4 fogColor = vec4( 0.01 ,  0.01 ,  0.1  , 1.0);
+vec4 fogColor = vec4( 0.01 ,  0.01 ,  0.2  , 1.0);
 
 in vec2 TexCoord;
 uniform sampler2D samplerTexture;
@@ -69,8 +69,8 @@ void main()
         discard;
     }
 
-    float visibility = getFogFactor(dist, 192.0);
-    float alpha = getFogFactorAlpha(dist, 0.1, 192.0);
+    float visibility = getFogFactor(dist, 160.0);
+    float alpha = getFogFactorAlpha(dist, 0.1, 160.0);
     
     
     
