@@ -261,6 +261,7 @@ bool Button::isHover(const float & xpos, const float & ypos) {
 
 void Button::update(float deltaTime, const float &xpos, const float &ypos) {
     isHovered = isHover(xpos, ypos);
+    isClicked = false;
     if(isHovered) {
         float speed = 0.75f;
         button -> setAlphaSpeed(speed);

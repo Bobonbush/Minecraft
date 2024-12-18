@@ -10,6 +10,7 @@ MainScreen::MainScreen() {
     StudioName = std::make_unique<ReAppearingTextOnlyOnce>("THUNDER HOUND", "Assets/Font/Mantinia.otf", glm::vec2(0.0f, -0.75), glm::vec2(0.5f, 0.5f), 54.f, 2.f, glm::vec3(1.0f, 1.0f, 1.0f));
     LoadedStudioName = false;
     StudioName -> setAlphaSpeed(0.25f);
+    TitleName -> setAlphaSpeed(0.25f);
     ShaderManager::GetInstance() -> addShader("Screen", "Shader/Screen.vs", "Shader/Screen.fs");
     
 
@@ -22,6 +23,7 @@ MainScreen::MainScreen() {
     ClearScreen = std::make_unique<ReAppearingSpriteOnlyOnce>(TextureManager::getInstance() -> getTexture("Assets/Clear.png"), glm::vec2(0.0f, 0.0f), glm::vec2(4.5f, 2.f));
     StudioLogo -> setAlphaSpeed(0.25f);
     ClearScreen -> setAlphaSpeed(0.25f);
+    Pickaxe -> setAlphaSpeed(0.15f);
     
     setNextState(std::make_unique<OptionMenu>());
 
@@ -54,7 +56,7 @@ void MainScreen::render() {
     TitleName -> render();
     Pickaxe -> render();
 
-    if(TitleName -> isFinished()) {
+    if(Pickaxe -> isFinished()) {
         StartGame -> render();
     }
     
