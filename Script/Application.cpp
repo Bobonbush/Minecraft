@@ -65,7 +65,7 @@ void Application::FixedUpdate(float xpos, float ypos) {
 
 void Application::Run() {
 
-    states.pushState(std::make_unique<Menu>());
+    states.pushState(std::make_unique<World>());
     float totalTime = 0;
     int FPS = 0;
     int cnt = 0;

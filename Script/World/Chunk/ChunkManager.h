@@ -28,7 +28,24 @@ class ChunkManager {
             front = glm::vec3(ChunkPosition.x, ChunkPosition.y, ChunkPosition.z + 1);
             back = glm::vec3(ChunkPosition.x, ChunkPosition.y, ChunkPosition.z - 1);
         }
+    };
 
+    struct EightFaceAdjacentChunks {
+        std::vector<glm::vec3> allPosition;
+
+        void update(const glm::vec3 & ChunkPosition) {
+            allPosition.clear();
+            for(int x = -1 ; x <= 1 ; x++) {
+                for(int y = -1 ; y <= 1 ; y++) {
+                    for(int z = -1 ; z <= 1 ; z++) {
+                        if(x == 0 && y == 0 && z == 0) {
+                            continue;
+                        }
+                        allPosition.push_back(glm::vec3(ChunkPosition.x + x, ChunkPosition.y + y, ChunkPosition.z + z));
+                    }
+                }
+            }
+        }
     };
     private:
         std::vector<ChunkSection> chunks;
@@ -47,7 +64,7 @@ class ChunkManager {
 
 
         std::map<glm::vec3 , std::array<ChunkBlock, Chunk::CHUNK_VOLUME>, Vec3Comparator> chunkMap;
-
+        std::map<glm::vec3 , bool, Vec3Comparator> isMisery;
         float renderDistance = 12;
         int numLoadChunks = 1;
         bool firstRender = true;
@@ -77,8 +94,10 @@ class ChunkManager {
         void removeBlock(float x, float y, float z);
         bool existsBlock(float x, float y, float z);
         ChunkBlock getBlock(float x, float y, float z);
-        ChunkBlock getOquaques(float x, float y, float z);
         glm::vec3 getBlockPosition(float x, float y, float z);
+
+        void ReBuildChunk(int x, int y, int z);
+
         //void getBlock(float x , float y , float z);
         //void getChunk(float x, float z);
 };

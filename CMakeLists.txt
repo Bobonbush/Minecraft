@@ -108,6 +108,7 @@ add_executable(OPENGL Script/main.cpp
                       Script/Menu/optionMenu.cpp
                       Script/Texture&Shader/SoundManager.cpp
                       Script/Menu/deathScene.cpp
+                      Script/World/WorldGenerator/structure.cpp
                       
 )
         

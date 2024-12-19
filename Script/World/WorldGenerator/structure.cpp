@@ -11,51 +11,69 @@ Structure::~Structure() {
 
 
 PlainTreeStructure::PlainTreeStructure(const float & _frequency, const glm::vec3 & position) : Structure(_frequency, position) {
-    diameter = SPA::RandomInt(1 , 3);
-    height = SPA::RandomInt(4 , 7);
+    diameter = SPA::RandomInt(2 , 4);
+    height = SPA::RandomInt(5 , 8);
+    diameter = 2 * diameter + 1;
+    BuildVerticalStructure(position.x, position.z, position.y, BLOCKID::Wood);
 
-
-    blocks = std::vector<std::vector<std::vector<BLOCKID>>>(height, std::vector<std::vector<BLOCKID>>(diameter * 2, std::vector<BLOCKID>(diameter * 2, BLOCKID::Air)));
-    int middle = (diameter + 1) /2 - 1;
-    for(int y = 0 ; y < height ; y++) {
-        blocks[y][middle][middle] = BLOCKID::Wood;
+    for(int i = 0 ; i < diameter /2 ; i++) {
+        BuildHorizontalStructure(position.x, position.z, position.y + height - i, BLOCKID::Leaf, diameter -(diameter / 2 - i) * 2);
     }
-
-    for(int y = height -1 ; y >= height - diameter ; y-- ) {
-        blocks[y][middle][middle] = BLOCKID::Leaf;
-    }
-
-    for(int y = height-1 ; y >= height - diameter ; y--) {
-        for(int x = 0 ; x < diameter * 2 ; x++) {
-            for(int z = 0 ; z < diameter * 2 ; z++) {
-                if(x == middle && z == middle) {
-                    continue;
-                }
-                if(glm::distance(glm::vec2(x, z), glm::vec2(middle, middle)) < diameter) {
-                    blocks[y][x][z] = BLOCKID::Leaf;
-                }
-            }
-        }
-    }
-
-    this -> position.x -= diameter /2.f;
-    this -> position.z -= diameter /2.f;
 }
 
 PlainTreeStructure::~PlainTreeStructure() {
     blocks.clear();
 }
 
-BLOCKID PlainTreeStructure::SetBlock(float x, float y, float z) {
-    int indexY = y - position.y;
-    int indexX = x - position.x;
-    int indexZ = z - position.z;
-    if(indexY < 0 || indexY >= blocks.size() || indexX < 0 || indexX >= blocks[0].size() || indexZ < 0 || indexZ >= blocks[0][0].size()) {
-        return BLOCKID::Air;
+void Structure::BuildVerticalStructure(const float &x , const float &z, const float &y, const BLOCKID &block) {
+    for(int i = 0 ; i < height ; i++) {
+        blocks.push_back(std::make_pair(glm::vec3(x, y + i, z), block));
     }
-
-    return blocks[indexY][indexX][indexZ];
 }
+
+void Structure::BuildHorizontalStructure(const float &x , const float &z, const float &y, const BLOCKID &block, const float &dia) {
+    float radius = dia / 2.f;
+    for(int i = -radius ; i <= radius ; i++) {
+        for(int j = -radius ; j <= radius ; j++) {
+            bool exists = false;
+            for(int z = 0 ; z < (int)blocks.size() ; z++) {
+                if(blocks[z].first == glm::vec3(x + i, y, z + j)) {
+                    exists = true;
+                    break;
+                }
+            }
+            if(exists) {
+                continue;
+            }
+            blocks.push_back(std::make_pair(glm::vec3(x + i, y, z + j), block));
+        }
+    }
+}
+
+CactusStructure::CactusStructure(const float & _frequency, const glm::vec3 & position) : Structure(_frequency, position) {
+    height = SPA::RandomInt(3, 5);
+    BuildVerticalStructure(position.x, position.z, position.y, BLOCKID::Cactus);
+}
+
+CactusStructure::~CactusStructure() {
+    blocks.clear();
+}
+
+SpecialTreeStructure::SpecialTreeStructure(const float & _frequency, const glm::vec3 & position) : Structure(_frequency, position) {
+    diameter = SPA::RandomInt(4 , 6);
+    height = SPA::RandomInt(14 , 16);
+    diameter = 2 * diameter + 1;
+    BuildVerticalStructure(position.x, position.z, position.y, BLOCKID::SpecialWood);
+
+    for(int i = 0 ; i < diameter /2 ; i++) {
+        BuildHorizontalStructure(position.x, position.z, position.y + height - i, BLOCKID::SpecialLeaf, diameter -(diameter / 2 - i) * 2);
+    }
+}
+
+SpecialTreeStructure::~SpecialTreeStructure() {
+    blocks.clear();
+}
+
 
 
 

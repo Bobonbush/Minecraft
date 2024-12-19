@@ -1,6 +1,7 @@
 #include "Terrain.h"
 
 
+std::map<std::pair<float , float> , float> NoiseGenerator::highestBlocks;
 NoiseGenerator::NoiseGenerator() {
                 
 
@@ -73,7 +74,6 @@ void NoiseGenerator::BuildChunk(ChunkSection &chunk) {
                     //float noiseBiome = noise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE / noiseScale, z + chunk.getPosition().z * Chunk::CHUNK_SIZE / noiseScale) + noise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE / noiseScale /1.5f, z + chunk.getPosition().z * Chunk::CHUNK_SIZE / noiseScale / 1.5f) / 2 + noise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE / noiseScale / 2, z + chunk.getPosition().z * Chunk::CHUNK_SIZE / noiseScale / 2) / 4;
                     //noiseBiome *= biomeNoise.GetNoise(x + chunk.getPosition().x * Chunk::CHUNK_SIZE, z + chunk.getPosition().z * Chunk::CHUNK_SIZE);
                     
-                    
                     float realX = x + chunk.getPosition().x * Chunk::CHUNK_SIZE;
                     float realZ = z + chunk.getPosition().z * Chunk::CHUNK_SIZE;
                     
@@ -129,11 +129,11 @@ void NoiseGenerator::BuildChunk(ChunkSection &chunk) {
                         probabilityofCave = 0.35f;
                     }
 
-                     int highest = noiseBiome * 3 + 1;
+                    int highest = noiseBiome * 3 + 1;
                     
 
                     noiseBiome *= HeightScale;
-
+                    
                     
 
                     
@@ -141,6 +141,7 @@ void NoiseGenerator::BuildChunk(ChunkSection &chunk) {
                     
                     int height = noiseBiome + surface;
 
+                    highestBlocks[std::make_pair(realX, realZ)] = height;
                     
                     
                     
@@ -194,6 +195,8 @@ void NoiseGenerator::BuildChunk(ChunkSection &chunk) {
                                 }else {
                                     chunk.setBlock(x, y, z, ChunkBlock(BLOCKID::Water));
                                 }
+
+                              
                             }else {
                                 chunk.setBlock(x, y, z, ChunkBlock(id));
                             }
@@ -210,6 +213,7 @@ void NoiseGenerator::BuildChunk(ChunkSection &chunk) {
                                 if(isOre(x + chunk.getPosition().x * Chunk::CHUNK_SIZE + i, y + chunk.getPosition().y * Chunk::CHUNK_SIZE + i, z + chunk.getPosition().z * Chunk::CHUNK_SIZE + i,low, high, i)) {
                                     id = static_cast<BLOCKID>(i + 11);
                                     chunk.setBlock(x, y, z, ChunkBlock(id));
+                                   
                                     isOred = true;
                                     break;
                                 }
@@ -259,3 +263,108 @@ void NoiseGenerator::BuildChunk(ChunkSection &chunk) {
                 }
             }
         }
+
+
+void NoiseGenerator::AddTreeToChunk(ChunkSection &chunk, std::vector<ChunkSection*> &adjChunks) {
+    Random random(Config::GetInstance() -> GetSeed());
+    
+    
+    
+    for(int xp = 0 ; xp < Chunk::CHUNK_SIZE ; xp++) {
+        for(int zp = 0 ; zp < Chunk::CHUNK_SIZE ; zp++) {
+
+            float realX = xp + chunk.getPosition().x * Chunk::CHUNK_SIZE;
+            float realZ = zp + chunk.getPosition().z * Chunk::CHUNK_SIZE;
+
+            if(highestBlocks.find(std::make_pair(realX, realZ)) == highestBlocks.end()) {
+                std::cout << "CLGT" <<'\n';
+                continue;
+            }
+            float highest = highestBlocks[std::make_pair(realX, realZ)];
+            if(highest > chunk.getPosition().y * Chunk::CHUNK_SIZE + Chunk::CHUNK_SIZE) {
+                continue;
+            }
+
+            if(chunk.getBlock(xp, highest - chunk.getPosition().y * Chunk::CHUNK_SIZE, zp) == BLOCKID::Air) {
+                continue;
+            }
+            float climate = ClimateNoise.GetNoise(realX, realZ);
+            climate = (climate + 1) /2.f;
+            climate = 1.f - climate * climate;
+            Biomes::Biome biome = Biomes::GetBiome(climate);
+
+            float sequence = 200.f; // 300 blocks
+
+            treeNoise = nullptr;
+
+            if(biome == Biomes::Biome::Sea) {
+                
+                continue;
+            }
+
+            if(biome == Biomes::Biome::Mountain) {
+                if(random.UnsignedInt(sequence) == 0) {
+                    treeNoise = std::make_unique<SpecialTreeStructure>(300, glm::vec3(realX, highest + 1, realZ));
+                }
+            }
+
+            if(biome == Biomes::Biome::Desert) {
+                //sequence = 1000.f;
+                if(random.UnsignedInt(sequence) == 0) {
+                    treeNoise = std::make_unique<CactusStructure>(300, glm::vec3(realX, highest + 1, realZ));
+                }
+            }
+
+            if( biome == Biomes::Biome::Valley || biome == Biomes::Biome::Mountain_grass || biome == Biomes::Biome::Grassland) {
+                
+                if(biome == Biomes::Biome::Valley) {
+                    sequence = 500.f;
+                }
+                int tree = random.UnsignedInt(sequence);
+                if(tree == 0) {
+                    treeNoise = std::make_unique<PlainTreeStructure>(300, glm::vec3(realX, highest + 1, realZ));
+                }
+            }
+            
+            if(treeNoise != nullptr) {
+                std::vector<std::pair<glm::vec3, BLOCKID>> blocks = treeNoise -> getBlocks();
+                for(auto & block : blocks) {
+                    glm::vec3 pos = block.first;   // Vị trí thật của tâm block đang xét
+                    AddBlockToChunk(chunk, pos.x, pos.y, pos.z, adjChunks, block.second);
+                }
+            }
+        }
+    }
+}
+
+
+void NoiseGenerator::AddBlockToChunk(ChunkSection &chunkbase, float x, float y, float z, std::vector<ChunkSection*> &adjChunks, const BLOCKID &id) {
+
+    x += Chunk::CHUNK_SCALE / 2.f;
+    y += Chunk::CHUNK_SCALE / 2.f;
+    z += Chunk::CHUNK_SCALE / 2.f;
+    
+    int chunkX = x / Chunk::CHUNK_SIZE / Chunk::CHUNK_SCALE - (x < 0) ;
+    int chunkZ = z / Chunk::CHUNK_SIZE / Chunk::CHUNK_SCALE - (z < 0) ;
+    int chunkY = y / Chunk::CHUNK_SIZE / Chunk::CHUNK_SCALE - (y < 0) ;
+    
+
+    x -= chunkX * Chunk::CHUNK_SIZE * Chunk::CHUNK_SCALE;
+    y -= chunkY * Chunk::CHUNK_SIZE * Chunk::CHUNK_SCALE ;
+    z -= chunkZ * Chunk::CHUNK_SIZE * Chunk::CHUNK_SCALE;
+
+
+    for(auto & chunk : adjChunks) {
+        if(chunk -> getPosition().x == chunkX && chunk -> getPosition().y == chunkY && chunk -> getPosition().z == chunkZ) {
+            chunk -> setBlock(x, y, z, ChunkBlock(id));
+            chunk -> setChanged(true);
+            return;
+        }
+    }
+
+    if(chunkbase.getPosition().x == chunkX && chunkbase.getPosition().y == chunkY && chunkbase.getPosition().z == chunkZ) {
+        chunkbase.setBlock(x, y, z, ChunkBlock(id));
+        //chunkbase.setChanged(true);
+        return;
+    }
+}

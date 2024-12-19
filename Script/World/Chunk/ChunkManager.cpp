@@ -8,7 +8,9 @@ void ChunkManager::addMiseryChunk(int x, int y, int z) {
     if(y >= Chunk::CHUNK_HEIGHT || y < 0) {
         return ;
     }
+
     miseryChunk.push_back(ChunkSection(glm::vec3(x, y, z)));
+    isMisery[HashFunction(x, y, z)] = true;
     
     if(chunkMap.find(HashFunction(x, y, z)) != chunkMap.end()) {
         miseryChunk.back().setBlocks(chunkMap[HashFunction(x, y, z)]);
@@ -25,14 +27,64 @@ void ChunkManager::addChunk(int x,int y, int z) {
 
     chunks.push_back(ChunkSection(glm::vec3(x, y, z)));
     
+    
+    EightFaceAdjacentChunks directions;
+    directions.update(chunks.back().getPosition());
+    std::vector<ChunkSection*> AdjChunks;
+    
+    for(auto & pos : directions.allPosition) {
+        if(!existsChunk(pos.x, pos.y, pos.z)) {
+            addMiseryChunk(pos.x, pos.y, pos.z);
+        }
+
+        
+        //std::cout << AdjChunks.back() -> getPosition().x << ' ' << AdjChunks.back() -> getPosition().y << ' ' << AdjChunks.back() -> getPosition().z << '\n';
+    }
+
+    for(auto & pos : directions.allPosition) {
+        if(existsChunk(pos.x, pos.y, pos.z))
+            AdjChunks.push_back(&getChunk(pos.x, pos.y, pos.z));
+    }
+
+    //std::cout << AdjChunks.back() -> getPosition().x << ' ' << AdjChunks.back() -> getPosition().y << ' ' << AdjChunks.back() -> getPosition().z << '\n';
+    //int sub = 6;
+    //std::cout << AdjChunks[0] -> getPosition().x << ' ' << AdjChunks[(int)AdjChunks.size()- sub ] -> getPosition().y << ' ' << AdjChunks[(int)AdjChunks.size()- sub] -> getPosition().z << '\n';
+    
+    
+
     if(chunkMap.find(HashFunction(x, y, z)) != chunkMap.end()) {
         //std::cout << "exists" << ' ' << x << ' ' << y << ' ' << z << '\n';
+        
         chunks.back().setBlocks(chunkMap[HashFunction(x, y, z)]);
+
+        
+        if(isMisery.find(HashFunction(x, y, z)) != isMisery.end()) {
+            isMisery.erase(HashFunction(x, y, z));
+            noise.AddTreeToChunk(chunks.back(), AdjChunks);
+        }
+        
     }
     else {
         noise.BuildChunk(chunks.back());
+        noise.AddTreeToChunk(chunks.back(), AdjChunks);
     }
 
+    for(int i = 0; i <= (int)AdjChunks.size() - 1 ; i++) {
+        if(isMisery.find(HashFunction(AdjChunks[i] -> getPosition().x, AdjChunks[i] -> getPosition().y, AdjChunks[i] -> getPosition().z)) != isMisery.end()) {
+            SPA::swap(AdjChunks[i], AdjChunks[(int)AdjChunks.size() - 1]);
+            AdjChunks.pop_back();
+            i--;
+        }
+        //Recover(*AdjChunks[i], AdjChunks);
+    }
+
+    for(auto & chunk : AdjChunks) {
+        if(chunk -> isChanged()) {
+            Recover(*chunk, AdjChunks);
+        }
+        
+    }
+    
     
     Recover(chunks.back(), std::vector<ChunkSection*>());
 }
@@ -47,47 +99,57 @@ void ChunkManager::Recover(ChunkSection & chunk , std::vector<ChunkSection*> & a
     if(!existsChunk(directions.left.x ,directions.left.y, directions.left.z)) {
         addMiseryChunk(directions.left.x, directions.left.y, directions.left.z);
     }
-    if(existsChunk(directions.left.x , directions.left.y, directions.left.z))
-        AdjChunks.push_back(&getChunk(directions.left.x, directions.left.y, directions.left.z));
 
     if(!existsChunk(directions.right.x , directions.right.y, directions.right.z)) {
         addMiseryChunk(directions.right.x, directions.right.y, directions.right.z);
     }
-    if(existsChunk(directions.right.x , directions.right.y, directions.right.z))
-        AdjChunks.push_back(&getChunk(directions.right.x, directions.right.y, directions.right.z)); 
-       
 
     if(!existsChunk(directions.up.x , directions.up.y, directions.up.z)) {
         addMiseryChunk(directions.up.x, directions.up.y, directions.up.z);
     }
-    if(existsChunk(directions.up.x , directions.up.y, directions.up.z))
-        AdjChunks.push_back(&getChunk(directions.up.x, directions.up.y, directions.up.z)); 
-       
 
     if(!existsChunk(directions.down.x , directions.down.y, directions.down.z)) {
         addMiseryChunk(directions.down.x, directions.down.y, directions.down.z);
         
     }
-    if(existsChunk(directions.down.x , directions.down.y, directions.down.z))
-        AdjChunks.push_back(&getChunk(directions.down.x, directions.down.y, directions.down.z)); 
-
 
     if(!existsChunk(directions.front.x , directions.front.y, directions.front.z)) {
         addMiseryChunk(directions.front.x, directions.front.y, directions.front.z);
         
     }
-    if(existsChunk(directions.front.x , directions.front.y, directions.front.z))
-        AdjChunks.push_back(&getChunk(directions.front.x, directions.front.y, directions.front.z)); 
-
 
     if(!existsChunk(directions.back.x , directions.back.y, directions.back.z)) {
         addMiseryChunk(directions.back.x, directions.back.y, directions.back.z);
     }
+
+    if(existsChunk(directions.left.x , directions.left.y, directions.left.z))
+        AdjChunks.push_back(&getChunk(directions.left.x, directions.left.y, directions.left.z));
+
+    
+    if(existsChunk(directions.right.x , directions.right.y, directions.right.z))
+        AdjChunks.push_back(&getChunk(directions.right.x, directions.right.y, directions.right.z)); 
+       
+
+    
+    if(existsChunk(directions.up.x , directions.up.y, directions.up.z))
+        AdjChunks.push_back(&getChunk(directions.up.x, directions.up.y, directions.up.z)); 
+       
+
+    
+    if(existsChunk(directions.down.x , directions.down.y, directions.down.z))
+        AdjChunks.push_back(&getChunk(directions.down.x, directions.down.y, directions.down.z)); 
+
+
+    
+    if(existsChunk(directions.front.x , directions.front.y, directions.front.z))
+        AdjChunks.push_back(&getChunk(directions.front.x, directions.front.y, directions.front.z)); 
+
+
+    
     if(existsChunk(directions.back.x , directions.back.y, directions.back.z))
         AdjChunks.push_back(&getChunk(directions.back.x, directions.back.y, directions.back.z)); 
     
-    
-    
+
     ChunkBuilder builder(chunk, AdjChunks);
     builder.BuildMesh(chunk.mesh, chunk.waterMesh);
     chunk.mesh.bufferMesh();
@@ -305,6 +367,7 @@ ChunkBlock ChunkManager::getBlock(float x, float y, float z) {
     x += Chunk::CHUNK_SCALE / 2.f;
     y += Chunk::CHUNK_SCALE / 2.f;
     z += Chunk::CHUNK_SCALE / 2.f;
+    
     int chunkX = x / Chunk::CHUNK_SIZE / Chunk::CHUNK_SCALE - (x < 0) ;
     int chunkZ = z / Chunk::CHUNK_SIZE / Chunk::CHUNK_SCALE - (z < 0) ;
     int chunkY = y / Chunk::CHUNK_SIZE / Chunk::CHUNK_SCALE - (y < 0) ;
@@ -473,4 +536,13 @@ ChunkSection& ChunkManager::getChunk(int x, int y, int z) {
 
 glm::vec3 ChunkManager::HashFunction(int x ,int y ,int z) {
     return glm::vec3(x, y, z);
+}
+
+
+void ChunkManager::ReBuildChunk(int x, int y, int z) {
+    if(!existsChunk(x, y, z)) {
+        return ;
+    }
+    ChunkSection & chunk = getChunk(x, y, z);
+    Recover(chunk, std::vector<ChunkSection*>());
 }

@@ -3,6 +3,7 @@
 #include "Chunk.h"
 #include "Block/ChunkBlock.h"
 #include "ChunkMesh.h"
+#include "Algorithm.h"
 
 
 class ChunkSection {
@@ -11,8 +12,8 @@ class ChunkSection {
         int getIndex(int x, int y, int z) const;
         std::array<ChunkBlock, Chunk::CHUNK_VOLUME> blocks;
         
-        
         glm::vec3 position;
+        bool Changed = false;
 
     public :
         ChunkMesh mesh;
@@ -35,6 +36,18 @@ class ChunkSection {
 
         void setBlocks(const std::array<ChunkBlock, Chunk::CHUNK_VOLUME> & _blocks) {
             blocks = _blocks;
+        }
+
+
+        void setChanged(bool changed) {
+            
+            Changed = changed;
+        }
+
+        bool isChanged() {
+            bool temp = Changed;
+            Changed = false;
+            return temp;
         }
 };
 

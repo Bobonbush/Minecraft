@@ -5,6 +5,10 @@ ChunkBlock::ChunkBlock(BLOCKID id) : id((int) id) {
         Opaque = true;
     }
 
+    if(id == BLOCKID::SpecialLeaf || id == BLOCKID::Leaf) {
+        Opaque = false;
+    }
+
     if(id == BLOCKID::Water) {
         Water = true;
     }

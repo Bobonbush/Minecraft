@@ -19,7 +19,7 @@ MainScreen::MainScreen() {
     float aspect = 1.f/ Config::GetInstance() -> GetAspectRatio();
     TitleSize.x *= aspect;
 
-    StudioLogo = std::make_unique<ReAppearingSpriteOnlyOnce>(TextureManager::getInstance() -> getTexture("Assets/Thunder Hound.png"), glm::vec2(0.0f, 0.0f), glm::vec2(1.f, 1.f));
+    StudioLogo = std::make_unique<ReAppearingSpriteOnlyOnce>(TextureManager::getInstance() -> getTexture("Assets/Thunder Hound.png"), glm::vec2(0.0f, 0.0f), glm::vec2(1.5f, 1.5f));
     ClearScreen = std::make_unique<ReAppearingSpriteOnlyOnce>(TextureManager::getInstance() -> getTexture("Assets/Clear.png"), glm::vec2(0.0f, 0.0f), glm::vec2(4.5f, 2.f));
     StudioLogo -> setAlphaSpeed(0.25f);
     ClearScreen -> setAlphaSpeed(0.25f);
