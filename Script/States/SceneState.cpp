@@ -20,7 +20,11 @@ void SceneState::Update(float deltaTime, const float &xpos, const float &ypos) {
         //states.pop();
 
         pushState(std::move(nextState));
-        
+    }
+
+    if(states.top() -> isFinished()) {
+        popState();
+        std::cout << "YES" << '\n';
     }
 }
 

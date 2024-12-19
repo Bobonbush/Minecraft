@@ -9,6 +9,7 @@ SoundManager::SoundManager() {
     AddTrack("Hover", "Assets/SoundEffect/hover.mp3");
     AddTrack("Step", "Assets/SoundEffect/step.mp3");
     AddTrack("WaterStep", "Assets/SoundEffect/waterStep.mp3");
+    AddTrack("Death", "Assets/Music/death.mp3");
 }
 
 void SoundManager::PlaySound(const std::string & soundName) {

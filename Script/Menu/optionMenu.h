@@ -30,7 +30,9 @@ class OptionMenu : public WaitingStage {
         void ProcessState() override;
 
         MenuState getMenuState() {
-            return menuState;
+            MenuState temp = menuState;
+            menuState = MenuState::NONE;
+            return temp;
         }
 };
 

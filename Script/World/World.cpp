@@ -13,15 +13,43 @@ World::World() : StateBase() {
     playingState = PlayingState::GetInstance();
 
     _next = nullptr;
+    deathScene = std::make_unique<DeathScene>();
+
+    if(player -> isDead()) {
+        player -> ReSpawn();
+    }
 }
 
 void World::render() {
     chunkManager.renderChunks(view, projection);
     cursor -> Draw( config -> GetWidth() / 2, config -> GetHeight() / 2);
+    if(player -> isDead()) {
+        deathScene -> render();
+        return ;
+    }
     player -> Render(view , projection);
 }
 
 void World::Update(float deltaTime, const float &xpos , const float &ypos) {
+
+
+    if(player -> isDead()) {
+        config -> SetMouseActive(true);
+        deathScene -> update(deltaTime, xpos, ypos);
+        deathScene -> render();
+
+        WaitingStage::MenuState state = deathScene -> getMenuState();
+
+        if(state == WaitingStage::MenuState::Respawn) {
+            player -> ReSpawn();
+            config -> SetMouseActive(false);
+        }
+
+        if(state == WaitingStage::MenuState::QUIT) {
+            backToMenu = true;
+        }
+        return ;
+    }
     camera -> update();
     player -> update(deltaTime);
     view = camera -> GetViewMatrix();
@@ -35,13 +63,15 @@ void World::Update(float deltaTime, const float &xpos , const float &ypos) {
     chunkManager.update(view , projection);
     playingState -> ProcessState(*camera, chunkManager, view, projection, deltaTime);
 
-
+    
 }
 
 
 void World::FixedUpdate(float xpos, float ypos) {
     
-    
+    if(player -> isDead()) {
+        return ;
+    }
     if(!config -> GetMouseActive()) {
         camera -> ProcessMouseMovement(xpos, ypos);
     }

@@ -13,7 +13,8 @@ class WaitingStage {
         enum class MenuState {
             NONE,
             PLAY,
-            QUIT
+            QUIT,
+            Respawn
         };
         WaitingStage();
         virtual ~WaitingStage() noexcept = default;

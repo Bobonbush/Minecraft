@@ -6,6 +6,7 @@
 #include "Chunk/ChunkManager.h"
 #include "States/PlayingState.h"
 #include "Texture&Shader/SoundEngine.h"
+#include "Menu/deathScene.h"
 class World : public StateBase {
     private:
         std::unique_ptr<RenderMaster> renderMaster;
@@ -23,6 +24,10 @@ class World : public StateBase {
 
         std::unique_ptr<StateBase> _next;
 
+        std::unique_ptr<DeathScene> deathScene;
+
+        bool backToMenu = false;
+
 
         
     public :
@@ -37,6 +42,10 @@ class World : public StateBase {
 
         std::unique_ptr<StateBase> isNext() override {
             return std::move(_next);
+        }
+
+        bool isFinished() override {
+            return backToMenu;
         }
         
 };

@@ -23,7 +23,7 @@ MainScreen::MainScreen() {
     ClearScreen = std::make_unique<ReAppearingSpriteOnlyOnce>(TextureManager::getInstance() -> getTexture("Assets/Clear.png"), glm::vec2(0.0f, 0.0f), glm::vec2(4.5f, 2.f));
     StudioLogo -> setAlphaSpeed(0.25f);
     ClearScreen -> setAlphaSpeed(0.25f);
-    Pickaxe -> setAlphaSpeed(0.15f);
+    Pickaxe -> setAlphaSpeed(0.1f);
     
     setNextState(std::make_unique<OptionMenu>());
 

@@ -4,6 +4,7 @@
 #include "mainScreen.h"
 #include "States/SceneState.h"
 #include "World/World.h"
+#include "deathScene.h"
 
 
 

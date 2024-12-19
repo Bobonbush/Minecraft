@@ -193,6 +193,9 @@
     <ClCompile Include="G:\WorkSpace\Minecraft\Script\Texture&amp;Shader\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="G:\WorkSpace\Minecraft\Script\Menu\deathScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G:\WorkSpace\Minecraft\Script\Renderer\RenderInfo.h">

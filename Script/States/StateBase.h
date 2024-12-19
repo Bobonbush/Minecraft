@@ -15,6 +15,9 @@ class StateBase {
         virtual void FixedUpdate(float xpos, float ypos) = 0;
 
         virtual std::unique_ptr<StateBase> isNext() = 0;
+        virtual bool isFinished() {
+            return false;
+        }
 };
 
 #endif // STATEBASE_H

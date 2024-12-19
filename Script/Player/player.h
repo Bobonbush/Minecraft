@@ -26,7 +26,7 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         float losingMeatMaxTime = 100.5f;
         float losingMeatCurrentTime = 0.f;
 
-        float losingBubbleMaxTime = 3.0f;
+        float losingBubbleMaxTime = 1.5f;
         float losingBubbleCurrentTime = 0.f;
 
         float exhaustConst = 0.5f;
@@ -97,6 +97,12 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         void UsingNormalInventory() {
             inventory -> UsingNormalInventory();
         }
+
+        const bool isDead() const {
+            return health <= 0;
+        }
+
+        void ReSpawn();
 
 
         

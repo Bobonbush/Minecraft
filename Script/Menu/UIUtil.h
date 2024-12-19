@@ -169,7 +169,9 @@ class Button {
         void update(float deltaTime, const float &xpos, const float &ypos);
 
         const bool isClickedButton() {
-            return isClicked;
+            bool click = isClicked;
+            isClicked = false;
+            return click;
         }
 
 };

@@ -26,6 +26,10 @@ Player::Player() : DYNAMIC_ENTITY(glm::vec3(0.5f , 1.7f, 0.5f)) {
 }
 
 void Player::update(float deltaTime) {
+
+    if(isDead()) {
+        return ;
+    }
     DYNAMIC_ENTITY::update(deltaTime);
     inventory -> update();
     currentItem = inventory -> getCurrentItem();
@@ -68,6 +72,9 @@ void Player::update(float deltaTime) {
 }
 
 void Player::FixedUpdate() {
+    if(isDead()) {
+        return ;
+    }
     DYNAMIC_ENTITY::FixedUpdate();
 
     if(UnderWater) {
@@ -142,3 +149,10 @@ std::shared_ptr<Item> Player::getCurrentItem() {
     return inventory -> getCurrentItem();
 }
 
+
+void Player::ReSpawn() {
+    position = glm::vec3(0.f, 150.f, 0.f);
+    health = 9;
+    meat = 9;
+    bubble = 9;
+}
