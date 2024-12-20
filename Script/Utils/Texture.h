@@ -48,7 +48,6 @@ class TextureLoader {
     static unsigned int LoadCubeMap(std::vector<std::string> faces);
 
     static Mesh extrudeTextureToMesh(const char* path , int width, int height, float depth);
-    
 };
 
 

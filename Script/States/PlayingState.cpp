@@ -13,6 +13,8 @@ PlayingState::PlayingState() {
     glfwSetKeyCallback(glfwGetCurrentContext(), key_callback);
 
     breakingBox = std::make_unique<AnimationBox>(4, "Assets/breaking.png", 16);
+    ShaderManager::GetInstance() -> addShader("tool", "Shader/tool.vs", "Shader/tool.fs");
+    handModel = nullptr;
 }
 
 PlayingState::~PlayingState() {
@@ -21,14 +23,32 @@ PlayingState::~PlayingState() {
 
 void PlayingState::ProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection, const float &deltaTime) {
     MouseProcess(camera, chunkManager, view, projection);
+
     if(BlockChoose != -1) {
         timer.Update(deltaTime);
+    }
+        
+    
+    if(handModel) {
+        handModel -> update(deltaTime);
+        handModel -> render(view , projection);
     }
 
 }
 
 void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
-    
+    {
+        std::shared_ptr<Item> item = player -> getCurrentItem();
+        if(item != nullptr && item -> getType() == "Block") {
+
+            if((handModel == nullptr) || (handModel && handModel -> getID() != item -> getID()) ) {
+                handModel = std::make_unique<BlockModel>(glm::vec3(0.65f));
+                handModel -> addData((BLOCKID) std::dynamic_pointer_cast<BlockItem>(item) -> getID());
+            }
+        }else {
+            handModel = nullptr;
+        }
+    }
     if(player -> isOpeningInventory()) {
         double xpos,ypos;
         glfwGetCursorPos(glfwGetCurrentContext(), &xpos, &ypos);
@@ -79,12 +99,19 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
         }
     }
 
+    if(input == Cursor::MOUSE_EVENT::LEFT_CLICK) {
+        if(handModel != nullptr) {
+            handModel -> BeingHit();
+        }
+    }
+
     if(exists == false) return ;
 
     if(input == Cursor::MOUSE_EVENT::LEFT_CLICK || input == Cursor::MOUSE_EVENT::LEFT_HOLD) {
         ChunkBlock block = chunkManager.getBlock(blockPosition.x, blockPosition.y, blockPosition.z);
         
         std::shared_ptr<Item> item = player -> getCurrentItem();
+
         
         
         int id = -1;
@@ -92,9 +119,14 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
             id = item -> getID();
         }
 
+        if(handModel != nullptr) {
+            handModel -> BeingContinuosHit();
+        }
+
         if( (int) block.getID() == BlockChoose && timer.isFinished() && id == timer.getInUse() && blockPosition == timer.getBlockPosition()) {
             
             chunkManager.removeBlock(blockPosition.x, blockPosition.y, blockPosition.z);
+            
             if(ItemConst::validTool( (int)block.getID(), id)) {
                 int itemID = ItemConst::getItemDrop((int)block.getID());
                 player -> addItem(itemID, 1);
@@ -117,18 +149,26 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
         }else {
             breakingBox -> Render(blockPosition, glm::vec3(1.f), timer.getCurrentTime(), timer.getMaxTime(), view, projection);
         }
+
+        
         
     } else {
         BlockChoose = -1;
         timer.Reset();
+
+        if(handModel != nullptr) {
+            handModel -> StopContinuosHit();
+        }
     }
 
     if(input == Cursor::MOUSE_EVENT::RIGHT_CLICK) {
         glm::vec3 position = blockPosition;
 
         ChunkBlock block = chunkManager.getBlock(position.x, position.y, position.z);
-        
-        if(block.getID() == BLOCKID::CraftingTable) {
+        if(handModel != nullptr) {
+            handModel -> BeingHit();
+        }
+        if(block.getID() == BLOCKID::CraftingTable) { 
             player -> openInventory();
             if(player -> isOpeningInventory() == false) {
                 throw std::runtime_error("Error");
@@ -153,6 +193,8 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
         }
 
         std::shared_ptr<Item> item = player -> getCurrentItem();
+
+        
         
         if(item != nullptr && item -> getType() == "Block") {
             AABB box(glm::vec3(1.f * Chunk::CHUNK_SCALE));

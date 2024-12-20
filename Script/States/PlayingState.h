@@ -8,6 +8,8 @@
 #include "Renderer/hitbox.h"
 #include "Timer.h"
 #include "Renderer/AnimationBoxRenderer.h"
+#include "Player/HandModel/BlockModel.h"
+
 
 class PlayingState : Singleton {
     private:
@@ -23,6 +25,9 @@ class PlayingState : Singleton {
         std::vector<DYNAMIC_ENTITY*> entities; 
 
         std::unique_ptr<AnimationBox> breakingBox;
+
+        std::unique_ptr<HandModel> handModel;
+        
 
         int BlockChoose = -1;
 

@@ -362,6 +362,8 @@ Mesh TextureLoader::extrudeTextureToMesh(const char* path , int width, int heigh
     return mesh;
 }
 
+
+
 TextHandler :: TextHandler(){
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);

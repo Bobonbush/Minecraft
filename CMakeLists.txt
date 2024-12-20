@@ -109,6 +109,9 @@ add_executable(OPENGL Script/main.cpp
                       Script/Texture&Shader/SoundManager.cpp
                       Script/Menu/deathScene.cpp
                       Script/World/WorldGenerator/structure.cpp
+                      Script/Player/HandModel/BlockModel.cpp
+                      Script/Player/HandModel/HandModel.cpp
+                      Script/Player/HandModel/itemModel.cpp
                       
 )
         

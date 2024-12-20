@@ -20,7 +20,7 @@ class TextureManager : public Singleton {   // Proxy x Singleton
     ~TextureManager();
     GLuint getTexture(const char * path);
     std::pair<int ,int > getTextureSize(const char * path);
-    Mesh get3DMeshFrom2D(const char * path, float depth);
+    Mesh get3DMeshFrom2D(const char * path, const float & width, const float &  height, const float & depth);
 };
 
 #endif
