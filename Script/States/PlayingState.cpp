@@ -42,11 +42,14 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
         if(item != nullptr && item -> getType() == "Block") {
 
             if((handModel == nullptr) || (handModel && handModel -> getID() != item -> getID()) ) {
-                handModel = std::make_unique<BlockModel>(glm::vec3(0.65f));
+                handModel = std::make_unique<BlockModel>(glm::vec3(0.45f));
                 handModel -> addData((BLOCKID) std::dynamic_pointer_cast<BlockItem>(item) -> getID());
             }
         }else {
-            handModel = nullptr;
+            if((handModel == nullptr) || (handModel && handModel -> getID() != (int) BLOCKID::Hand) ) {
+                handModel = std::make_unique<BlockModel>(glm::vec3(0.35f));
+                handModel -> addData(BLOCKID::Hand);
+            }
         }
     }
     if(player -> isOpeningInventory()) {

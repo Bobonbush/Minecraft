@@ -130,6 +130,11 @@
         "topX" : 9, "topY" : 1,
         "sideX" : 9, "sideY" : 1,
         "bottomX" : 9, "bottomY" : 1
+    },
+    "Hand" : {
+        "topX" : 10, "topY" : 1,
+        "sideX" : 10, "sideY" : 1,
+        "bottomX" : 10, "bottomY" : 1
     }
 }
 

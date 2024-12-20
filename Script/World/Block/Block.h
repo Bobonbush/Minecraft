@@ -58,6 +58,7 @@ enum class BLOCKID : int {
     Copper_Block = 20,
     Laser_Block = 21,
     Blue_Block = 22,
+    Hand = 23,
     
     TOTAL,
 };

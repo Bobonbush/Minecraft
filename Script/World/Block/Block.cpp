@@ -128,6 +128,8 @@ void Block::initBlockMap() {
     blockMap[static_cast<int>(BLOCKID::Laser_Block)] = "Laser Block";
     blockMap[static_cast<int>(BLOCKID::Blue_Block)] = "Blue Block";
 
+    blockMap[static_cast<int>(BLOCKID::Hand)] = "Hand";
+
     
 
 

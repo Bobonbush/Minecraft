@@ -12,6 +12,14 @@ BlockModel::~BlockModel() {
 
 void BlockModel::addData(const BLOCKID & id) {
     BlockID = (int)id;
+    
+    if(id == BLOCKID::Hand) {
+        //destinationRotation = rotation = glm::vec3(20.f , 10.f, -140.f);
+        //defaultRotation = rotation;
+        //scale.z *= 2.5f;
+        //scale.y *= 2.f;
+        scale.x *= 2.5f;
+    }
     BlockDataBase * blockDataBase = BlockDataBase::GetInstance();
     auto topCoords = blockDataBase -> getData(id).getBlockData().topCoords;
     auto sideCoords = blockDataBase -> getData(id).getBlockData().sideCoords;

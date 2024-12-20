@@ -108,20 +108,20 @@ void Player::Render(const glm::mat4 & view, const glm::mat4 & projection) {
     SunBox -> Render(sunPosition, glm::vec3(15.f), 0.f, 0.f, view, projection);
 
     ShaderManager::GetInstance() -> getShader("solid") -> setVec3("lightPosition", glm::vec3(sunPosition));
-    
-    if(currentItem == nullptr) {
-        
-        return ;
-    }
-
-
     healthBar -> Render();
     meatBar -> Render();
 
     if(UnderWater) {
         bubbleBar -> Render();
     }
+
+    if(currentItem == nullptr) {
+        
+        return ;
+    }
 }
+
+    
 
 
 void Player::InventoryUpdate(const float & xpos, const float & ypos, const int & input) {
