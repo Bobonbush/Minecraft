@@ -20,6 +20,7 @@
 #include "shader.h"
 #include <memory>
 #include <chrono>
+#include "Mesh.h"
 
 
 class TextureLoader {
@@ -27,6 +28,7 @@ class TextureLoader {
     private:
     static unsigned int LoadTexturePNG(const char* path);
     static unsigned int LoadTextureJPG(const char* path);
+    static const unsigned char* LoadTextureChar(char* path);
     static std::string prefix[2];
     
 
@@ -44,6 +46,9 @@ class TextureLoader {
     static GLFWcursor* createCustomCursor(const char* imagePath);
 
     static unsigned int LoadCubeMap(std::vector<std::string> faces);
+
+    static Mesh extrudeTextureToMesh(const char* path , int width, int height, float depth);
+    
 };
 
 

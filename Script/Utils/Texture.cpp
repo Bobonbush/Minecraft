@@ -192,6 +192,176 @@ GLFWcursor* TextureLoader::createCustomCursor(const char* imagePath) {
     return cursor;
 }
 
+Mesh TextureLoader::extrudeTextureToMesh(const char* path , int width, int height, float depth) {
+    Mesh mesh;
+
+    unsigned char* textureData = stbi_load(path, &width, &height, nullptr, STBI_rgb_alpha);
+    
+    if(textureData == nullptr) {
+        return mesh;
+    }
+    // Step 1: Create vertices for the front and back faces
+    for (int y = 0; y <= height; ++y) {
+        for (int x = 0; x <= width; ++x) {
+            // Front face
+
+            float realX = static_cast<GLfloat>(x) / width - 0.5f;
+            float realY = static_cast<GLfloat>(y) / height - 0.5f;
+            
+
+            // Back face
+
+            mesh.vertexPosition.push_back(static_cast<GLfloat>(realX));
+            mesh.vertexPosition.push_back(static_cast<GLfloat>(realY));
+            mesh.vertexPosition.push_back(depth/2.f);
+
+            mesh.vertexPosition.push_back(static_cast<GLfloat>(realX));
+            mesh.vertexPosition.push_back(static_cast<GLfloat>(realY));
+            mesh.vertexPosition.push_back(-depth/2.f);
+
+            
+
+            //x += width/2;
+            //y += height/2;
+
+            mesh.textureCoords.push_back(static_cast<GLfloat>(x) / width);
+            mesh.textureCoords.push_back( static_cast<GLfloat>(y) / height);
+
+            mesh.textureCoords.push_back( static_cast<GLfloat>(x) / width);
+            mesh.textureCoords.push_back( static_cast<GLfloat>(y) / height);
+            //std::cout << mesh.textureCoords[(int)mesh.textureCoords.size()-2]<< " " << mesh.textureCoords[(int)mesh.textureCoords.size()-1] << std::endl;
+            //x -= width/2;
+           //y -= height/2;
+        }
+    }
+
+    // Lambda function to get vertex index in grid (front face and back face alternate)
+
+    
+
+    
+    // Step 2: Create faces for edges
+    /*
+    auto getVertexIndex = [width](int x, int y, bool back) {
+        return (y * (width + 1) + x) * 3 + (back ? 1 : 0) * 3;
+    };
+    */
+    
+
+    // Step 2: Create faces for edges
+
+    auto getVertexIndex = [width](int x, int y, bool back) {
+        return (y * (width + 1) + x) * 2 + (back ? 1 : 0);
+    };
+    
+
+    // Step 2: Create faces for edges
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            int index = (y * width + x) * 4; // Assuming 4 bytes per texel (RGBA)
+            unsigned char alpha = textureData[index + 3];
+
+            if (alpha == 0) continue; // Skip transparent texels
+
+            // Front face quad
+            GLuint v0 = getVertexIndex(x, y, false);
+            GLuint v1 = getVertexIndex(x + 1, y, false);
+            GLuint v2 = getVertexIndex(x + 1, y + 1, false);
+            GLuint v3 = getVertexIndex(x, y + 1, false);
+
+            mesh.indices.push_back(v0);
+            mesh.indices.push_back(v1);
+            mesh.indices.push_back(v2);
+            mesh.indices.push_back(v2);
+            mesh.indices.push_back(v3);
+            mesh.indices.push_back(v0);
+
+            // Back face quad
+            GLuint bv0 = getVertexIndex(x, y, true);
+            GLuint bv1 = getVertexIndex(x, y + 1, true);
+            GLuint bv2 = getVertexIndex(x + 1, y + 1, true);
+            GLuint bv3 = getVertexIndex(x + 1, y, true);
+
+            mesh.indices.push_back(bv0);
+            mesh.indices.push_back(bv1);
+            mesh.indices.push_back(bv2);
+            mesh.indices.push_back(bv2);
+            mesh.indices.push_back(bv3);
+            mesh.indices.push_back(bv0);
+
+            
+
+            // Horizontal edges
+            if (x == 0 || textureData[index - 4 + 3] == 0) {
+                // Left face
+                GLuint lv0 = getVertexIndex(x, y, false);
+                GLuint lv1 = getVertexIndex(x, y + 1, false);
+                GLuint lv2 = getVertexIndex(x, y + 1, true);
+                GLuint lv3 = getVertexIndex(x, y, true);
+
+                mesh.indices.push_back(lv0);
+                mesh.indices.push_back(lv1);
+                mesh.indices.push_back(lv2);
+                mesh.indices.push_back(lv2);
+                mesh.indices.push_back(lv3);
+                mesh.indices.push_back(lv0);
+            }
+
+
+            if (x == width - 1 || textureData[index + 4 + 3] == 0) {
+                // Right face
+                GLuint rv0 = getVertexIndex(x + 1, y, false);
+                GLuint rv1 = getVertexIndex(x + 1, y, true);
+                GLuint rv2 = getVertexIndex(x + 1, y + 1, true);
+                GLuint rv3 = getVertexIndex(x + 1, y + 1, false);
+
+                mesh.indices.push_back(rv0);
+                mesh.indices.push_back(rv1);
+                mesh.indices.push_back(rv2);
+                mesh.indices.push_back(rv2);
+                mesh.indices.push_back(rv3);
+                mesh.indices.push_back(rv0);
+            }
+
+            // Vertical edges
+            if (y == 0 || textureData[index - width * 4 + 3] == 0) {
+                // Bottom face
+                GLuint bv0 = getVertexIndex(x, y, false);
+                GLuint bv1 = getVertexIndex(x, y, true);
+                GLuint bv2 = getVertexIndex(x + 1, y, true);
+                GLuint bv3 = getVertexIndex(x + 1, y, false);
+
+                mesh.indices.push_back(bv0);
+                mesh.indices.push_back(bv1);
+                mesh.indices.push_back(bv2);
+                mesh.indices.push_back(bv2);
+                mesh.indices.push_back(bv3);
+                mesh.indices.push_back(bv0);
+            }
+
+            if (y == height - 1 || textureData[index + width * 4 + 3] == 0) {
+                // Top face
+                GLuint tv0 = getVertexIndex(x, y + 1, false);
+                GLuint tv1 = getVertexIndex(x + 1, y + 1, false);
+                GLuint tv2 = getVertexIndex(x + 1, y + 1, true);
+                GLuint tv3 = getVertexIndex(x, y + 1, true);
+
+                mesh.indices.push_back(tv0);
+                mesh.indices.push_back(tv1);
+                mesh.indices.push_back(tv2);
+                mesh.indices.push_back(tv2);
+                mesh.indices.push_back(tv3);
+                mesh.indices.push_back(tv0);
+            }
+        }
+    }
+
+    stbi_image_free(textureData);
+
+
+    return mesh;
+}
+
 TextHandler :: TextHandler(){
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
