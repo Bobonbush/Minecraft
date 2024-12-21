@@ -76,11 +76,33 @@ void Player::FixedUpdate() {
         return ;
     }
     DYNAMIC_ENTITY::FixedUpdate();
+    
+    if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_W) == GLFW_PRESS || glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_S) == GLFW_PRESS || glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_A) == GLFW_PRESS || glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_D) == GLFW_PRESS) {
+        Walking = true;
+    } else {
+        Walking = false;
+    }
 
     if(UnderWater) {
         ApplyFriction(PhysicConst::WaterFriction);
+        SoundManager * soundManager = SoundManager::GetInstance();
+        soundManager -> StopSound("Step");
+        soundManager -> PlaySoundEffect("WaterStep");
+            
+        
     }else {
+        SoundManager::GetInstance() -> StopSound("WaterStep");
+        if(Walking && isOnGround()) {
+            
+            SoundManager::GetInstance() -> PlaySoundEffect("Step");
+            SoundManager::GetInstance() -> setVolume( 0.15f, "Step");
+        }
         ApplyFriction();
+    }
+
+    
+    if(!Walking) {
+        SoundManager::GetInstance() -> StopSound("Step");
     }
 
     if(isOnGround()) {

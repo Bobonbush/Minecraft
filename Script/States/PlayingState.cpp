@@ -136,7 +136,8 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
         if( (int) block.getID() == BlockChoose && timer.isFinished() && id == timer.getInUse() && blockPosition == timer.getBlockPosition()) {
             
             chunkManager.removeBlock(blockPosition.x, blockPosition.y, blockPosition.z);
-            
+            SoundManager::GetInstance() -> PlaySound("Block");
+            SoundManager::GetInstance() -> StopSound("Breaking");
             if(ItemConst::validTool( (int)block.getID(), id)) {
                 int itemID = ItemConst::getItemDrop((int)block.getID());
                 player -> addItem(itemID, 1);
@@ -155,6 +156,8 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
                 timer.setInUse(-1);
             }else timer.setInUse((int)item->getID());
 
+            SoundManager::GetInstance() -> PlaySoundEffect("Breaking");
+
             timer.setBlockPosition(blockPosition);
         }else {
             breakingBox -> Render(blockPosition, glm::vec3(1.f), timer.getCurrentTime(), timer.getMaxTime(), view, projection);
@@ -165,6 +168,7 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
     } else {
         BlockChoose = -1;
         timer.Reset();
+        SoundManager::GetInstance() -> StopSound("Breaking");
 
         if(handModel != nullptr) {
             handModel -> StopContinuosHit();
@@ -211,11 +215,10 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
             box.update(position);
             BLOCKID id = (BLOCKID) std::dynamic_pointer_cast<BlockItem>(item) -> getID();
             if(id != BLOCKID::Air) {
-
-            
                 if(!player -> getColliding(box)) {
                     chunkManager.addBlock(position.x, position.y, position.z, ChunkBlock(id));
                     player -> RemoveItem(item);
+                    SoundManager::GetInstance() -> PlaySound("Block");
                 }
             }
         }

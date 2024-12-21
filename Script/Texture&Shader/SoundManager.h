@@ -1,32 +1,55 @@
-#ifndef SOUNDMANAGER_H
-#define SOUNDMANAGER_H
-#include "SoundEngine.h"
+#ifndef SOUNDENGINE_H
+#define SOUNDENGINE_H
+#include <iostream>
 #include "Utils/Singleton.h"
+#include <irrKlang.h>
+#include <vector>
 #include <map>
+#include "Utils/Singleton.h"
+#include <irrKlang.h>
+using namespace irrklang;
 
-class SoundManager : public Singleton {
-    std::map<std::string , std::string> soundMap; // Sound Name, Sound Path
-    SoundEngine * soundEngine;
-    SoundManager();
-    void AddTrack(const std::string & soundName, const std::string & path) {
-        soundMap[soundName] = path;
-    }
-    static SoundManager * instance;
-    public :
 
-    static SoundManager * GetInstance() {
-        if(instance == nullptr) {
-            instance = new SoundManager();
+class SoundManager : Singleton {
+    private:
+        irrklang::ISoundEngine* engine;
+
+        std::map<std::string , std::string> soundMap; // Sound Name, Sound Path
+        
+        
+        void AddTrack(const std::string & soundName, const std::string & path) {
+            soundMap[soundName] = path;
         }
-        return instance;
-    }
-    
-    
-    void PlaySound(const std::string & soundName);
-    void PlaySound(const std::string & soundName, bool loop);
-    void PlaySound(const std::string & soundName, bool loop, bool startPaused);
-    void PlaySound(const std::string & soundName, bool loop, bool startPaused, bool track);
-    void StopAllSounds();
+        void Init();
+
+        static SoundManager * instance;
+        std::vector<irrklang::ISound*> sounds;
+        std::map<std::string , int> inTrack; 
+
+        SoundManager();
+    public:
+
+        static SoundManager * GetInstance() {
+            if(instance == nullptr) {
+                instance = new SoundManager();
+            }
+            return instance;
+        }
+        
+        ~SoundManager();
+        
+        void PlaySound(const char* path);
+        void PlaySound(const char* path, bool loop);
+        void PlaySound(const char* path, bool loop, bool startPaused);
+        void PlaySound(const char* path, bool loop, bool startPaused, bool track);
+        void PlaySoundEffect(const char* path);
+        void StopAllSounds();
+        void Drop();
+        void SetSoundVolume(float volume);
+        void SetSoundPosition(float x, float y, float z);
+        void StopSound(const char* path);
+        
+        void setVolume(float volume, const char* path);
 };
 
-#endif // SOUNDMANAGER_H
+#endif // SOUNDENGINE_H

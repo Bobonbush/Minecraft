@@ -5,7 +5,6 @@
 #include "Application.h"
 #include "Chunk/ChunkManager.h"
 #include "States/PlayingState.h"
-#include "Texture&Shader/SoundEngine.h"
 #include "Menu/deathScene.h"
 class World : public StateBase {
     private:

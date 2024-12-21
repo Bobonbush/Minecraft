@@ -18,6 +18,10 @@ World::World() : StateBase() {
     if(player -> isDead()) {
         player -> ReSpawn();
     }
+
+    SoundManager::GetInstance() -> StopAllSounds();
+
+    SoundManager::GetInstance() -> PlaySound("Background");
 }
 
 void World::render() {

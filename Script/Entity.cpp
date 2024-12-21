@@ -27,11 +27,11 @@ void DYNAMIC_ENTITY::FixedUpdate() {
     velocity.x *= friction;
     velocity.z *= friction;
 
-    if(SPA::abs(velocity.x) < 0.00001f ) {
+    if(SPA::abs(velocity.x) < 0.001f ) {
         velocity.x = 0;
     }
 
-    if(SPA::abs(velocity.z) < 0.00001f ) {
+    if(SPA::abs(velocity.z) < 0.001f ) {
         velocity.z = 0;
     }
 
@@ -41,11 +41,8 @@ void DYNAMIC_ENTITY::FixedUpdate() {
         velocity.y *= friction*1.15f;
     }
 
-    if(velocity.x != 0 || velocity.z != 0) {
-        Walking = true;
-    }else {
-        Walking = false;
-    }
+    
+
     
     
 

@@ -88,7 +88,6 @@ add_executable(OPENGL Script/main.cpp
                       Script/Renderer/SpriteRenderer.cpp
                       Script/Player/Inventory/InteractiveBox.cpp
                       Script/Texture&Shader/TextureManager.cpp
-                      Script/Texture&Shader/SoundEngine.cpp
                       Script/Item/Item.cpp
                       Script/Player/Inventory/InventoryManager.cpp
                       Script/Player/Inventory/InventorySection.cpp

@@ -22,7 +22,7 @@ class MainScreen : public WaitingStage {
         glm::vec2 Titleposition = glm::vec2(0.0f, 0.0f);
         glm::vec2 TitleSize = glm::vec2(3.75f , 0.35f);
 
-        SoundEngine * soundEngine;
+        SoundManager * soundEngine;
 
         std::unique_ptr<SpriteAnimator> ClearScreen;
 
