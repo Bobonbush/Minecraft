@@ -1,3 +1,0 @@
-D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/OPENGL.dir
-D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/ALL_BUILD.dir
-D:/WorkSpace/Minecraft/Minecraft/build/CMakeFiles/ZERO_CHECK.dir
