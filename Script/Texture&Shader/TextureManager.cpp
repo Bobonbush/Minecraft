@@ -31,9 +31,10 @@ std::pair<int ,int > TextureManager::getTextureSize(const char * path) {
 }
 
 
-Mesh TextureManager::get3DMeshFrom2D(const char * path, const float &width , const float &height, const float & depth ) {
-    if(meshCache.find(path) == meshCache.end()) {
-        meshCache[path] = TextureLoader::extrudeTextureToMesh(path, width, height, depth);
+Mesh TextureManager::get3DMeshFrom2DPart(const int & id , const char * path, const float & width, const float & height, const float & depth, const float & currentX, const float & currentY) {
+    if(meshCache.find(id) == meshCache.end()) {
+        
+        meshCache[id] = TextureLoader::extrudePartTextureToMesh(path, width, height, currentX, currentY, depth);
     }
-    return meshCache[path];
+    return meshCache[id];
 }

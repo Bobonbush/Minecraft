@@ -39,16 +39,23 @@ void PlayingState::ProcessState(const Camera & camera, ChunkManager & chunkManag
 void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection) {
     {
         std::shared_ptr<Item> item = player -> getCurrentItem();
-        if(item != nullptr && item -> getType() == "Block") {
+        if(item != nullptr) {
 
             if((handModel == nullptr) || (handModel && handModel -> getID() != item -> getID()) ) {
-                handModel = std::make_unique<BlockModel>(glm::vec3(0.45f));
-                handModel -> addData((BLOCKID) std::dynamic_pointer_cast<BlockItem>(item) -> getID());
+                
+                int id = item -> getID();
+                if(id < (int) BLOCKID::TOTAL ) {
+                    handModel = std::make_unique<BlockModel>(glm::vec3(0.45f));
+                    handModel -> addData(std::dynamic_pointer_cast<BlockItem>(item) -> getID());
+                }else {
+                    handModel = std::make_unique<ItemModel>(glm::vec3(1.f), "Assets/Items/items.png");
+                    handModel -> addData(id);
+                }
             }
         }else {
             if((handModel == nullptr) || (handModel && handModel -> getID() != (int) BLOCKID::Hand) ) {
                 handModel = std::make_unique<BlockModel>(glm::vec3(0.35f));
-                handModel -> addData(BLOCKID::Hand);
+                handModel -> addData( (int)BLOCKID::Hand);
             }
         }
     }

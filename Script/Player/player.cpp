@@ -22,7 +22,7 @@ Player::Player() : DYNAMIC_ENTITY(glm::vec3(0.5f , 1.7f, 0.5f)) {
     spriteRenderer = SpriteRenderer::getInstance();
     textureManager = TextureManager::getInstance();
 
-    setHeadPosition(0.45f);
+    setHeadPosition(0.35f);
 }
 
 void Player::update(float deltaTime) {

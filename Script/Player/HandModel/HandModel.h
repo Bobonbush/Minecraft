@@ -41,10 +41,10 @@ class HandModel {
         void setCooldown(float time);
 
         void addData(const Mesh & mesh);
-        virtual void addData(const BLOCKID & id) = 0;
-
-        void BeingHit();
-        void BeingContinuosHit();
+        virtual void addData(const int & id) = 0;
+        
+        virtual void BeingHit();
+        virtual void BeingContinuosHit();
         void StopContinuosHit();
 
         virtual int getID()  = 0;

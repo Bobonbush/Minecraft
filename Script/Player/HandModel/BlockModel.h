@@ -13,7 +13,7 @@ class BlockModel : public HandModel {
         ~BlockModel();
         void render(const glm::mat4 & view , const glm::mat4 & projection) override;
         void update(const float & deltaTime) override;
-        void addData( const BLOCKID & id) override;
+        void addData( const int & id) override;
 
         virtual int getID() override;
         

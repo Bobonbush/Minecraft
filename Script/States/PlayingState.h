@@ -9,6 +9,7 @@
 #include "Timer.h"
 #include "Renderer/AnimationBoxRenderer.h"
 #include "Player/HandModel/BlockModel.h"
+#include "Player/HandModel/ItemModel.h"
 
 
 class PlayingState : Singleton {

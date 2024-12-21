@@ -10,8 +10,8 @@ class Config : public Singleton {
         static float width;
         static float height;
         int antialiasing = 4;
-        const int majorVersion = 4;
-        const int minorVersion = 6;
+        const int majorVersion = 3;
+        const int minorVersion = 3;
         int depthBits = 24;
         int stencilBits = 8;
 

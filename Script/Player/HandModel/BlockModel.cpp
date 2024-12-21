@@ -10,10 +10,10 @@ BlockModel::~BlockModel() {
 
 }
 
-void BlockModel::addData(const BLOCKID & id) {
-    BlockID = (int)id;
+void BlockModel::addData(const int & id) {
+    BlockID = id;
     
-    if(id == BLOCKID::Hand) {
+    if((BLOCKID)id == BLOCKID::Hand) {
         //destinationRotation = rotation = glm::vec3(20.f , 10.f, -140.f);
         //defaultRotation = rotation;
         //scale.z *= 2.5f;
@@ -21,9 +21,9 @@ void BlockModel::addData(const BLOCKID & id) {
         scale.x *= 2.5f;
     }
     BlockDataBase * blockDataBase = BlockDataBase::GetInstance();
-    auto topCoords = blockDataBase -> getData(id).getBlockData().topCoords;
-    auto sideCoords = blockDataBase -> getData(id).getBlockData().sideCoords;
-    auto bottomCoords = blockDataBase -> getData(id).getBlockData().bottomCoords;
+    auto topCoords = blockDataBase -> getData((BLOCKID)id).getBlockData().topCoords;
+    auto sideCoords = blockDataBase -> getData((BLOCKID)id).getBlockData().sideCoords;
+    auto bottomCoords = blockDataBase -> getData((BLOCKID)id).getBlockData().bottomCoords;
     
     std::vector<GLfloat> vertices = {
                 // Front
