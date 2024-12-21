@@ -1,8 +1,0 @@
-{
-    "width" : 1200, 
-    "height" : 800, 
-    "antialiasing" : 16,
-    "depthBits" : 24, 
-    "stencilBits" : 8, 
-    "title" : "Elden Craft"
-}
