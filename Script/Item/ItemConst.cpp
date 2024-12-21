@@ -113,9 +113,9 @@ void ItemConst::initItemDropMap() {
     ItemDrop[(int)BLOCKID::Water] = 0;
     ItemDrop[(int)BLOCKID::Sand] = static_cast<int>(BLOCKID::Sand);
     ItemDrop[(int)BLOCKID::Bedrock] = static_cast<int>(BLOCKID::Bedrock);
-    ItemDrop[(int)BLOCKID::BlueOre] = static_cast<int>(BLOCKID::BlueOre);
-    ItemDrop[(int)BLOCKID::CopperOre] = static_cast<int>(BLOCKID::CopperOre);
-    ItemDrop[(int)BLOCKID::LaserOre] = static_cast<int>(BLOCKID::LaserOre);
+    ItemDrop[(int)BLOCKID::BlueOre] = static_cast<int>(ItemID::Blue);
+    ItemDrop[(int)BLOCKID::CopperOre] = static_cast<int>(ItemID::Copper);
+    ItemDrop[(int)BLOCKID::LaserOre] = static_cast<int>(ItemID::Laser);
     ItemDrop[(int)BLOCKID::CoalOre] = static_cast<int>(ItemID::Coal);
     ItemDrop[(int)BLOCKID::Leaf] = static_cast<int>(ItemID::Apple);
     ItemDrop[(int)BLOCKID::TearWood] = static_cast<int>(BLOCKID::TearWood);
@@ -177,4 +177,8 @@ const bool ItemConst::validEfficiency(const int & id, const  int& blockID) {
 
     return false;
             
+}
+
+const ItemConst::Type ItemConst::getItemType(const int & id) {
+    return itemMap[id];
 }

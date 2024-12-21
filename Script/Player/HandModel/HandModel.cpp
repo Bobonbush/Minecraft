@@ -13,11 +13,13 @@ HandModel::HandModel( const glm::vec3 & scale) :  scale(scale) {
 
     position.y = -1.2f;
     position.x = 1.f;
+    position.z += 0.5f;
 
     destinationPosition = position;
     destinationPosition.y = -1.0f;
     destinationPosition.y += this -> scale.y / 16.f;
     destinationPosition.x -= this -> scale.x / 1.f;
+    
 
     destinationRotation = rotation;
 

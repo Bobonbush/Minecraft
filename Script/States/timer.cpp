@@ -8,7 +8,7 @@ Timer::Timer(float maxTime) : maxTime(maxTime) {
 
 Timer::Timer(float maxTime, float efficiency) : maxTime(maxTime), efficiency(efficiency) {
     this -> efficiency++;
-    this -> maxTime *= 0.35f;
+    this -> maxTime *= 1.f;
 }
 
 void Timer::Update(float deltaTime) {

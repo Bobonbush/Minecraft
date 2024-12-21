@@ -256,6 +256,11 @@ void InventorySection::PickItem() {
 bool InventorySection::PlaceItem(std::shared_ptr<Item> & item) {
     if(itemChoose == nullptr) return false ;
     if(isResultBox) return false;
+    if(type == Type::Weapon) {
+        if(ItemConst::getItemType(item -> getID()) != ItemConst::Type::Armor) {
+            return false;
+        }
+    }
     if(itemChoose -> isEmpty()) {
         itemChoose -> setItem(item);
         item = nullptr;
@@ -288,6 +293,11 @@ bool InventorySection::PlaceItem(std::shared_ptr<Item> & item) {
 
 bool InventorySection:: PlaceItem(std::shared_ptr<Item> & item, bool one) {
     if(itemChoose == nullptr) return false ;
+    if(type == Type::Weapon) {
+        if(ItemConst::getItemType(item -> getID()) != ItemConst::Type::Armor) {
+            return false;
+        }
+    }
     if(itemChoose -> isEmpty()) {
         int old = item -> getNumber();
         item -> addNumber(-item -> getNumber() + 1);

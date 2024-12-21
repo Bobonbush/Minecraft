@@ -361,7 +361,7 @@
 
         "Iron" : {
             "Ingredients" : [
-                "Iron Block"
+                "Stone"
             ],
             "Result" : "Iron",
             "Recipe": "100000000",

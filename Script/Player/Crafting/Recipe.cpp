@@ -151,6 +151,7 @@ CraftingRecipeDataBase::CraftingRecipeDataBase() {
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Laser"));
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Copper"));
     recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Coal"));
+    recipes.push_back(Recipe(Recipe::Type::CRAFTING, "Iron"));
     
 }
 

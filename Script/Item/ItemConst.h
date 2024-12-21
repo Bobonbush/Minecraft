@@ -91,6 +91,7 @@ class ItemConst {
 
 
         static int getMaxStack( ItemID & id);
+        static const  Type getItemType(const int & id);
         static const float getItemEfficiency(const int &id);
 
         static const bool validEfficiency(const int & id, const  int& blockID);
