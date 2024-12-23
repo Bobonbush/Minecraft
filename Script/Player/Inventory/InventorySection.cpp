@@ -230,7 +230,6 @@ void InventorySection::PickItem() {
                     if(Boxes[i][j] -> isEmpty()) {
                         continue;
                     }
-                    std::cout << Boxes[i][j] -> getItem() -> getNumber() << std::endl;
 
                     Boxes[i][j] -> getItem() -> addNumber(-minimal);
                     //std::cout << Boxes[i][j] -> getItem() -> getNumber() << std::endl;
@@ -366,9 +365,7 @@ void InventorySection::CreateRecipe() {
     std::shared_ptr<Item> item = nullptr;
 
     if(id < (int) BLOCKID::TOTAL) {
-
         item = std::make_shared<BlockItem>((BLOCKID) id, ItemDataBase::GetInstance() -> getItemName((ItemID) id));
-        
     }else {
         item = std::make_shared<SpriteItem>((ItemID) id, ItemDataBase::GetInstance() -> getItemName((ItemID) id));
     }

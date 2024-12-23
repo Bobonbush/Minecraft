@@ -90,6 +90,11 @@ InventoryManager::InventoryManager() {
     addItem((int)BLOCKID::SpecialLeaf, 64);
     addItem((int)BLOCKID::Sand, 64);
 
+    addItem((int)ItemID::Blue_Helmet, 1);
+    addItem((int)ItemID::Blue_Chestplate , 1);
+    addItem((int)ItemID::Blue_Leggings , 1);
+    addItem((int)ItemID::Blue_Boots , 1);
+
     
 }
 
@@ -249,7 +254,7 @@ void InventoryManager::RemoveItem(std::shared_ptr<Item> item)  {
     std::pair<int ,int> pos = FindItem(item -> getID());
     if(items[pos.first][pos.second] != nullptr) {
         items[pos.first][pos.second] -> use();
-        if(items[pos.first][pos.second] -> getNumber() == 0) {
+        if(items[pos.first][pos.second] -> getNumber() == 0 || items[pos.first][pos.second] -> getMaximalUse() == 0) {
             items[pos.first][pos.second] = nullptr;
             if(pos.first * Inventory::MAX_COL + pos.second < Inventory::handCol) {
                 sections[0] -> unsetBoxItem(pos.first * Inventory::MAX_COL + pos.second);
@@ -264,7 +269,6 @@ void InventoryManager::RemoveItem(int row , int col) {
         if(row * Inventory::MAX_COL + col < Inventory::handCol) {
             sections[0] -> unsetBoxItem(row * Inventory::MAX_COL + col);
         }
-
     }
 }
 
@@ -434,4 +438,17 @@ void InventoryManager::UsingNormalInventory() {
     sections[2] -> Activation();
     sections[3] -> Activation();
     sections[4] -> Disactivation();
+}
+
+int InventoryManager::CalculateArmor() {
+    int total = 0;
+    for(int i = 0 ; i < 4 ; i++) {
+        std::shared_ptr<Item> item = sections[2] -> getItem(i);
+        
+        if(item == nullptr) {
+            continue;
+        }
+        total += ItemConst::getArmorValue(item -> getID());
+    }
+    return total;
 }

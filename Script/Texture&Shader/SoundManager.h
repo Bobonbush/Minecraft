@@ -15,7 +15,7 @@ class SoundManager : Singleton {
         irrklang::ISoundEngine* engine;
 
         std::map<std::string , std::string> soundMap; // Sound Name, Sound Path
-        
+        std::map<std::string , int > InUseSound;
         
         void AddTrack(const std::string & soundName, const std::string & path) {
             soundMap[soundName] = path;
@@ -39,11 +39,13 @@ class SoundManager : Singleton {
         ~SoundManager();
         
         void PlaySound(const char* path);
-        void PlaySound(const char* path, bool loop);
+        void PlaySound(const char * path, float alpha);
+        void PlaySound(const char* path, bool loop, float alpha);
         void PlaySound(const char* path, bool loop, bool startPaused);
         void PlaySound(const char* path, bool loop, bool startPaused, bool track);
         void PlaySoundEffect(const char* path);
         void StopAllSounds();
+        void StopAllSoundsEffect();
         void Drop();
         void SetSoundVolume(float volume);
         void SetSoundPosition(float x, float y, float z);

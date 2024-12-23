@@ -90,7 +90,7 @@ public:
     {
         float velocity = MovementSpeed * deltaTime;
         if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
-            velocity *= 2.f;
+            velocity *= 1.75f;
         }
         if (direction == Camera_Movement::FORWARD) {
             glm::vec3 force = glm::vec3(Front.x, 0.f, Front.z);

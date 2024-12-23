@@ -22,6 +22,8 @@ Player::Player() : DYNAMIC_ENTITY(glm::vec3(0.5f , 1.7f, 0.5f)) {
     spriteRenderer = SpriteRenderer::getInstance();
     textureManager = TextureManager::getInstance();
 
+    AmorBar = std::make_unique<InteractiveBar>(maxAmor, glm::vec2(-0.01f, pos.y), size * 1.25f, "Assets/HealthBar/Armor.png", "Assets/HealthBar/armor_empty.png");
+
     setHeadPosition(0.35f);
 }
 
@@ -30,14 +32,16 @@ void Player::update(float deltaTime) {
     if(isDead()) {
         return ;
     }
+
     DYNAMIC_ENTITY::update(deltaTime);
     inventory -> update();
     currentItem = inventory -> getCurrentItem();
-
+    currentAmor = inventory -> CalculateArmor();
     
 
     losingMeatCurrentTime += deltaTime;
     losingBubbleCurrentTime += deltaTime;
+
     if(losingMeatCurrentTime >= losingMeatMaxTime) {
         meat -= 1;
         if(meat < 0 ) {
@@ -49,7 +53,7 @@ void Player::update(float deltaTime) {
         losingMeatCurrentTime = 0.f;
     }
 
-    if(UnderWater) {
+    if(headUnderWater) {
         if(losingBubbleCurrentTime >= losingBubbleMaxTime) {
             bubble -= 1;
             if(bubble < 0) {
@@ -60,15 +64,17 @@ void Player::update(float deltaTime) {
         }
         
     }else  {
-        losingBubbleCurrentTime = 0.f;
-        bubble = 9;
+        if(bubble < 9 && losingBubbleCurrentTime >= losingBubbleMaxTime) {
+            bubble += 1;
+            losingBubbleCurrentTime = 0.f;
+        }
     }
 
 
     healthBar -> setHealth(health);
     meatBar -> setHealth(meat);
     bubbleBar -> setHealth(bubble);
-    
+    AmorBar -> setHealth(currentAmor);
 }
 
 void Player::FixedUpdate() {
@@ -101,13 +107,14 @@ void Player::FixedUpdate() {
     }
 
     
-    if(!Walking) {
+    if(!Walking || !isOnGround()) {
         SoundManager::GetInstance() -> StopSound("Step");
     }
 
     if(isOnGround()) {
         if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_SPACE) == GLFW_PRESS) {
             addForce(glm::vec3(0.f, JUMP_FORCE, 0.f));
+            SoundManager::GetInstance() -> PlaySound("Jumping");
         }
     }
 
@@ -116,11 +123,10 @@ void Player::FixedUpdate() {
 
 void Player::Render(const glm::mat4 & view, const glm::mat4 & projection) {
     
-    
-    
     inventory -> Render();
 
-    if(UnderWater) {
+    if(headUnderWater) {
+        
         spriteRenderer -> setShader(ShaderManager::GetInstance() -> getShader("clear"));   
         unsigned int underWaterClear = textureManager -> getTexture("Assets/UnderWater.png");
         spriteRenderer -> DrawSprite(underWaterClear, glm::vec2(0.f), glm::vec2(2.f), 0.f, glm::vec3(1.f), glm::mat4(1.0f), glm::mat4(1.0f), 0.5f);
@@ -133,8 +139,12 @@ void Player::Render(const glm::mat4 & view, const glm::mat4 & projection) {
     healthBar -> Render();
     meatBar -> Render();
 
-    if(UnderWater) {
+    if(bubble <  9) {
         bubbleBar -> Render();
+    }
+
+    if(currentAmor > 0) {
+        AmorBar -> Render();
     }
 
     if(currentItem == nullptr) {
@@ -177,4 +187,5 @@ void Player::ReSpawn() {
     health = 9;
     meat = 9;
     bubble = 9;
+    currentAmor = maxAmor;
 }

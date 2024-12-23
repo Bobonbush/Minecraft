@@ -29,7 +29,7 @@ MainScreen::MainScreen() {
 
     soundManager = SoundManager::GetInstance();
 
-    soundManager -> PlaySound("Menu", true);
+    soundManager -> PlaySound("Menu", true, 1.f);
 }
 
 MainScreen::~MainScreen() {

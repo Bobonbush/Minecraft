@@ -141,6 +141,9 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
             if(ItemConst::validTool( (int)block.getID(), id)) {
                 int itemID = ItemConst::getItemDrop((int)block.getID());
                 player -> addItem(itemID, 1);
+                if(item != nullptr) {
+                    player -> RemoveItem(item);
+                }
             }
         }else if( (int) block.getID() != BlockChoose || id != timer.getInUse() || blockPosition != timer.getBlockPosition()) {
             BlockChoose = (int) block.getID();
@@ -287,13 +290,21 @@ void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunk
     }
 
 
-    glm::vec3 headPosition = player -> getHeadPosition();
+    glm::vec3 headPosition = player -> getPosition() - glm::vec3(0.f, 0.65f, 0.f);
     
     ChunkBlock block = chunkManager.getBlock(headPosition.x, headPosition.y, headPosition.z);
     if(block.getID() == BLOCKID::Water) {
         player -> isUnderWater(true);
     }else {
         player -> isUnderWater(false);
+    }
+
+    headPosition = player -> getHeadPosition();
+    block = chunkManager.getBlock(headPosition.x, headPosition.y, headPosition.z);
+    if(block.getID() == BLOCKID::Water) {
+        player -> setHeadUnderWater(true);
+    }else {
+        player -> setHeadUnderWater(false);
     }
     
 

@@ -19,6 +19,8 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         std::shared_ptr<Item> currentItem;
 
         std::shared_ptr<AnimationBox> SunBox;
+
+        bool headUnderWater = false;
         Player();
 
         bool openingInventory = false;
@@ -28,6 +30,9 @@ class Player : public DYNAMIC_ENTITY, Singleton {
 
         float losingBubbleMaxTime = 1.5f;
         float losingBubbleCurrentTime = 0.f;
+
+        int maxAmor = 9;
+        int currentAmor = 9;
 
         float exhaustConst = 0.5f;
 
@@ -49,6 +54,7 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         std::unique_ptr<InteractiveBar> healthBar;
         std::unique_ptr<InteractiveBar> meatBar;
         std::unique_ptr<InteractiveBar> bubbleBar;
+        std::unique_ptr<InteractiveBar> AmorBar;
 
         ~Player() {
             delete m_instance;
@@ -103,6 +109,11 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         }
 
         void ReSpawn();
+
+        void setHeadUnderWater(bool headUnderWater) {
+            this -> headUnderWater = headUnderWater;
+        }
+
 
 
         

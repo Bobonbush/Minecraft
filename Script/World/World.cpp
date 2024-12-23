@@ -20,8 +20,6 @@ World::World() : StateBase() {
     }
 
     SoundManager::GetInstance() -> StopAllSounds();
-
-    SoundManager::GetInstance() -> PlaySound("Background");
 }
 
 void World::render() {
@@ -36,7 +34,7 @@ void World::render() {
 
 void World::Update(float deltaTime, const float &xpos , const float &ypos) {
 
-
+    SoundManager::GetInstance() -> PlaySound("Background", true, 0.5f);
     if(player -> isDead()) {
         config -> SetMouseActive(true);
         deathScene -> update(deltaTime, xpos, ypos);

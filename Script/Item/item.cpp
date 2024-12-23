@@ -8,6 +8,8 @@ Item::Item() : stats({0}) {
         textLoader = std::make_unique<TextHandler>();
         textLoader -> LoadFont("Assets/Font/Revamped.ttf", 12);
     }
+
+    stats.maximalUse = -1;
 }
 
 
@@ -78,6 +80,9 @@ SpriteItem::SpriteItem(ItemID id , const std::string &name) : Item(), data(name)
     stats.number = 0;
 
     maxStack = ItemConst::getMaxStack(id);
+    if(ItemConst::itemMap[stats.id] == ItemConst::Type::Tool)
+        stats.maximalUse = ItemConst::getToolMaxUse( (int) id);
+        
 
 }
 
@@ -125,3 +130,20 @@ Item::Stats SpriteItem::getStats() {
 }
 
 
+
+void SpriteItem::use() {
+    
+    if(stats.maximalUse == -1) {
+        stats.number--;
+        return ;
+    }
+    stats.maximalUse--;
+
+    if(stats.maximalUse == 0) {
+        SoundManager::GetInstance() -> PlaySound("ItemBreak");
+    }
+    
+    if(stats.number == 0) {
+        stats.id = -1;
+    }
+}

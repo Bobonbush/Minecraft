@@ -55,6 +55,8 @@ class InventoryManager {
 
         void UsingCraftingTable();
         void UsingNormalInventory();
+
+        int CalculateArmor();
 };
 
 #endif // INVENTORYMANAGER_H

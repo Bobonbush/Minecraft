@@ -30,18 +30,17 @@ void SoundManager::Init() {
     AddTrack("Block", "Assets/SoundEffect/stone.wav");
     AddTrack("Breaking", "Assets/SoundEffect/Breaking.wav");
     AddTrack("Background", "Assets/Music/Background.wav");
+    AddTrack("ItemBreak", "Assets/SoundEffect/ItemBreak.wav");
+    AddTrack("Jumping", "Assets/SoundEffect/Jumping.wav");
+    AddTrack("Falling", "Assets/SoundEffect/Falling.wav");
 }
 
 void SoundManager::PlaySound(const char* path) {
-
-
     engine -> play2D(soundMap[path].c_str());
-    
-    //sounds.push_back(engine -> play2D(soundMap[path].c_str()));
-    //inTrack[path] = (int) sounds.size() - 1;
+}
 
-    
-    
+void SoundManager::PlaySound(const char * path, float alpha) {
+    engine -> play2D(soundMap[path].c_str(), false, false, true) -> setVolume(alpha);
 }
 
 void SoundManager::PlaySoundEffect(const char* path) {
@@ -59,43 +58,50 @@ void SoundManager::PlaySoundEffect(const char* path) {
 
     inTrack[path] = (int) sounds.size() - 1;
 }
-void SoundManager::PlaySound(const char* path, bool loop) {
-    if(inTrack.find(path) != inTrack.end()) {
+void SoundManager::PlaySound(const char* path, bool loop, float alpha) {
+    if(InUseSound.find(path) != InUseSound.end()) {
         return ;
     }
-    irrklang::ISound * sound = engine -> play2D(soundMap[path].c_str(), loop);
-    sounds.push_back(sound);
-    inTrack[path] = (int) sounds.size() - 1;
+
+    InUseSound[path] = 1;
+    irrklang::ISound * sound = engine -> play2D(soundMap[path].c_str(), loop, false , true);
+    if(sound) {
+        sound -> setVolume(alpha);   // BackGround Sound
+    }
 
 
 }
 
 void SoundManager::PlaySound(const char* path, bool loop, bool startPaused) {
-    if(inTrack.find(path) != inTrack.end()) {
-        return ;
-    }
 
-    sounds.push_back(engine -> play2D(soundMap[path].c_str(), loop, startPaused));
-    inTrack[path] = (int) sounds.size() - 1;
+    engine -> play2D(soundMap[path].c_str(), loop, startPaused);
+
 }
 
 void SoundManager::PlaySound(const char* path, bool loop, bool startPaused, bool track) {
-    if(inTrack.find(path) != inTrack.end()) {
-        return ;
-    }
-    sounds.push_back(engine -> play2D(soundMap[path].c_str(), loop, startPaused, track));
-    inTrack[path] = (int) sounds.size() - 1;
+
+    engine -> play2D(soundMap[path].c_str(), loop, startPaused, track);
+    
 }
 
 void SoundManager::StopAllSounds() {
     engine -> stopAllSounds();
     sounds.clear();
     inTrack.clear();
+    InUseSound.clear();
+}
+
+void SoundManager::StopAllSoundsEffect() {
+    for(auto & sound : sounds) {
+        sound -> stop();
+        sound -> drop();
+    }
+    sounds.clear();
+    inTrack.clear();
 }
 
 void SoundManager::Drop() {
     engine -> drop();
-
 
 }
 
@@ -113,8 +119,8 @@ void SoundManager::SetSoundPosition(float x, float y, float z) {
 void SoundManager::StopSound(const char* path) {
     if(inTrack.find(path) != inTrack.end()) {
         int t = inTrack[path];
-        if(t > sounds.size()) {
-            SoundManager::GetInstance() -> StopAllSounds();
+        if( t >= (int) sounds.size()) {
+            StopAllSoundsEffect();
             return ;
         }
         if(sounds[t]) {
@@ -132,8 +138,8 @@ void SoundManager::StopSound(const char* path) {
 void SoundManager::setVolume(float volume, const char* path) {
     if(inTrack.find(path) != inTrack.end()) {
         int t = inTrack[path];
-        if(t > sounds.size()) {
-            SoundManager::GetInstance() -> StopAllSounds();
+        if(t >= (int) sounds.size()) {
+            StopAllSoundsEffect();
             return ;
         }
         if(sounds[inTrack[path]])

@@ -77,10 +77,14 @@ class ItemConst {
         static std::map<int , float> itemEfficiency;   // Default Item = 0
         static std::map<int ,int> ItemDrop;
         static std::map<int , glm::vec2> RequiredTool;
+        static std::map<int ,int > Armor_Value;
+        static std::map<int ,int > MaxUse;
         
         static void initBlockMap();
         static void initRequiredTool();
         static void initItemDropMap();
+        static void initArmorValue();
+        static void initMaxUse();
 
         const static  bool validTool(const int & blockID, const int & itemID);
 
@@ -93,8 +97,11 @@ class ItemConst {
         static int getMaxStack( ItemID & id);
         static const  Type getItemType(const int & id);
         static const float getItemEfficiency(const int &id);
+        static const int getArmorValue(const int & id);
+        static const int getToolMaxUse(const int & id);
 
         static const bool validEfficiency(const int & id, const  int& blockID);
+        
 };
 
 

@@ -5,6 +5,7 @@
 #include <vector>
 #include "Block/Block.h"
 #include "Algorithm.h"
+#include "Texture&Shader/SoundManager.h"
 
 class Entity
 {
@@ -62,6 +63,7 @@ class DYNAMIC_ENTITY : public Entity {
         bool UnderWater = false;
         bool Walking = false;
         bool oldWalking = false;
+        bool oldGrounded = false;
 
         std::vector<AABB> nearBoxes;
 

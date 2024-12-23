@@ -9,6 +9,7 @@
 #include "Config.h"
 #include "Player/Inventory/Inventory.h"
 #include "itemDataBase.h"
+#include "Texture&Shader/SoundManager.h"
 
 class Item {
     
@@ -22,7 +23,7 @@ class Item {
     struct Stats {
         int number;
         int id;
-        
+        int maximalUse = -1;
         
 
         const bool operator == (const Stats & other) const {
@@ -62,7 +63,7 @@ class Item {
         return 1;
     }
 
-    void use() {
+    virtual void use() {
         stats.number--;
     }
 
@@ -84,6 +85,10 @@ class Item {
 
     const int getNumber() const {
         return stats.number;
+    }
+
+    const int getMaximalUse() const {
+        return stats.maximalUse;
     }
 
 
@@ -137,6 +142,8 @@ class SpriteItem : public Item {
         std::shared_ptr<Item> clone() override {
             return std::make_shared<SpriteItem>(*this);
         }
+
+        void use();
 
         
 };

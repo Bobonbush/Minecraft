@@ -17,6 +17,8 @@ void DYNAMIC_ENTITY::FixedUpdate() {
         ApplyGravity();
     }
     oldWalking = Walking;
+
+    oldGrounded = isGrounded;
     
     isGrounded = false;
     applyForce();
@@ -82,11 +84,15 @@ void DYNAMIC_ENTITY::resolveCollision() {
 
         position.y += overlap.y;
         box.update(position);
-    
-        
-        
+
+        float alpha = 1.00f;
+        float scale = (velocity.y / -1.f);
+        alpha *= scale;
         velocity.y = 0;
         isGrounded = true;
+        if(isGrounded && !oldGrounded) {
+            SoundManager::GetInstance() -> PlaySound("Falling", alpha);
+        }
         break;
     }
 

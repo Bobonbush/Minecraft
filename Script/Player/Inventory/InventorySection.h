@@ -80,7 +80,11 @@ class InventorySection {
         std::shared_ptr<Item> getItem(int row, int col) {
             return Boxes[row][col] -> getItem();
         }
-    
+
+        const std::shared_ptr<Item> getItem(int number) const {
+
+            return Boxes[number / numCOLLUM][number % numCOLLUM] -> getItem();
+        }
 
 
 

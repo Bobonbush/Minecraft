@@ -4,6 +4,8 @@ std::map<int , ItemConst::Type> ItemConst::itemMap;
 std::map<int ,float> ItemConst::itemEfficiency;
 std::map<int ,int > ItemConst :: ItemDrop;
 std::map<int ,glm::vec2 > ItemConst :: RequiredTool;
+std::map<int ,int > ItemConst :: Armor_Value;
+std::map<int ,int > ItemConst :: MaxUse;
 
 
 void ItemConst::initBlockMap() {
@@ -77,6 +79,27 @@ void ItemConst::initBlockMap() {
 
     initRequiredTool();
     initItemDropMap();
+    initArmorValue();
+    initMaxUse();
+
+
+}
+
+void ItemConst::initMaxUse() {
+    MaxUse[(int)ItemID::Iron_Sword] = 20;
+    MaxUse[(int)ItemID::Copper_Sword] = 40;
+    MaxUse[(int)ItemID::Laser_Sword] = 80;
+    MaxUse[(int)ItemID::Blue_Sword] = 160;
+
+    MaxUse[(int)ItemID::Iron_Axe] = 20;
+    MaxUse[(int)ItemID::Copper_Axe] = 40;
+    MaxUse[(int)ItemID::Laser_Axe] = 80;
+    MaxUse[(int)ItemID::Blue_Axe] = 160;
+
+    MaxUse[(int)ItemID::Iron_Pickage] = 2;
+    MaxUse[(int)ItemID::Copper_Pickage] = 40;
+    MaxUse[(int)ItemID::Laser_Pickage] = 80;
+    MaxUse[(int)ItemID::Blue_Pickage] = 160;
 
 
 }
@@ -101,7 +124,6 @@ void ItemConst::initRequiredTool() {
     RequiredTool[(int)BLOCKID::SpecialLeaf] = glm::vec2(ItemID::Laser_Pickage, ItemID::Blue_Pickage);
     RequiredTool[(int)BLOCKID::SpecialWood] = glm::vec2(ItemID::Blue_Pickage, ItemID::Blue_Pickage);
     RequiredTool[(int)BLOCKID::Cactus] = glm::vec2(-1, ItemID::TOTAL);
-
 }
 
 void ItemConst::initItemDropMap() {
@@ -124,6 +146,38 @@ void ItemConst::initItemDropMap() {
     ItemDrop[(int)BLOCKID::Cactus] = static_cast<int>(BLOCKID::Cactus);
 
 
+}
+
+void ItemConst::initArmorValue() {
+    Armor_Value[(int)ItemID::Iron_Helmet] = 1;
+    Armor_Value[(int)ItemID::Copper_Helmet] = 2;
+    Armor_Value[(int)ItemID::Laser_Helmet] = 2;
+    Armor_Value[(int)ItemID::Blue_Helmet] = 2;
+
+    Armor_Value[(int)ItemID::Iron_Chestplate] = 2;
+    Armor_Value[(int)ItemID::Copper_Chestplate] = 3;
+    Armor_Value[(int)ItemID::Laser_Chestplate] = 3;
+    Armor_Value[(int)ItemID::Blue_Chestplate] = 4;
+
+    Armor_Value[(int)ItemID::Iron_Leggings] = 1;
+    Armor_Value[(int)ItemID::Copper_Leggings] = 2;
+    Armor_Value[(int)ItemID::Laser_Leggings] = 1;
+    Armor_Value[(int)ItemID::Blue_Leggings] = 2;
+
+    Armor_Value[(int)ItemID::Iron_Boots] = 1;
+    Armor_Value[(int)ItemID::Copper_Boots] = 1;
+    Armor_Value[(int)ItemID::Laser_Boots] = 2;
+    Armor_Value[(int)ItemID::Blue_Boots] = 2;
+
+
+}
+
+const int ItemConst::getToolMaxUse(const int & id) {
+    return MaxUse[id];
+}
+
+const int ItemConst::getArmorValue(const int & id) {
+    return Armor_Value[id];
 }
 
 int ItemConst::getMaxStack( ItemID & id) {
