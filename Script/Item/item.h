@@ -10,6 +10,7 @@
 #include "Player/Inventory/Inventory.h"
 #include "itemDataBase.h"
 #include "Texture&Shader/SoundManager.h"
+#include "Menu/UIUtil.h"
 
 class Item {
     
@@ -67,7 +68,7 @@ class Item {
         stats.number--;
     }
 
-    void setPosition(const glm::vec3 & pos) {
+    virtual void setPosition(const glm::vec3 & pos) {
         position = pos;
     }
 
@@ -132,6 +133,8 @@ class SpriteItem : public Item {
         QuadRenderer * quadRenderer;
         ItemDataBase * itemDataBase;
         ItemData data;
+
+        std::shared_ptr<LimitBar> limitBar;
     public:
         SpriteItem(ItemID id ,const std::string & name);
         ~SpriteItem();
@@ -144,6 +147,8 @@ class SpriteItem : public Item {
         }
 
         void use();
+
+        void setPosition(const glm::vec3 & pos) override;
 
         
 };

@@ -26,8 +26,9 @@ class PlayingState : Singleton {
         std::vector<DYNAMIC_ENTITY*> entities; 
 
         std::unique_ptr<AnimationBox> breakingBox;
-
         std::unique_ptr<HandModel> handModel;
+
+        std::vector<std::pair<glm::vec3 , float>> Explosions;
         
 
         int BlockChoose = -1;
@@ -57,6 +58,8 @@ class PlayingState : Singleton {
         
 
         void FixedProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 &view, const glm::mat4 & projection);
+        
+        void Explosion(ChunkManager & chunkManager, const glm::vec3 & position, const float & radius, const float & damage);
 };
 
 #endif // PLAYINGSTATE_H

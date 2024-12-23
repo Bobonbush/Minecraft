@@ -24,6 +24,21 @@ PlayingState::~PlayingState() {
 void PlayingState::ProcessState(const Camera & camera, ChunkManager & chunkManager, const glm::mat4 & view, const glm::mat4 & projection, const float &deltaTime) {
     MouseProcess(camera, chunkManager, view, projection);
 
+
+
+    for(int i = 0 ; i <= (int)Explosions.size()-1 ; i++) {
+        
+        Explosions[i].second -= deltaTime;
+        
+        if(Explosions[i].second < 0) {
+            Explosion(chunkManager, Explosions[i].first, 6.f, 1.f);
+            swap(Explosions[i], Explosions.back());
+            Explosions.pop_back();
+            i--;
+        }
+        
+    }
+
     if(BlockChoose != -1) {
         timer.Update(deltaTime);
     }
@@ -115,6 +130,15 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
         }
     }
 
+    if(input == Cursor::MOUSE_EVENT::RIGHT_CLICK) {
+        std::shared_ptr<Item> food = player -> getCurrentItem();
+    
+        if(food && ItemConst::getItemType(food -> getID()) == ItemConst::Type::Food) {
+            player -> Eat(ItemConst::getFoodValue(food -> getID()));
+            player -> RemoveItem(food);
+        }
+    }   
+
     if(exists == false) return ;
 
     if(input == Cursor::MOUSE_EVENT::LEFT_CLICK || input == Cursor::MOUSE_EVENT::LEFT_HOLD) {
@@ -141,8 +165,11 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
             if(ItemConst::validTool( (int)block.getID(), id)) {
                 int itemID = ItemConst::getItemDrop((int)block.getID());
                 player -> addItem(itemID, 1);
-                if(item != nullptr) {
-                    player -> RemoveItem(item);
+                
+                    
+                if(item != nullptr ) {
+                    if(ItemConst::getItemType(id) == ItemConst::Type::Tool)
+                        player -> RemoveItem(item);
                 }
             }
         }else if( (int) block.getID() != BlockChoose || id != timer.getInUse() || blockPosition != timer.getBlockPosition()) {
@@ -197,6 +224,15 @@ void PlayingState::MouseProcess(const Camera & camera, ChunkManager & chunkManag
 
             return ;
         }
+        if(block.getID() == BLOCKID::TNT) {
+            
+            chunkManager.removeBlock(position.x, position.y, position.z);
+            chunkManager.addBlock(position.x, position.y, position.z, ChunkBlock(BLOCKID::TNT_Active));
+            Explosions.push_back(std::make_pair(position, 3.f));
+            return ;
+        }
+
+        
         
         //glm::vec3 normalize = glm::vec3(0.f);
         float distance = 10000.f;
@@ -290,7 +326,7 @@ void PlayingState::FixedProcessState(const Camera & camera, ChunkManager & chunk
     }
 
 
-    glm::vec3 headPosition = player -> getPosition() - glm::vec3(0.f, 0.65f, 0.f);
+    glm::vec3 headPosition = player -> getPosition() - glm::vec3(0.f, 0.85f, 0.f);
     
     ChunkBlock block = chunkManager.getBlock(headPosition.x, headPosition.y, headPosition.z);
     if(block.getID() == BLOCKID::Water) {
@@ -367,3 +403,36 @@ void PlayingState::key_callback(GLFWwindow* window, int key, int scancode, int a
     }
     */
 }
+
+void PlayingState::Explosion(ChunkManager & chunkManager, const glm::vec3 & position, const float & radius, const float & damage) {
+    for(DYNAMIC_ENTITY * &entity : entities) {
+        glm::vec3 distance = entity -> getPosition() - position;
+        float dist = glm::length(distance);
+        if(dist < radius) {
+            entity -> addForce(distance * damage);
+        }
+    }
+
+    std::vector<glm::vec3> BFS ;
+
+    chunkManager.removeBlock(position.x, position.y, position.z);
+
+    for(int x = -radius; x <= radius ; x++) {
+        for(int y = -radius; y <= radius ; y++) {
+            for(int z = -radius; z <= radius ; z++) {
+                if(x == 0 && y == 0 && z == 0) continue;
+                glm::vec3 blockPosition = position + glm::vec3(x, y, z);
+                float dist = glm::length(blockPosition - position);
+                
+                if(dist < radius) {
+                    ChunkBlock block = chunkManager.getBlock(blockPosition.x, blockPosition.y, blockPosition.z);
+                    if(block.getID() == BLOCKID::TNT){
+                        Explosion(chunkManager, blockPosition, radius, damage);
+                    }
+                    chunkManager.removeBlock(blockPosition.x, blockPosition.y, blockPosition.z);
+                }
+            }
+        }
+    }
+}
+

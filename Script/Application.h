@@ -19,7 +19,7 @@ class Application : public Singleton {
         
         float elapsedTime;
         float accumulator = 0.0f;
-        float maxFrameTime = 1/ 60.f;
+        float maxFrameTime = 1/ 90.f;
         float Alpha = 1.0f;
         static Application* instance;
         

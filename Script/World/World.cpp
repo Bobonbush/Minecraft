@@ -53,10 +53,13 @@ void World::Update(float deltaTime, const float &xpos , const float &ypos) {
         return ;
     }
     camera -> update();
-    player -> update(deltaTime);
+    if(!player -> isDead()) {
+    
+        player -> update(deltaTime);
+    }
     view = camera -> GetViewMatrix();
        
-    projection = glm::perspective(glm::radians(45.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 160.0f); // 160
+    projection = glm::perspective(glm::radians(80.0f), config -> GetWidth() / config -> GetHeight(), 0.1f, 160.0f); // 160
 
     
     Frustum * frustum = Frustum::GetInstance();

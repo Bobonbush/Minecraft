@@ -26,6 +26,8 @@ class InventoryBox {
         int m_number = 0;
         unsigned int fakeTexture = -1;
         bool hasFake = false;
+
+        std::unique_ptr<TextHandler> textLoader;
     public :
     
         enum class State : int {

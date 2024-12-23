@@ -8,6 +8,8 @@ InventorySection::InventorySection(const glm::vec2 & position, const  glm::vec2&
 
     ResultBox = nullptr;
 
+    
+
 
     spriteRenderer = SpriteRenderer::getInstance();
     
@@ -365,9 +367,9 @@ void InventorySection::CreateRecipe() {
     std::shared_ptr<Item> item = nullptr;
 
     if(id < (int) BLOCKID::TOTAL) {
-        item = std::make_shared<BlockItem>((BLOCKID) id, ItemDataBase::GetInstance() -> getItemName((ItemID) id));
+        item = std::make_shared<BlockItem>((BLOCKID) id, ItemDataBase::GetInstance() -> getItemName( id));
     }else {
-        item = std::make_shared<SpriteItem>((ItemID) id, ItemDataBase::GetInstance() -> getItemName((ItemID) id));
+        item = std::make_shared<SpriteItem>((ItemID) id, ItemDataBase::GetInstance() -> getItemName( id));
     }
 
     item -> addNumber(number);

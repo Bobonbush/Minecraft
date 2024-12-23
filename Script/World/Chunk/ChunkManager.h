@@ -65,7 +65,7 @@ class ChunkManager {
 
         std::map<glm::vec3 , std::array<ChunkBlock, Chunk::CHUNK_VOLUME>, Vec3Comparator> chunkMap;
         std::map<glm::vec3 , bool, Vec3Comparator> isMisery;
-        float renderDistance = 12;
+        float renderDistance = 13;
         int numLoadChunks = 1;
         bool firstRender = true;
         

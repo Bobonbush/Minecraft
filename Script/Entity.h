@@ -15,6 +15,8 @@ class Entity
         glm::vec3 velocity;
         glm::vec3 rotation;
 
+        int damage = 0;
+
         float head = 0.0f;
     public:
         Entity() : box(glm::vec3(0.0f, 0.0f, 0.0f)) , position(glm::vec3(0.0f)) , rotation(glm::vec3(0.0f)), velocity(glm::vec3(0.0f)) {}
@@ -64,6 +66,9 @@ class DYNAMIC_ENTITY : public Entity {
         bool Walking = false;
         bool oldWalking = false;
         bool oldGrounded = false;
+
+        float invisibleTime = 0.0f;
+        float maxInvisibleTime = 0.25f;
 
         std::vector<AABB> nearBoxes;
 
@@ -140,6 +145,17 @@ class DYNAMIC_ENTITY : public Entity {
 
         const bool StopWalking() const {
             return !Walking;
+        }
+
+        int getDamage()  {
+            int dame = this -> damage;
+            damage = 0;
+            if(dame == 0) return 0;
+            if(invisibleTime < maxInvisibleTime) {
+                return 0;
+            }else invisibleTime = 0;
+
+            return dame;
         }
 
         

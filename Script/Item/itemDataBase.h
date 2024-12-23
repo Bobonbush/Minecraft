@@ -30,7 +30,7 @@ class ItemDataBase : public Singleton {
         ~ItemDataBase();
 
         const ItemData & getData(ItemID id) const;
-        std::string getItemName(ItemID id);
+        const std::string getItemName(int id);
         int getItemID(const std::string & name);
 
         TextureAtlas textureAtlas;

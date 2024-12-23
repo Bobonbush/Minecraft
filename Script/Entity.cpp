@@ -10,6 +10,8 @@ void DYNAMIC_ENTITY::ApplyGravity() {
 }
 
 void DYNAMIC_ENTITY::update(float deltaTime) {
+    invisibleTime += deltaTime;
+
 }
 
 void DYNAMIC_ENTITY::FixedUpdate() {
@@ -88,9 +90,17 @@ void DYNAMIC_ENTITY::resolveCollision() {
         float alpha = 1.00f;
         float scale = (velocity.y / -1.f);
         alpha *= scale;
+        int dame = 0;
+        float limit = -0.1f;
+        if(velocity.y < limit) {
+            dame = SPA::abs(velocity.y - limit ) *SPA::abs(velocity.y - limit ) *  100;
+        }
+        
         velocity.y = 0;
+        
         isGrounded = true;
-        if(isGrounded && !oldGrounded) {
+        if(isGrounded && !oldGrounded && UnderWater == false) {
+            damage += dame;
             SoundManager::GetInstance() -> PlaySound("Falling", alpha);
         }
         break;

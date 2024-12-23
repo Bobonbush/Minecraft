@@ -1,0 +1,10 @@
+^G:\WORKSPACE\MINECRAFT\CMAKELISTS.TXT
+setlocal
+D:\CMAKE\bin\cmake.exe -SG:/WorkSpace/Minecraft -BG:/WorkSpace/Minecraft/build --check-stamp-file G:/WorkSpace/Minecraft/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

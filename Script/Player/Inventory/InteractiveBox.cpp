@@ -6,6 +6,9 @@ InventoryBox::InventoryBox(glm::vec2 position, glm::vec2 size, int number, const
     m_texture[0] = textureManager -> getTexture(off.c_str());
     m_texture[1] = textureManager -> getTexture("Assets/Inventory/on.png");
     m_spriteRenderer = SpriteRenderer::getInstance();
+
+    textLoader = std::make_unique<TextHandler>();
+    textLoader -> LoadFont("Assets/Font/Mantinia.otf", 24);
     
 
     if(state != State::None) {
@@ -44,17 +47,37 @@ void InventoryBox::update() {
 void InventoryBox::Render() {
     Config * config = Config::GetInstance();
     glDisable(GL_DEPTH_TEST);
+
+    if(!empty) {
+        ItemDataBase * itemDataBase = ItemDataBase::GetInstance();
+        if(m_chosen) {
+
+        
+            std::string name = itemDataBase -> getItemName(item -> getID());
+            Config * config = Config::GetInstance();
+            SPA::LowerCase(name);
+            
+            
+            ShaderManager::GetInstance() -> getShader("text") -> use();
+            
+            ShaderManager::GetInstance() -> getShader("text") -> setFloat("alpha", 1.0f);
+            textLoader -> RenderMiddleText(name, m_position.x + m_size.x / 3.5f, m_position.y + m_size.y / 1.8f, 1.5f,  glm::vec3(0.8f , 0.2f, 0.8f), 0 , glm::vec2(config -> GetWidth(), config -> GetHeight()));
+            
+        }
+    }
     
     ShaderManager * shaderManager = ShaderManager::GetInstance();
     m_spriteRenderer -> setShader(shaderManager -> getShader("Screen"));
     glm::mat4 projection = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     m_spriteRenderer -> DrawSprite(m_texture[m_chosen], m_position, m_size, 0.f, glm::vec3(1.f), view , projection);
-    m_chosen = false;
+    
     
     if(!empty) {
+        
         item -> Render();
     }
+    m_chosen = false;
 
     if(hasFake && empty) {
         m_spriteRenderer -> setShader(ShaderManager::GetInstance() -> getShader("Screen"));

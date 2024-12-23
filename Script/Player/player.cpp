@@ -37,7 +37,19 @@ void Player::update(float deltaTime) {
     inventory -> update();
     currentItem = inventory -> getCurrentItem();
     currentAmor = inventory -> CalculateArmor();
+    int dame = getDamage();
     
+    if(FirstTimeSpawn) {
+        dame = 0;
+    }
+
+    if(isOnGround()){
+        FirstTimeSpawn = false;
+    }
+    health -= dame;
+    if(dame > 0) {
+        SoundManager::GetInstance() -> PlaySound("Hurt");
+    }
 
     losingMeatCurrentTime += deltaTime;
     losingBubbleCurrentTime += deltaTime;
@@ -47,6 +59,7 @@ void Player::update(float deltaTime) {
         if(meat < 0 ) {
             if(health > 1) {
                 health -= 1;
+                SoundManager::GetInstance() -> PlaySound("Hurt");
             }
             meat = 0;
         }
@@ -58,6 +71,7 @@ void Player::update(float deltaTime) {
             bubble -= 1;
             if(bubble < 0) {
                 health--;
+                SoundManager::GetInstance() -> PlaySound("Hurt");
                 bubble = 0;
             }
             losingBubbleCurrentTime = 0.f;
@@ -67,6 +81,16 @@ void Player::update(float deltaTime) {
         if(bubble < 9 && losingBubbleCurrentTime >= losingBubbleMaxTime) {
             bubble += 1;
             losingBubbleCurrentTime = 0.f;
+        }
+    }
+
+    if(health < 9 && meat > 0) {
+        if(heartCurrentTime < heartRate) {
+            heartCurrentTime += deltaTime;
+            losingMeatCurrentTime += deltaTime * 30;
+        }else {
+            health += 1;
+            heartCurrentTime = 0.f;
         }
     }
 
@@ -88,6 +112,8 @@ void Player::FixedUpdate() {
     } else {
         Walking = false;
     }
+
+    
 
     if(UnderWater) {
         ApplyFriction(PhysicConst::WaterFriction);
@@ -112,6 +138,7 @@ void Player::FixedUpdate() {
     }
 
     if(isOnGround()) {
+        
         if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_SPACE) == GLFW_PRESS) {
             addForce(glm::vec3(0.f, JUMP_FORCE, 0.f));
             SoundManager::GetInstance() -> PlaySound("Jumping");
@@ -187,5 +214,6 @@ void Player::ReSpawn() {
     health = 9;
     meat = 9;
     bubble = 9;
+    FirstTimeSpawn = true;
     currentAmor = maxAmor;
 }

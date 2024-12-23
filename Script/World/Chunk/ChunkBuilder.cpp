@@ -45,8 +45,6 @@ void ChunkBuilder::BuildOquaques(int x ,int y ,int z) {
 
     glm::vec3 position = glm::vec3(x, y, z);
     
-    
-    
     tryAddFaceToMesh(pWaterMesh, Block::Front, Block::frontNormal, data.sideCoords, position, directions.front);
     tryAddFaceToMesh(pWaterMesh, Block::Top, Block::upNormal, data.topCoords, position, directions.up);
                 
@@ -131,6 +129,7 @@ void ChunkBuilder::tryAddFaceToMesh(ChunkMesh * cMesh, const std::vector<GLfloat
 
 bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolder & blockData) {
     auto block = pChunk -> getBlock(position.x, position.y, position.z);
+
 
     float x = position.x;
     float y = position.y;
@@ -260,6 +259,7 @@ bool ChunkBuilder::shouldMakeFace(const glm::vec3 position, const BlockDataHolde
         if(block.isLiquid()) {
             return false;
         }
+        
     }
     if(block.isOpaque()) {
         return true;

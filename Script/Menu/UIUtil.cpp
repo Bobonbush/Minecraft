@@ -293,5 +293,39 @@ void Button::update(float deltaTime, const float &xpos, const float &ypos) {
 }
 
 
+LimitBar::LimitBar(const glm::vec2 & position, const glm::vec2 & size, const int & max_value) {
+    bar = std::make_unique<AppearSprite>(TextureManager::getInstance() -> getTexture("Assets/Bar.png"), position, size);
+    bar -> setAppearant(1.0f);
+    barWater = std::make_unique<AppearSprite>(TextureManager::getInstance() -> getTexture("Assets/BarWater.png"), position, size);
+    barWater -> setAppearant(1.0f);
+    maximum = max_value;
+    current = max_value;
+    Waterscale = size;
+}
+
+LimitBar::~LimitBar() {
+    
+}
+
+
+void LimitBar::render() {
+    if(current == maximum) {
+        return ;
+    }
+    bar -> render();
+
+    barWater -> setScale(glm::vec2(Waterscale.x * (1.f * current / maximum), Waterscale.y));
+    barWater -> render();
+}
+
+void LimitBar::update() {
+}
+
+void LimitBar::setCurrent(const int & value) {
+    current = value;
+}
+
+
+
 
 

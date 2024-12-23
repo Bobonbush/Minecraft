@@ -118,11 +118,11 @@ ItemDataBase::~ItemDataBase() {
     delete instance;
 }
 
-std::string ItemDataBase::getItemName(ItemID id) {
+const std::string ItemDataBase::getItemName(int id) {
     if((unsigned) id < (unsigned) BLOCKID::TOTAL) {
         return Block::blockMap[(int) id];
     }
-    return itemMap[id ];
+    return itemMap[(ItemID) id ];
 }
 
 int ItemDataBase::getItemID(const std::string & name) {

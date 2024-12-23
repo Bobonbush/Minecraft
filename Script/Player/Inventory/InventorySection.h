@@ -4,6 +4,7 @@
 #include "InteractiveBox.h"
 #include <vector>
 #include "Player/Crafting/Recipe.h"
+#include "Texture.h"
 
 class InventorySection {
 

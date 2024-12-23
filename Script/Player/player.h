@@ -21,12 +21,15 @@ class Player : public DYNAMIC_ENTITY, Singleton {
         std::shared_ptr<AnimationBox> SunBox;
 
         bool headUnderWater = false;
+        bool FirstTimeSpawn = true;
         Player();
 
         bool openingInventory = false;
 
         float losingMeatMaxTime = 100.5f;
         float losingMeatCurrentTime = 0.f;
+        float heartRate = 1.5f;
+        float heartCurrentTime = 0.f;
 
         float losingBubbleMaxTime = 1.5f;
         float losingBubbleCurrentTime = 0.f;
@@ -112,6 +115,12 @@ class Player : public DYNAMIC_ENTITY, Singleton {
 
         void setHeadUnderWater(bool headUnderWater) {
             this -> headUnderWater = headUnderWater;
+        }
+
+
+        void Eat(int value) {
+            meat += value;
+            SPA::clamp(meat, 0, 9);
         }
 
 

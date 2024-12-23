@@ -14,6 +14,7 @@ class AnimationBox {
         int frame;
         int maxFrame;
 
+
         void LoadData(Model & model, const glm::vec2 & coords);
         void GetFrame(float currentTime, float maxTime);
     public:

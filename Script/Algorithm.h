@@ -162,6 +162,12 @@ class SPA {
         return ((y2 - y) / (y2 - y1)) * r1 + ((y - y1) / (y2 - y1)) * r2;
     }
 
+    static void LowerCase(std::string & str) {
+        for(int i = 0; i < (int)str.size(); i++) {
+            str[i] = tolower(str[i]);
+        }
+    }
+
 };
 
 

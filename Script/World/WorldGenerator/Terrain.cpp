@@ -81,6 +81,7 @@ void NoiseGenerator::BuildChunk(ChunkSection &chunk) {
                     climate = (climate + 1) /2.f;
                     climate = 1.f - climate * climate;
                     Biomes::Biome biome = Biomes::GetBiome(climate);
+                    //biome = Biomes::Biome::Sea;
                     
                     float noiseBiome = noise.GetNoise(realX, realZ ) +
                     (0.5 *noise.GetNoise(realX , realZ  )) *  noise.GetNoise(realX * 0.4, realZ * 0.4);
@@ -98,7 +99,7 @@ void NoiseGenerator::BuildChunk(ChunkSection &chunk) {
                         surface = 50.f;
 
                         waterLevel_min = 35;
-                        waterLevel_max = 76;
+                        waterLevel_max = 75;
                     }
 
                     if(biome == Biomes::Biome::Grassland) {
@@ -178,7 +179,7 @@ void NoiseGenerator::BuildChunk(ChunkSection &chunk) {
 
                         if(biome == Biomes::Biome::Sea) {
                             if(yPos > waterLevel_max) {
-                                chunk.setBlock(x, y, z, ChunkBlock(id));
+                                //chunk.setBlock(x, y, z, ChunkBlock(id));
                                 continue;
                             }
                         }
@@ -233,7 +234,10 @@ void NoiseGenerator::BuildChunk(ChunkSection &chunk) {
                             }
                         } else if(biome == Biomes::Biome::Grassland || biome == Biomes::Biome::Valley || biome == Biomes::Biome::Mountain_grass) {
                             if(yPos == height ) {
-                                id = BLOCKID::Grass;
+                                if(height < waterLevel_max) {
+                                    id = BLOCKID::Dirt;
+                                }else
+                                    id = BLOCKID::Grass;
                             }else {
                                 if(yPos <= height && yPos >= height - highest) {
                                     id = BLOCKID::Dirt;

@@ -30,9 +30,9 @@ public:
 // Default camera values
     static const float YAW ;      
     static const float PITCH;      
-    const float SPEED       =  0.07;
+    const float SPEED       =  0.03;
     const float SENSITIVITY =  0.1f;
-    const float ZOOM        =  45.0f;
+    const float ZOOM        =  1.0f;
     // camera Attributes
     glm::vec3 Position;
     glm::vec3 Front;
@@ -90,7 +90,7 @@ public:
     {
         float velocity = MovementSpeed * deltaTime;
         if(glfwGetKey(glfwGetCurrentContext(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
-            velocity *= 1.75f;
+            velocity *= 1.5f;
         }
         if (direction == Camera_Movement::FORWARD) {
             glm::vec3 force = glm::vec3(Front.x, 0.f, Front.z);
@@ -113,9 +113,9 @@ public:
             return force * velocity;
         }
         if(direction == Camera_Movement::UP)
-            return  glm::vec3(0.f, 1.f, 0.f) * velocity;
+            return  glm::vec3(0.f, 1.5f, 0.f) * velocity;
         if(direction == Camera_Movement::DOWN)
-            return - glm::vec3(0.f , 1.f, 0.f) * velocity;
+            return - glm::vec3(0.f , 1.5f, 0.f) * velocity;
         return glm::vec3(0.0f);
     }
 

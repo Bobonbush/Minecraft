@@ -79,8 +79,10 @@ class ItemConst {
         static std::map<int , glm::vec2> RequiredTool;
         static std::map<int ,int > Armor_Value;
         static std::map<int ,int > MaxUse;
+        static std::map<int ,int > FoodValue;
         
         static void initBlockMap();
+        static void initFoodValue();
         static void initRequiredTool();
         static void initItemDropMap();
         static void initArmorValue();
@@ -99,8 +101,10 @@ class ItemConst {
         static const float getItemEfficiency(const int &id);
         static const int getArmorValue(const int & id);
         static const int getToolMaxUse(const int & id);
+        static const int getFoodValue(const int & id);
 
         static const bool validEfficiency(const int & id, const  int& blockID);
+
         
 };
 

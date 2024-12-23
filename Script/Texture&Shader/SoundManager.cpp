@@ -33,6 +33,7 @@ void SoundManager::Init() {
     AddTrack("ItemBreak", "Assets/SoundEffect/ItemBreak.wav");
     AddTrack("Jumping", "Assets/SoundEffect/Jumping.wav");
     AddTrack("Falling", "Assets/SoundEffect/Falling.wav");
+    AddTrack("Hurt", "Assets/SoundEffect/Hurt.wav");
 }
 
 void SoundManager::PlaySound(const char* path) {

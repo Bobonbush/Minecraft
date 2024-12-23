@@ -122,6 +122,7 @@ void Block::initBlockMap() {
     blockMap[static_cast<int>(BLOCKID::SpecialLeaf)] = "SpecialLeaf";
     blockMap[static_cast<int>(BLOCKID::Cactus)] = "Cactus";
     blockMap[static_cast<int>(BLOCKID::TNT)] = "TNT";
+    blockMap[static_cast<int>(BLOCKID::TNT_Active)] = "TNT_Active";
 
     blockMap[static_cast<int>(BLOCKID::Coal_Block)] = "Coal Block";
     blockMap[static_cast<int>(BLOCKID::Copper_Block)] = "Copper Block";
@@ -160,6 +161,7 @@ void Block::initBlockHardness() {
     blockHardness[static_cast<int>(BLOCKID::SpecialLeaf)] = 15.5;
     blockHardness[static_cast<int>(BLOCKID::Cactus)] = 1.5;
     blockHardness[static_cast<int>(BLOCKID::TNT)] = 0.f;
+    blockHardness[static_cast<int>(BLOCKID::TNT_Active)] = 1000000.f;
     blockHardness[static_cast<int>(BLOCKID::Coal_Block)] = 3.f;
     blockHardness[static_cast<int>(BLOCKID::Copper_Block)] = 5.f;
     blockHardness[static_cast<int>(BLOCKID::Laser_Block)] = 10.f;

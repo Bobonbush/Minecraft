@@ -122,6 +122,16 @@ class AppearSprite : public SpriteAnimator {
         void update(float deltaTime) override;
         void render() override;
         bool isFinished() override;
+
+        void setScale(const glm::vec2 & scale) {
+            size = scale;
+        }
+
+        void setPosition(const glm::vec2 & position) {
+            this -> position = position;
+        }
+
+       
 };
 
 
@@ -174,6 +184,33 @@ class Button {
             return click;
         }
 
+};
+
+
+class LimitBar {
+    private:
+        std::unique_ptr<AppearSprite> bar;
+        std::unique_ptr<AppearSprite> barWater;
+        glm::vec2 Waterscale;
+        int maximum;
+        int current;
+
+        glm::vec2 position;
+    public :
+
+        LimitBar(const glm::vec2 & position, const glm::vec2 & size, const int & max_value);
+        ~LimitBar();
+
+        void render();
+        void update();
+        void setCurrent(const int & current);
+
+         void setPosition(const glm::vec2 & position) {
+            this -> position = position;
+            bar -> setPosition(position);
+            barWater -> setPosition(position);
+        }
+          
 };
 
 

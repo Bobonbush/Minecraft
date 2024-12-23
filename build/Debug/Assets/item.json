@@ -1,0 +1,138 @@
+{
+    "Iron_Sword" : {
+        "x" : 3, "y" : 0
+    },
+
+    "Copper_Sword" : {
+        "x" : 4, "y" : 0
+    },
+
+    "Laser_Sword" : {
+        "x" : 5, "y" : 0
+    },
+    
+    "Blue_Sword" : {
+        "x" : 6, "y" : 0
+    },
+
+
+    "Iron_Axe" : {
+        "x" : 1, "y" : 1   
+    },
+    "Copper_Axe" : {
+        "x" : 2, "y" : 1
+    },
+    "Laser_Axe" : {
+        "x" : 3, "y" : 1
+    },
+    "Blue_Axe" : {
+        "x" : 4, "y" : 1
+    },
+
+    "Iron_Pickage" : {
+        "x" : 6, "y" : 2
+    },
+    "Copper_Pickage" : {
+        "x" : 8, "y" : 2
+    },
+    "Laser_Pickage" : {
+        "x" : 7, "y" : 2
+    },
+
+    "Blue_Pickage" : {
+        "x" : 9, "y" : 2
+    },
+
+    
+
+    "Bow" : {
+        "x" : 0, "y" : 2
+    },
+    "Arrow" : {
+        "x" : 2, "y" : 2
+    },
+
+    "Iron_Helmet" : {
+        "x" : 5, "y" : 3
+    },
+    "Iron_Chestplate" : {
+        "x" : 4, "y" : 3
+    },
+    "Iron_Leggings" : {
+        "x" : 3, "y" : 3
+    },
+    "Iron_Boots" : {
+        "x" : 2, "y" : 3
+    },
+
+    "Copper_Helmet" : {
+        "x" : 9, "y" : 3
+    },
+    "Copper_Chestplate" : {
+        "x" : 8, "y" : 3
+    },
+    "Copper_Leggings" : {
+        "x" : 7, "y" : 3
+    },
+    "Copper_Boots" : {
+        "x" : 6, "y" : 3
+    },
+
+    "Laser_Helmet" : {
+        "x" : 4, "y" : 4
+    },
+    "Laser_Chestplate" : {
+        "x" : 3, "y" : 4
+    },
+    "Laser_Leggings" : {
+        "x" : 2, "y" : 4
+    },
+    "Laser_Boots" : {
+        "x" : 1, "y" : 4
+    },
+
+    "Blue_Helmet" : {
+        "x" : 8, "y" : 4
+    },
+    "Blue_Chestplate" : {
+        "x" : 7, "y" : 4
+    },
+    "Blue_Leggings" : {
+        "x" : 6, "y" : 4
+    },
+    "Blue_Boots" : {
+        "x" : 5, "y" : 4
+    },
+
+    "Stick" : {
+        "x" : 3, "y" : 2
+    },
+
+    "Iron" : {
+        "x" : 3, "y" : 0
+    },
+
+    "Copper" : {
+        "x" : 2, "y" : 0
+    },
+
+    "Laser" : {
+        "x" : 1, "y" : 0
+    },
+
+    "Blue" : {
+        "x" : 0, "y" : 0
+    },
+
+    "Coal" : {
+        "x": 4, "y": 0
+    },
+
+    "Apple" : {
+        "x": 7, "y": 5
+    },
+
+    "Golden Apple" : {
+        "x": 8, "y": 5
+    }
+}

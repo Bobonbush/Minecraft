@@ -90,10 +90,10 @@ InventoryManager::InventoryManager() {
     addItem((int)BLOCKID::SpecialLeaf, 64);
     addItem((int)BLOCKID::Sand, 64);
 
-    addItem((int)ItemID::Blue_Helmet, 1);
-    addItem((int)ItemID::Blue_Chestplate , 1);
-    addItem((int)ItemID::Blue_Leggings , 1);
-    addItem((int)ItemID::Blue_Boots , 1);
+    addItem((int)BLOCKID::LaserOre, 64);
+    addItem((int)BLOCKID::CopperOre, 64);
+    addItem((int)BLOCKID::BlueOre, 64);
+    addItem((int)BLOCKID::CoalOre, 64);
 
     
 }
@@ -209,7 +209,7 @@ void InventoryManager::addSpriteItem(ItemID id , int number) {
             number = items[pos.first][pos.second] -> addNumber(number);
             continue;
         }
-        items[pos.first][pos.second] = std::make_shared<SpriteItem>(id, ItemDataBase::GetInstance() -> getItemName(id));    
+        items[pos.first][pos.second] = std::make_shared<SpriteItem>(id, ItemDataBase::GetInstance() -> getItemName((int)id));    
         if(pos.first * Inventory::MAX_COL + pos.second < Inventory::handCol) {
             sections[0] -> setBoxItem(items[pos.first][pos.second], pos.first * Inventory::MAX_COL + pos.second);
         }else {
@@ -224,7 +224,7 @@ int InventoryManager::addSpriteItem(ItemID id ,int number ,int row ,int col) {
     if(items[row][col] != nullptr) {
         return items[row][col] -> getNumber();
     }
-    items[row][col] = std::make_shared<SpriteItem>(id, ItemDataBase::GetInstance() -> getItemName(id));
+    items[row][col] = std::make_shared<SpriteItem>(id, ItemDataBase::GetInstance() -> getItemName((int)id));
     if(row * Inventory::MAX_COL + col < Inventory::handCol) {
         sections[0] -> setBoxItem(items[row][col], row * Inventory::MAX_COL + col);
     }else {

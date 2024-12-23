@@ -80,9 +80,11 @@ SpriteItem::SpriteItem(ItemID id , const std::string &name) : Item(), data(name)
     stats.number = 0;
 
     maxStack = ItemConst::getMaxStack(id);
-    if(ItemConst::itemMap[stats.id] == ItemConst::Type::Tool)
+    limitBar = nullptr;
+    if(ItemConst::itemMap[stats.id] == ItemConst::Type::Tool) {
         stats.maximalUse = ItemConst::getToolMaxUse( (int) id);
-        
+        limitBar = std::make_unique<LimitBar>(glm::vec2(0.0f, 0.0f), glm::vec2(0.07f, 0.005f), stats.maximalUse);
+    }    
 
 }
 
@@ -95,6 +97,11 @@ void SpriteItem::Render() {
     glm::vec2 m_size = Inventory::BoxSize;
     float aspect = 1.f/config -> GetAspectRatio();
     m_size.x *= aspect;
+
+    if(limitBar != nullptr) {
+        
+        limitBar -> render();
+    }
 
     glDisable(GL_DEPTH_TEST);
     if(number > 1)
@@ -122,7 +129,9 @@ void SpriteItem::Render() {
 }
 
 void SpriteItem::update() {
-
+    if(limitBar != nullptr) {
+        limitBar -> setCurrent(stats.maximalUse);
+    }
 }
 
 Item::Stats SpriteItem::getStats() {
@@ -145,5 +154,12 @@ void SpriteItem::use() {
     
     if(stats.number == 0) {
         stats.id = -1;
+    }
+}
+
+void SpriteItem::setPosition(const glm::vec3 & position) {
+    this -> position = position ;
+    if(limitBar != nullptr) {
+        limitBar -> setPosition(position + glm::vec3(0.0f , -0.05f, 0.f) );
     }
 }

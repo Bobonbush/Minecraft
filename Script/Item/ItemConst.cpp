@@ -6,6 +6,7 @@ std::map<int ,int > ItemConst :: ItemDrop;
 std::map<int ,glm::vec2 > ItemConst :: RequiredTool;
 std::map<int ,int > ItemConst :: Armor_Value;
 std::map<int ,int > ItemConst :: MaxUse;
+std::map<int ,int > ItemConst :: FoodValue;
 
 
 void ItemConst::initBlockMap() {
@@ -81,8 +82,14 @@ void ItemConst::initBlockMap() {
     initItemDropMap();
     initArmorValue();
     initMaxUse();
+    initFoodValue();
 
 
+}
+
+void ItemConst::initFoodValue() {
+    FoodValue[(int)ItemID::Apple] = 1;
+    FoodValue[(int)ItemID::GoldenApple] = 2;
 }
 
 void ItemConst::initMaxUse() {
@@ -91,12 +98,12 @@ void ItemConst::initMaxUse() {
     MaxUse[(int)ItemID::Laser_Sword] = 80;
     MaxUse[(int)ItemID::Blue_Sword] = 160;
 
-    MaxUse[(int)ItemID::Iron_Axe] = 20;
+    MaxUse[(int)ItemID::Iron_Axe] = 10;
     MaxUse[(int)ItemID::Copper_Axe] = 40;
     MaxUse[(int)ItemID::Laser_Axe] = 80;
     MaxUse[(int)ItemID::Blue_Axe] = 160;
 
-    MaxUse[(int)ItemID::Iron_Pickage] = 2;
+    MaxUse[(int)ItemID::Iron_Pickage] = 10;
     MaxUse[(int)ItemID::Copper_Pickage] = 40;
     MaxUse[(int)ItemID::Laser_Pickage] = 80;
     MaxUse[(int)ItemID::Blue_Pickage] = 160;
@@ -235,4 +242,8 @@ const bool ItemConst::validEfficiency(const int & id, const  int& blockID) {
 
 const ItemConst::Type ItemConst::getItemType(const int & id) {
     return itemMap[id];
+}
+
+const int ItemConst::getFoodValue(const int & id) {
+    return FoodValue[id];
 }
